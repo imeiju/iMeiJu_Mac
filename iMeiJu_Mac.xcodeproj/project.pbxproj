@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F0E42205BFB4005A0BB1 /* AppDelegate.swift */; };
+		2705F0E72205BFB4005A0BB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F0E62205BFB4005A0BB1 /* ViewController.swift */; };
+		2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2705F0E82205BFB6005A0BB1 /* Assets.xcassets */; };
+		2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2705F0EA2205BFB6005A0BB1 /* Main.storyboard */; };
+		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMeiJu_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2705F0E12205BFB4005A0BB1 /* iMeiJu_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMeiJu_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2705F0E42205BFB4005A0BB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2705F0E62205BFB4005A0BB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2705F0E82205BFB6005A0BB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2705F0EB2205BFB6005A0BB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2705F0ED2205BFB6005A0BB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2705F0EE2205BFB6005A0BB1 /* iMeiJu_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iMeiJu_Mac.entitlements; sourceTree = "<group>"; };
+		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
+		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2705F0DE2205BFB4005A0BB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		09E6A8D1D83132E30760A7FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2705F0D82205BFB4005A0BB1 = {
+			isa = PBXGroup;
+			children = (
+				2705F0E32205BFB4005A0BB1 /* iMeiJu_Mac */,
+				2705F0E22205BFB4005A0BB1 /* Products */,
+				6C6722660887476393F165E6 /* Pods */,
+				09E6A8D1D83132E30760A7FF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2705F0E22205BFB4005A0BB1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2705F0E12205BFB4005A0BB1 /* iMeiJu_Mac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2705F0E32205BFB4005A0BB1 /* iMeiJu_Mac */ = {
+			isa = PBXGroup;
+			children = (
+				2705F0E42205BFB4005A0BB1 /* AppDelegate.swift */,
+				2705F0E62205BFB4005A0BB1 /* ViewController.swift */,
+				2705F0E82205BFB6005A0BB1 /* Assets.xcassets */,
+				2705F0EA2205BFB6005A0BB1 /* Main.storyboard */,
+				2705F0ED2205BFB6005A0BB1 /* Info.plist */,
+				2705F0EE2205BFB6005A0BB1 /* iMeiJu_Mac.entitlements */,
+			);
+			path = iMeiJu_Mac;
+			sourceTree = "<group>";
+		};
+		6C6722660887476393F165E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */,
+				3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2705F0E02205BFB4005A0BB1 /* iMeiJu_Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2705F0F12205BFB6005A0BB1 /* Build configuration list for PBXNativeTarget "iMeiJu_Mac" */;
+			buildPhases = (
+				12444791093EF49DC50BE0AC /* [CP] Check Pods Manifest.lock */,
+				2705F0DD2205BFB4005A0BB1 /* Sources */,
+				2705F0DE2205BFB4005A0BB1 /* Frameworks */,
+				2705F0DF2205BFB4005A0BB1 /* Resources */,
+				496E68E15B2F29AE68D08DE5 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iMeiJu_Mac;
+			productName = iMeiJu_Mac;
+			productReference = 2705F0E12205BFB4005A0BB1 /* iMeiJu_Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2705F0D92205BFB4005A0BB1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = iizvv;
+				TargetAttributes = {
+					2705F0E02205BFB4005A0BB1 = {
+						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 2705F0DC2205BFB4005A0BB1 /* Build configuration list for PBXProject "iMeiJu_Mac" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2705F0D82205BFB4005A0BB1;
+			productRefGroup = 2705F0E22205BFB4005A0BB1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2705F0E02205BFB4005A0BB1 /* iMeiJu_Mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2705F0DF2205BFB4005A0BB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */,
+				2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		12444791093EF49DC50BE0AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iMeiJu_Mac-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		496E68E15B2F29AE68D08DE5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2705F0DD2205BFB4005A0BB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2705F0E72205BFB4005A0BB1 /* ViewController.swift in Sources */,
+				2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2705F0EA2205BFB6005A0BB1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2705F0EB2205BFB6005A0BB1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2705F0EF2205BFB6005A0BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2705F0F02205BFB6005A0BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		2705F0F22205BFB6005A0BB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iMeiJu_Mac/iMeiJu_Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RS65R2LL7H;
+				INFOPLIST_FILE = iMeiJu_Mac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iizvv.iMeiJu-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		2705F0F32205BFB6005A0BB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iMeiJu_Mac/iMeiJu_Mac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = RS65R2LL7H;
+				INFOPLIST_FILE = iMeiJu_Mac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iizvv.iMeiJu-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2705F0DC2205BFB4005A0BB1 /* Build configuration list for PBXProject "iMeiJu_Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2705F0EF2205BFB6005A0BB1 /* Debug */,
+				2705F0F02205BFB6005A0BB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2705F0F12205BFB6005A0BB1 /* Build configuration list for PBXNativeTarget "iMeiJu_Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2705F0F22205BFB6005A0BB1 /* Debug */,
+				2705F0F32205BFB6005A0BB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2705F0D92205BFB4005A0BB1 /* Project object */;
+}
