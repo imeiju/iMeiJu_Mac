@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F0E42205BFB4005A0BB1 /* AppDelegate.swift */; };
-		2705F0E72205BFB4005A0BB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F0E62205BFB4005A0BB1 /* ViewController.swift */; };
 		2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2705F0E82205BFB6005A0BB1 /* Assets.xcassets */; };
 		2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2705F0EA2205BFB6005A0BB1 /* Main.storyboard */; };
+		2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F12E2205C3ED005A0BB1 /* IZExtension.swift */; };
+		2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -18,11 +19,12 @@
 		24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iMeiJu_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2705F0E12205BFB4005A0BB1 /* iMeiJu_Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iMeiJu_Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2705F0E42205BFB4005A0BB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2705F0E62205BFB4005A0BB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2705F0E82205BFB6005A0BB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2705F0EB2205BFB6005A0BB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2705F0ED2205BFB6005A0BB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2705F0EE2205BFB6005A0BB1 /* iMeiJu_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iMeiJu_Mac.entitlements; sourceTree = "<group>"; };
+		2705F12E2205C3ED005A0BB1 /* IZExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZExtension.swift; sourceTree = "<group>"; };
+		2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainViewController.swift; sourceTree = "<group>"; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,14 +70,39 @@
 		2705F0E32205BFB4005A0BB1 /* iMeiJu_Mac */ = {
 			isa = PBXGroup;
 			children = (
-				2705F0E42205BFB4005A0BB1 /* AppDelegate.swift */,
-				2705F0E62205BFB4005A0BB1 /* ViewController.swift */,
+				2705F1302205C427005A0BB1 /* ViewContros */,
+				2705F12D2205C3B5005A0BB1 /* Extension */,
+				2705F12C2205C383005A0BB1 /* Applegate */,
 				2705F0E82205BFB6005A0BB1 /* Assets.xcassets */,
 				2705F0EA2205BFB6005A0BB1 /* Main.storyboard */,
 				2705F0ED2205BFB6005A0BB1 /* Info.plist */,
 				2705F0EE2205BFB6005A0BB1 /* iMeiJu_Mac.entitlements */,
 			);
 			path = iMeiJu_Mac;
+			sourceTree = "<group>";
+		};
+		2705F12C2205C383005A0BB1 /* Applegate */ = {
+			isa = PBXGroup;
+			children = (
+				2705F0E42205BFB4005A0BB1 /* AppDelegate.swift */,
+			);
+			path = Applegate;
+			sourceTree = "<group>";
+		};
+		2705F12D2205C3B5005A0BB1 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2705F12E2205C3ED005A0BB1 /* IZExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		2705F1302205C427005A0BB1 /* ViewContros */ = {
+			isa = PBXGroup;
+			children = (
+				2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */,
+			);
+			path = ViewContros;
 			sourceTree = "<group>";
 		};
 		6C6722660887476393F165E6 /* Pods */ = {
@@ -115,6 +142,7 @@
 		2705F0D92205BFB4005A0BB1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = IZ;
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = iizvv;
@@ -219,7 +247,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2705F0E72205BFB4005A0BB1 /* ViewController.swift in Sources */,
+				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
+				2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */,
 				2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
