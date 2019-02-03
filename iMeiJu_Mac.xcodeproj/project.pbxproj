@@ -12,6 +12,11 @@
 		2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2705F0EA2205BFB6005A0BB1 /* Main.storyboard */; };
 		2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F12E2205C3ED005A0BB1 /* IZExtension.swift */; };
 		2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */; };
+		2711C7322206B9F8003A28DB /* IZMainViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7302206B9F8003A28DB /* IZMainViewItem.swift */; };
+		2711C7332206B9F8003A28DB /* IZMainViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2711C7312206B9F8003A28DB /* IZMainViewItem.xib */; };
+		2711C7352206CAE4003A28DB /* IZWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7342206CAE4003A28DB /* IZWindow.swift */; };
+		2711C7392206D63C003A28DB /* IZUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7382206D63C003A28DB /* IZUtils.swift */; };
+		2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7402206F13B003A28DB /* IZMainModel.swift */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +30,11 @@
 		2705F0EE2205BFB6005A0BB1 /* iMeiJu_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iMeiJu_Mac.entitlements; sourceTree = "<group>"; };
 		2705F12E2205C3ED005A0BB1 /* IZExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZExtension.swift; sourceTree = "<group>"; };
 		2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainViewController.swift; sourceTree = "<group>"; };
+		2711C7302206B9F8003A28DB /* IZMainViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainViewItem.swift; sourceTree = "<group>"; };
+		2711C7312206B9F8003A28DB /* IZMainViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMainViewItem.xib; sourceTree = "<group>"; };
+		2711C7342206CAE4003A28DB /* IZWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZWindow.swift; sourceTree = "<group>"; };
+		2711C7382206D63C003A28DB /* IZUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZUtils.swift; sourceTree = "<group>"; };
+		2711C7402206F13B003A28DB /* IZMainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMainModel.swift; sourceTree = "<group>"; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,7 +80,11 @@
 		2705F0E32205BFB4005A0BB1 /* iMeiJu_Mac */ = {
 			isa = PBXGroup;
 			children = (
-				2705F1302205C427005A0BB1 /* ViewContros */,
+				2711C73D2206F12B003A28DB /* Model */,
+				2711C7372206D624003A28DB /* Utils */,
+				2711C7362206CAE7003A28DB /* Window */,
+				2711C72F2206B9D6003A28DB /* Views */,
+				2705F1302205C427005A0BB1 /* Contros */,
 				2705F12D2205C3B5005A0BB1 /* Extension */,
 				2705F12C2205C383005A0BB1 /* Applegate */,
 				2705F0E82205BFB6005A0BB1 /* Assets.xcassets */,
@@ -97,12 +111,53 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		2705F1302205C427005A0BB1 /* ViewContros */ = {
+		2705F1302205C427005A0BB1 /* Contros */ = {
 			isa = PBXGroup;
 			children = (
 				2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */,
 			);
-			path = ViewContros;
+			path = Contros;
+			sourceTree = "<group>";
+		};
+		2711C72F2206B9D6003A28DB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2711C7302206B9F8003A28DB /* IZMainViewItem.swift */,
+				2711C7312206B9F8003A28DB /* IZMainViewItem.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2711C7362206CAE7003A28DB /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				2711C7342206CAE4003A28DB /* IZWindow.swift */,
+			);
+			path = Window;
+			sourceTree = "<group>";
+		};
+		2711C7372206D624003A28DB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2711C7382206D63C003A28DB /* IZUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2711C73D2206F12B003A28DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2711C73E2206F12F003A28DB /* Main */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2711C73E2206F12F003A28DB /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2711C7402206F13B003A28DB /* IZMainModel.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		6C6722660887476393F165E6 /* Pods */ = {
@@ -182,6 +237,7 @@
 			files = (
 				2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */,
 				2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */,
+				2711C7332206B9F8003A28DB /* IZMainViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +276,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -230,6 +287,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -247,9 +305,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2711C7392206D63C003A28DB /* IZUtils.swift in Sources */,
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
+				2711C7322206B9F8003A28DB /* IZMainViewItem.swift in Sources */,
+				2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */,
 				2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */,
 				2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */,
+				2711C7352206CAE4003A28DB /* IZWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
