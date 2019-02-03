@@ -77,7 +77,6 @@ class IZMainViewController: NSViewController {
 extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         if model?.code==0 {
-            print(model?.data.count as Any)
             return (model?.data.count)!
         }
         return 0
@@ -97,14 +96,15 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     
     func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
         let headView = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"), for: indexPath) as! IZMainSectionHeaderView
-        headView.setIndexPath(idxp: indexPath)
-        headView.addGestureRecognizer(NSGestureRecognizer(target: self, action: #selector(headViewDidSelect(sender:))))
+        headView.actionButton.target = self
+        headView.actionButton.action = #selector(headViewDidSelect(sender:))
+        headView.actionButton.tag = indexPath.section
         headView.setSectionHeader(title: (model?.data[indexPath.section].name)!)
-        return view
+        return headView
     }
-    
-    @objc func headViewDidSelect(sender: IZMainSectionHeaderView) {
-        print(sender.indexPath?.section as Any)
+
+    @objc func headViewDidSelect(sender: NSButton) {
+        print(model?.data[sender.tag].id as Any)
     }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {

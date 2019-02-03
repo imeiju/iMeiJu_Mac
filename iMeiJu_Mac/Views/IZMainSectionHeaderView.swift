@@ -13,22 +13,17 @@ class IZMainSectionHeaderView: NSView {
 
     @IBOutlet weak var sectionTitle: NSTextField!
     
-    var indexPath: IndexPath?
     
+    @IBOutlet weak var actionButton: NSButton!
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         NSColor(calibratedWhite: 0.8 , alpha: 0.8).set()
         __NSRectFillUsingOperation(dirtyRect, NSCompositingOperation.sourceOver)
-        
     }
     
     func setSectionHeader(title: String) {
         sectionTitle.stringValue = title
-    }
-    
-    func setIndexPath(idxp: IndexPath) {
-        indexPath = idxp
     }
     
 }

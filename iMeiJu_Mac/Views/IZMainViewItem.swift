@@ -18,7 +18,6 @@ class IZMainViewItem: NSCollectionViewItem {
     }
     
     func setName(name: String) {
-        print(name)
         textField?.stringValue = name
     }
     

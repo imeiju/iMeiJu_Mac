@@ -23,23 +23,35 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VVZ-ew-Jrd">
-                    <rect key="frame" x="950" y="0.0" width="49" height="24"/>
+                    <rect key="frame" x="951" y="0.0" width="48" height="24"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="更多 》" id="Vkn-fd-OhY">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZS-FI-mlz">
+                    <rect key="frame" x="0.0" y="0.0" width="953" height="40"/>
+                    <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="GCQ-wk-pgh">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="VVZ-ew-Jrd" firstAttribute="leading" secondItem="fZS-FI-mlz" secondAttribute="trailing" id="23i-Ve-usW"/>
+                <constraint firstItem="fZS-FI-mlz" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="3Lt-oN-VLI"/>
                 <constraint firstAttribute="trailing" secondItem="VVZ-ew-Jrd" secondAttribute="trailing" constant="5" id="66s-h4-Qh4"/>
                 <constraint firstItem="mAo-6g-1FY" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="16" id="ON9-4l-6OH"/>
                 <constraint firstItem="VVZ-ew-Jrd" firstAttribute="bottom" secondItem="mAo-6g-1FY" secondAttribute="bottom" id="Vaa-yV-BOX"/>
+                <constraint firstItem="fZS-FI-mlz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="Wft-lM-aSG"/>
                 <constraint firstAttribute="trailing" secondItem="mAo-6g-1FY" secondAttribute="trailing" constant="92" id="Zff-D7-ph9"/>
                 <constraint firstItem="VVZ-ew-Jrd" firstAttribute="top" secondItem="mAo-6g-1FY" secondAttribute="top" id="b1h-VF-6Z2"/>
+                <constraint firstAttribute="bottom" secondItem="fZS-FI-mlz" secondAttribute="bottom" id="bqn-j6-7Tp"/>
                 <constraint firstAttribute="bottom" secondItem="mAo-6g-1FY" secondAttribute="bottom" id="dvm-TQ-63H"/>
                 <constraint firstItem="mAo-6g-1FY" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="10" id="iM7-X6-v9Z"/>
             </constraints>
             <connections>
+                <outlet property="actionButton" destination="fZS-FI-mlz" id="NGV-7Y-IH7"/>
                 <outlet property="sectionTitle" destination="mAo-6g-1FY" id="YM8-km-Otv"/>
             </connections>
         </customView>
