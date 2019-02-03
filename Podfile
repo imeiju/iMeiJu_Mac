@@ -10,6 +10,5 @@ use_frameworks!
     pod 'Moya', '~> 12.0.1' # 网络层
 
     pod 'Kingfisher', '~> 5.1.0' # 图片下载
-    
-    
+        
 end

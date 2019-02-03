@@ -11,7 +11,6 @@ import Cocoa
 import Moya
 import SwiftyJSON
 
-
 class IZMainViewController: NSViewController {
     
     @IBOutlet weak var collectionView: NSCollectionView!
@@ -20,9 +19,14 @@ class IZMainViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         view.wantsLayer = true
         windowConfiguration()
         collectionViewConfiguration()
+        network()
+    }
+    
+    @objc func refresh() {
         network()
     }
     
@@ -33,18 +37,12 @@ class IZMainViewController: NSViewController {
         window?.setFrame(frame!, display: true)
     }
     
-    func collectionViewConfiguration() {
-        collectionView.collectionViewLayout = layout
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(NSNib(nibNamed: "IZMainViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
-        
-        collectionView.register(NSNib(nibNamed:"IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
-    }
-    
     func network() {
+        ProgressHUD.setDefaultPosition(.center)
+        ProgressHUD.show()
         let provider = MoyaProvider<MoyaApi>()
         provider.request(MoyaApi.index(vsize: "15"), callbackQueue: nil, progress: nil) { (result) in
+            ProgressHUD.dismiss()
             switch result {
             case let .success(result):
                 let json = JSON(result.data)
@@ -55,6 +53,14 @@ class IZMainViewController: NSViewController {
                 
             }
         }
+    }
+    
+    func collectionViewConfiguration() {
+        collectionView.collectionViewLayout = layout
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(NSNib(nibNamed: "IZMainViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
+        collectionView.register(NSNib(nibNamed:"IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
     
     var layout: NSCollectionViewFlowLayout {
