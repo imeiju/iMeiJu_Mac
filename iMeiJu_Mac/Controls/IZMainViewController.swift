@@ -57,8 +57,7 @@ class IZMainViewController: NSViewController {
     
     func collectionViewConfiguration() {
         collectionView.collectionViewLayout = layout
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        collectionView.isSelectable = true
         collectionView.register(NSNib(nibNamed: "IZMainViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
         collectionView.register(NSNib(nibNamed:"IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
@@ -97,9 +96,20 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     }
     
     func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
-        let view = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"), for: indexPath) as! IZMainSectionHeaderView
-        view.setSectionHeader(title: (model?.data[indexPath.section].name)!)
+        let headView = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"), for: indexPath) as! IZMainSectionHeaderView
+        headView.setIndexPath(idxp: indexPath)
+        headView.addGestureRecognizer(NSGestureRecognizer(target: self, action: #selector(headViewDidSelect(sender:))))
+        headView.setSectionHeader(title: (model?.data[indexPath.section].name)!)
         return view
+    }
+    
+    @objc func headViewDidSelect(sender: IZMainSectionHeaderView) {
+        print(sender.indexPath?.section as Any)
+    }
+
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        let m = model?.data[indexPaths.first!.section].vod![indexPaths.first!.item]
+        print(m!.id)
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
