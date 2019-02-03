@@ -17,6 +17,8 @@
 		2711C7352206CAE4003A28DB /* IZWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7342206CAE4003A28DB /* IZWindow.swift */; };
 		2711C7392206D63C003A28DB /* IZUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7382206D63C003A28DB /* IZUtils.swift */; };
 		2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7402206F13B003A28DB /* IZMainModel.swift */; };
+		2711C74822071E88003A28DB /* IZMainSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */; };
+		2711C74A22071F4E003A28DB /* IZMainSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		2711C7342206CAE4003A28DB /* IZWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZWindow.swift; sourceTree = "<group>"; };
 		2711C7382206D63C003A28DB /* IZUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZUtils.swift; sourceTree = "<group>"; };
 		2711C7402206F13B003A28DB /* IZMainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMainModel.swift; sourceTree = "<group>"; };
+		2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMainSectionHeaderView.xib; sourceTree = "<group>"; };
+		2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainSectionHeaderView.swift; sourceTree = "<group>"; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +128,8 @@
 			children = (
 				2711C7302206B9F8003A28DB /* IZMainViewItem.swift */,
 				2711C7312206B9F8003A28DB /* IZMainViewItem.xib */,
+				2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */,
+				2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,6 +243,7 @@
 			files = (
 				2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */,
 				2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */,
+				2711C74822071E88003A28DB /* IZMainSectionHeaderView.xib in Resources */,
 				2711C7332206B9F8003A28DB /* IZMainViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2711C7392206D63C003A28DB /* IZUtils.swift in Sources */,
+				2711C74A22071F4E003A28DB /* IZMainSectionHeaderView.swift in Sources */,
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
 				2711C7322206B9F8003A28DB /* IZMainViewItem.swift in Sources */,
 				2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */,

@@ -721,6 +721,10 @@
                                                 <size key="itemSize" width="50" height="50"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <outlet property="dataSource" destination="XfG-lQ-9wD" id="Zh7-qP-ffs"/>
+                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="WMa-aR-2BE"/>
+                                            </connections>
                                         </collectionView>
                                     </subviews>
                                 </clipView>
