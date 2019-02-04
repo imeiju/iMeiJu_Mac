@@ -109,7 +109,11 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         let m = model?.data[indexPaths.first!.section].vod![indexPaths.first!.item]
-        print(m!.id)
+        let plot = IZPlotMessgaeWindowController(windowNibName: "IZPlotMessgaeWindowController")
+        plot.vid = m?.id
+        plot.window!.title = (m?.name)!
+        plot.window?.orderFront(nil)
+        plot.window?.setFrame((NSApplication.shared.windows.first?.frame)!, display: true)
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {

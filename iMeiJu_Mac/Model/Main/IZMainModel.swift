@@ -9,7 +9,7 @@ import SwiftyJSON
 class IZMainModel : NSObject, NSCoding{
 
 	var code : Int!
-	var data : [IZData]!
+	var data : [IZMainData]!
 
 
 	/**
@@ -20,10 +20,10 @@ class IZMainModel : NSObject, NSCoding{
 			return
 		}
 		code = json["code"].intValue
-		data = [IZData]()
-		let IZDataArray = json["data"].arrayValue
-		for IZDataJson in IZDataArray{
-			let value = IZData(fromJson: IZDataJson)
+		data = [IZMainData]()
+		let dataArray = json["data"].arrayValue
+		for dataJson in dataArray{
+			let value = IZMainData(fromJson: dataJson)
 			data.append(value)
 		}
 	}
@@ -39,8 +39,8 @@ class IZMainModel : NSObject, NSCoding{
 		}
 		if data != nil{
 			var dictionaryElements = [[String:Any]]()
-			for IZDataElement in data {
-				dictionaryElements.append(IZDataElement.toDictionary())
+			for dataElement in data {
+				dictionaryElements.append(dataElement.toDictionary())
 			}
 			dictionary["data"] = dictionaryElements
 		}
@@ -49,12 +49,12 @@ class IZMainModel : NSObject, NSCoding{
 
     /**
     * NSCoding required initializer.
-    * Fills the IZData from the passed decoder
+    * Fills the IZMainData from the passed decoder
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
          code = aDecoder.decodeObject(forKey: "code") as? Int
-         data = aDecoder.decodeObject(forKey: "data") as? [IZData]
+         data = aDecoder.decodeObject(forKey: "data") as? [IZMainData]
 
 	}
 
@@ -75,7 +75,7 @@ class IZMainModel : NSObject, NSCoding{
 
 }
 
-class IZData : NSObject, NSCoding{
+class IZMainData : NSObject, NSCoding{
     
     var ad : Int!
     var id : String!
@@ -138,7 +138,7 @@ class IZData : NSObject, NSCoding{
     
     /**
      * NSCoding required initializer.
-     * Fills the IZData from the passed decoder
+     * Fills the IZMainData from the passed decoder
      */
     @objc required init(coder aDecoder: NSCoder)
     {
@@ -255,7 +255,7 @@ class Vod : NSObject, NSCoding{
     
     /**
      * NSCoding required initializer.
-     * Fills the IZData from the passed decoder
+     * Fills the IZMainData from the passed decoder
      */
     @objc required init(coder aDecoder: NSCoder)
     {

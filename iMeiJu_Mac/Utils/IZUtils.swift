@@ -12,6 +12,7 @@ import Moya
 
 enum MoyaApi {
     case index(vsize: String)
+    case show(vid: String)
 }
 
 extension MoyaApi : TargetType {
@@ -24,12 +25,16 @@ extension MoyaApi : TargetType {
         switch self {
         case .index:
             return "/index.php/app/ios/topic/index"
+        case .show:
+            return "/index.php/app/ios/vod/show"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .index:
+            return .get
+        case .show:
             return .get
         }
     }
@@ -42,6 +47,8 @@ extension MoyaApi : TargetType {
         switch self {
         case let .index(vsize):
             return .requestParameters(parameters:["vsize":vsize], encoding: URLEncoding.default)
+        case let .show(vid):
+            return .requestParameters(parameters: ["id":vid], encoding: URLEncoding.default)
         }
     }
     
