@@ -23,4 +23,6 @@
 >> 刷新,只刷新首页资源(`command + R`)\
 >> 美剧自动连播 
 
-![](Resource/imgs/preview.gif)
+<p align="center">
+  <img src="Resource/imgs/preview.gif" width="500" />
+</p>
