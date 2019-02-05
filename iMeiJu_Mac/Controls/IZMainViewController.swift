@@ -11,20 +11,77 @@ import Cocoa
 import Moya
 import SwiftyJSON
 
+enum MenuType: Int {
+    case recommend = 0
+    case movie = 1
+    case usMovie = 2
+}
+
 class IZMainViewController: NSViewController {
     
     @IBOutlet weak var collectionView: NSCollectionView!
-    var model: IZMainModel?
+    @IBOutlet weak var vip: NSButton!
+    @IBOutlet weak var recommend: NSButton!
+    @IBOutlet weak var movie: NSButton!
+    @IBOutlet weak var usMovie: NSButton!
     
+    var model: IZMainModel?
+    var api = MoyaApi.index(vsize: "15")
+    var isZtid = true
+    var isMenu = MenuType.recommend
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         view.wantsLayer = true
+        if UserDefaults.standard.bool(forKey: "isVip") {
+            vip.state = NSControl.StateValue.on
+        }
+        vip.isHidden = true
+        recommend.isEnabled = false
         windowConfiguration()
         collectionViewConfiguration()
         network()
     }
+    
+    @IBAction func recommend(_ sender: NSButton) {
+        vip.isHidden = true
+        sender.isEnabled = false
+        movie.isEnabled = true
+        usMovie.isEnabled = true
+        api = .index(vsize: "15")
+        isZtid = true
+        isMenu = .recommend
+        network()
+    }
+    
+    @IBAction func movie(_ sender: NSButton) {
+        vip.isHidden = false
+        sender.isEnabled = false
+        recommend.isEnabled = true
+        usMovie.isEnabled = true
+        api = .movie(id: "1", vsize: "15")
+        isZtid = false
+        isMenu = .movie
+        network()
+    }
+    
+    @IBAction func usMove(_ sender: NSButton) {
+        vip.isHidden = true
+        sender.isEnabled = false
+        movie.isEnabled = true
+        recommend.isEnabled = true
+        api = .movie(id: "2", vsize: "15")
+        isZtid = false
+        isMenu = .usMovie
+        network()
+    }
+    
+    @IBAction func vip(_ sender: NSButton) {
+        UserDefaults.standard.set(sender.state, forKey: "isVip")
+        self.collectionView.reloadData()
+    }
+    
     
     @objc func refresh() {
         network()
@@ -34,19 +91,22 @@ class IZMainViewController: NSViewController {
         let window = NSApplication.shared.windows.first
         var frame = window?.frame
         frame?.size.width = 1002
+        frame?.size.height = 600
         window?.setFrame(frame!, display: true)
     }
     
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
-        provider.request(MoyaApi.index(vsize: "15"), callbackQueue: nil, progress: nil) { (result) in
+        provider.request(api, callbackQueue: nil, progress: nil) { (result) in
             ProgressHUD.dismiss()
             switch result {
             case let .success(result):
                 let json = JSON(result.data)
                 self.model = IZMainModel(fromJson: json)
                 self.collectionView.reloadData()
+                //刷新完成后 回滚到顶部
+                self.collectionView.scrollToItems(at: Set(arrayLiteral: IndexPath(item: 0, section: 0)), scrollPosition: .top)
                 break
             case .failure(_): break
                 
@@ -76,6 +136,9 @@ class IZMainViewController: NSViewController {
 extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         if model?.code==0 {
+            if isMenu == MenuType.movie && !UserDefaults.standard.bool(forKey: "isVip") {
+               return (model?.data.count)!-1
+            }
             return (model?.data.count)!
         }
         return 0
@@ -105,7 +168,11 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     @objc func headViewDidSelect(sender: NSButton) {
         let m = model!.data[sender.tag]
         let more = IZMoreWindowController(windowNibName: "IZMoreWindowController")
-        more.ztid = m.id
+        if isZtid {
+            more.ztid = m.id
+        }else {
+            more.id = m.id
+        }
         jumpWindow(window: more.window!, name: m.name)
     }
 

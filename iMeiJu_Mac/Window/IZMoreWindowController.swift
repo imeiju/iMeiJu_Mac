@@ -11,12 +11,17 @@ import Cocoa
 
 class IZMoreWindowController: NSWindowController {
 
-    var ztid: String!
+    var ztid: String?
+    var id: String?
     
     override func windowDidLoad() {
         super.windowDidLoad()
         let more = IZMoreViewController.init(nibName: "IZMoreViewController", bundle: nil)
-        more.ztid = ztid
+        if ztid == nil {
+            more.id = id
+        }else {
+            more.ztid = ztid
+        }
         contentViewController = more
     }
     

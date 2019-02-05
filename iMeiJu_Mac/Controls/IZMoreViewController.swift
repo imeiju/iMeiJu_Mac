@@ -15,17 +15,26 @@ class IZMoreViewController: NSViewController {
 
     @IBOutlet weak var collectionView: NSCollectionView!
     
-    var ztid: String!
+    var ztid: String?
+    var id: String?
+    var api: MoyaApi!
+    
+    
     var model: IZMoreModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewConfiguration()
+        if ztid == nil {
+            api = .movieMore(page: "1", size: "10000", id: id!)
+        }else {
+            api = .more(page: "1", size: "10000", ztid: ztid!)
+        }
         network()
     }
     
     func network() {
-        provider.request(.more(page: "1", size: "10000", ztid: ztid), callbackQueue: nil, progress: nil) { result in
+        provider.request(api, callbackQueue: nil, progress: nil) { result in
             switch result{
             case let .success(result):
                 self.model = IZMoreModel(fromJson: JSON(result.data))

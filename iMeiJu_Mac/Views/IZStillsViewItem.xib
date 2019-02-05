@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,8 +18,8 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wAb-sy-bI3">
-                    <rect key="frame" x="82" y="20" width="37" height="17"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="fwB-bI-4h9">
+                    <rect key="frame" x="1" y="20" width="198" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="fwB-bI-4h9">
                         <font key="font" usesAppearanceFont="YES"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -30,6 +31,8 @@
                 </imageView>
             </subviews>
             <constraints>
+                <constraint firstItem="wAb-sy-bI3" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="3" id="BiF-UG-i70"/>
+                <constraint firstAttribute="trailing" secondItem="wAb-sy-bI3" secondAttribute="trailing" constant="3" id="JIN-NY-5zT"/>
                 <constraint firstItem="wAb-sy-bI3" firstAttribute="top" secondItem="mDs-ry-DDE" secondAttribute="bottom" constant="5" id="Lzn-yb-C3E"/>
                 <constraint firstItem="mDs-ry-DDE" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="5" id="Lzu-IB-L3J"/>
                 <constraint firstItem="mDs-ry-DDE" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="5" id="jt3-sp-FPE"/>

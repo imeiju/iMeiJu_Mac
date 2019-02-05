@@ -13,9 +13,10 @@ import Moya
 let provider = MoyaProvider<MoyaApi>()
 
 enum MoyaApi {
-    //index.php/app/ios/vod/index?page=1&size=21&ztid=1
     case index(vsize: String)
+    case movie(id: String, vsize: String)
     case more(page: String, size: String, ztid: String)
+    case movieMore(page: String, size: String, id: String)
     case show(id: String)
 }
 
@@ -25,10 +26,15 @@ extension MoyaApi : TargetType {
         return URL.init(string: "https://mjappaz.yefu365.com")!
     }
     
+    //https://mjappaz.yefu365.com/index.php/app/ios/vod/index?id=23&page=1&size=21
     var path: String {
         switch self {
         case .index:
             return "/index.php/app/ios/topic/index"
+        case .movie:
+            return "/index.php/app/ios/type/index"
+        case .movieMore:
+            return "/index.php/app/ios/vod/index"
         case .more:
             return "/index.php/app/ios/vod/index"
         case .show:
@@ -41,13 +47,17 @@ extension MoyaApi : TargetType {
         switch self {
         case .index:
             return .get
+        case .movie:
+            return .get
         case .more:
+            return .get
+        case .movieMore:
             return .get
         case .show:
             return .get
         }
     }
-    
+
     var sampleData: Data {
         return Data(base64Encoded: "just for test")!
     }
@@ -56,8 +66,12 @@ extension MoyaApi : TargetType {
         switch self {
         case let .index(vsize):
             return .requestParameters(parameters:["vsize":vsize], encoding: URLEncoding.default)
+        case let .movie(id, vsize):
+            return .requestParameters(parameters: ["id":id, "vsize":vsize], encoding: URLEncoding.default)
         case let .more(page, size, ztid):
             return .requestParameters(parameters: ["page":page, "size":size, "ztid":ztid], encoding: URLEncoding.default)
+        case let .movieMore(page, size, id):
+            return .requestParameters(parameters: ["page":page, "size":size, "id":id], encoding: URLEncoding.default)
         case let .show(id):
             return .requestParameters(parameters: ["id":id], encoding: URLEncoding.default)
         }
