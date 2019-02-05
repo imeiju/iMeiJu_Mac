@@ -55,10 +55,16 @@ class IZMainViewController: NSViewController {
         }
     }
     
+    func jumpWindow(window: NSWindow, name: String) {
+        window.title = name
+        window.setFrame(NSApplication.shared.windows.first!.frame, display: true)
+        window.orderFront(nil)
+    }
+    
     func collectionViewConfiguration() {
         collectionView.collectionViewLayout = layout
         collectionView.isSelectable = true
-        collectionView.register(NSNib(nibNamed: "IZMainViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
+        collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
         collectionView.register(NSNib(nibNamed:"IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
     
@@ -87,10 +93,10 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZMainViewItem
-        let m = model?.data[indexPath.section].vod![indexPath.item]
-        item.setName(name: m!.name)
-        item.setImageUrl(url: m!.pic)
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZStillsViewItem
+        let m = model!.data[indexPath.section].vod![indexPath.item]
+        item.setName(name: m.name)
+        item.setImageUrl(url: m.pic)
         return item
     }
     
@@ -104,18 +110,18 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     }
 
     @objc func headViewDidSelect(sender: NSButton) {
-        print(model?.data[sender.tag].id as Any)
+        let m = model!.data[sender.tag]
+        let more = IZMoreWindowController(windowNibName: "IZMoreWindowController")
+        jumpWindow(window: more.window!, name: m.name)
     }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         // 消除选中状态,使其可以再次选择
         collectionView.deselectAll(nil)
-        let m = model?.data[indexPaths.first!.section].vod![indexPaths.first!.item]
+        let m = model!.data[indexPaths.first!.section].vod![indexPaths.first!.item]
         let plot = IZPlotMessgaeWindowController(windowNibName: "IZPlotMessgaeWindowController")
-        plot.vid = m?.id
-        plot.window!.title = (m?.name)!
-        plot.window?.orderFront(nil)
-        plot.window?.setFrame((NSApplication.shared.windows.first?.frame)!, display: true)
+        plot.id = m.id
+        jumpWindow(window: plot.window!, name: m.name)
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {

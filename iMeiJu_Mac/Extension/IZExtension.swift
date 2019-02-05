@@ -21,7 +21,6 @@ extension NSColor {
 }
 
 extension NSImageView {
-    
     func setImage(_ url: String) {
         kf.setImage(with: URL(string: url), placeholder: NSImage(named: ""), options: nil, progressBlock: nil) { (result) in
             

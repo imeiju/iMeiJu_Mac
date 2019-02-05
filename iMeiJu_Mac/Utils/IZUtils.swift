@@ -11,8 +11,10 @@ import Foundation
 import Moya
 
 enum MoyaApi {
+    //index.php/app/ios/vod/index?page=1&size=21&ztid=1
     case index(vsize: String)
-    case show(vid: String)
+    case more(page: String, size: String, ztid: String)
+    case show(id: String)
 }
 
 extension MoyaApi : TargetType {
@@ -25,14 +27,19 @@ extension MoyaApi : TargetType {
         switch self {
         case .index:
             return "/index.php/app/ios/topic/index"
+        case .more:
+            return "/index.php/app/ios/vod/index"
         case .show:
             return "/index.php/app/ios/vod/show"
+        
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .index:
+            return .get
+        case .more:
             return .get
         case .show:
             return .get
@@ -47,8 +54,10 @@ extension MoyaApi : TargetType {
         switch self {
         case let .index(vsize):
             return .requestParameters(parameters:["vsize":vsize], encoding: URLEncoding.default)
-        case let .show(vid):
-            return .requestParameters(parameters: ["id":vid], encoding: URLEncoding.default)
+        case let .more(page, size, ztid):
+            return .requestParameters(parameters: ["page":page, "size":size, "ztid":ztid], encoding: URLEncoding.default)
+        case let .show(id):
+            return .requestParameters(parameters: ["id":id], encoding: URLEncoding.default)
         }
     }
     

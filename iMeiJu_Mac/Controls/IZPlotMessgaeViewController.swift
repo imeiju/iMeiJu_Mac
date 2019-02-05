@@ -20,51 +20,74 @@ class IZPlotMessgaeViewController: NSViewController {
     
     @IBOutlet weak var collectionView: NSCollectionView!
     
-    var vid: String!
+    var id: String!
     var model: IZPlotMessageModel?
     var player: AVPlayer?
-    var isShow = true
-    
+    var idx = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         playerView.showsFullScreenToggleButton = true
         episodeView.backgroundColor = .clear
+        episodeView.isHidden = true
         collectionView.backgroundColors = [NSColor(calibratedWhite: 0.8 , alpha: 0.8)]
         collectionViewConfiguration()
+        NotificationCenter.default.addObserver(self, selector: #selector(playToEndTime), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         network()
     }
     
-    func showEpisodeView() {
-        if isShow {
-            episodeView.layer?.transform = CATransform3DMakeTranslation(episodeView.frame.size.width, 0, 0)
-        }else {
-            episodeView.layer?.transform = CATransform3DMakeTranslation(0, 0, 0)
+    override func mouseDown(with event: NSEvent) {
+        if episodeView == nil {
+            return
         }
-        isShow = !isShow
+        showEpisodeView()
     }
     
-    override func mouseDown(with event: NSEvent) {
-        showEpisodeView()
+    func showEpisodeView() {
+        episodeView.isHidden = !episodeView.isHidden
+    }
+    
+    @objc func playToEndTime() {
+        if episodeView != nil &&
+            (model?.data.zu.first?.ji.count)! > 1 &&
+            idx < (model?.data.zu.first?.ji.count)!-1 {
+            idx+=1
+            self.collectionView.deselectAll(nil)
+            self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: idx, section: 0)), scrollPosition: .top)
+            let m = model!.data.zu.first?.ji[idx]
+            playVideo(url: m!.purl, level: m!.name)
+        }
+    }
+    
+    func playVideo(url: String, level: String) {
+        let item = AVPlayerItem(url: URL(string: url)!)
+        self.player = AVPlayer(playerItem: item)
+        self.playerView.player = self.player
+        self.player?.play()
+        let window = NSApplication.shared.windows.last!
+        window.title =  (model?.data.name)! + " " + level
     }
     
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
         let provider = MoyaProvider<MoyaApi>()
-        provider.request(.show(vid: vid!), callbackQueue: nil, progress: nil) { result in
+        provider.request(.show(id: id!), callbackQueue: nil, progress: nil) { result in
             ProgressHUD.dismiss()
             switch result {
             case let .success(result):
                 self.model = IZPlotMessageModel(fromJson: JSON(result.data))
-                if self.model!.code == 0 {
-                    let v = self.model!.data.zu.first!.ji.first!
-                    let item = AVPlayerItem(url: URL(string: v.purl)!)
-                    self.player = AVPlayer(playerItem: item)
-                    self.playerView.player = self.player
-                    self.player?.play()
-                    let window = NSApplication.shared.windows.last!
-                    window.title =  (self.model?.data.name)! + " " + v.name
+                if self.model?.code == 0 {
+                    let ji = self.model!.data.zu.first!.ji!
+                    let first = ji.first!
+                    self.playVideo(url: first.purl, level: first.name)
+                    // 当集数数组长度为1时, 则表示当前内容无法选集, 则移除选集菜单图层
+                    if ji.count == 1 {
+                        self.episodeView.removeFromSuperview()
+                        self.episodeView = nil
+                    }else {
+                        self.episodeView.isHidden = false
+                    }
                     self.collectionView.reloadData()
                     // 默认选中第一集
                     self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: 0, section: 0)), scrollPosition: .top)
@@ -113,14 +136,9 @@ extension IZPlotMessgaeViewController: NSCollectionViewDelegate, NSCollectionVie
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-        let m = model!.data.zu.first?.ji[indexPaths.first!.item]
-        let p = AVPlayerItem(url: URL(string: m!.purl)!)
-        self.player = AVPlayer(playerItem: p)
-        self.playerView.player = self.player
-        self.player?.play()
-        let window = NSApplication.shared.windows.last!
-        window.title =  (model?.data.name)! + " " + m!.name
+        idx = indexPaths.first!.item
+        let m = model!.data.zu.first?.ji[idx]
+        playVideo(url: m!.purl, level: m!.name)
     }
-    
     
 }

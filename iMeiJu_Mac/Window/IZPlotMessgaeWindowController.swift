@@ -11,12 +11,12 @@ import Cocoa
 
 class IZPlotMessgaeWindowController: NSWindowController {
 
-    var vid: String?
+    var id: String?
     
     override func windowDidLoad() {
         super.windowDidLoad()
         let plot = IZPlotMessgaeViewController.init(nibName: "IZPlotMessgaeViewController", bundle: nil)
-        plot.vid = vid
+        plot.id = id
         contentViewController = plot
     }
     
