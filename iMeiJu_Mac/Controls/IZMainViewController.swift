@@ -40,7 +40,6 @@ class IZMainViewController: NSViewController {
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
-        let provider = MoyaProvider<MoyaApi>()
         provider.request(MoyaApi.index(vsize: "15"), callbackQueue: nil, progress: nil) { (result) in
             ProgressHUD.dismiss()
             switch result {
@@ -53,12 +52,6 @@ class IZMainViewController: NSViewController {
                 
             }
         }
-    }
-    
-    func jumpWindow(window: NSWindow, name: String) {
-        window.title = name
-        window.setFrame(NSApplication.shared.windows.first!.frame, display: true)
-        window.orderFront(nil)
     }
     
     func collectionViewConfiguration() {
@@ -112,12 +105,13 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     @objc func headViewDidSelect(sender: NSButton) {
         let m = model!.data[sender.tag]
         let more = IZMoreWindowController(windowNibName: "IZMoreWindowController")
+        more.ztid = m.id
         jumpWindow(window: more.window!, name: m.name)
     }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         // 消除选中状态,使其可以再次选择
-        collectionView.deselectAll(nil)
+        collectionView.deselectItems(at: indexPaths)
         let m = model!.data[indexPaths.first!.section].vod![indexPaths.first!.item]
         let plot = IZPlotMessgaeWindowController(windowNibName: "IZPlotMessgaeWindowController")
         plot.id = m.id

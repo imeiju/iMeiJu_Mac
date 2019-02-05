@@ -32,7 +32,8 @@ class IZPlotMessgaeViewController: NSViewController {
         episodeView.isHidden = true
         collectionView.backgroundColors = [NSColor(calibratedWhite: 0.8 , alpha: 0.8)]
         collectionViewConfiguration()
-        NotificationCenter.default.addObserver(self, selector: #selector(playToEndTime), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        // 监听播放完成通知,进行连播任务
+        NotificationCenter.default.addObserver(self, selector: #selector(playToEndTime), name: .AVPlayerItemDidPlayToEndTime, object: nil)
         network()
     }
     
@@ -71,7 +72,6 @@ class IZPlotMessgaeViewController: NSViewController {
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
-        let provider = MoyaProvider<MoyaApi>()
         provider.request(.show(id: id!), callbackQueue: nil, progress: nil) { result in
             ProgressHUD.dismiss()
             switch result {

@@ -27,3 +27,12 @@ extension NSImageView {
         }
     }
 }
+
+extension NSViewController {
+    func jumpWindow(window: NSWindow, name: String) {
+        window.title = name
+        window.setFrame(NSApplication.shared.windows.first!.frame, display: true)
+        window.orderFront(nil)
+    }
+    
+}

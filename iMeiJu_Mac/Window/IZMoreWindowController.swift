@@ -11,10 +11,13 @@ import Cocoa
 
 class IZMoreWindowController: NSWindowController {
 
+    var ztid: String!
+    
     override func windowDidLoad() {
         super.windowDidLoad()
-
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+        let more = IZMoreViewController.init(nibName: "IZMoreViewController", bundle: nil)
+        more.ztid = ztid
+        contentViewController = more
     }
     
 }

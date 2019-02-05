@@ -10,6 +10,8 @@
 import Foundation
 import Moya
 
+let provider = MoyaProvider<MoyaApi>()
+
 enum MoyaApi {
     //index.php/app/ios/vod/index?page=1&size=21&ztid=1
     case index(vsize: String)

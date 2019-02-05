@@ -33,6 +33,9 @@
 		2723E38A22092E2E00EB9CE1 /* IZMoreWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E38822092E2E00EB9CE1 /* IZMoreWindowController.xib */; };
 		278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604A8220930FF0097192A /* IZStillsViewItem.swift */; };
 		278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604A9220930FF0097192A /* IZStillsViewItem.xib */; };
+		278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604AC2209418D0097192A /* IZMoreViewController.swift */; };
+		278604AF2209418D0097192A /* IZMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604AD2209418D0097192A /* IZMoreViewController.xib */; };
+		278604B2220955530097192A /* IZMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B1220955530097192A /* IZMoreModel.swift */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +70,9 @@
 		2723E38822092E2E00EB9CE1 /* IZMoreWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMoreWindowController.xib; sourceTree = "<group>"; };
 		278604A8220930FF0097192A /* IZStillsViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZStillsViewItem.swift; sourceTree = "<group>"; };
 		278604A9220930FF0097192A /* IZStillsViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZStillsViewItem.xib; sourceTree = "<group>"; };
+		278604AC2209418D0097192A /* IZMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMoreViewController.swift; sourceTree = "<group>"; };
+		278604AD2209418D0097192A /* IZMoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMoreViewController.xib; sourceTree = "<group>"; };
+		278604B1220955530097192A /* IZMoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMoreModel.swift; sourceTree = "<group>"; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +160,8 @@
 				2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */,
 				2723E376220821E900EB9CE1 /* IZPlotMessgaeViewController.swift */,
 				2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */,
+				278604AC2209418D0097192A /* IZMoreViewController.swift */,
+				278604AD2209418D0097192A /* IZMoreViewController.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -195,6 +203,7 @@
 		2711C73D2206F12B003A28DB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				278604B02209553F0097192A /* More */,
 				2723E37E2208272800EB9CE1 /* PlotMessage */,
 				2711C73E2206F12F003A28DB /* Main */,
 			);
@@ -233,6 +242,14 @@
 				2723E37F220829D100EB9CE1 /* IZPlotMessageModel.swift */,
 			);
 			path = PlotMessage;
+			sourceTree = "<group>";
+		};
+		278604B02209553F0097192A /* More */ = {
+			isa = PBXGroup;
+			children = (
+				278604B1220955530097192A /* IZMoreModel.swift */,
+			);
+			path = More;
 			sourceTree = "<group>";
 		};
 		6C6722660887476393F165E6 /* Pods */ = {
@@ -311,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */,
+				278604AF2209418D0097192A /* IZMoreViewController.xib in Resources */,
 				2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */,
 				2723E379220821E900EB9CE1 /* IZPlotMessgaeViewController.xib in Resources */,
 				2711C74822071E88003A28DB /* IZMainSectionHeaderView.xib in Resources */,
@@ -359,7 +377,6 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -370,7 +387,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,11 +408,13 @@
 				2723E378220821E900EB9CE1 /* IZPlotMessgaeViewController.swift in Sources */,
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
 				2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */,
+				278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */,
 				2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */,
 				2723E38922092E2E00EB9CE1 /* IZMoreWindowController.swift in Sources */,
 				278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */,
 				2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */,
 				2711C75C2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift in Sources */,
+				278604B2220955530097192A /* IZMoreModel.swift in Sources */,
 				2723E37022081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift in Sources */,
 				2723E380220829D100EB9CE1 /* IZPlotMessageModel.swift in Sources */,
 				2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */,
@@ -548,6 +566,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iizvv.iMeiJu-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -570,6 +589,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iizvv.iMeiJu-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
