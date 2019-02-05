@@ -36,6 +36,10 @@
 		278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604AC2209418D0097192A /* IZMoreViewController.swift */; };
 		278604AF2209418D0097192A /* IZMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604AD2209418D0097192A /* IZMoreViewController.xib */; };
 		278604B2220955530097192A /* IZMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B1220955530097192A /* IZMoreModel.swift */; };
+		278604B52209A2660097192A /* IZSearchWindowContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B32209A2660097192A /* IZSearchWindowContoller.swift */; };
+		278604B62209A2660097192A /* IZSearchWindowContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604B42209A2660097192A /* IZSearchWindowContoller.xib */; };
+		278604B92209A27B0097192A /* IZSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B72209A27B0097192A /* IZSearchViewController.swift */; };
+		278604BA2209A27B0097192A /* IZSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604B82209A27B0097192A /* IZSearchViewController.xib */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +77,10 @@
 		278604AC2209418D0097192A /* IZMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMoreViewController.swift; sourceTree = "<group>"; };
 		278604AD2209418D0097192A /* IZMoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMoreViewController.xib; sourceTree = "<group>"; };
 		278604B1220955530097192A /* IZMoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMoreModel.swift; sourceTree = "<group>"; };
+		278604B32209A2660097192A /* IZSearchWindowContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZSearchWindowContoller.swift; sourceTree = "<group>"; };
+		278604B42209A2660097192A /* IZSearchWindowContoller.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZSearchWindowContoller.xib; sourceTree = "<group>"; };
+		278604B72209A27B0097192A /* IZSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZSearchViewController.swift; sourceTree = "<group>"; };
+		278604B82209A27B0097192A /* IZSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZSearchViewController.xib; sourceTree = "<group>"; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,6 +170,8 @@
 				2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */,
 				278604AC2209418D0097192A /* IZMoreViewController.swift */,
 				278604AD2209418D0097192A /* IZMoreViewController.xib */,
+				278604B72209A27B0097192A /* IZSearchViewController.swift */,
+				278604B82209A27B0097192A /* IZSearchViewController.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -188,6 +198,8 @@
 				2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */,
 				2723E38722092E2E00EB9CE1 /* IZMoreWindowController.swift */,
 				2723E38822092E2E00EB9CE1 /* IZMoreWindowController.xib */,
+				278604B32209A2660097192A /* IZSearchWindowContoller.swift */,
+				278604B42209A2660097192A /* IZSearchWindowContoller.xib */,
 			);
 			path = Window;
 			sourceTree = "<group>";
@@ -332,6 +344,8 @@
 				2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */,
 				2723E379220821E900EB9CE1 /* IZPlotMessgaeViewController.xib in Resources */,
 				2711C74822071E88003A28DB /* IZMainSectionHeaderView.xib in Resources */,
+				278604BA2209A27B0097192A /* IZSearchViewController.xib in Resources */,
+				278604B62209A2660097192A /* IZSearchWindowContoller.xib in Resources */,
 				2723E38A22092E2E00EB9CE1 /* IZMoreWindowController.xib in Resources */,
 				278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */,
 				2723E38422085FBF00EB9CE1 /* IZEpisodeItem.xib in Resources */,
@@ -408,11 +422,13 @@
 				2723E378220821E900EB9CE1 /* IZPlotMessgaeViewController.swift in Sources */,
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
 				2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */,
+				278604B92209A27B0097192A /* IZSearchViewController.swift in Sources */,
 				278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */,
 				2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */,
 				2723E38922092E2E00EB9CE1 /* IZMoreWindowController.swift in Sources */,
 				278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */,
 				2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */,
+				278604B52209A2660097192A /* IZSearchWindowContoller.swift in Sources */,
 				2711C75C2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift in Sources */,
 				278604B2220955530097192A /* IZMoreModel.swift in Sources */,
 				2723E37022081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift in Sources */,

@@ -18,8 +18,6 @@ class IZMoreViewController: NSViewController {
     var ztid: String?
     var id: String?
     var api: MoyaApi!
-    
-    
     var model: IZMoreModel?
     
     override func viewDidLoad() {
@@ -34,7 +32,10 @@ class IZMoreViewController: NSViewController {
     }
     
     func network() {
+        ProgressHUD.setDefaultPosition(.center)
+        ProgressHUD.show()
         provider.request(api, callbackQueue: nil, progress: nil) { result in
+            ProgressHUD.dismiss()
             switch result{
             case let .success(result):
                 self.model = IZMoreModel(fromJson: JSON(result.data))

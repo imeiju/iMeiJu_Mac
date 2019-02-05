@@ -33,6 +33,7 @@ class IZMainViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(search), name: NSNotification.Name(rawValue: "search"), object: nil)
         view.wantsLayer = true
         if UserDefaults.standard.bool(forKey: "isVip") {
             vip.state = NSControl.StateValue.on
@@ -85,6 +86,11 @@ class IZMainViewController: NSViewController {
     
     @objc func refresh() {
         network()
+    }
+    
+    @objc func search() {
+        let search = IZSearchWindowContoller(windowNibName: "IZSearchWindowContoller")
+        jumpWindow(window: search.window!, name: "搜索")
     }
     
     func windowConfiguration() {

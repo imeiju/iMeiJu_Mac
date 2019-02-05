@@ -17,6 +17,7 @@ enum MoyaApi {
     case movie(id: String, vsize: String)
     case more(page: String, size: String, ztid: String)
     case movieMore(page: String, size: String, id: String)
+    case search(key: String, page: String, size: String)
     case show(id: String)
 }
 
@@ -26,7 +27,6 @@ extension MoyaApi : TargetType {
         return URL.init(string: "https://mjappaz.yefu365.com")!
     }
     
-    //https://mjappaz.yefu365.com/index.php/app/ios/vod/index?id=23&page=1&size=21
     var path: String {
         switch self {
         case .index:
@@ -36,6 +36,8 @@ extension MoyaApi : TargetType {
         case .movieMore:
             return "/index.php/app/ios/vod/index"
         case .more:
+            return "/index.php/app/ios/vod/index"
+        case .search:
             return "/index.php/app/ios/vod/index"
         case .show:
             return "/index.php/app/ios/vod/show"
@@ -52,6 +54,8 @@ extension MoyaApi : TargetType {
         case .more:
             return .get
         case .movieMore:
+            return .get
+        case .search:
             return .get
         case .show:
             return .get
@@ -72,6 +76,8 @@ extension MoyaApi : TargetType {
             return .requestParameters(parameters: ["page":page, "size":size, "ztid":ztid], encoding: URLEncoding.default)
         case let .movieMore(page, size, id):
             return .requestParameters(parameters: ["page":page, "size":size, "id":id], encoding: URLEncoding.default)
+        case let .search(key, page, size):
+            return .requestParameters(parameters: ["key":key, "page":page, "size":size], encoding: URLEncoding.default)
         case let .show(id):
             return .requestParameters(parameters: ["id":id], encoding: URLEncoding.default)
         }

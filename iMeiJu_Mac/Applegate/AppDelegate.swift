@@ -17,8 +17,13 @@ import Cocoa
     }
 
     @IBAction func refresh(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
     }
+    
+    @IBAction func search(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "search"), object: nil)
+    }
+    
     
 }
 

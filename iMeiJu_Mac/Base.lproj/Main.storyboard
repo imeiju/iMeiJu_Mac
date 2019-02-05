@@ -56,13 +56,61 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Edit" id="wsf-Ky-yhy">
+                            <menuItem title="Edit" id="7Qf-ri-wR5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Edit" id="IuY-A8-HGx">
+                                <menu key="submenu" title="Edit" id="AZt-yk-xdp">
+                                    <items>
+                                        <menuItem title="Cut" keyEquivalent="x" id="9h1-k7-q6d">
+                                            <connections>
+                                                <action selector="cut:" target="Ady-hI-5gd" id="NCR-C6-vg6"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Copy" keyEquivalent="c" id="vjN-3T-oTQ">
+                                            <connections>
+                                                <action selector="copy:" target="Ady-hI-5gd" id="qPV-kc-PtC"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Paste" keyEquivalent="v" id="iy5-QB-txm">
+                                            <connections>
+                                                <action selector="paste:" target="Ady-hI-5gd" id="Qk0-qT-KNZ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="QB8-uo-j6G"/>
+                                        <menuItem title="Speech" id="8AL-yf-Hgf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Speech" id="pa5-Iu-TM0">
+                                                <items>
+                                                    <menuItem title="Start Speaking" id="dR7-zh-zaC">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="startSpeaking:" target="Ady-hI-5gd" id="pfh-gF-3bo"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Stop Speaking" id="KtK-8A-NVU">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="stopSpeaking:" target="Ady-hI-5gd" id="P9R-kV-uhV"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Options" id="wsf-Ky-yhy">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Options" id="IuY-A8-HGx">
                                     <items>
                                         <menuItem title="Refresh" keyEquivalent="r" id="HnP-Ms-4Ki">
                                             <connections>
                                                 <action selector="refresh:" target="Voe-Tx-rLC" id="grU-Wg-cm1"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="VCt-Yf-6Xb"/>
+                                        <menuItem title="Search" keyEquivalent="f" id="80y-x9-L6m">
+                                            <connections>
+                                                <action selector="search:" target="Voe-Tx-rLC" id="JRl-t0-WpQ"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -117,17 +165,17 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="IZMainViewController" customModule="iMeiJu_Mac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1002" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1002" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a75-Vu-acx">
-                                <rect key="frame" x="70" y="0.0" width="932" height="800"/>
+                                <rect key="frame" x="70" y="0.0" width="932" height="600"/>
                                 <clipView key="contentView" id="FRX-yC-SZG">
-                                    <rect key="frame" x="1" y="1" width="930" height="798"/>
+                                    <rect key="frame" x="1" y="1" width="930" height="598"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView id="CuU-Zl-x9L">
-                                            <rect key="frame" x="0.0" y="0.0" width="930" height="798"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="930" height="598"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="MZX-EU-kH7">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -145,15 +193,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="4hj-1f-9KH">
-                                    <rect key="frame" x="915" y="1" width="16" height="386"/>
+                                    <rect key="frame" x="915" y="1" width="16" height="598"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="9uF-Ob-rWU">
-                                <rect key="frame" x="0.0" y="0.0" width="70" height="800"/>
+                                <rect key="frame" x="0.0" y="0.0" width="70" height="600"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-nE-wT6">
-                                        <rect key="frame" x="15" y="380" width="40" height="40"/>
+                                        <rect key="frame" x="15" y="280" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="4We-aW-UG2"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="DMs-nC-0cA"/>
@@ -168,7 +216,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-xC-U6K">
-                                        <rect key="frame" x="15" y="520" width="40" height="40"/>
+                                        <rect key="frame" x="15" y="420" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="GPJ-f6-DWP"/>
                                         </constraints>
@@ -181,7 +229,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bDb-Bn-rlQ">
-                                        <rect key="frame" x="15" y="240" width="40" height="40"/>
+                                        <rect key="frame" x="15" y="140" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="sV7-gT-ybr"/>
                                         </constraints>

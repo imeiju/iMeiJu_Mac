@@ -15,9 +15,7 @@ import SwiftyJSON
 class IZPlotMessgaeViewController: NSViewController {
     
     @IBOutlet weak var playerView: AVPlayerView!
-    
     @IBOutlet weak var episodeView: NSScrollView!
-    
     @IBOutlet weak var collectionView: NSCollectionView!
     
     var id: String!
