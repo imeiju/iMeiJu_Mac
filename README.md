@@ -8,10 +8,10 @@
 ![](https://img.shields.io/github/forks/iizvv/iMeiju_Mac.svg?style=social)
 
 > *资源来源于`爱美剧`, 支持`MacOS 10.12及以后版本`*\
-> `resource/build`文件中的压缩包为应用程序, 解压后直接打开使用
+> `res/versions`文件中的压缩包为应用程序, 解压后直接打开使用
 
 ### 版本功能
 > 1.1
 >> 自动连播
 
-![](resource/imgs/preview.gif)
+![](res/imgs/preview.gif)
