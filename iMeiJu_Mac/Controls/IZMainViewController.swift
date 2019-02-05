@@ -108,6 +108,8 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     }
 
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        // 消除选中状态,使其可以再次选择
+        collectionView.deselectAll(nil)
         let m = model?.data[indexPaths.first!.section].vod![indexPaths.first!.item]
         let plot = IZPlotMessgaeWindowController(windowNibName: "IZPlotMessgaeWindowController")
         plot.vid = m?.id

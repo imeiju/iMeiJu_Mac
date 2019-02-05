@@ -148,8 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */,
-				2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */,
-				2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */,
 				2723E376220821E900EB9CE1 /* IZPlotMessgaeViewController.swift */,
 				2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */,
 			);
@@ -174,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				2711C7342206CAE4003A28DB /* IZWindow.swift */,
+				2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */,
+				2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */,
 			);
 			path = Window;
 			sourceTree = "<group>";

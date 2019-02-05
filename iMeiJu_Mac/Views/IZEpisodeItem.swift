@@ -22,9 +22,7 @@ class IZEpisodeItem: NSCollectionViewItem {
     }
  
     override var isSelected: Bool{
-        willSet{
-            
-        }
+        willSet{}
         didSet{
             if isSelected {
                 textField?.textColor = .black
@@ -33,11 +31,4 @@ class IZEpisodeItem: NSCollectionViewItem {
             }
         }
     }
-    
-    
-
-    
-    
-//    override var isSelected: Bool
-    
 }

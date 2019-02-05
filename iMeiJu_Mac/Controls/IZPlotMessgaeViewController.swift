@@ -20,9 +20,6 @@ class IZPlotMessgaeViewController: NSViewController {
     
     @IBOutlet weak var collectionView: NSCollectionView!
     
-    var idxp = 0
-    
-    
     var vid: String!
     var model: IZPlotMessageModel?
     var player: AVPlayer?
@@ -68,8 +65,9 @@ class IZPlotMessgaeViewController: NSViewController {
                     self.player?.play()
                     let window = NSApplication.shared.windows.last!
                     window.title =  (self.model?.data.name)! + " " + v.name
-//                    self.showEpisodeView()
                     self.collectionView.reloadData()
+                    // 默认选中第一集
+                    self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: 0, section: 0)), scrollPosition: .top)
                 }
                 break
             case .failure(_):
@@ -84,7 +82,6 @@ class IZPlotMessgaeViewController: NSViewController {
         collectionView.register(NSNib(nibNamed: "IZEpisodeItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
         collectionView.dataSource = self
         collectionView.delegate = self
-//        collectionView.register(NSNib(nibNamed:"IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
     
     var layout: NSCollectionViewFlowLayout {
@@ -112,18 +109,10 @@ extension IZPlotMessgaeViewController: NSCollectionViewDelegate, NSCollectionVie
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZEpisodeItem
         let m = model!.data.zu.first?.ji[indexPath.item]
         item.setLevel(level: (m?.name)!)
-        if indexPath.item == 0 {
-            item.isSelected = true;
-        }
         return item
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-        let old = collectionView.item(at: IndexPath(item: idxp, section: 0))
-        let current = collectionView.item(at: indexPaths.first!)
-        old?.isSelected = false
-        current?.isSelected = true
-        idxp = (indexPaths.first?.item)!
         let m = model!.data.zu.first?.ji[indexPaths.first!.item]
         let p = AVPlayerItem(url: URL(string: m!.purl)!)
         self.player = AVPlayer(playerItem: p)

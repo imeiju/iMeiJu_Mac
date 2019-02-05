@@ -7,18 +7,8 @@
 //  Copyright © 2019 iizvv. All rights reserved.
 //
 
+import Cocoa
 import Foundation
-
-/** 自动布局 */
-import SnapKit
-
-/** 转模型 */
-import SwiftyJSON
-
-/** 网络请求 */
-import Moya
-
-/** 图片下载 */
 import Kingfisher
 
 extension NSColor {
