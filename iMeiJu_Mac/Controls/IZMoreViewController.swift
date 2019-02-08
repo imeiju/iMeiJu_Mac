@@ -10,6 +10,7 @@
 import Cocoa
 import Moya
 import SwiftyJSON
+import SQLite
 
 class IZMoreViewController: NSViewController {
 

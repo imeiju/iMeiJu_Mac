@@ -166,12 +166,12 @@
 			isa = PBXGroup;
 			children = (
 				2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */,
-				2723E376220821E900EB9CE1 /* IZPlotMessgaeViewController.swift */,
-				2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */,
 				278604AC2209418D0097192A /* IZMoreViewController.swift */,
 				278604AD2209418D0097192A /* IZMoreViewController.xib */,
 				278604B72209A27B0097192A /* IZSearchViewController.swift */,
 				278604B82209A27B0097192A /* IZSearchViewController.xib */,
+				2723E376220821E900EB9CE1 /* IZPlotMessgaeViewController.swift */,
+				2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -389,6 +389,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/LeanCloud/LeanCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
@@ -401,6 +402,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LeanCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",

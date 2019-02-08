@@ -1,6 +1,17 @@
 PODS:
   - Alamofire (4.8.0)
   - Kingfisher (5.1.0)
+  - LeanCloud (15.0.0):
+    - LeanCloud/Foundation (= 15.0.0)
+    - LeanCloud/LocalStorage (= 15.0.0)
+    - LeanCloud/Storage (= 15.0.0)
+  - LeanCloud/Foundation (15.0.0)
+  - LeanCloud/LocalStorage (15.0.0):
+    - LeanCloud/Foundation
+  - LeanCloud/Storage (15.0.0):
+    - Alamofire (~> 4.8.0)
+    - LeanCloud/Foundation
+    - LeanCloud/LocalStorage
   - Moya (12.0.1):
     - Moya/Core (= 12.0.1)
   - Moya/Core (12.0.1):
@@ -15,6 +26,7 @@ PODS:
 
 DEPENDENCIES:
   - Kingfisher (~> 5.1.0)
+  - LeanCloud (~> 15.0.0)
   - Moya (~> 12.0.1)
   - SQLite.swift (~> 0.11.5)
   - SwiftHEXColors (~> 1.2.0)
@@ -24,6 +36,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Kingfisher
+    - LeanCloud
     - Moya
     - Result
     - SQLite.swift
@@ -33,12 +46,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
+  LeanCloud: 62fe4e615494425081fd719c0d56fae130f764ea
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwiftHEXColors: a4ebe93a70890a9fa124e205dd785cc7552273b4
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 866e0a7a4586758fd08b66cc8fe1ff489c529eff
+PODFILE CHECKSUM: 5ac615a97e13e6b3f87ea66b8152d3b1a5751761
 
 COCOAPODS: 1.5.3

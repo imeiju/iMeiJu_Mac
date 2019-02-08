@@ -2,8 +2,8 @@
 //  iMeiJu_Mac
 //
 //  Created by iizvv on 2019/2/4.
-//	QQ群:	577506623
-//	GitHub:	https://github.com/iizvv
+//    QQ群:    577506623
+//    GitHub:    https://github.com/iizvv
 //  Copyright © 2019 iizvv. All rights reserved.
 //
 
@@ -11,6 +11,7 @@ import Cocoa
 import AVKit
 import Moya
 import SwiftyJSON
+import SQLite
 
 class IZPlotMessgaeViewController: NSViewController {
     
@@ -22,6 +23,14 @@ class IZPlotMessgaeViewController: NSViewController {
     var model: IZPlotMessageModel?
     var player: AVPlayer?
     var idx = 0
+    var db: Connection!
+    var plot: Table!
+    let pid = Expression<Int64>("pid") // 主key
+    let vid = Expression<String>("vid") // 视频id
+    let name = Expression<String>("name") // 视频名称
+    let level = Expression<Int>("level") // 第几集
+    let prate = Expression<Int64>("prate") // 视频进度
+    var playing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +41,22 @@ class IZPlotMessgaeViewController: NSViewController {
         collectionViewConfiguration()
         // 监听播放完成通知,进行连播任务
         NotificationCenter.default.addObserver(self, selector: #selector(playToEndTime), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+        
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        do {
+            db = try Connection("\(path)/iMeiJu.sqlite3")
+            plot = Table("plot")
+            try db!.run(plot!.create { t in
+                t.column(pid, primaryKey: .autoincrement)
+                t.column(vid)
+                t.column(name)
+                t.column(level)
+                t.column(prate, defaultValue: 0)
+            })
+        }catch {
+            
+        }
+        
         network()
     }
     
@@ -54,17 +79,58 @@ class IZPlotMessgaeViewController: NSViewController {
             self.collectionView.deselectAll(nil)
             self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: idx, section: 0)), scrollPosition: .top)
             let m = model!.data.zu.first?.ji[idx]
-            playVideo(url: m!.purl, level: m!.name)
+            playVideo(url: m!.purl, levelName: m!.name, update: true)
         }
     }
     
-    func playVideo(url: String, level: String) {
+    func playVideo(url: String, levelName: String, update: Bool?) {
         let item = AVPlayerItem(url: URL(string: url)!)
         self.player = AVPlayer(playerItem: item)
         self.playerView.player = self.player
         self.player?.play()
         let window = NSApplication.shared.windows.last!
-        window.title =  (model?.data.name)! + " " + level
+        window.title =  (model?.data.name)! + " " + levelName
+        item.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        if update == true {
+            do {
+                let query = self.plot.filter(self.vid == self.id)
+                try db.run(query.update(self.level <- idx))
+            }catch {
+                
+            }
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "status" {
+            switch self.player?.currentItem!.status {
+            case .readyToPlay?:
+                do {
+                    if playing == false {
+                        let query = self.plot.filter(self.vid == self.id)
+                        let p = try self.db.pluck(query)
+                        player?.seek(to: CMTime(value: p![prate], timescale: 1))
+//                        player?.play()
+                        playing = true
+                    }
+                }catch {
+                    
+                }
+               
+            case .failed?:
+                //播放失败
+                print("failed")
+            case.unknown?:
+                //未知情况
+                print("unkonwn")
+            case .none:
+                print("none")
+                break
+            case .some(_):
+                print("some")
+                break
+            }
+        }
     }
     
     func network() {
@@ -77,8 +143,7 @@ class IZPlotMessgaeViewController: NSViewController {
                 self.model = IZPlotMessageModel(fromJson: JSON(result.data))
                 if self.model?.code == 0 {
                     let ji = self.model!.data.zu.first!.ji!
-                    let first = ji.first!
-                    self.playVideo(url: first.purl, level: first.name)
+                    var v = ji[self.idx]
                     // 当集数数组长度为1时, 则表示当前内容无法选集, 则移除选集菜单图层
                     if ji.count == 1 {
                         self.episodeView.removeFromSuperview()
@@ -86,9 +151,24 @@ class IZPlotMessgaeViewController: NSViewController {
                     }else {
                         self.episodeView.isHidden = false
                     }
+                    do {
+                        let query = self.plot.filter(self.vid == self.id)
+                        let p = try self.db.pluck(query)
+                        if p == nil {
+                            let insert = self.plot.insert(self.vid <- self.id, self.name <- v.name, self.level <- self.idx, self.prate <- 0)
+                            try self.db.run(insert)
+                        }else {
+                            self.idx = p![self.level]
+                            v = ji[self.idx]
+//                            let seekTime = CMTime(value: p![self.prate], timescale: 1)
+//                            self.player?.seek(to: seekTime)
+                        }
+                    }catch {
+                        
+                    }
+                    self.playVideo(url: v.purl, levelName: v.name, update: false)
                     self.collectionView.reloadData()
-                    // 默认选中第一集
-                    self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: 0, section: 0)), scrollPosition: .top)
+                    self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: self.idx, section: 0)), scrollPosition: .top)
                 }
                 break
             case .failure(_):
@@ -136,7 +216,22 @@ extension IZPlotMessgaeViewController: NSCollectionViewDelegate, NSCollectionVie
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         idx = indexPaths.first!.item
         let m = model!.data.zu.first?.ji[idx]
-        playVideo(url: m!.purl, level: m!.name)
+        playVideo(url: m!.purl, levelName: m!.name, update: true)
+    }
+    
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        let currentTime = player!.currentTime()
+        let currentTimeNum = currentTime.value / Int64(currentTime.timescale)
+        do {
+            let query = self.plot.filter(self.vid == self.id)
+            try db.run(query.update(self.prate <- currentTimeNum))
+        }catch {
+            
+        }
+        player?.currentItem!.removeObserver(self, forKeyPath: "status", context: nil)
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
 }
+

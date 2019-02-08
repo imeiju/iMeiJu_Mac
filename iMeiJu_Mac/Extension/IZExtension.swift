@@ -34,5 +34,6 @@ extension NSViewController {
         window.setFrame(NSApplication.shared.windows.first!.frame, display: true)
         window.orderFront(nil)
     }
-    
 }
+
+
