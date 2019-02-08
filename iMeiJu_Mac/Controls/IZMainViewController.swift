@@ -127,7 +127,7 @@ class IZMainViewController: NSViewController {
         collectionView.register(NSNib(nibNamed:"IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
     
-    var layout: NSCollectionViewFlowLayout {
+    let layout: NSCollectionViewFlowLayout = {
         let layout = NSCollectionViewFlowLayout()
         layout.itemSize = NSSize(width: 200, height: 260)
         layout.sectionInset = NSEdgeInsetsZero
@@ -135,7 +135,7 @@ class IZMainViewController: NSViewController {
         layout.minimumInteritemSpacing = CGFloat.leastNormalMagnitude
         layout.sectionHeadersPinToVisibleBounds = true
         return layout
-    }
+    }()
     
 }
 

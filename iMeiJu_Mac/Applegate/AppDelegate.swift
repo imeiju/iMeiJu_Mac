@@ -24,6 +24,10 @@ import Cocoa
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "search"), object: nil)
     }
     
+    @IBAction func github(_ sender: Any) {
+        NSWorkspace.init().open(NSURL(string: "https://github.com/imeiju/iMeiJu_Mac")! as URL)
+    }
+    
     
 }
 

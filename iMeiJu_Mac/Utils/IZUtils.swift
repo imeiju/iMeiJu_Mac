@@ -24,7 +24,7 @@ enum MoyaApi {
 extension MoyaApi : TargetType {
 
     var baseURL: URL {
-        return URL.init(string: "https://mjappaz.yefu365.com")!
+        return URL(string: "https://mjappaz.yefu365.com")!
     }
     
     var path: String {
