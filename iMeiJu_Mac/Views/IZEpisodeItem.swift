@@ -10,23 +10,21 @@
 import Cocoa
 
 class IZEpisodeItem: NSCollectionViewItem {
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.wantsLayer = true
     }
-    
+
     func setLevel(level: String) {
         textField?.stringValue = level
     }
- 
-    override var isSelected: Bool{
-        willSet{}
-        didSet{
+
+    override var isSelected: Bool {
+        willSet {}
+        didSet {
             if isSelected {
                 textField?.textColor = .black
-            }else {
+            } else {
                 textField?.textColor = .white
             }
         }

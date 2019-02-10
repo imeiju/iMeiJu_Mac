@@ -23,11 +23,10 @@
 //
 
 #if SWIFT_PACKAGE
-import SQLiteObjc
+    import SQLiteObjc
 #endif
 
 extension Module {
-
     public static func FTS4(_ column: Expressible, _ more: Expressible...) -> Module {
         return FTS4([column] + more)
     }
@@ -42,7 +41,6 @@ extension Module {
 }
 
 extension VirtualTable {
-
     /// Builds an expression appended with a `MATCH` query against the given
     /// pattern.
     ///
@@ -88,11 +86,9 @@ extension VirtualTable {
     public func match(_ pattern: Expression<String?>) -> QueryType {
         return filter(match(pattern))
     }
-
 }
 
 public struct Tokenizer {
-
     public static let Simple = Tokenizer("simple")
 
     public static let Porter = Tokenizer("porter")
@@ -131,31 +127,28 @@ public struct Tokenizer {
     }
 
     fileprivate static let moduleName = "SQLite.swift"
-
 }
 
-extension Tokenizer : CustomStringConvertible {
-
+extension Tokenizer: CustomStringConvertible {
     public var description: String {
         return ([name] + arguments).joined(separator: " ")
     }
-
 }
 
 extension Connection {
-
     public func registerTokenizer(_ submoduleName: String, next: @escaping (String) -> (String, Range<String.Index>)?) throws {
         try check(_SQLiteRegisterTokenizer(handle, Tokenizer.moduleName, submoduleName) { (
-                input: UnsafePointer<Int8>, offset: UnsafeMutablePointer<Int32>, length: UnsafeMutablePointer<Int32>) in
+            input: UnsafePointer<Int8>, offset: UnsafeMutablePointer<Int32>, length: UnsafeMutablePointer<Int32>
+            ) in
             let string = String(cString: input)
 
             guard let (token, range) = next(string) else { return nil }
 
-            let view:String.UTF8View = string.utf8
+            let view: String.UTF8View = string.utf8
 
             if let from = range.lowerBound.samePosition(in: view),
-               let to = range.upperBound.samePosition(in: view) {
-                offset.pointee += Int32(string[string.startIndex..<range.lowerBound].utf8.count)
+                let to = range.upperBound.samePosition(in: view) {
+                offset.pointee += Int32(string[string.startIndex ..< range.lowerBound].utf8.count)
                 length.pointee = Int32(view.distance(from: from, to: to))
                 return token
             } else {
@@ -182,7 +175,7 @@ open class FTSConfig {
 
     /// Adds a column definition
     @discardableResult open func column(_ column: Expressible, _ options: [ColumnOption] = []) -> Self {
-        self.columnDefinitions.append((column, options))
+        columnDefinitions.append((column, options))
         return self
     }
 
@@ -201,19 +194,19 @@ open class FTSConfig {
 
     /// [The prefix= option](https://www.sqlite.org/fts3.html#section_6_6)
     open func prefix(_ prefix: [Int]) -> Self {
-        self.prefixes += prefix
+        prefixes += prefix
         return self
     }
 
     /// [The content= option](https://www.sqlite.org/fts3.html#section_6_2)
     open func externalContent(_ schema: SchemaType) -> Self {
-        self.externalContentSchema = schema
+        externalContentSchema = schema
         return self
     }
 
     /// [Contentless FTS4 Tables](https://www.sqlite.org/fts3.html#section_6_2_1)
     open func contentless() -> Self {
-        self.isContentless = true
+        isContentless = true
         return self
     }
 
@@ -231,7 +224,7 @@ open class FTSConfig {
         if let tokenizer = tokenizer {
             options.append("tokenize", value: Expression<Void>(literal: tokenizer.description))
         }
-        options.appendCommaSeparated("prefix", values:prefixes.sorted().map { String($0) })
+        options.appendCommaSeparated("prefix", values: prefixes.sorted().map { String($0) })
         if isContentless {
             options.append("content", value: "")
         } else if let externalContentSchema = externalContentSchema {
@@ -274,9 +267,9 @@ open class FTSConfig {
 }
 
 /// Configuration for the [FTS4](https://www.sqlite.org/fts3.html) extension.
-open class FTS4Config : FTSConfig {
+open class FTS4Config: FTSConfig {
     /// [The matchinfo= option](https://www.sqlite.org/fts3.html#section_6_4)
-    public enum MatchInfo : CustomStringConvertible {
+    public enum MatchInfo: CustomStringConvertible {
         case fts3
         public var description: String {
             return "fts3"
@@ -284,7 +277,7 @@ open class FTS4Config : FTSConfig {
     }
 
     /// [FTS4 options](https://www.sqlite.org/fts3.html#fts4_options)
-    public enum Order : CustomStringConvertible {
+    public enum Order: CustomStringConvertible {
         /// Data structures are optimized for returning results in ascending order by docid (default)
         case asc
         /// FTS4 stores its data in such a way as to optimize returning results in descending order by docid.
@@ -304,24 +297,23 @@ open class FTS4Config : FTSConfig {
     var matchInfo: MatchInfo?
     var order: Order?
 
-    override public init() {
-    }
+    public override init() {}
 
     /// [The compress= and uncompress= options](https://www.sqlite.org/fts3.html#section_6_1)
     open func compress(_ functionName: String) -> Self {
-        self.compressFunction = functionName
+        compressFunction = functionName
         return self
     }
 
     /// [The compress= and uncompress= options](https://www.sqlite.org/fts3.html#section_6_1)
     open func uncompress(_ functionName: String) -> Self {
-        self.uncompressFunction = functionName
+        uncompressFunction = functionName
         return self
     }
 
     /// [The languageid= option](https://www.sqlite.org/fts3.html#section_6_3)
     open func languageId(_ columnName: String) -> Self {
-        self.languageId = columnName
+        languageId = columnName
         return self
     }
 

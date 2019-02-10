@@ -192,8 +192,8 @@ protocol LCValueExtension: LCValue {
      - parameter other:  The object to be concatenated.
      - parameter unique: Whether to concatenate with unique or not.
 
-        If `unique` is true, for each element in `other`, if current object has already included the element, do nothing.
-        Otherwise, the element will always be appended.
+     If `unique` is true, for each element in `other`, if current object has already included the element, do nothing.
+     Otherwise, the element will always be appended.
 
      - returns: The concatenation result.
      */

@@ -6,16 +6,16 @@
 //  Copyright © 2016 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 precedencegroup UniqueAdd {
     associativity: left
 }
 
-infix operator +~ : UniqueAdd
+infix operator +~: UniqueAdd
 
-func +(lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
+func + (lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
     var result = lhs
 
     result.append(contentsOf: rhs)
@@ -23,7 +23,7 @@ func +(lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
     return result
 }
 
-func +~(lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
+func +~ (lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
     var result = lhs
 
     rhs.forEach { element in
@@ -35,36 +35,36 @@ func +~(lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
     return result
 }
 
-func -(lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
+func - (lhs: [LCValue], rhs: [LCValue]) -> [LCValue] {
     return lhs.filter { element in
         !rhs.contains { $0.isEqual(element) }
     }
 }
 
-func +<T: LCValue>(lhs: [T], rhs: [T]) -> [T] {
+func + <T: LCValue>(lhs: [T], rhs: [T]) -> [T] {
     return ((lhs as [LCValue]) + (rhs as [LCValue])) as! [T]
 }
 
-func +~<T: LCValue>(lhs: [T], rhs: [T]) -> [T] {
+func +~ <T: LCValue>(lhs: [T], rhs: [T]) -> [T] {
     return ((lhs as [LCValue]) +~ (rhs as [LCValue])) as! [T]
 }
 
-func -<T: LCValue>(lhs: [T], rhs: [T]) -> [T] {
+func - <T: LCValue>(lhs: [T], rhs: [T]) -> [T] {
     return ((lhs as [LCValue]) - (rhs as [LCValue])) as! [T]
 }
 
-func *(lhs: String, rhs: Int) -> String {
+func * (lhs: String, rhs: Int) -> String {
     return "".padding(toLength: rhs * lhs.count, withPad: lhs, startingAt: 0)
 }
 
-func ==(lhs: [LCValue], rhs: [LCValue]) -> Bool {
+func == (lhs: [LCValue], rhs: [LCValue]) -> Bool {
     let count = lhs.count
 
     guard count == rhs.count else {
         return false
     }
 
-    for index in 0..<count {
+    for index in 0 ..< count {
         guard lhs[index].isEqual(rhs[index]) else {
             return false
         }
@@ -73,7 +73,7 @@ func ==(lhs: [LCValue], rhs: [LCValue]) -> Bool {
     return true
 }
 
-func ==<K, V: Equatable>(lhs: [K: [K: V]], rhs: [K: [K: V]]) -> Bool {
+func == <K, V: Equatable>(lhs: [K: [K: V]], rhs: [K: [K: V]]) -> Bool {
     guard lhs.count == rhs.count else {
         return false
     }
@@ -90,7 +90,7 @@ func ==<K, V: Equatable>(lhs: [K: [K: V]], rhs: [K: [K: V]]) -> Bool {
     return true
 }
 
-func ==(lhs: [LCDictionary.Key: LCDictionary.Value], rhs: [LCDictionary.Key: LCDictionary.Value]) -> Bool {
+func == (lhs: [LCDictionary.Key: LCDictionary.Value], rhs: [LCDictionary.Key: LCDictionary.Value]) -> Bool {
     guard lhs.count == rhs.count else {
         return false
     }
@@ -117,25 +117,24 @@ extension Dictionary {
     }
 
     func mapValue<T>(_ transform: (Value) throws -> T) rethrows -> [Key: T] {
-        let elements: [(Key, T)] = try compactMap { (key, value) in
+        let elements: [(Key, T)] = try compactMap { key, value in
             (key, try transform(value))
         }
-        return Dictionary<Key, T>(elements: elements)
+        return [Key: T](elements: elements)
     }
 
     func compactMapValue<T>(_ transform: (Value) throws -> T?) rethrows -> [Key: T] {
-        let elements: [(Key, T)] = try compactMap { (key, value) in
+        let elements: [(Key, T)] = try compactMap { key, value in
             guard let value = try transform(value) else {
                 return nil
             }
             return (key, value)
         }
-        return Dictionary<Key, T>(elements: elements)
+        return [Key: T](elements: elements)
     }
 }
 
 extension String {
-
     var regularEscapedString: String {
         return NSRegularExpression.escapedPattern(for: self)
     }
@@ -144,7 +143,7 @@ extension String {
         guard !isEmpty else { return self }
 
         var result = self
-        result.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).uppercased())
+        result.replaceSubrange(startIndex ... startIndex, with: String(self[startIndex]).uppercased())
         return result
     }
 
@@ -152,7 +151,7 @@ extension String {
         guard !isEmpty else { return self }
 
         var result = self
-        result.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).lowercased())
+        result.replaceSubrange(startIndex ... startIndex, with: String(self[startIndex]).lowercased())
         return result
     }
 
@@ -178,25 +177,20 @@ extension String {
 }
 
 extension Sequence {
-
     var unique: [Element] {
         return NSOrderedSet(array: Array(self)).array as? [Element] ?? []
     }
-
 }
 
 extension LCApplication {
-
     var storageContextCache: StorageContextCache {
         return lc_lazyload("storageContextCache", .OBJC_ASSOCIATION_RETAIN) {
             StorageContextCache(application: self)
         }
     }
-
 }
 
 extension LCError {
-
     /**
      Initialize with an LCResponse object.
 
@@ -221,12 +215,11 @@ extension LCError {
         do {
             body = try JSONSerialization.jsonObject(with: data, options: [])
         } catch
-            /*
-             We discard the deserialization error,
-             because it's not the real error that user should care about.
-             */
-            _
-        {
+        /*
+         We discard the deserialization error,
+         because it's not the real error that user should care about.
+         */
+        _ {
             self = LCError(underlyingError: error)
             return
         }
@@ -238,14 +231,12 @@ extension LCError {
         if
             let body = body as? [String: Any],
             let code = body["code"] as? Int,
-            let reason = body["error"] as? String
-        {
+            let reason = body["error"] as? String {
             self = LCError(code: code, reason: reason, userInfo: nil)
         } else {
             self = LCError(underlyingError: error)
         }
     }
-
 }
 
 /**

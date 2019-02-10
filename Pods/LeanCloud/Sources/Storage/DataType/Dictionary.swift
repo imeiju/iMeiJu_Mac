@@ -15,7 +15,7 @@ import Foundation
  */
 @dynamicMemberLookup
 public final class LCDictionary: NSObject, LCValue, LCValueExtension, Collection, ExpressibleByDictionaryLiteral {
-    public typealias Key   = String
+    public typealias Key = String
     public typealias Value = LCValue
     public typealias Index = DictionaryIndex<Key, Value>
 
@@ -44,11 +44,11 @@ public final class LCDictionary: NSObject, LCValue, LCValueExtension, Collection
      */
     public convenience init(_ dictionary: LCDictionary) {
         self.init()
-        self.value = dictionary.value
+        value = dictionary.value
     }
 
-    public convenience required init(dictionaryLiteral elements: (Key, Value)...) {
-        self.init(Dictionary<Key, Value>(elements: elements))
+    public required convenience init(dictionaryLiteral elements: (Key, Value)...) {
+        self.init([Key: Value](elements: elements))
     }
 
     public convenience init(unsafeObject: Any) throws {
@@ -57,7 +57,8 @@ public final class LCDictionary: NSObject, LCValue, LCValueExtension, Collection
         guard let object = unsafeObject as? [Key: Any] else {
             throw LCError(
                 code: .malformedData,
-                reason: "Failed to construct LCDictionary with non-dictionary object.")
+                reason: "Failed to construct LCDictionary with non-dictionary object."
+            )
         }
 
         value = try object.mapValue { value in
@@ -67,7 +68,7 @@ public final class LCDictionary: NSObject, LCValue, LCValueExtension, Collection
 
     public required init?(coder aDecoder: NSCoder) {
         /* Note: We have to make type casting twice here, or it will crash for unknown reason.
-                 It seems that it's a bug of Swift. */
+         It seems that it's a bug of Swift. */
         value = (aDecoder.decodeObject(forKey: "value") as? [String: AnyObject] as? [String: LCValue]) ?? [:]
     }
 
@@ -75,7 +76,7 @@ public final class LCDictionary: NSObject, LCValue, LCValueExtension, Collection
         aCoder.encode(value, forKey: "value")
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCDictionary(value)
     }
 
@@ -152,9 +153,9 @@ public final class LCDictionary: NSObject, LCValue, LCValueExtension, Collection
         let lastIndent = " " * (numberOfSpacesForOneIndentLevel * indentLevel)
         let bodyIndent = " " * (numberOfSpacesForOneIndentLevel * (indentLevel + 1))
         let body = value
-            .map    { (key, value)  in (key, (value as! LCValueExtension).formattedJSONString(indentLevel: indentLevel + 1, numberOfSpacesForOneIndentLevel: numberOfSpacesForOneIndentLevel)) }
-            .sorted { (left, right) in left.0 < right.0 }
-            .map    { (key, value)  in "\"\(key.doubleQuoteEscapedString)\": \(value)" }
+            .map { key, value in (key, (value as! LCValueExtension).formattedJSONString(indentLevel: indentLevel + 1, numberOfSpacesForOneIndentLevel: numberOfSpacesForOneIndentLevel)) }
+            .sorted { left, right in left.0 < right.0 }
+            .map { key, value in "\"\(key.doubleQuoteEscapedString)\": \(value)" }
             .joined(separator: ",\n" + bodyIndent)
 
         return "{\n\(bodyIndent)\(body)\n\(lastIndent)}"
@@ -178,18 +179,18 @@ public final class LCDictionary: NSObject, LCValue, LCValueExtension, Collection
     }
 
     func forEachChild(_ body: (_ child: LCValue) throws -> Void) rethrows {
-        try forEach { (_, element) in try body(element) }
+        try forEach { _, element in try body(element) }
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 }

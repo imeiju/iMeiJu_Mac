@@ -10,20 +10,18 @@
 import Cocoa
 
 class IZStillsViewItem: NSCollectionViewItem {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.wantsLayer = true
         imageView?.imageFrameStyle = NSImageView.FrameStyle.grayBezel
     }
-    
+
     func setName(name: String) {
         textField?.stringValue = name
     }
-    
+
     func setImageUrl(url: String) {
         imageView?.kf.indicatorType = .activity
         imageView?.setImage(url)
     }
-    
 }

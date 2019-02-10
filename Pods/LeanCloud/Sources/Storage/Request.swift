@@ -6,25 +6,22 @@
 //  Copyright © 2016 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 /**
  This type represents HTTP request.
  */
 public class LCRequest: NSObject {
-
     /**
      Request states.
      */
     enum State {
-
         case resumed
 
         case suspended
 
         case cancelled
-
     }
 
     var state: State = .resumed
@@ -76,14 +73,12 @@ public class LCRequest: NSObject {
     public func cancel() {
         /* Nop */
     }
-
 }
 
 /**
  This type represents a single HTTP request.
  */
 class LCSingleRequest: LCRequest {
-
     let request: Request?
 
     init(request: Request?) {
@@ -107,14 +102,12 @@ class LCSingleRequest: LCRequest {
             request?.cancel()
         }
     }
-
 }
 
 /**
  This type represents a sequence of HTTP requests.
  */
 class LCSequenceRequest: LCRequest {
-
     private(set) var request: LCRequest?
 
     func setCurrentRequest(_ request: LCRequest) {
@@ -155,5 +148,4 @@ class LCSequenceRequest: LCRequest {
             request?.cancel()
         }
     }
-
 }

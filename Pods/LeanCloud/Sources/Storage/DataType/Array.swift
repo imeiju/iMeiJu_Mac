@@ -33,7 +33,7 @@ public final class LCArray: NSObject, LCValue, LCValueExtension, Collection, Exp
         self.value = value.map { element in element.lcValue }
     }
 
-    public convenience required init(arrayLiteral elements: Element...) {
+    public required convenience init(arrayLiteral elements: Element...) {
         self.init(elements)
     }
 
@@ -43,7 +43,8 @@ public final class LCArray: NSObject, LCValue, LCValueExtension, Collection, Exp
         guard let object = unsafeObject as? [Any] else {
             throw LCError(
                 code: .malformedData,
-                reason: "Failed to construct LCArray with non-array object.")
+                reason: "Failed to construct LCArray with non-array object."
+            )
         }
 
         value = try object.map { element in
@@ -59,7 +60,7 @@ public final class LCArray: NSObject, LCValue, LCValueExtension, Collection, Exp
         aCoder.encode(value, forKey: "value")
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCArray(value)
     }
 
@@ -87,9 +88,7 @@ public final class LCArray: NSObject, LCValue, LCValueExtension, Collection, Exp
         return value.index(after: i)
     }
 
-    public subscript(index: Int) -> LCValue {
-        get { return value[index] }
-    }
+    public subscript(index: Int) -> LCValue { return value[index] }
 
     public var jsonValue: Any {
         return value.map { element in element.jsonValue }
@@ -130,12 +129,12 @@ public final class LCArray: NSObject, LCValue, LCValueExtension, Collection, Exp
         try forEach { element in try body(element) }
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
     func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
-        let result   = LCArray(value)
+        let result = LCArray(value)
         let elements = (other as! LCArray).value
 
         result.concatenateInPlace(elements, unique: unique)
@@ -148,7 +147,7 @@ public final class LCArray: NSObject, LCValue, LCValueExtension, Collection, Exp
     }
 
     func differ(_ other: LCValue) throws -> LCValue {
-        let result   = LCArray(value)
+        let result = LCArray(value)
         let elements = (other as! LCArray).value
 
         result.differInPlace(elements)

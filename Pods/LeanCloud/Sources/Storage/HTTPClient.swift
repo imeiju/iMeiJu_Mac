@@ -6,8 +6,8 @@
 //  Copyright © 2016 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 /**
  LeanCloud REST client.
@@ -25,9 +25,9 @@ class HTTPClient {
         /// Get Alamofire corresponding method
         var alamofireMethod: Alamofire.HTTPMethod {
             switch self {
-            case .get:    return .get
-            case .post:   return .post
-            case .put:    return .put
+            case .get: return .get
+            case .post: return .post
+            case .put: return .put
             case .delete: return .delete
             }
         }
@@ -35,30 +35,29 @@ class HTTPClient {
 
     /// Data type.
     enum DataType: String {
-        case object   = "Object"
-        case pointer  = "Pointer"
+        case object = "Object"
+        case pointer = "Pointer"
         case relation = "Relation"
         case geoPoint = "GeoPoint"
-        case bytes    = "Bytes"
-        case date     = "Date"
-        case file     = "File"
+        case bytes = "Bytes"
+        case date = "Date"
+        case file = "File"
     }
 
     /// Header field name.
     class HeaderFieldName {
-        static let id         = "X-LC-Id"
-        static let signature  = "X-LC-Sign"
-        static let session    = "X-LC-Session"
+        static let id = "X-LC-Id"
+        static let signature = "X-LC-Sign"
+        static let session = "X-LC-Session"
         static let production = "X-LC-Prod"
-        static let userAgent  = "User-Agent"
-        static let accept     = "Accept"
+        static let userAgent = "User-Agent"
+        static let accept = "Accept"
     }
 
     /**
      HTTPClient configuration.
      */
     struct Configuration {
-
         let userAgent: String
 
         /// Default timeout interval for request. If not given, defaults to 60 seconds.
@@ -66,8 +65,8 @@ class HTTPClient {
 
         static let `default` = Configuration(
             userAgent: "LeanCloud-Swift-SDK/\(LeanCloud.version)",
-            defaultTimeoutInterval: nil)
-
+            defaultTimeoutInterval: nil
+        )
     }
 
     static let `default` = HTTPClient(application: .default, configuration: .default)
@@ -109,10 +108,10 @@ class HTTPClient {
     /// Common REST request headers.
     func createCommonHeaders() -> [String: String] {
         var headers: [String: String] = [
-            HeaderFieldName.id:        application.id,
+            HeaderFieldName.id: application.id,
             HeaderFieldName.signature: createRequestSignature(),
             HeaderFieldName.userAgent: configuration.userAgent,
-            HeaderFieldName.accept:    "application/json"
+            HeaderFieldName.accept: "application/json",
         ]
 
         if let sessionToken = LCUser.current?.sessionToken {
@@ -206,7 +205,7 @@ class HTTPClient {
     func mergeCommonHeaders(_ headers: [String: String]?) -> [String: String] {
         var result = createCommonHeaders()
 
-        headers?.forEach { (key, value) in result[key] = value }
+        headers?.forEach { key, value in result[key] = value }
 
         return result
     }
@@ -229,18 +228,20 @@ class HTTPClient {
         parameters: [String: Any]? = nil,
         headers: [String: String]? = nil,
         completionDispatchQueue: DispatchQueue? = nil,
-        completionHandler: @escaping (LCResponse) -> Void)
-        -> LCRequest
-    {
+        completionHandler: @escaping (LCResponse) -> Void
+    )
+        -> LCRequest {
         let completionDispatchQueue = (
             completionDispatchQueue ??
-            defaultCompletionDispatchQueue)
+                defaultCompletionDispatchQueue
+        )
 
         guard let url = router.route(path: path) else {
             let error = LCError(code: .notFound, reason: "URL not found.")
 
             let response = LCResponse(response: DataResponse<Any>(
-                request: nil, response: nil, data: nil, result: .failure(error)))
+                request: nil, response: nil, data: nil, result: .failure(error)
+            ))
 
             completionDispatchQueue.sync {
                 completionHandler(response)
@@ -249,13 +250,13 @@ class HTTPClient {
             return LCSingleRequest(request: nil)
         }
 
-        let method    = method.alamofireMethod
-        let headers   = mergeCommonHeaders(headers)
+        let method = method.alamofireMethod
+        let headers = mergeCommonHeaders(headers)
         var encoding: ParameterEncoding
 
         switch method {
         case .get: encoding = URLEncoding.default
-        default:   encoding = JSONEncoding.default
+        default: encoding = JSONEncoding.default
         }
 
         let request = sessionManager.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).validate()
@@ -287,16 +288,16 @@ class HTTPClient {
         parameters: [String: Any]? = nil,
         headers: [String: String]? = nil,
         completionDispatchQueue: DispatchQueue? = nil,
-        completionHandler: @escaping (LCResponse) -> Void)
-        -> LCRequest
-    {
-        let method    = method.alamofireMethod
-        let headers   = mergeCommonHeaders(headers)
+        completionHandler: @escaping (LCResponse) -> Void
+    )
+        -> LCRequest {
+        let method = method.alamofireMethod
+        let headers = mergeCommonHeaders(headers)
         var encoding: ParameterEncoding!
 
         switch method {
         case .get: encoding = URLEncoding.default
-        default:   encoding = JSONEncoding.default
+        default: encoding = JSONEncoding.default
         }
 
         let request = sessionManager.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).validate()
@@ -324,8 +325,8 @@ class HTTPClient {
     func request(
         error: Error,
         completionDispatchQueue: DispatchQueue? = nil,
-        completionHandler: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completionHandler: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         return request(object: error, completionDispatchQueue: completionDispatchQueue) { error in
             completionHandler(.failure(error: LCError(error: error)))
         }
@@ -343,8 +344,8 @@ class HTTPClient {
     func request<T>(
         error: Error,
         completionDispatchQueue: DispatchQueue? = nil,
-        completionHandler: @escaping (LCValueResult<T>) -> Void) -> LCRequest
-    {
+        completionHandler: @escaping (LCValueResult<T>) -> Void
+    ) -> LCRequest {
         return request(object: error, completionDispatchQueue: completionDispatchQueue) { error in
             completionHandler(.failure(error: LCError(error: error)))
         }
@@ -353,8 +354,8 @@ class HTTPClient {
     func request<T>(
         object: T,
         completionDispatchQueue: DispatchQueue? = nil,
-        completionHandler: @escaping (T) -> Void) -> LCRequest
-    {
+        completionHandler: @escaping (T) -> Void
+    ) -> LCRequest {
         let completionDispatchQueue = completionDispatchQueue ?? defaultCompletionDispatchQueue
 
         completionDispatchQueue.async {
@@ -374,8 +375,7 @@ class HTTPClient {
 }
 
 extension Request {
-
-    var lcDebugDescription : String {
+    var lcDebugDescription: String {
         var curl: String = debugDescription
 
         if curl.hasPrefix("$ ") {
@@ -385,17 +385,15 @@ extension Request {
 
         let taskIdentifier = task?.taskIdentifier ?? 0
         let message = "------ BEGIN LeanCloud HTTP Request\n" +
-                      "task: \(taskIdentifier)\n" +
-                      "curl: \(curl)\n" +
-                      "------ END"
+            "task: \(taskIdentifier)\n" +
+            "curl: \(curl)\n" +
+            "------ END"
         return message
     }
-
 }
 
 extension DataResponse {
-
-    func lcDebugDescription(_ request : Request) -> String {
+    func lcDebugDescription(_ request: Request) -> String {
         let taskIdentifier = request.task?.taskIdentifier ?? 0
 
         var message = "------ BEGIN LeanCloud HTTP Response\n"
@@ -424,5 +422,4 @@ extension DataResponse {
 
         return message
     }
-
 }

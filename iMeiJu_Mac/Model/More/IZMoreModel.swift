@@ -2,79 +2,69 @@
 //	IZMoreModel.swift
 //	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
-import Foundation 
+import Foundation
 import SwiftyJSON
 
-
-class IZMoreModel : NSObject, NSCoding{
-
-	var code : Int!
-	var data : [IZMoreData]!
-
-
-	/**
-	 * Instantiate the instance using the passed json values to set the properties values
-	 */
-	init(fromJson json: JSON!){
-		if json.isEmpty{
-			return
-		}
-		code = json["code"].intValue
-		data = [IZMoreData]()
-		let moreDataArray = json["data"].arrayValue
-		for moreDataJson in moreDataArray{
-			let value = IZMoreData(fromJson: moreDataJson)
-			data.append(value)
-		}
-	}
-
-	/**
-	 * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
-	 */
-	func toDictionary() -> [String:Any]
-	{
-		var dictionary = [String:Any]()
-		if code != nil{
-			dictionary["code"] = code
-		}
-		if data != nil{
-			var dictionaryElements = [[String:Any]]()
-			for moreDataElement in data {
-				dictionaryElements.append(moreDataElement.toDictionary())
-			}
-			dictionary["data"] = dictionaryElements
-		}
-		return dictionary
-	}
+class IZMoreModel: NSObject, NSCoding {
+    var code: Int!
+    var data: [IZMoreData]!
 
     /**
-    * NSCoding required initializer.
-    * Fills the data from the passed decoder
-    */
-    @objc required init(coder aDecoder: NSCoder)
-	{
-         code = aDecoder.decodeObject(forKey: "code") as? Int
-         data = aDecoder.decodeObject(forKey: "data") as? [IZMoreData]
-
-	}
+     * Instantiate the instance using the passed json values to set the properties values
+     */
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
+            return
+        }
+        code = json["code"].intValue
+        data = [IZMoreData]()
+        let moreDataArray = json["data"].arrayValue
+        for moreDataJson in moreDataArray {
+            let value = IZMoreData(fromJson: moreDataJson)
+            data.append(value)
+        }
+    }
 
     /**
-    * NSCoding required method.
-    * Encodes mode properties into the decoder
-    */
-    func encode(with aCoder: NSCoder)
-	{
-		if code != nil{
-			aCoder.encode(code, forKey: "code")
-		}
-		if data != nil{
-			aCoder.encode(data, forKey: "data")
-		}
+     * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
+     */
+    func toDictionary() -> [String: Any] {
+        var dictionary = [String: Any]()
+        if code != nil {
+            dictionary["code"] = code
+        }
+        if data != nil {
+            var dictionaryElements = [[String: Any]]()
+            for moreDataElement in data {
+                dictionaryElements.append(moreDataElement.toDictionary())
+            }
+            dictionary["data"] = dictionaryElements
+        }
+        return dictionary
+    }
 
-	}
+    /**
+     * NSCoding required initializer.
+     * Fills the data from the passed decoder
+     */
+    @objc required init(coder aDecoder: NSCoder) {
+        code = aDecoder.decodeObject(forKey: "code") as? Int
+        data = aDecoder.decodeObject(forKey: "data") as? [IZMoreData]
+    }
 
+    /**
+     * NSCoding required method.
+     * Encodes mode properties into the decoder
+     */
+    func encode(with aCoder: NSCoder) {
+        if code != nil {
+            aCoder.encode(code, forKey: "code")
+        }
+        if data != nil {
+            aCoder.encode(data, forKey: "data")
+        }
+    }
 }
-
 
 //
 //    IZMoreData.swift
@@ -83,30 +73,27 @@ class IZMoreModel : NSObject, NSCoding{
 import Foundation
 import SwiftyJSON
 
+class IZMoreData: NSObject, NSCoding {
+    var ad: Int!
+    var cid: String!
+    var cion: String!
+    var fid: String!
+    var hits: String!
+    var id: String!
+    var info: String!
+    var name: String!
+    var pf: String!
+    var pic: String!
+    var pic2: String!
+    var state: String!
+    var type: String!
+    var vip: String!
 
-class IZMoreData : NSObject, NSCoding{
-    
-    var ad : Int!
-    var cid : String!
-    var cion : String!
-    var fid : String!
-    var hits : String!
-    var id : String!
-    var info : String!
-    var name : String!
-    var pf : String!
-    var pic : String!
-    var pic2 : String!
-    var state : String!
-    var type : String!
-    var vip : String!
-    
-    
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
-    init(fromJson json: JSON!){
-        if json.isEmpty{
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
             return
         }
         ad = json["ad"].intValue
@@ -124,64 +111,62 @@ class IZMoreData : NSObject, NSCoding{
         type = json["type"].stringValue
         vip = json["vip"].stringValue
     }
-    
+
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> [String:Any]
-    {
-        var dictionary = [String:Any]()
-        if ad != nil{
+    func toDictionary() -> [String: Any] {
+        var dictionary = [String: Any]()
+        if ad != nil {
             dictionary["ad"] = ad
         }
-        if cid != nil{
+        if cid != nil {
             dictionary["cid"] = cid
         }
-        if cion != nil{
+        if cion != nil {
             dictionary["cion"] = cion
         }
-        if fid != nil{
+        if fid != nil {
             dictionary["fid"] = fid
         }
-        if hits != nil{
+        if hits != nil {
             dictionary["hits"] = hits
         }
-        if id != nil{
+        if id != nil {
             dictionary["id"] = id
         }
-        if info != nil{
+        if info != nil {
             dictionary["info"] = info
         }
-        if name != nil{
+        if name != nil {
             dictionary["name"] = name
         }
-        if pf != nil{
+        if pf != nil {
             dictionary["pf"] = pf
         }
-        if pic != nil{
+        if pic != nil {
             dictionary["pic"] = pic
         }
-        if pic2 != nil{
+        if pic2 != nil {
             dictionary["pic2"] = pic2
         }
-        if state != nil{
+        if state != nil {
             dictionary["state"] = state
         }
-        if type != nil{
+        if type != nil {
             dictionary["type"] = type
         }
-        if vip != nil{
+        if vip != nil {
             dictionary["vip"] = vip
         }
         return dictionary
     }
-    
+
     /**
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    @objc required init(coder aDecoder: NSCoder)
-    {
+    @objc required init(coder aDecoder: NSCoder) {
         ad = aDecoder.decodeObject(forKey: "ad") as? Int
         cid = aDecoder.decodeObject(forKey: "cid") as? String
         cion = aDecoder.decodeObject(forKey: "cion") as? String
@@ -196,58 +181,54 @@ class IZMoreData : NSObject, NSCoding{
         state = aDecoder.decodeObject(forKey: "state") as? String
         type = aDecoder.decodeObject(forKey: "type") as? String
         vip = aDecoder.decodeObject(forKey: "vip") as? String
-        
     }
-    
+
     /**
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encode(with aCoder: NSCoder)
-    {
-        if ad != nil{
+    func encode(with aCoder: NSCoder) {
+        if ad != nil {
             aCoder.encode(ad, forKey: "ad")
         }
-        if cid != nil{
+        if cid != nil {
             aCoder.encode(cid, forKey: "cid")
         }
-        if cion != nil{
+        if cion != nil {
             aCoder.encode(cion, forKey: "cion")
         }
-        if fid != nil{
+        if fid != nil {
             aCoder.encode(fid, forKey: "fid")
         }
-        if hits != nil{
+        if hits != nil {
             aCoder.encode(hits, forKey: "hits")
         }
-        if id != nil{
+        if id != nil {
             aCoder.encode(id, forKey: "id")
         }
-        if info != nil{
+        if info != nil {
             aCoder.encode(info, forKey: "info")
         }
-        if name != nil{
+        if name != nil {
             aCoder.encode(name, forKey: "name")
         }
-        if pf != nil{
+        if pf != nil {
             aCoder.encode(pf, forKey: "pf")
         }
-        if pic != nil{
+        if pic != nil {
             aCoder.encode(pic, forKey: "pic")
         }
-        if pic2 != nil{
+        if pic2 != nil {
             aCoder.encode(pic2, forKey: "pic2")
         }
-        if state != nil{
+        if state != nil {
             aCoder.encode(state, forKey: "state")
         }
-        if type != nil{
+        if type != nil {
             aCoder.encode(type, forKey: "type")
         }
-        if vip != nil{
+        if vip != nil {
             aCoder.encode(vip, forKey: "vip")
         }
-        
     }
-    
 }

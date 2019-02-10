@@ -39,7 +39,6 @@ public protocol CIImageProcessor: ImageProcessor {
 }
 
 extension CIImageProcessor {
-    
     /// Processes the input `ImageProcessItem` with this processor.
     ///
     /// - Parameters:
@@ -50,7 +49,7 @@ extension CIImageProcessor {
     /// - Note: See documentation of `ImageProcessor` protocol for more.
     public func process(item: ImageProcessItem, options: KingfisherParsedOptionsInfo) -> Image? {
         switch item {
-        case .image(let image):
+        case let .image(image):
             return image.kf.apply(filter)
         case .data:
             return (DefaultImageProcessor.default >> self).process(item: item, options: options)
@@ -61,36 +60,35 @@ extension CIImageProcessor {
 /// A wrapper struct for a `Transformer` of CIImage filters. A `Filter`
 /// value could be used to create a `CIImage` processor.
 public struct Filter {
-    
     let transform: Transformer
 
     public init(transform: @escaping Transformer) {
         self.transform = transform
     }
-    
+
     /// Tint filter which will apply a tint color to images.
     public static var tint: (Color) -> Filter = {
         color in
         Filter {
             input in
-            
+
             let colorFilter = CIFilter(name: "CIConstantColorGenerator")!
             colorFilter.setValue(CIColor(color: color), forKey: kCIInputColorKey)
-            
+
             let filter = CIFilter(name: "CISourceOverCompositing")!
-            
+
             let colorImage = colorFilter.outputImage
             filter.setValue(colorImage, forKey: kCIInputImageKey)
             filter.setValue(input, forKey: kCIInputBackgroundImageKey)
-            
+
             return filter.outputImage?.cropped(to: input.extent)
         }
     }
-    
+
     /// Represents color control elements. It is a tuple of
     /// `(brightness, contrast, saturation, inputEV)`
     public typealias ColorElement = (CGFloat, CGFloat, CGFloat, CGFloat)
-    
+
     /// Color control filter which will apply color control change to images.
     public static var colorControl: (ColorElement) -> Filter = { arg -> Filter in
         let (brightness, contrast, saturation, inputEV) = arg
@@ -106,7 +104,6 @@ public struct Filter {
 }
 
 extension KingfisherWrapper where Base: Image {
-
     /// Applies a `Filter` containing `CIImage` transformer to `self`.
     ///
     /// - Parameter filter: The filter used to transform `self`.
@@ -116,12 +113,11 @@ extension KingfisherWrapper where Base: Image {
     ///    Only CG-based images are supported. If any error happens
     ///    during transforming, `self` will be returned.
     public func apply(_ filter: Filter) -> Image {
-        
         guard let cgImage = cgImage else {
             assertionFailure("[Kingfisher] Tint image only works for CG-based image.")
             return base
         }
-        
+
         let inputImage = CIImage(cgImage: cgImage)
         guard let outputImage = filter.transform(inputImage) else {
             return base
@@ -131,12 +127,11 @@ extension KingfisherWrapper where Base: Image {
             assertionFailure("[Kingfisher] Can not make an tint image within context.")
             return base
         }
-        
+
         #if os(macOS)
             return fixedForRetinaPixel(cgImage: result, to: size)
         #else
             return Image(cgImage: result, scale: base.scale, orientation: base.imageOrientation)
         #endif
     }
-
 }

@@ -93,16 +93,15 @@ public enum LCValueResult<T: LCValue>: LCResultType {
             /* Add missing meta data for object. */
             if
                 let objectClass = T.self as? LCObject.Type,
-                var dictionary = jsonValue as? [String: Any]
-            {
-                dictionary["__type"]    = HTTPClient.DataType.object.rawValue
+                var dictionary = jsonValue as? [String: Any] {
+                dictionary["__type"] = HTTPClient.DataType.object.rawValue
                 dictionary["className"] = objectClass.objectClassName()
 
                 jsonValue = dictionary
             }
 
             value = try ObjectProfiler.shared.object(jsonValue: jsonValue)
-        } catch let error {
+        } catch {
             self = .failure(error: LCError(error: error))
             return
         }

@@ -29,10 +29,10 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
     /**
      The table of properties.
 
-     - note: This property table may not contains all properties, 
-             because when a property did set in initializer, its setter hook will not be called in Swift.
-             This property is intent for internal use.
-             For accesssing all properties, please use `dictionary` property.
+     - note: This property table may not contains all properties,
+     because when a property did set in initializer, its setter hook will not be called in Swift.
+     This property is intent for internal use.
+     For accesssing all properties, please use `dictionary` property.
      */
     private var propertyTable: LCDictionary = [:]
 
@@ -63,11 +63,11 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
         return hasObjectId ? (!operationHub.isEmpty) : true
     }
 
-    public override required init() {
+    public required override init() {
         super.init()
         operationHub = OperationHub(self)
 
-        propertyTable.elementDidChange = { (key, value) in
+        propertyTable.elementDidChange = { key, value in
             Runtime.setInstanceVariable(self, key, value)
         }
     }
@@ -92,7 +92,7 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
         self.init()
         propertyTable = dictionary.lcDictionary
 
-        propertyTable.forEach { (key, value) in
+        propertyTable.forEach { key, value in
             Runtime.setInstanceVariable(self, key, value)
         }
     }
@@ -101,18 +101,18 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
         self.init()
         propertyTable = (aDecoder.decodeObject(forKey: "propertyTable") as? LCDictionary) ?? [:]
 
-        propertyTable.forEach { (key, value) in
+        propertyTable.forEach { key, value in
             Runtime.setInstanceVariable(self, key, value)
         }
     }
 
     open func encode(with aCoder: NSCoder) {
-        let propertyTable = self.dictionary.copy() as! LCDictionary
+        let propertyTable = dictionary.copy() as! LCDictionary
 
         aCoder.encode(propertyTable, forKey: "propertyTable")
     }
 
-    open func copy(with zone: NSZone?) -> Any {
+    open func copy(with _: NSZone?) -> Any {
         return self
     }
 
@@ -140,10 +140,10 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
         var result: [String: Any] = [:]
 
         if let properties = dictionary.jsonValue as? [String: Any] {
-            result.merge(properties) { (lhs, rhs) in rhs }
+            result.merge(properties) { _, rhs in rhs }
         }
 
-        result["__type"]    = "Object"
+        result["__type"] = "Object"
         result["className"] = actualClassName
 
         return result
@@ -172,9 +172,9 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
         }
 
         return [
-            "__type"    : "Pointer",
-            "className" : actualClassName,
-            "objectId"  : objectId.value
+            "__type": "Pointer",
+            "className": actualClassName,
+            "objectId": objectId.value,
         ]
     }
 
@@ -183,7 +183,7 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
 
      If returns nil, it will use the default batch request.
      */
-    func preferredBatchRequest(method: HTTPClient.Method, path: String, internalId: String) throws -> [String: Any]? {
+    func preferredBatchRequest(method _: HTTPClient.Method, path _: String, internalId _: String) throws -> [String: Any]? {
         return nil
     }
 
@@ -195,15 +195,15 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
         try dictionary.forEachChild(body)
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 
@@ -289,8 +289,8 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
      - parameter operation: The operation used to update property.
      */
     func updateProperty(_ operation: Operation) throws {
-        let key   = operation.key
-        let name  = operation.name
+        let key = operation.key
+        let name = operation.name
         let value = operation.value
 
         willChangeValue(forKey: key)
@@ -371,10 +371,10 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
      Q: Why we need this method?
 
      A: When a property is set through dot syntax in initializer, its corresponding setter hook will not be called,
-        it will result in that some properties will not be added into property table.
+     it will result in that some properties will not be added into property table.
      */
     func synchronizePropertyTable() {
-        ObjectProfiler.shared.iterateProperties(self) { (key, _) in
+        ObjectProfiler.shared.iterateProperties(self) { key, _ in
             if key == "propertyTable" { return }
 
             if let value = Runtime.instanceVariableValue(self, key) as? LCValue {
@@ -437,7 +437,7 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
      */
     open subscript(key: String) -> LCValue? {
         get {
-            var lcValue: LCValue? = nil
+            var lcValue: LCValue?
             if let value: LCValue = get(key) {
                 lcValue = value
             }
@@ -469,7 +469,7 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
      - returns: The value for key.
      */
     open func get(_ key: String) -> LCValue? {
-        var lcValue: LCValue? = nil
+        var lcValue: LCValue?
         if let value: LCValue = ObjectProfiler.shared.propertyValue(self, key) {
             lcValue = value
         } else if let value: LCValue = propertyTable[key] {
@@ -549,8 +549,8 @@ open class LCObject: NSObject, LCValue, LCValueExtension, Sequence {
      - parameter key:     The key of array into which you want to append the element.
      - parameter element: The element to append.
      - parameter unique:  Whether append element by unique or not.
-                          If true, element will not be appended if it had already existed in array;
-                          otherwise, element will always be appended.
+     If true, element will not be appended if it had already existed in array;
+     otherwise, element will always be appended.
      */
     open func append(_ key: String, element: LCValueConvertible, unique: Bool) throws {
         try addOperation(unique ? .addUnique : .add, key, LCArray([element.lcValue]))

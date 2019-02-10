@@ -9,7 +9,6 @@
 import Foundation
 
 class Logger {
-    
     static let shared = Logger()
 
     static let dateFormatter: DateFormatter = {
@@ -26,25 +25,25 @@ class Logger {
         _ value: @autoclosure () -> T,
         _ file: String = #file,
         _ function: String = #function,
-        _ line: Int = #line)
-    {
+        _ line: Int = #line
+    ) {
         guard LCApplication.default.logLevel >= level else {
             return
         }
 
         let date = Logger.dateFormatter.string(from: Date())
         let file = NSURL(string: file)?.lastPathComponent ?? "Unknown"
-        
+
         var info = "[\(level.description)][LeanCloud][\(date) \(file) #\(line) \(function)]:"
         #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
-        switch level {
-        case .error:
-            info = "[❤️]" + info
-        case .debug:
-            info = "[💙]" + info
-        default:
-            break
-        }
+            switch level {
+            case .error:
+                info = "[❤️]" + info
+            case .debug:
+                info = "[💙]" + info
+            default:
+                break
+            }
         #endif
 
         print(info, value())
@@ -54,8 +53,8 @@ class Logger {
         _ value: @autoclosure () -> T,
         _ file: String = #file,
         _ function: String = #function,
-        _ line: Int = #line)
-    {
+        _ line: Int = #line
+    ) {
         log(.debug, value, file, function, line)
     }
 
@@ -63,9 +62,8 @@ class Logger {
         _ value: @autoclosure () -> T,
         _ file: String = #file,
         _ function: String = #function,
-        _ line: Int = #line)
-    {
+        _ line: Int = #line
+    ) {
         log(.error, value, file, function, line)
     }
-    
 }

@@ -11,7 +11,7 @@ import Foundation
 /**
  Query defines a query for objects.
  */
-final public class LCQuery: NSObject, NSCopying, NSCoding {
+public final class LCQuery: NSObject, NSCopying, NSCoding {
     /// Object class name.
     public let objectClassName: String
 
@@ -71,7 +71,7 @@ final public class LCQuery: NSObject, NSCopying, NSCoding {
         }
 
         if let extraParameters = extraParameters {
-            extraParameters.forEach { (key, value) in
+            extraParameters.forEach { key, value in
                 dictionary[key] = value
             }
         }
@@ -141,32 +141,32 @@ final public class LCQuery: NSObject, NSCopying, NSCoding {
      - parameter objectClassName: The class name to query.
      */
     public init(className: String) {
-        self.objectClassName = className
+        objectClassName = className
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         let query = LCQuery(className: objectClassName)
 
-        query.includedKeys  = includedKeys
-        query.selectedKeys  = selectedKeys
+        query.includedKeys = includedKeys
+        query.selectedKeys = selectedKeys
         query.equalityTable = equalityTable
         query.constraintDictionary = constraintDictionary
         query.extraParameters = extraParameters
         query.limit = limit
-        query.skip  = skip
+        query.skip = skip
 
         return query
     }
 
     public required init?(coder aDecoder: NSCoder) {
         objectClassName = aDecoder.decodeObject(forKey: "objectClassName") as! String
-        includedKeys    = aDecoder.decodeObject(forKey: "includedKeys") as! Set<String>
-        selectedKeys    = aDecoder.decodeObject(forKey: "selectedKeys") as! Set<String>
-        equalityTable   = aDecoder.decodeObject(forKey: "equalityTable") as! [String: LCValue]
+        includedKeys = aDecoder.decodeObject(forKey: "includedKeys") as! Set<String>
+        selectedKeys = aDecoder.decodeObject(forKey: "selectedKeys") as! Set<String>
+        equalityTable = aDecoder.decodeObject(forKey: "equalityTable") as! [String: LCValue]
         constraintDictionary = aDecoder.decodeObject(forKey: "constraintDictionary") as! [String: Any]
         extraParameters = aDecoder.decodeObject(forKey: "extraParameters") as? [String: Any]
         limit = aDecoder.decodeObject(forKey: "limit") as? Int
-        skip  = aDecoder.decodeObject(forKey: "skip") as? Int
+        skip = aDecoder.decodeObject(forKey: "skip") as? Int
     }
 
     public func encode(with aCoder: NSCoder) {

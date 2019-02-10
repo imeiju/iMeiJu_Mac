@@ -1,5 +1,5 @@
-import Foundation
 import Alamofire
+import Foundation
 
 public typealias Manager = Alamofire.SessionManager
 internal typealias Request = Alamofire.Request
@@ -26,7 +26,7 @@ public typealias MultipartFormDataEncodingResult = Manager.MultipartFormDataEnco
 public typealias DownloadDestination = Alamofire.DownloadRequest.DownloadFileDestination
 
 /// Make the Alamofire Request type conform to our type, to prevent leaking Alamofire to plugins.
-extension Request: RequestType { }
+extension Request: RequestType {}
 
 /// Internal token that can be used to cancel requests
 public final class CancellableToken: Cancellable, CustomDebugStringConvertible {
@@ -46,13 +46,13 @@ public final class CancellableToken: Cancellable, CustomDebugStringConvertible {
     }
 
     public init(action: @escaping () -> Void) {
-        self.cancelAction = action
-        self.request = nil
+        cancelAction = action
+        request = nil
     }
 
     init(request: Request) {
         self.request = request
-        self.cancelAction = {
+        cancelAction = {
             request.cancel()
         }
     }
@@ -64,7 +64,6 @@ public final class CancellableToken: Cancellable, CustomDebugStringConvertible {
         }
         return request.debugDescription
     }
-
 }
 
 internal typealias RequestableCompletion = (HTTPURLResponse?, URLRequest?, Data?, Swift.Error?) -> Void
@@ -75,7 +74,7 @@ internal protocol Requestable {
 
 extension DataRequest: Requestable {
     internal func response(callbackQueue: DispatchQueue?, completionHandler: @escaping RequestableCompletion) -> Self {
-        return response(queue: callbackQueue) { handler  in
+        return response(queue: callbackQueue) { handler in
             completionHandler(handler.response, handler.request, handler.data, handler.error)
         }
     }
@@ -83,7 +82,7 @@ extension DataRequest: Requestable {
 
 extension DownloadRequest: Requestable {
     internal func response(callbackQueue: DispatchQueue?, completionHandler: @escaping RequestableCompletion) -> Self {
-        return response(queue: callbackQueue) { handler  in
+        return response(queue: callbackQueue) { handler in
             completionHandler(handler.response, handler.request, nil, handler.error)
         }
     }

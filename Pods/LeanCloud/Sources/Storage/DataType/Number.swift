@@ -25,11 +25,11 @@ public final class LCNumber: NSObject, LCValue, LCValueExtension, ExpressibleByF
         self.value = value
     }
 
-    public convenience required init(floatLiteral value: FloatLiteralType) {
+    public required convenience init(floatLiteral value: FloatLiteralType) {
         self.init(value)
     }
 
-    public convenience required init(integerLiteral value: IntegerLiteralType) {
+    public required convenience init(integerLiteral value: IntegerLiteralType) {
         self.init(Double(value))
     }
 
@@ -41,7 +41,7 @@ public final class LCNumber: NSObject, LCValue, LCValueExtension, ExpressibleByF
         aCoder.encode(value, forKey: "value")
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCNumber(value)
     }
 
@@ -57,7 +57,7 @@ public final class LCNumber: NSObject, LCValue, LCValueExtension, ExpressibleByF
         return value
     }
 
-    func formattedJSONString(indentLevel: Int, numberOfSpacesForOneIndentLevel: Int = 4) -> String {
+    func formattedJSONString(indentLevel _: Int, numberOfSpacesForOneIndentLevel _: Int = 4) -> String {
         return String(format: "%g", value)
     }
 
@@ -77,7 +77,7 @@ public final class LCNumber: NSObject, LCValue, LCValueExtension, ExpressibleByF
         return LCNumber()
     }
 
-    func forEachChild(_ body: (_ child: LCValue) throws -> Void) rethrows {
+    func forEachChild(_: (_ child: LCValue) throws -> Void) rethrows {
         /* Nothing to do. */
     }
 
@@ -93,11 +93,11 @@ public final class LCNumber: NSObject, LCValue, LCValueExtension, ExpressibleByF
         value += amount
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 }

@@ -28,15 +28,15 @@ public final class LCString: NSObject, LCValue, LCValueExtension, ExpressibleByS
         self.value = value
     }
 
-    public convenience required init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
+    public required convenience init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
         self.init(String(value))
     }
 
-    public convenience required init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
+    public required convenience init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
         self.init(String(value))
     }
 
-    public convenience required init(stringLiteral value: StringLiteralType) {
+    public required convenience init(stringLiteral value: StringLiteralType) {
         self.init(value)
     }
 
@@ -48,7 +48,7 @@ public final class LCString: NSObject, LCValue, LCValueExtension, ExpressibleByS
         aCoder.encode(value, forKey: "value")
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCString(value)
     }
 
@@ -64,7 +64,7 @@ public final class LCString: NSObject, LCValue, LCValueExtension, ExpressibleByS
         return value
     }
 
-    func formattedJSONString(indentLevel: Int, numberOfSpacesForOneIndentLevel: Int = 4) -> String {
+    func formattedJSONString(indentLevel _: Int, numberOfSpacesForOneIndentLevel _: Int = 4) -> String {
         return "\"\(value.doubleQuoteEscapedString)\""
     }
 
@@ -84,19 +84,19 @@ public final class LCString: NSObject, LCValue, LCValueExtension, ExpressibleByS
         return self.init()
     }
 
-    func forEachChild(_ body: (_ child: LCValue) throws -> Void) rethrows {
+    func forEachChild(_: (_ child: LCValue) throws -> Void) rethrows {
         /* Nothing to do. */
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 }

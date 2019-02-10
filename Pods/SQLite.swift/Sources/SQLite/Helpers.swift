@@ -23,38 +23,33 @@
 //
 
 #if SQLITE_SWIFT_STANDALONE
-import sqlite3
+    import sqlite3
 #elseif SQLITE_SWIFT_SQLCIPHER
-import SQLCipher
+    import SQLCipher
 #elseif os(Linux)
-import CSQLite
+    import CSQLite
 #else
-import SQLite3
+    import SQLite3
 #endif
 
 public typealias Star = (Expression<Binding>?, Expression<Binding>?) -> Expression<Void>
 
-public func *(_: Expression<Binding>?, _: Expression<Binding>?) -> Expression<Void> {
+public func * (_: Expression<Binding>?, _: Expression<Binding>?) -> Expression<Void> {
     return Expression(literal: "*")
 }
 
 public protocol _OptionalType {
-
     associatedtype WrappedType
-
 }
 
-extension Optional : _OptionalType {
-
+extension Optional: _OptionalType {
     public typealias WrappedType = Wrapped
-
 }
 
 // let SQLITE_STATIC = unsafeBitCast(0, sqlite3_destructor_type.self)
 let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
 
 extension String {
-
     func quote(_ mark: Character = "\"") -> String {
         let escaped = reduce("") { string, character in
             string + (character == mark ? "\(mark)\(mark)" : "\(character)")
@@ -95,7 +90,6 @@ extension String {
     func wrap<T>(_ expressions: [Expressible]) -> Expression<T> {
         return wrap(", ".join(expressions))
     }
-
 }
 
 func infix<T>(_ lhs: Expressible, _ rhs: Expressible, wrap: Bool = true, function: String = #function) -> Expression<T> {

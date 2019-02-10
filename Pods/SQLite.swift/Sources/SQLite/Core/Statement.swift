@@ -23,19 +23,18 @@
 //
 
 #if SQLITE_SWIFT_STANDALONE
-import sqlite3
+    import sqlite3
 #elseif SQLITE_SWIFT_SQLCIPHER
-import SQLCipher
+    import SQLCipher
 #elseif os(Linux)
-import CSQLite
+    import CSQLite
 #else
-import SQLite3
+    import SQLite3
 #endif
 
 /// A single SQL statement.
 public final class Statement {
-
-    fileprivate var handle: OpaquePointer? = nil
+    fileprivate var handle: OpaquePointer?
 
     fileprivate let connection: Connection
 
@@ -50,7 +49,7 @@ public final class Statement {
 
     public lazy var columnCount: Int = Int(sqlite3_column_count(self.handle))
 
-    public lazy var columnNames: [String] = (0..<Int32(self.columnCount)).map {
+    public lazy var columnNames: [String] = (0 ..< Int32(self.columnCount)).map {
         String(cString: sqlite3_column_name(self.handle, $0))
     }
 
@@ -77,7 +76,7 @@ public final class Statement {
         guard values.count == Int(sqlite3_bind_parameter_count(handle)) else {
             fatalError("\(sqlite3_bind_parameter_count(handle)) values expected, \(values.count) passed")
         }
-        for idx in 1...values.count { bind(values[idx - 1], atIndex: idx) }
+        for idx in 1 ... values.count { bind(values[idx - 1], atIndex: idx) }
         return self
     }
 
@@ -111,9 +110,9 @@ public final class Statement {
         } else if let value = value as? String {
             sqlite3_bind_text(handle, Int32(idx), value, -1, SQLITE_TRANSIENT)
         } else if let value = value as? Int {
-            self.bind(value.datatypeValue, atIndex: idx)
+            bind(value.datatypeValue, atIndex: idx)
         } else if let value = value as? Bool {
-            self.bind(value.datatypeValue, atIndex: idx)
+            bind(value.datatypeValue, atIndex: idx)
         } else if let value = value {
             fatalError("tried to bind unexpected value \(value)")
         }
@@ -173,7 +172,6 @@ public final class Statement {
         return try bind(bindings).scalar()
     }
 
-
     /// - Parameter bindings: A dictionary of named parameters to bind to the
     ///   statement.
     ///
@@ -188,21 +186,18 @@ public final class Statement {
 
     fileprivate func reset(clearBindings shouldClear: Bool = true) {
         sqlite3_reset(handle)
-        if (shouldClear) { sqlite3_clear_bindings(handle) }
+        if shouldClear { sqlite3_clear_bindings(handle) }
     }
-
 }
 
-extension Statement : Sequence {
-
+extension Statement: Sequence {
     public func makeIterator() -> Statement {
         reset(clearBindings: false)
         return self
     }
-
 }
 
-public protocol FailableIterator : IteratorProtocol {
+public protocol FailableIterator: IteratorProtocol {
     func failableNext() throws -> Self.Element?
 }
 
@@ -221,23 +216,20 @@ extension Array {
     }
 }
 
-extension Statement : FailableIterator {
+extension Statement: FailableIterator {
     public typealias Element = [Binding?]
     public func failableNext() throws -> [Binding?]? {
         return try step() ? Array(row) : nil
     }
 }
 
-extension Statement : CustomStringConvertible {
-
+extension Statement: CustomStringConvertible {
     public var description: String {
         return String(cString: sqlite3_sql(handle))
     }
-
 }
 
 public struct Cursor {
-
     fileprivate let handle: OpaquePointer
 
     fileprivate let columnCount: Int
@@ -279,12 +271,10 @@ public struct Cursor {
     public subscript(idx: Int) -> Int {
         return Int.fromDatatypeValue(self[idx])
     }
-
 }
 
 /// Cursors provide direct access to a statement’s current row.
-extension Cursor : Sequence {
-
+extension Cursor: Sequence {
     public subscript(idx: Int) -> Binding? {
         switch sqlite3_column_type(handle, Int32(idx)) {
         case SQLITE_BLOB:
@@ -306,12 +296,11 @@ extension Cursor : Sequence {
         var idx = 0
         return AnyIterator {
             if idx >= self.columnCount {
-                return Optional<Binding?>.none
+                return Binding??.none
             } else {
                 idx += 1
                 return self[idx - 1]
             }
         }
     }
-
 }

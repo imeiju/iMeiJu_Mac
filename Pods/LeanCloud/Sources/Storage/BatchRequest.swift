@@ -34,7 +34,7 @@ class BatchRequest {
 
         var children: [(String, LCObject)] = []
 
-        operationTable?.forEach { (key, operation) in
+        operationTable?.forEach { key, operation in
             switch operation.name {
             case .set:
                 /* If object is newborn, put it in __children field. */
@@ -51,14 +51,14 @@ class BatchRequest {
             }
         }
 
-        if children.count > 0 {
+        if !children.isEmpty {
             var list: [Any] = []
 
-            children.forEach { (key, child) in
+            children.forEach { key, child in
                 list.append([
                     "className": child.actualClassName,
                     "cid": child.internalId,
-                    "key": key
+                    "key": key,
                 ])
             }
 
@@ -79,7 +79,7 @@ class BatchRequest {
 
         var request: [String: Any] = [
             "path": path,
-            "method": method.rawValue
+            "method": method.rawValue,
         ]
 
         switch method {
@@ -124,12 +124,12 @@ class BatchRequestBuilder {
         var operationTable: OperationTable = [:]
 
         /* Collect all non-null properties. */
-        object.forEach { (key, value) in
+        object.forEach { key, value in
             switch value {
             case let relation as LCRelation:
                 /* If the property type is relation,
-                   We should use "AddRelation" instead of "Set" as operation type.
-                   Otherwise, the relations will added as an array. */
+                 We should use "AddRelation" instead of "Set" as operation type.
+                 Otherwise, the relations will added as an array. */
                 operationTable[key] = Operation(name: .addRelation, key: key, value: LCArray(relation.value))
             default:
                 operationTable[key] = Operation(name: .set, key: key, value: value)

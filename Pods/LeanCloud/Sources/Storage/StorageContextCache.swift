@@ -6,14 +6,13 @@
 //  Copyright © 2018 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 /**
  Storage context cache.
  */
 final class StorageContextCache: LocalStorage, LocalStorageProtocol {
-
     let name = "StorageContext"
 
     var type = LocalStorageType.fileCacheOrMemory
@@ -24,7 +23,7 @@ final class StorageContextCache: LocalStorage, LocalStorageProtocol {
     var installation: LCInstallation? {
         get {
             do {
-                return try withSingleton { (storageContext: StorageContext, context) in
+                return try withSingleton { (storageContext: StorageContext, _) in
                     guard let data = storageContext.installation else {
                         return nil
                     }
@@ -55,5 +54,4 @@ final class StorageContextCache: LocalStorage, LocalStorageProtocol {
             }
         }
     }
-
 }

@@ -34,10 +34,10 @@ import Foundation
 public enum Result<Value, Error> {
     /// A success, storing a `Value`.
     case success(Value)
-    
+
     /// A failure, storing an `Error`.
     case failure(Error)
-    
+
     /// The stored value of a successful `Result`. `nil` if the `Result` was a
     /// failure.
     public var value: Value? {
@@ -48,7 +48,7 @@ public enum Result<Value, Error> {
             return nil
         }
     }
-    
+
     /// The stored value of a failure `Result`. `nil` if the `Result` was a
     /// success.
     public var error: Error? {
@@ -59,7 +59,7 @@ public enum Result<Value, Error> {
             return nil
         }
     }
-    
+
     /// A Boolean value indicating whether the `Result` as a success.
     public var isSuccess: Bool {
         switch self {
@@ -69,7 +69,7 @@ public enum Result<Value, Error> {
             return false
         }
     }
-    
+
     /// Evaluates the given transform closure when this `Result` instance is
     /// `.success`, passing the value as a parameter.
     ///
@@ -81,7 +81,7 @@ public enum Result<Value, Error> {
     ///   it was applied.
     public func map<NewValue>(
         _ transform: (Value) -> NewValue
-        ) -> Result<NewValue, Error> {
+    ) -> Result<NewValue, Error> {
         switch self {
         case let .success(value):
             return .success(transform(value))
@@ -89,7 +89,7 @@ public enum Result<Value, Error> {
             return .failure(error)
         }
     }
-    
+
     /// Evaluates the given transform closure when this `Result` instance is
     /// `.failure`, passing the error as a parameter.
     ///
@@ -102,7 +102,7 @@ public enum Result<Value, Error> {
     ///   it was applied.
     public func mapError<NewError>(
         _ transform: (Error) -> NewError
-        ) -> Result<Value, NewError> {
+    ) -> Result<Value, NewError> {
         switch self {
         case let .success(value):
             return .success(value)
@@ -110,7 +110,7 @@ public enum Result<Value, Error> {
             return .failure(transform(error))
         }
     }
-    
+
     /// Evaluates the given transform closure when this `Result` instance is
     /// `.success`, passing the value as a parameter and flattening the result.
     ///
@@ -120,7 +120,7 @@ public enum Result<Value, Error> {
     ///   the previous error value.
     public func flatMap<NewValue>(
         _ transform: (Value) -> Result<NewValue, Error>
-        ) -> Result<NewValue, Error> {
+    ) -> Result<NewValue, Error> {
         switch self {
         case let .success(value):
             return transform(value)
@@ -128,7 +128,7 @@ public enum Result<Value, Error> {
             return .failure(error)
         }
     }
-    
+
     /// Evaluates the given transform closure when this `Result` instance is
     /// `.failure`, passing the error as a parameter and flattening the result.
     ///
@@ -138,7 +138,7 @@ public enum Result<Value, Error> {
     ///   the previous success value.
     public func flatMapError<NewError>(
         _ transform: (Error) -> Result<Value, NewError>
-        ) -> Result<Value, NewError> {
+    ) -> Result<Value, NewError> {
         switch self {
         case let .success(value):
             return .success(value)
@@ -146,7 +146,7 @@ public enum Result<Value, Error> {
             return transform(error)
         }
     }
-    
+
     /// Evaluates the given transform closures to create a single output value.
     ///
     /// - Parameters:
@@ -156,7 +156,7 @@ public enum Result<Value, Error> {
     public func fold<Output>(
         onSuccess: (Value) -> Output,
         onFailure: (Error) -> Output
-        ) -> Output {
+    ) -> Output {
         switch self {
         case let .success(value):
             return onSuccess(value)
@@ -166,7 +166,7 @@ public enum Result<Value, Error> {
     }
 }
 
-extension Result where Error : Swift.Error {
+extension Result where Error: Swift.Error {
     /// Unwraps the `Result` into a throwing expression.
     ///
     /// - Returns: The success value, if the instance is a success.
@@ -194,7 +194,7 @@ extension Result where Error == Swift.Error {
             self = .failure(error)
         }
     }
-    
+
     /// Unwraps the `Result` into a throwing expression.
     ///
     /// - Returns: The success value, if the instance is a success.
@@ -207,7 +207,7 @@ extension Result where Error == Swift.Error {
             throw error
         }
     }
-    
+
     /// Evaluates the given transform closure when this `Result` instance is
     /// `.success`, passing the value as a parameter and flattening the result.
     ///
@@ -217,7 +217,7 @@ extension Result where Error == Swift.Error {
     ///   the previous error value.
     public func flatMap<NewValue>(
         _ transform: (Value) throws -> NewValue
-        ) -> Result<NewValue, Error> {
+    ) -> Result<NewValue, Error> {
         switch self {
         case let .success(value):
             do {
@@ -231,16 +231,16 @@ extension Result where Error == Swift.Error {
     }
 }
 
-extension Result : Equatable where Value : Equatable, Error : Equatable { }
+extension Result: Equatable where Value: Equatable, Error: Equatable {}
 
-extension Result : Hashable where Value : Hashable, Error : Hashable {
+extension Result: Hashable where Value: Hashable, Error: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(value)
         hasher.combine(error)
     }
 }
 
-extension Result : CustomDebugStringConvertible {
+extension Result: CustomDebugStringConvertible {
     public var debugDescription: String {
         var output = "Result."
         switch self {
@@ -252,7 +252,7 @@ extension Result : CustomDebugStringConvertible {
             debugPrint(error, terminator: "", to: &output)
         }
         output += ")"
-        
+
         return output
     }
 }

@@ -29,7 +29,7 @@ class ObjectUpdater {
             return
         }
 
-        dictionary.forEach { (key, value) in
+        dictionary.forEach { key, value in
             let filtered = objects.filter { object in
                 key == object.objectId?.value || key == object.internalId
             }
@@ -73,7 +73,7 @@ class ObjectUpdater {
 
         do {
             requests = try createSaveBatchRequests(objects: objects)
-        } catch let error {
+        } catch {
             return HTTPClient.default.request(error: error, completionHandler: completion)
         }
 
@@ -111,7 +111,7 @@ class ObjectUpdater {
         do {
             let family = try ObjectProfiler.shared.family(objects)
             return saveInOneBatchRequest(family, completionInBackground: completion)
-        } catch let error {
+        } catch {
             return HTTPClient.default.request(error: error, completionHandler: completion)
         }
     }
@@ -185,10 +185,11 @@ class ObjectUpdater {
             try family.forEach { object in
                 try object.validateBeforeSaving()
             }
-        } catch let error {
+        } catch {
             return HTTPClient.default.request(
                 error: error,
-                completionHandler: completion)
+                completionHandler: completion
+            )
         }
 
         let sequenceRequest = LCSequenceRequest()
@@ -227,7 +228,7 @@ class ObjectUpdater {
                 requests = try objects.unique.map { object in
                     try BatchRequest(object: object, method: .delete).jsonValue()
                 }
-            } catch let error {
+            } catch {
                 return HTTPClient.default.request(error: error, completionHandler: completion)
             }
 
@@ -291,7 +292,7 @@ class ObjectUpdater {
                 switch handleObjectFetchedResult(dictionary, objects) {
                 case .success:
                     break
-                case .failure(let error):
+                case let .failure(error):
                     result = .failure(error: error)
                 }
             }
@@ -321,7 +322,7 @@ class ObjectUpdater {
                 requests = try objects.unique.map { object in
                     try BatchRequest(object: object, method: .get).jsonValue()
                 }
-            } catch let error {
+            } catch {
                 return HTTPClient.default.request(error: error, completionHandler: completion)
             }
 

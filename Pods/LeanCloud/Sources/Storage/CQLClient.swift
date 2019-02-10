@@ -30,7 +30,7 @@ public final class LCCQLValue {
      Get objects for object query.
      */
     public var objects: [LCObject] {
-        let results   = self.results
+        let results = self.results
         let className = self.className
 
         do {

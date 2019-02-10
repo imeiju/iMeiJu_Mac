@@ -10,20 +10,17 @@
 import Cocoa
 
 class IZMainSectionHeaderView: NSView {
+    @IBOutlet var sectionTitle: NSTextField!
 
-    @IBOutlet weak var sectionTitle: NSTextField!
-    
-    
-    @IBOutlet weak var actionButton: NSButton!
-    
+    @IBOutlet var actionButton: NSButton!
+
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        NSColor(calibratedWhite: 0.8 , alpha: 0.8).set()
+        NSColor(calibratedWhite: 0.8, alpha: 0.8).set()
         __NSRectFillUsingOperation(dirtyRect, NSCompositingOperation.sourceOver)
     }
-    
+
     func setSectionHeader(title: String) {
         sectionTitle.stringValue = title
     }
-    
 }

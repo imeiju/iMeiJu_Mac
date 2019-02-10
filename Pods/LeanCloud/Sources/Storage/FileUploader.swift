@@ -6,18 +6,17 @@
 //  Copyright © 2018 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 #if canImport(MobileCoreServices)
-import MobileCoreServices
+    import MobileCoreServices
 #endif
 
 /**
  File uploader.
  */
 class FileUploader {
-
     /// The file to be uploaded.
     let file: LCFile
 
@@ -49,16 +48,13 @@ class FileUploader {
      File tokens.
      */
     private struct FileTokens {
-
         /**
          File hosting provider.
          */
         enum Provider: String {
-
             case qiniu
             case qcloud
             case s3
-
         }
 
         let provider: Provider
@@ -92,14 +88,12 @@ class FileUploader {
             self.token = token
             self.mimeType = mimeType
         }
-
     }
 
     /**
      File attributes.
      */
     private struct FileAttributes {
-
         /// File payload.
         let payload: LCFile.Payload
 
@@ -131,9 +125,9 @@ class FileUploader {
             let resourceKey = FileAttributes.getResourceKey(filename: filename)
 
             switch payload {
-            case .data(let data):
-                self.name = filename ?? resourceKey
-                self.size = UInt64(data.count)
+            case let .data(data):
+                name = filename ?? resourceKey
+                size = UInt64(data.count)
                 self.resourceKey = FileAttributes.getResourceKey(filename: filename)
 
                 if let mimeType = mimeType {
@@ -143,11 +137,11 @@ class FileUploader {
                 } else {
                     self.mimeType = FileAttributes.defaultMIMEType
                 }
-            case .fileURL(let fileURL):
+            case let .fileURL(fileURL):
                 let filename = filename ?? fileURL.lastPathComponent
 
-                self.name = filename
-                self.size = try FileAttributes.getFileSize(fileURL: fileURL)
+                name = filename
+                size = try FileAttributes.getFileSize(fileURL: fileURL)
                 self.resourceKey = FileAttributes.getResourceKey(filename: filename)
 
                 // It might be a bit odd that, unlike name, we detect MIME type from fileURL firstly.
@@ -165,7 +159,7 @@ class FileUploader {
             self.payload = payload
         }
 
-        static private func validate<T>(fileURL url: URL, body: (URL) throws -> T) throws -> T {
+        private static func validate<T>(fileURL url: URL, body: (URL) throws -> T) throws -> T {
             let fileManager = FileManager.default
 
             guard fileManager.isReadableFile(atPath: url.path) else {
@@ -175,7 +169,7 @@ class FileUploader {
             return try body(url)
         }
 
-        static private func getFileSize(fileURL url: URL) throws -> UInt64 {
+        private static func getFileSize(fileURL url: URL) throws -> UInt64 {
             return try validate(fileURL: url) { url in
                 let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
 
@@ -194,7 +188,7 @@ class FileUploader {
 
          - parameter filename: The file name.
          */
-        static private func getResourceKey(filename: String?) -> String {
+        private static func getResourceKey(filename: String?) -> String {
             let key = Utility.uuid()
 
             guard let filename = filename else {
@@ -210,20 +204,19 @@ class FileUploader {
             }
         }
 
-        static private func getMIMEType(filenameExtension: String) -> String? {
+        private static func getMIMEType(filenameExtension: String) -> String? {
             if filenameExtension.isEmpty {
                 return nil
             } else if
                 let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, filenameExtension as CFString, nil)?.takeRetainedValue(),
-                let mimeType = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue()
-            {
+                let mimeType = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
                 return mimeType as String
             } else {
                 return nil
             }
         }
 
-        static private func getMIMEType(filename: String?) -> String? {
+        private static func getMIMEType(filename: String?) -> String? {
             guard let filename = filename else {
                 return nil
             }
@@ -234,12 +227,11 @@ class FileUploader {
             return mimeType
         }
 
-        static private func getMIMEType(fileURL url: URL) throws -> String? {
+        private static func getMIMEType(fileURL url: URL) throws -> String? {
             return try validate(fileURL: url) { url in
                 getMIMEType(filenameExtension: url.pathExtension)
             }
         }
-
     }
 
     private func createTouchParameters(file: LCFile, attributes: FileAttributes) -> [String: Any] {
@@ -270,30 +262,28 @@ class FileUploader {
     }
 
     private struct TouchResult {
-
         let plainTokens: LCDictionary
 
         let typedTokens: FileTokens
-
     }
 
     private func touch(
         parameters: [String: Any],
-        completion: @escaping (LCGenericResult<TouchResult>) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCGenericResult<TouchResult>) -> Void
+    ) -> LCRequest {
         return httpClient.request(.post, "fileTokens", parameters: parameters) { response in
             let dictionaryResult = LCValueResult<LCDictionary>(response: response)
 
             switch dictionaryResult {
-            case .success(let plainTokens):
+            case let .success(plainTokens):
                 do {
                     let typedTokens = try FileTokens(plainTokens: plainTokens)
                     let value = TouchResult(plainTokens: plainTokens, typedTokens: typedTokens)
                     completion(.success(value: value))
-                } catch let error {
+                } catch {
                     completion(.failure(error: LCError(error: error)))
                 }
-            case .failure(let error):
+            case let .failure(error):
                 completion(.failure(error: error))
             }
         }
@@ -303,12 +293,12 @@ class FileUploader {
         tokens: FileTokens,
         attributes: FileAttributes,
         progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         let token = tokens.token
         let resourceKey = attributes.resourceKey
 
-        let payload  = self.payload
+        let payload = self.payload
         let mimeType = attributes.mimeType
         let fileName = attributes.name
 
@@ -327,7 +317,7 @@ class FileUploader {
             } else {
                 throw LCError(code: .malformedData, reason: "Invalid uploading token.")
             }
-        } catch let error {
+        } catch {
             return httpClient.request(error: error) { result in
                 completion(result)
             }
@@ -345,9 +335,9 @@ class FileUploader {
                 multipartFormData.append(resourceKeyData, withName: "key")
 
                 switch payload {
-                case .data(let data):
+                case let .data(data):
                     multipartFormData.append(data, withName: "file", fileName: fileName, mimeType: mimeType)
-                case .fileURL(let fileURL):
+                case let .fileURL(fileURL):
                     multipartFormData.append(fileURL, withName: "file", fileName: fileName, mimeType: mimeType)
                 }
             },
@@ -372,7 +362,8 @@ class FileUploader {
                 case let .failure(error):
                     completion(.failure(error: LCError(error: error)))
                 }
-            })
+            }
+        )
 
         return sequenceRequest
     }
@@ -381,9 +372,9 @@ class FileUploader {
         tokens: FileTokens,
         attributes: FileAttributes,
         progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
-        let payload  = self.payload
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
+        let payload = self.payload
         let mimeType = attributes.mimeType
         let fileName = attributes.name
 
@@ -392,9 +383,9 @@ class FileUploader {
         sessionManager.upload(
             multipartFormData: { multipartFormData in
                 switch payload {
-                case .data(let data):
+                case let .data(data):
                     multipartFormData.append(data, withName: "filecontent", fileName: fileName, mimeType: mimeType)
-                case .fileURL(let fileURL):
+                case let .fileURL(fileURL):
                     multipartFormData.append(fileURL, withName: "filecontent", fileName: fileName, mimeType: mimeType)
                 }
 
@@ -422,7 +413,8 @@ class FileUploader {
                 case let .failure(error):
                     completion(.failure(error: LCError(error: error)))
                 }
-            })
+            }
+        )
 
         return sequenceRequest
     }
@@ -431,8 +423,8 @@ class FileUploader {
         tokens: FileTokens,
         attributes: FileAttributes,
         progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         var uploadRequest: UploadRequest
         let uploadingURLString = tokens.uploadingURLString
 
@@ -443,9 +435,9 @@ class FileUploader {
         headers["Cache-Control"] = "public, max-age=31536000"
 
         switch payload {
-        case .data(let data):
+        case let .data(data):
             uploadRequest = sessionManager.upload(data, to: uploadingURLString, method: .put, headers: headers)
-        case .fileURL(let fileURL):
+        case let .fileURL(fileURL):
             uploadRequest = sessionManager.upload(fileURL, to: uploadingURLString, method: .put, headers: headers)
         }
 
@@ -472,8 +464,8 @@ class FileUploader {
         tokens: FileTokens,
         attributes: FileAttributes,
         progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         switch tokens.provider {
         case .qiniu:
             return writeToQiniu(tokens: tokens, attributes: attributes, progress: progress, completion: completion)
@@ -486,8 +478,8 @@ class FileUploader {
 
     private func feedback(
         result: LCBooleanResult,
-        tokens: FileTokens)
-    {
+        tokens: FileTokens
+    ) {
         var parameters: [String: Any] = [:]
 
         parameters["token"] = tokens.token
@@ -499,7 +491,7 @@ class FileUploader {
             parameters["result"] = false
         }
 
-        _ = httpClient.request(.post, "fileCallback", parameters: parameters) { response in
+        _ = httpClient.request(.post, "fileCallback", parameters: parameters) { _ in
             /* Ignore response of file feedback. */
         }
     }
@@ -507,8 +499,8 @@ class FileUploader {
     private func close(
         result: LCBooleanResult,
         tokens: LCDictionary,
-        touchParameters: [String: Any])
-    {
+        touchParameters: [String: Any]
+    ) {
         switch result {
         case .success:
             let properties = LCDictionary(tokens)
@@ -517,10 +509,10 @@ class FileUploader {
             do {
                 let dictionary = try LCDictionary(unsafeObject: touchParameters)
 
-                dictionary.forEach { (key, value) in
+                dictionary.forEach { key, value in
                     properties.set(key, value)
                 }
-            } catch let error {
+            } catch {
                 Logger.shared.error(error)
             }
 
@@ -548,8 +540,8 @@ class FileUploader {
      */
     func upload(
         progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         // If objectId exists, we think that the file has already been uploaded.
         if let _ = file.objectId {
             return httpClient.request(object: LCBooleanResult.success) { result in
@@ -561,7 +553,7 @@ class FileUploader {
 
         do {
             attributes = try FileAttributes(file: file, payload: payload)
-        } catch let error {
+        } catch {
             return httpClient.request(error: error) { result in
                 completion(result)
             }
@@ -573,7 +565,7 @@ class FileUploader {
         // Before upload resource, we have to touch file first.
         let touchRequest = touch(parameters: touchParameters) { result in
             switch result {
-            case .success(let value):
+            case let .success(value):
                 let plainTokens = value.plainTokens
                 let typedTokens = value.typedTokens
 
@@ -584,7 +576,7 @@ class FileUploader {
                     completion(result)
                 }
                 sequenceRequest.setCurrentRequest(writeRequest)
-            case .failure(let error):
+            case let .failure(error):
                 completion(.failure(error: error))
             }
         }
@@ -593,5 +585,4 @@ class FileUploader {
 
         return sequenceRequest
     }
-
 }

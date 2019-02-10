@@ -26,12 +26,10 @@
 
 import Foundation
 
-
 /// Represents a set of conception related to storage which stores a certain type of value in disk.
 /// This is a namespace for the disk storage types. A `Backend` with a certain `Config` will be used to describe the
 /// storage. See these composed types for more information.
 public enum DiskStorage {
-
     /// Represents a storage back-end for the `DiskStorage`. The value is serialized to data
     /// and stored as file in the file system under a specified location.
     ///
@@ -52,7 +50,6 @@ public enum DiskStorage {
         /// - Parameter config: The config used for this disk storage.
         /// - Throws: An error if the folder for storage cannot be got or created.
         public init(config: Config) throws {
-
             self.config = config
 
             let url: URL
@@ -63,7 +60,8 @@ public enum DiskStorage {
                     for: .cachesDirectory,
                     in: .userDomainMask,
                     appropriateFor: nil,
-                    create: true)
+                    create: true
+                )
             }
 
             let cacheName = "com.onevcat.Kingfisher.ImageCache.\(config.name)"
@@ -85,7 +83,8 @@ public enum DiskStorage {
                 try fileManager.createDirectory(
                     atPath: path,
                     withIntermediateDirectories: true,
-                    attributes: nil)
+                    attributes: nil
+                )
             } catch {
                 throw KingfisherError.cacheError(reason: .cannotCreateDirectory(path: path, error: error))
             }
@@ -94,12 +93,12 @@ public enum DiskStorage {
         func store(
             value: T,
             forKey key: String,
-            expiration: StorageExpiration? = nil) throws
-        {
+            expiration: StorageExpiration? = nil
+        ) throws {
             let expiration = expiration ?? config.expiration
             // The expiration indicates that already expired, no need to store.
             guard !expiration.isExpired else { return }
-            
+
             let data: Data
             do {
                 data = try value.toData()
@@ -110,11 +109,11 @@ public enum DiskStorage {
             let fileURL = cacheFileURL(forKey: key)
 
             let now = Date()
-            let attributes: [FileAttributeKey : Any] = [
+            let attributes: [FileAttributeKey: Any] = [
                 // The last access date.
                 .creationDate: now.fileAttributeDate,
                 // The estimated expiration date.
-                .modificationDate: expiration.estimatedExpirationSinceNow.fileAttributeDate
+                .modificationDate: expiration.estimatedExpirationSinceNow.fileAttributeDate,
             ]
             config.fileManager.createFile(atPath: fileURL.path, contents: data, attributes: attributes)
         }
@@ -137,7 +136,8 @@ public enum DiskStorage {
                 meta = try FileMeta(fileURL: fileURL, resourceKeys: resourceKeys)
             } catch {
                 throw KingfisherError.cacheError(
-                    reason: .invalidURLResource(error: error, key: key, url: fileURL))
+                    reason: .invalidURLResource(error: error, key: key, url: fileURL)
+                )
             }
 
             if meta.expired(referenceDate: referenceDate) {
@@ -207,8 +207,8 @@ public enum DiskStorage {
             let fileManager = config.fileManager
 
             guard let directoryEnumerator = fileManager.enumerator(
-                at: directoryURL, includingPropertiesForKeys: propertyKeys, options: .skipsHiddenFiles) else
-            {
+                at: directoryURL, includingPropertiesForKeys: propertyKeys, options: .skipsHiddenFiles
+            ) else {
                 throw KingfisherError.cacheError(reason: .fileEnumeratorCreationFailed(url: directoryURL))
             }
 
@@ -221,7 +221,7 @@ public enum DiskStorage {
         func removeExpiredValues(referenceDate: Date = Date()) throws -> [URL] {
             let propertyKeys: [URLResourceKey] = [
                 .isDirectoryKey,
-                .contentModificationDateKey
+                .contentModificationDateKey,
             ]
 
             let urls = try allFileURLs(for: propertyKeys)
@@ -244,7 +244,6 @@ public enum DiskStorage {
         }
 
         func removeSizeExceededValues() throws -> [URL] {
-
             if config.sizeLimit == 0 { return [] } // Back compatible. 0 means no limit.
 
             var size = try totalSize()
@@ -253,7 +252,7 @@ public enum DiskStorage {
             let propertyKeys: [URLResourceKey] = [
                 .isDirectoryKey,
                 .creationDateKey,
-                .fileSizeKey
+                .fileSizeKey,
             ]
             let keys = Set(propertyKeys)
 
@@ -298,7 +297,6 @@ public enum DiskStorage {
 extension DiskStorage {
     /// Represents the config used in a `DiskStorage`.
     public struct Config {
-
         /// The file size limit on disk of the storage in bytes. 0 means no limit.
         public var sizeLimit: UInt
 
@@ -308,15 +306,15 @@ extension DiskStorage {
 
         /// The preferred extension of cache item. It will be appended to the file name as its extension.
         /// Default is `nil`, means that the cache file does not contain a file extension.
-        public var pathExtension: String? = nil
+        public var pathExtension: String?
 
         let name: String
         let fileManager: FileManager
         let directory: URL?
 
         var cachePathBlock: ((_ directory: URL, _ cacheName: String) -> URL)! = {
-            (directory, cacheName) in
-            return directory.appendingPathComponent(cacheName, isDirectory: true)
+            directory, cacheName in
+            directory.appendingPathComponent(cacheName, isDirectory: true)
         }
 
         /// Creates a config value based on given parameters.
@@ -334,8 +332,8 @@ extension DiskStorage {
             name: String,
             sizeLimit: UInt,
             fileManager: FileManager = .default,
-            directory: URL? = nil)
-        {
+            directory: URL? = nil
+        ) {
             self.name = name
             self.fileManager = fileManager
             self.directory = directory
@@ -346,18 +344,17 @@ extension DiskStorage {
 
 extension DiskStorage {
     struct FileMeta {
-    
         let url: URL
-        
+
         let lastAccessDate: Date?
         let estimatedExpirationDate: Date?
         let isDirectory: Bool
         let fileSize: Int
-        
+
         static func lastAccessDate(lhs: FileMeta, rhs: FileMeta) -> Bool {
             return lhs.lastAccessDate ?? .distantPast > rhs.lastAccessDate ?? .distantPast
         }
-        
+
         init(fileURL: URL, resourceKeys: Set<URLResourceKey>) throws {
             let meta = try fileURL.resourceValues(forKeys: resourceKeys)
             self.init(
@@ -365,17 +362,18 @@ extension DiskStorage {
                 lastAccessDate: meta.creationDate,
                 estimatedExpirationDate: meta.contentModificationDate,
                 isDirectory: meta.isDirectory ?? false,
-                fileSize: meta.fileSize ?? 0)
+                fileSize: meta.fileSize ?? 0
+            )
         }
-        
+
         init(
             fileURL: URL,
             lastAccessDate: Date?,
             estimatedExpirationDate: Date?,
             isDirectory: Bool,
-            fileSize: Int)
-        {
-            self.url = fileURL
+            fileSize: Int
+        ) {
+            url = fileURL
             self.lastAccessDate = lastAccessDate
             self.estimatedExpirationDate = estimatedExpirationDate
             self.isDirectory = isDirectory
@@ -385,23 +383,21 @@ extension DiskStorage {
         func expired(referenceDate: Date) -> Bool {
             return estimatedExpirationDate?.isPast(referenceDate: referenceDate) ?? true
         }
-        
+
         func extendExpiration(with fileManager: FileManager) {
             guard let lastAccessDate = lastAccessDate,
-                  let lastEstimatedExpiration = estimatedExpirationDate else
-            {
+                let lastEstimatedExpiration = estimatedExpirationDate else {
                 return
             }
-            
+
             let originalExpiration: StorageExpiration =
                 .seconds(lastEstimatedExpiration.timeIntervalSince(lastAccessDate))
-            let attributes: [FileAttributeKey : Any] = [
+            let attributes: [FileAttributeKey: Any] = [
                 .creationDate: Date().fileAttributeDate,
-                .modificationDate: originalExpiration.estimatedExpirationSinceNow.fileAttributeDate
+                .modificationDate: originalExpiration.estimatedExpirationSinceNow.fileAttributeDate,
             ]
 
             try? fileManager.setAttributes(attributes, ofItemAtPath: url.path)
         }
     }
 }
-

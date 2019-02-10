@@ -32,7 +32,6 @@ enum ProgressHUDStyle {
         case let .custom(foreground, _): return foreground
         }
     }
-
 }
 
 /// Mask type for the view around of the `ProgressHUD`
@@ -71,7 +70,6 @@ private enum ProgressHUDMode {
 typealias ProgressHUDDismissCompletion = () -> Void
 
 class ProgressHUD: NSView {
-
     // MARK: - Lifecycle
 
     static let shared = ProgressHUD()
@@ -98,10 +96,9 @@ class ProgressHUD: NSView {
         window.level = .floating
         window.backgroundColor = .clear
         windowController = NSWindowController(window: window)
-
     }
 
-    required init?(coder decoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -219,7 +216,7 @@ class ProgressHUD: NSView {
     }
 
     /// Dismisses the currently visible `ProgressHUD` if visible and calls the completion closure
-    class func dismiss(completion: ProgressHUDDismissCompletion?) {
+    class func dismiss(completion _: ProgressHUDDismissCompletion?) {
         ProgressHUD.shared.hide(true)
     }
 
@@ -229,7 +226,7 @@ class ProgressHUD: NSView {
     }
 
     /// Dismisses the currently visible `ProgressHUD` if visible, after a time interval and calls the completion closure
-    class func dismiss(delay: TimeInterval, completion: ProgressHUDDismissCompletion?) {
+    class func dismiss(delay: TimeInterval, completion _: ProgressHUDDismissCompletion?) {
         ProgressHUD.shared.perform(#selector(hideDelayed(_:)), with: 1, afterDelay: delay)
     }
 
@@ -253,6 +250,7 @@ class ProgressHUD: NSView {
             needsDisplay = true
         }
     }
+
     private var yOffset: CGFloat {
         switch position {
         case .top: return -bounds.size.height / 5
@@ -260,6 +258,7 @@ class ProgressHUD: NSView {
         case .bottom: return bounds.size.height / 5
         }
     }
+
     private var hudView: NSView? {
         if let view = containerView {
             windowController?.close()
@@ -268,6 +267,7 @@ class ProgressHUD: NSView {
         windowController?.showWindow(self)
         return windowController?.window?.contentView
     }
+
     private let minimumDismissTimeInterval: TimeInterval = 2
     private let maximumDismissTimeInterval: TimeInterval = 5
     private var windowController: NSWindowController?
@@ -352,7 +352,6 @@ class ProgressHUD: NSView {
     }
 
     override func mouseDown(with theEvent: NSEvent) {
-
         NotificationCenter.default.post(name: ProgressHUD.didReceiveMouseDownEvent, object: self)
 
         switch maskType {
@@ -367,9 +366,7 @@ class ProgressHUD: NSView {
     }
 
     private func setupProgressIndicator() {
-
         switch mode {
-
         case .indeterminate:
             indicator?.removeFromSuperview()
             let view = NSView(frame: NSRect(x: 0, y: 0, width: spinnerSize, height: spinnerSize))
@@ -387,7 +384,6 @@ class ProgressHUD: NSView {
             indicator?.removeFromSuperview()
             indicator = view
             addSubview(indicator!)
-
         }
     }
 
@@ -404,7 +400,6 @@ class ProgressHUD: NSView {
     // MARK: - Layout & Drawing
 
     func layoutSubviews() {
-
         // Entirely cover the parent view
         frame = superview?.bounds ?? .zero
 
@@ -423,14 +418,14 @@ class ProgressHUD: NSView {
             totalSize.height += padding
         }
 
-        var statusLabelSize: CGSize = statusLabel.string.count > 0 ? statusLabel.string.size(withAttributes: [NSAttributedString.Key.font: statusLabel.font!]) : CGSize.zero
+        var statusLabelSize: CGSize = !statusLabel.string.isEmpty ? statusLabel.string.size(withAttributes: [NSAttributedString.Key.font: statusLabel.font!]) : CGSize.zero
         if statusLabelSize.width > 0.0 {
             statusLabelSize.width += 10.0
         }
         statusLabelSize.width = min(statusLabelSize.width, maxWidth)
         totalSize.width = max(totalSize.width, statusLabelSize.width)
         totalSize.height += statusLabelSize.height
-        if statusLabelSize.height > 0.0 && indicatorFrame.size.height > 0.0 {
+        if statusLabelSize.height > 0.0, indicatorFrame.size.height > 0.0 {
             totalSize.height += padding
         }
         totalSize.width += margin * 2
@@ -441,7 +436,7 @@ class ProgressHUD: NSView {
         if indicatorFrame.size.height > 0.0 {
             yPos += padding
         }
-        if statusLabelSize.height > 0.0 && indicatorFrame.size.height > 0.0 {
+        if statusLabelSize.height > 0.0, indicatorFrame.size.height > 0.0 {
             yPos += padding + statusLabelSize.height
         }
         let xPos: CGFloat = 0
@@ -453,7 +448,7 @@ class ProgressHUD: NSView {
             yPos -= padding * 2
         }
 
-        if statusLabelSize.height > 0.0 && indicatorFrame.size.height > 0.0 {
+        if statusLabelSize.height > 0.0, indicatorFrame.size.height > 0.0 {
             yPos -= padding + statusLabelSize.height
         }
         var statusLabelFrame = CGRect.zero
@@ -616,13 +611,11 @@ class ProgressHUD: NSView {
     static let didDisappear = Notification.Name("ProgressHUD.didDisappear")
     static let willAppear = Notification.Name("ProgressHUD.willAppear")
     static let didAppear = Notification.Name("ProgressHUD.didAppear")
-
 }
 
 // MARK: -
 
 private class ProgressIndicatorLayer: CALayer {
-
     private(set) var isRunning = false
 
     private var color: NSColor
@@ -658,7 +651,7 @@ private class ProgressIndicatorLayer: CALayer {
         }
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -711,7 +704,7 @@ private class ProgressIndicatorLayer: CALayer {
         let finAnchorPoint: CGPoint = finAnchorPointForCurrentBounds
         let finPosition = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
         let finCornerRadius: CGFloat = finBounds.size.width / 2
-        for i in 0..<numFins {
+        for i in 0 ..< numFins {
             let newFin = CALayer()
             newFin.bounds = finBounds
             newFin.anchorPoint = finAnchorPoint
@@ -779,8 +772,6 @@ private class ProgressIndicatorLayer: CALayer {
                 fin.cornerRadius = finCornerRadius
             }
             CATransaction.commit()
-
         }
     }
-
 }

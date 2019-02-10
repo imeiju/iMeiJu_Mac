@@ -20,15 +20,15 @@ public final class LCNull: NSObject, LCValue, LCValueExtension {
         super.init()
     }
 
-    public required init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         /* Nothing to decode. */
     }
 
-    public func encode(with aCoder: NSCoder) {
+    public func encode(with _: NSCoder) {
         /* Nothing to encode. */
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCNull()
     }
 
@@ -40,7 +40,7 @@ public final class LCNull: NSObject, LCValue, LCValueExtension {
         return NSNull()
     }
 
-    func formattedJSONString(indentLevel: Int, numberOfSpacesForOneIndentLevel: Int = 4) -> String {
+    func formattedJSONString(indentLevel _: Int, numberOfSpacesForOneIndentLevel _: Int = 4) -> String {
         return "null"
     }
 
@@ -60,19 +60,19 @@ public final class LCNull: NSObject, LCValue, LCValueExtension {
         return LCNull()
     }
 
-    func forEachChild(_ body: (_ child: LCValue) throws -> Void) rethrows {
+    func forEachChild(_: (_ child: LCValue) throws -> Void) rethrows {
         /* Nothing to do. */
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 }

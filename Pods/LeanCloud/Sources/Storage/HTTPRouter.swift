@@ -9,27 +9,25 @@
 import Foundation
 
 extension LCError {
-
     static let appRouterUrlNotFound = LCError(
         code: .inconsistency,
-        reason: "App router URL not found.")
+        reason: "App router URL not found."
+    )
 
     static let applicationNotInitialized = LCError(
         code: .inconsistency,
-        reason: "Application not initialized.")
-
+        reason: "Application not initialized."
+    )
 }
 
 /**
  HTTP router for application.
  */
 class HTTPRouter {
-
     /**
      Application API module.
      */
     enum Module: String {
-
         case api
         case push
         case engine
@@ -53,18 +51,15 @@ class HTTPRouter {
                 return nil
             }
         }
-
     }
 
     /**
      HTTP router configuration.
      */
     struct Configuration {
-
         let apiVersion: String
 
         static let `default` = Configuration(apiVersion: "1.1")
-
     }
 
     let application: LCApplication
@@ -104,7 +99,7 @@ class HTTPRouter {
 
         "stats": .stats,
         "statistics": .stats,
-        "always_collect": .stats
+        "always_collect": .stats,
     ]
 
     /**
@@ -251,11 +246,10 @@ class HTTPRouter {
 
         var hostTable: [Module: String] = [:]
 
-        dictionary.forEach { (key, value) in
+        dictionary.forEach { key, value in
             if
                 let module = Module(key: key),
-                let host = value.stringValue
-            {
+                let host = value.stringValue {
                 hostTable[module] = host
             }
         }
@@ -277,13 +271,13 @@ class HTTPRouter {
             var booleanResult = LCBooleanResult.success
 
             switch result {
-            case .success(let object):
+            case let .success(object):
                 do {
                     try cacheAppRouter(object)
-                } catch let error {
+                } catch {
                     booleanResult = .failure(error: LCError(error: error))
                 }
-            case .failure(let error):
+            case let .failure(error):
                 booleanResult = .failure(error: error)
             }
 
@@ -307,12 +301,14 @@ class HTTPRouter {
         guard let url = appRouterURL else {
             return httpClient.request(
                 error: LCError.appRouterUrlNotFound,
-                completionHandler: completion)
+                completionHandler: completion
+            )
         }
         guard let id = application.id else {
             return httpClient.request(
                 error: LCError.applicationNotInitialized,
-                completionHandler: completion)
+                completionHandler: completion
+            )
         }
         return httpClient.request(url: url, method: .get, parameters: ["appId": id]) { response in
             completion(LCValueResult(response: response))
@@ -360,7 +356,7 @@ class HTTPRouter {
                     return nil
                 }
                 return absoluteUrl(host: host, path: path)
-            } catch let error {
+            } catch {
                 Logger.shared.error(error)
                 return nil
             }
@@ -391,5 +387,4 @@ class HTTPRouter {
             return nil
         }
     }
-
 }

@@ -6,8 +6,8 @@
 //  Copyright © 2016 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 final class LCResponse {
     let response: Alamofire.DataResponse<Any>

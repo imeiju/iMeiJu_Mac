@@ -22,7 +22,7 @@ public extension MoyaProvider {
     /// Performs normal requests.
     func requestNormal(_ target: Target, callbackQueue: DispatchQueue?, progress: Moya.ProgressBlock?, completion: @escaping Moya.Completion) -> Cancellable {
         let endpoint = self.endpoint(target)
-        let stubBehavior = self.stubClosure(target)
+        let stubBehavior = stubClosure(target)
         let cancellableToken = CancellableWrapper()
 
         // Allow plugins to modify response
@@ -33,16 +33,16 @@ public extension MoyaProvider {
 
         if trackInflights {
             objc_sync_enter(self)
-            var inflightCompletionBlocks = self.inflightRequests[endpoint]
+            var inflightCompletionBlocks = inflightRequests[endpoint]
             inflightCompletionBlocks?.append(pluginsWithCompletion)
-            self.inflightRequests[endpoint] = inflightCompletionBlocks
+            inflightRequests[endpoint] = inflightCompletionBlocks
             objc_sync_exit(self)
 
             if inflightCompletionBlocks != nil {
                 return cancellableToken
             } else {
                 objc_sync_enter(self)
-                self.inflightRequests[endpoint] = [pluginsWithCompletion]
+                inflightRequests[endpoint] = [pluginsWithCompletion]
                 objc_sync_exit(self)
             }
         }
@@ -56,9 +56,9 @@ public extension MoyaProvider {
             var request: URLRequest!
 
             switch requestResult {
-            case .success(let urlRequest):
+            case let .success(urlRequest):
                 request = urlRequest
-            case .failure(let error):
+            case let .failure(error):
                 pluginsWithCompletion(.failure(error))
                 return
             }
@@ -67,15 +67,15 @@ public extension MoyaProvider {
             let preparedRequest = self.plugins.reduce(request) { $1.prepare($0, target: target) }
 
             let networkCompletion: Moya.Completion = { result in
-              if self.trackInflights {
-                self.inflightRequests[endpoint]?.forEach { $0(result) }
+                if self.trackInflights {
+                    self.inflightRequests[endpoint]?.forEach { $0(result) }
 
-                objc_sync_enter(self)
-                self.inflightRequests.removeValue(forKey: endpoint)
-                objc_sync_exit(self)
-              } else {
-                pluginsWithCompletion(result)
-              }
+                    objc_sync_enter(self)
+                    self.inflightRequests.removeValue(forKey: endpoint)
+                    objc_sync_exit(self)
+                } else {
+                    pluginsWithCompletion(result)
+                }
             }
 
             cancellableToken.innerCancellable = self.performRequest(target, request: preparedRequest, callbackQueue: callbackQueue, progress: progress, completion: networkCompletion, endpoint: endpoint, stubBehavior: stubBehavior)
@@ -92,19 +92,19 @@ public extension MoyaProvider {
         case .never:
             switch endpoint.task {
             case .requestPlain, .requestData, .requestJSONEncodable, .requestCustomJSONEncodable, .requestParameters, .requestCompositeData, .requestCompositeParameters:
-                return self.sendRequest(target, request: request, callbackQueue: callbackQueue, progress: progress, completion: completion)
-            case .uploadFile(let file):
-                return self.sendUploadFile(target, request: request, callbackQueue: callbackQueue, file: file, progress: progress, completion: completion)
-            case .uploadMultipart(let multipartBody), .uploadCompositeMultipart(let multipartBody, _):
-                guard !multipartBody.isEmpty && endpoint.method.supportsMultipart else {
+                return sendRequest(target, request: request, callbackQueue: callbackQueue, progress: progress, completion: completion)
+            case let .uploadFile(file):
+                return sendUploadFile(target, request: request, callbackQueue: callbackQueue, file: file, progress: progress, completion: completion)
+            case let .uploadMultipart(multipartBody), .uploadCompositeMultipart(let multipartBody, _):
+                guard !multipartBody.isEmpty, endpoint.method.supportsMultipart else {
                     fatalError("\(target) is not a multipart upload target.")
                 }
-                return self.sendUploadMultipart(target, request: request, callbackQueue: callbackQueue, multipartBody: multipartBody, progress: progress, completion: completion)
-            case .downloadDestination(let destination), .downloadParameters(_, _, let destination):
-                return self.sendDownloadRequest(target, request: request, callbackQueue: callbackQueue, destination: destination, progress: progress, completion: completion)
+                return sendUploadMultipart(target, request: request, callbackQueue: callbackQueue, multipartBody: multipartBody, progress: progress, completion: completion)
+            case let .downloadDestination(destination), let .downloadParameters(_, _, destination):
+                return sendDownloadRequest(target, request: request, callbackQueue: callbackQueue, destination: destination, progress: progress, completion: completion)
             }
         default:
-            return self.stubRequest(target, request: request, callbackQueue: callbackQueue, completion: completion, endpoint: endpoint, stubBehavior: stubBehavior)
+            return stubRequest(target, request: request, callbackQueue: callbackQueue, completion: completion, endpoint: endpoint, stubBehavior: stubBehavior)
         }
     }
 
@@ -115,7 +115,7 @@ public extension MoyaProvider {
     }
 
     /// Creates a function which, when called, executes the appropriate stubbing behavior for the given parameters.
-    public final func createStubFunction(_ token: CancellableToken, forTarget target: Target, withCompletion completion: @escaping Moya.Completion, endpoint: Endpoint, plugins: [PluginType], request: URLRequest) -> (() -> Void) { // swiftlint:disable:this function_parameter_count
+    final func createStubFunction(_ token: CancellableToken, forTarget target: Target, withCompletion completion: @escaping Moya.Completion, endpoint: Endpoint, plugins: [PluginType], request: URLRequest) -> (() -> Void) { // swiftlint:disable:this function_parameter_count
         return {
             if token.isCancelled {
                 self.cancelCompletion(completion, target: target)
@@ -135,17 +135,17 @@ public extension MoyaProvider {
             }
 
             switch endpoint.sampleResponseClosure() {
-            case .networkResponse(let statusCode, let data):
+            case let .networkResponse(statusCode, data):
                 let response = Moya.Response(statusCode: statusCode, data: data, request: request, response: nil)
                 let result = validate(response)
                 plugins.forEach { $0.didReceive(result, target: target) }
                 completion(result)
-            case .response(let customResponse, let data):
+            case let .response(customResponse, data):
                 let response = Moya.Response(statusCode: customResponse.statusCode, data: data, request: request, response: customResponse)
                 let result = validate(response)
                 plugins.forEach { $0.didReceive(result, target: target) }
                 completion(result)
-            case .networkError(let error):
+            case let .networkError(error):
                 let error = MoyaError.underlying(error, nil)
                 plugins.forEach { $0.didReceive(.failure(error), target: target) }
                 completion(.failure(error))
@@ -179,7 +179,7 @@ private extension MoyaProvider {
                 let validationCodes = target.validationType.statusCodes
                 let validatedRequest = validationCodes.isEmpty ? alamoRequest : alamoRequest.validate(statusCode: validationCodes)
                 cancellable.innerCancellable = self.sendAlamofireRequest(validatedRequest, target: target, callbackQueue: callbackQueue, progress: progress, completion: completion)
-            case .failure(let error):
+            case let .failure(error):
                 completion(.failure(MoyaError.underlying(error as NSError, nil)))
             }
         }
@@ -191,14 +191,14 @@ private extension MoyaProvider {
         let uploadRequest = manager.upload(file, with: request)
         let validationCodes = target.validationType.statusCodes
         let alamoRequest = validationCodes.isEmpty ? uploadRequest : uploadRequest.validate(statusCode: validationCodes)
-        return self.sendAlamofireRequest(alamoRequest, target: target, callbackQueue: callbackQueue, progress: progress, completion: completion)
+        return sendAlamofireRequest(alamoRequest, target: target, callbackQueue: callbackQueue, progress: progress, completion: completion)
     }
 
     func sendDownloadRequest(_ target: Target, request: URLRequest, callbackQueue: DispatchQueue?, destination: @escaping DownloadDestination, progress: ProgressBlock? = nil, completion: @escaping Completion) -> CancellableToken {
         let downloadRequest = manager.download(request, to: destination)
         let validationCodes = target.validationType.statusCodes
         let alamoRequest = validationCodes.isEmpty ? downloadRequest : downloadRequest.validate(statusCode: validationCodes)
-        return self.sendAlamofireRequest(alamoRequest, target: target, callbackQueue: callbackQueue, progress: progress, completion: completion)
+        return sendAlamofireRequest(alamoRequest, target: target, callbackQueue: callbackQueue, progress: progress, completion: completion)
     }
 
     func sendRequest(_ target: Target, request: URLRequest, callbackQueue: DispatchQueue?, progress: Moya.ProgressBlock?, completion: @escaping Moya.Completion) -> CancellableToken {

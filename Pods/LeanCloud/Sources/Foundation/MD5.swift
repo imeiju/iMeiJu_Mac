@@ -63,40 +63,40 @@ class MD5 {
     }
 
     private static func rotateLeft(_ x: Word, by: Word) -> Word {
-        return ((x << by) & 0xFFFFFFFF) | (x >> (32 - by))
+        return ((x << by) & 0xFFFF_FFFF) | (x >> (32 - by))
     }
 
     static func calculate(_ bytes: [Byte]) -> [Byte] {
         // Initialization
         let s: [Word] = [
             7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
-            5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20,
+            5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
             4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
-            6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21
+            6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21,
         ]
         let K: [Word] = [
-            0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
-            0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
-            0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
-            0x6b901122, 0xfd987193, 0xa679438e, 0x49b40821,
-            0xf61e2562, 0xc040b340, 0x265e5a51, 0xe9b6c7aa,
-            0xd62f105d, 0x02441453, 0xd8a1e681, 0xe7d3fbc8,
-            0x21e1cde6, 0xc33707d6, 0xf4d50d87, 0x455a14ed,
-            0xa9e3e905, 0xfcefa3f8, 0x676f02d9, 0x8d2a4c8a,
-            0xfffa3942, 0x8771f681, 0x6d9d6122, 0xfde5380c,
-            0xa4beea44, 0x4bdecfa9, 0xf6bb4b60, 0xbebfbc70,
-            0x289b7ec6, 0xeaa127fa, 0xd4ef3085, 0x04881d05,
-            0xd9d4d039, 0xe6db99e5, 0x1fa27cf8, 0xc4ac5665,
-            0xf4292244, 0x432aff97, 0xab9423a7, 0xfc93a039,
-            0x655b59c3, 0x8f0ccc92, 0xffeff47d, 0x85845dd1,
-            0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
-            0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
+            0xD76A_A478, 0xE8C7_B756, 0x2420_70DB, 0xC1BD_CEEE,
+            0xF57C_0FAF, 0x4787_C62A, 0xA830_4613, 0xFD46_9501,
+            0x6980_98D8, 0x8B44_F7AF, 0xFFFF_5BB1, 0x895C_D7BE,
+            0x6B90_1122, 0xFD98_7193, 0xA679_438E, 0x49B4_0821,
+            0xF61E_2562, 0xC040_B340, 0x265E_5A51, 0xE9B6_C7AA,
+            0xD62F_105D, 0x0244_1453, 0xD8A1_E681, 0xE7D3_FBC8,
+            0x21E1_CDE6, 0xC337_07D6, 0xF4D5_0D87, 0x455A_14ED,
+            0xA9E3_E905, 0xFCEF_A3F8, 0x676F_02D9, 0x8D2A_4C8A,
+            0xFFFA_3942, 0x8771_F681, 0x6D9D_6122, 0xFDE5_380C,
+            0xA4BE_EA44, 0x4BDE_CFA9, 0xF6BB_4B60, 0xBEBF_BC70,
+            0x289B_7EC6, 0xEAA1_27FA, 0xD4EF_3085, 0x0488_1D05,
+            0xD9D4_D039, 0xE6DB_99E5, 0x1FA2_7CF8, 0xC4AC_5665,
+            0xF429_2244, 0x432A_FF97, 0xAB94_23A7, 0xFC93_A039,
+            0x655B_59C3, 0x8F0C_CC92, 0xFFEF_F47D, 0x8584_5DD1,
+            0x6FA8_7E4F, 0xFE2C_E6E0, 0xA301_4314, 0x4E08_11A1,
+            0xF753_7E82, 0xBD3A_F235, 0x2AD7_D2BB, 0xEB86_D391,
         ]
 
-        var a0: Word = 0x67452301 // A
-        var b0: Word = 0xefcdab89 // B
-        var c0: Word = 0x98badcfe // C
-        var d0: Word = 0x10325476 // D
+        var a0: Word = 0x6745_2301 // A
+        var b0: Word = 0xEFCD_AB89 // B
+        var c0: Word = 0x98BA_DCFE // C
+        var d0: Word = 0x1032_5476 // D
 
         // Pad message with a single bit "1"
         var message = bytes
@@ -132,17 +132,17 @@ class MD5 {
 
         assert(totalChunks >= 1)
 
-        for chunk in 0..<totalChunks {
-            let index = chunk*chunkLengthInBytes
-            var chunk: [Byte] = Array(message[index..<index+chunkLengthInBytes]) // 512-bit/64-byte chunk
+        for chunk in 0 ..< totalChunks {
+            let index = chunk * chunkLengthInBytes
+            var chunk: [Byte] = Array(message[index ..< index + chunkLengthInBytes]) // 512-bit/64-byte chunk
 
             // break chunk into sixteen 32-bit words
             var M: [Word] = []
-            for j in 0..<16 {
-                let m0 = Word(chunk[4*j+0]) << 0
-                let m1 = Word(chunk[4*j+1]) << 8
-                let m2 = Word(chunk[4*j+2]) << 16
-                let m3 = Word(chunk[4*j+3]) << 24
+            for j in 0 ..< 16 {
+                let m0 = Word(chunk[4 * j + 0]) << 0
+                let m1 = Word(chunk[4 * j + 1]) << 8
+                let m2 = Word(chunk[4 * j + 2]) << 16
+                let m3 = Word(chunk[4 * j + 3]) << 24
                 let m = Word(m0 | m1 | m2 | m3)
 
                 M.append(m)
@@ -155,22 +155,22 @@ class MD5 {
             var C: Word = c0
             var D: Word = d0
 
-            for i in 0..<64 {
+            for i in 0 ..< 64 {
                 var f: Word = 0
                 var g: Int = 0
 
                 if i < 16 {
                     f = F(B, C, D)
                     g = i
-                } else if i >= 16 && i <= 31 {
+                } else if i >= 16, i <= 31 {
                     f = G(B, C, D)
-                    g = ((5*i + 1) % 16)
-                } else if i >= 32 && i <= 47 {
+                    g = ((5 * i + 1) % 16)
+                } else if i >= 32, i <= 47 {
                     f = H(B, C, D)
-                    g = ((3*i + 5) % 16)
-                } else if i >= 48 && i <= 63 {
+                    g = ((3 * i + 5) % 16)
+                } else if i >= 48, i <= 63 {
                     f = I(B, C, D)
-                    g = ((7*i) % 16)
+                    g = ((7 * i) % 16)
                 }
 
                 let dTemp = D
@@ -195,41 +195,40 @@ class MD5 {
         assert(c0 >= 0)
         assert(d0 >= 0)
 
-        let digest0: Byte =   Byte((a0 >> 0) & 0xFF)
-        let digest1: Byte =   Byte((a0 >> 8) & 0xFF)
-        let digest2: Byte =   Byte((a0 >> 16) & 0xFF)
-        let digest3: Byte =   Byte((a0 >> 24) & 0xFF)
+        let digest0: Byte = Byte((a0 >> 0) & 0xFF)
+        let digest1: Byte = Byte((a0 >> 8) & 0xFF)
+        let digest2: Byte = Byte((a0 >> 16) & 0xFF)
+        let digest3: Byte = Byte((a0 >> 24) & 0xFF)
 
-        let digest4: Byte =   Byte((b0 >> 0) & 0xFF)
-        let digest5: Byte =   Byte((b0 >> 8) & 0xFF)
-        let digest6: Byte =   Byte((b0 >> 16) & 0xFF)
-        let digest7: Byte =   Byte((b0 >> 24) & 0xFF)
+        let digest4: Byte = Byte((b0 >> 0) & 0xFF)
+        let digest5: Byte = Byte((b0 >> 8) & 0xFF)
+        let digest6: Byte = Byte((b0 >> 16) & 0xFF)
+        let digest7: Byte = Byte((b0 >> 24) & 0xFF)
 
-        let digest8: Byte =   Byte((c0 >> 0) & 0xFF)
-        let digest9: Byte =   Byte((c0 >> 8) & 0xFF)
-        let digest10: Byte =  Byte((c0 >> 16) & 0xFF)
-        let digest11: Byte =  Byte((c0 >> 24) & 0xFF)
-        
-        let digest12: Byte =  Byte((d0 >> 0) & 0xFF)
-        let digest13: Byte =  Byte((d0 >> 8) & 0xFF)
-        let digest14: Byte =  Byte((d0 >> 16) & 0xFF)
-        let digest15: Byte =  Byte((d0 >> 24) & 0xFF)
-        
+        let digest8: Byte = Byte((c0 >> 0) & 0xFF)
+        let digest9: Byte = Byte((c0 >> 8) & 0xFF)
+        let digest10: Byte = Byte((c0 >> 16) & 0xFF)
+        let digest11: Byte = Byte((c0 >> 24) & 0xFF)
+
+        let digest12: Byte = Byte((d0 >> 0) & 0xFF)
+        let digest13: Byte = Byte((d0 >> 8) & 0xFF)
+        let digest14: Byte = Byte((d0 >> 16) & 0xFF)
+        let digest15: Byte = Byte((d0 >> 24) & 0xFF)
+
         let digest = [
-            digest0, digest1, digest2,  digest3,  digest4,  digest5,  digest6,  digest7,
+            digest0, digest1, digest2, digest3, digest4, digest5, digest6, digest7,
             digest8, digest9, digest10, digest11, digest12, digest13, digest14, digest15,
         ]
-        
+
         assert(digest.count == 16)
-        
+
         return digest
     }
 }
 
 extension String {
-
     var md5: String {
-        let bytes = Array<MD5.Byte>(self.utf8)
+        let bytes = [MD5.Byte](utf8)
         let encodedBytes = MD5.calculate(bytes)
 
         let string = encodedBytes.reduce("") { string, byte in
@@ -241,5 +240,4 @@ extension String {
 
         return string
     }
-
 }

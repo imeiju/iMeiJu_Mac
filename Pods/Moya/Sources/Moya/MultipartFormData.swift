@@ -1,9 +1,8 @@
-import Foundation
 import Alamofire
+import Foundation
 
 /// Represents "multipart/form-data" for an upload.
 public struct MultipartFormData {
-
     /// Method to provide the form data.
     public enum FormDataProvider {
         case data(Foundation.Data)
@@ -29,10 +28,10 @@ public struct MultipartFormData {
 
     /// The MIME type
     public let mimeType: String?
-
 }
 
 // MARK: RequestMultipartFormData appending
+
 internal extension RequestMultipartFormData {
     func append(data: Data, bodyPart: MultipartFormData) {
         if let mimeType = bodyPart.mimeType {
@@ -61,11 +60,11 @@ internal extension RequestMultipartFormData {
     func applyMoyaMultipartFormData(_ multipartBody: [Moya.MultipartFormData]) {
         for bodyPart in multipartBody {
             switch bodyPart.provider {
-            case .data(let data):
+            case let .data(data):
                 append(data: data, bodyPart: bodyPart)
-            case .file(let url):
+            case let .file(url):
                 append(fileURL: url, bodyPart: bodyPart)
-            case .stream(let stream, let length):
+            case let .stream(stream, length):
                 append(stream: stream, length: length, bodyPart: bodyPart)
             }
         }

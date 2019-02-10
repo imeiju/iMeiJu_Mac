@@ -52,7 +52,7 @@ open class LCUser: LCObject {
     @objc open private(set) dynamic var sessionToken: LCString?
 
     /// Current authenticated user.
-    public static var current: LCUser? = nil
+    public static var current: LCUser?
 
     public final override class func objectClassName() -> String {
         return "_User"
@@ -93,7 +93,7 @@ open class LCUser: LCObject {
 
     /**
      Log in with username and password.
-     
+
      - parameter username: The username.
      - parameter password: The password.
 
@@ -126,7 +126,7 @@ open class LCUser: LCObject {
     private static func logIn<User: LCUser>(username: String, password: String, completionInBackground completion: @escaping (LCValueResult<User>) -> Void) -> LCRequest {
         let parameters = [
             "username": username,
-            "password": password
+            "password": password,
         ]
 
         let request = logIn(parameters: parameters, completionInBackground: completion)
@@ -171,7 +171,7 @@ open class LCUser: LCObject {
     private static func logIn<User: LCUser>(mobilePhoneNumber: String, password: String, completionInBackground completion: @escaping (LCValueResult<User>) -> Void) -> LCRequest {
         let parameters = [
             "password": password,
-            "mobilePhoneNumber": mobilePhoneNumber
+            "mobilePhoneNumber": mobilePhoneNumber,
         ]
 
         let request = logIn(parameters: parameters, completionInBackground: completion)
@@ -216,7 +216,7 @@ open class LCUser: LCObject {
     private static func logIn<User: LCUser>(mobilePhoneNumber: String, verificationCode: String, completionInBackground completion: @escaping (LCValueResult<User>) -> Void) -> LCRequest {
         let parameters = [
             "smsCode": verificationCode,
-            "mobilePhoneNumber": mobilePhoneNumber
+            "mobilePhoneNumber": mobilePhoneNumber,
         ]
 
         let request = logIn(parameters: parameters, completionInBackground: completion)
@@ -240,7 +240,7 @@ open class LCUser: LCObject {
             let result = LCValueResult<User>(response: response)
 
             switch result {
-            case .success(let user):
+            case let .success(user):
                 LCUser.current = user
             case .failure:
                 break
@@ -301,7 +301,7 @@ open class LCUser: LCObject {
             let result = LCValueResult<User>(response: response)
 
             switch result {
-            case .success(let user):
+            case let .success(user):
                 LCUser.current = user
             case .failure:
                 break
@@ -350,14 +350,14 @@ open class LCUser: LCObject {
     private static func signUpOrLogIn<User: LCUser>(mobilePhoneNumber: String, verificationCode: String, completionInBackground completion: @escaping (LCValueResult<User>) -> Void) -> LCRequest {
         let parameters = [
             "smsCode": verificationCode,
-            "mobilePhoneNumber": mobilePhoneNumber
+            "mobilePhoneNumber": mobilePhoneNumber,
         ]
 
         let request = HTTPClient.default.request(.post, "usersByMobilePhone", parameters: parameters) { response in
             let result = LCValueResult<User>(response: response)
 
             switch result {
-            case .success(let user):
+            case let .success(user):
                 LCUser.current = user
             case .failure:
                 break
@@ -626,7 +626,7 @@ open class LCUser: LCObject {
     /**
      Reset password with verification code and new password.
 
-     - note: 
+     - note:
      This method will reset password of `LCUser.current`.
      If `LCUser.current` is nil, in other words, no user logged in,
      password reset will be failed because of permission.
@@ -665,7 +665,7 @@ open class LCUser: LCObject {
     private static func resetPassword(mobilePhoneNumber: String, verificationCode: String, newPassword: String, completionInBackground completion: @escaping (LCBooleanResult) -> Void) -> LCRequest {
         let parameters = [
             "password": newPassword,
-            "mobilePhoneNumber": mobilePhoneNumber
+            "mobilePhoneNumber": mobilePhoneNumber,
         ]
         let request = HTTPClient.default.request(.put, "resetPasswordBySmsCode/\(verificationCode)", parameters: parameters) { response in
             completion(LCBooleanResult(response: response))
@@ -712,17 +712,19 @@ open class LCUser: LCObject {
         guard let endpoint = HTTPClient.default.getObjectEndpoint(object: self) else {
             return HTTPClient.default.request(
                 error: LCError(code: .notFound, reason: "User not found."),
-                completionHandler: completion)
+                completionHandler: completion
+            )
         }
         guard let sessionToken = sessionToken else {
             return HTTPClient.default.request(
                 error: LCError(code: .notFound, reason: "Session token not found."),
-                completionHandler: completion)
+                completionHandler: completion
+            )
         }
 
         let parameters = [
             "old_password": oldPassword,
-            "new_password": newPassword
+            "new_password": newPassword,
         ]
         let headers = [HTTPClient.HeaderFieldName.session: sessionToken.value]
 

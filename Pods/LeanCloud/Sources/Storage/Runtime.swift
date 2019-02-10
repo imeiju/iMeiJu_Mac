@@ -24,12 +24,12 @@ class Runtime {
         guard let properties: UnsafeMutablePointer<objc_property_t> = class_copyPropertyList(aClass, &count) else {
             return result
         }
-        
+
         defer {
             properties.deallocate()
         }
 
-        for i in 0..<Int(count) {
+        for i in 0 ..< Int(count) {
             let property: objc_property_t = properties[i]
             result.append(property)
         }
@@ -45,23 +45,21 @@ class Runtime {
      - returns: An array of all non-computed properties of the given class.
      */
     static func nonComputedProperties(_ aClass: AnyClass) -> [objc_property_t] {
-        
         var properties: [objc_property_t] = self.properties(aClass)
-        
+
         properties = properties.filter { property in
             if let varChars: UnsafeMutablePointer<Int8> = property_copyAttributeValue(property, "V") {
-                
                 defer {
                     let utf8Str = String(validatingUTF8: varChars)!
                     varChars.deallocate()
                 }
-                
+
                 return true
             } else {
                 return false
             }
         }
-        
+
         return properties
     }
 
@@ -71,17 +69,16 @@ class Runtime {
      - parameter property: Inspected property.
      */
     static func typeEncoding(_ property: objc_property_t) -> String? {
-        
         guard let typeChars: UnsafeMutablePointer<Int8> = property_copyAttributeValue(property, "T") else {
             return nil
         }
-        
+
         let utf8Str = String(validatingUTF8: typeChars)!
-        
+
         defer {
             typeChars.deallocate()
         }
-        
+
         return utf8Str
     }
 
@@ -105,22 +102,21 @@ class Runtime {
      - returns: Instance variable correspond to the property name.
      */
     static func instanceVariable(_ aClass: AnyClass, _ propertyName: String) -> Ivar? {
-        
         guard let property: objc_property_t = class_getProperty(aClass, propertyName) else {
             return nil
         }
-        
+
         guard let varChars: UnsafeMutablePointer<Int8> = property_copyAttributeValue(property, "V") else {
             return nil
         }
-        
+
         defer {
             let utf8Str = String(validatingUTF8: varChars)!
             varChars.deallocate()
         }
-        
+
         let ivar: Ivar? = class_getInstanceVariable(aClass, varChars)
-        
+
         return ivar
     }
 
@@ -141,7 +137,7 @@ class Runtime {
         }
 
         let ivarValue = object_getIvar(object, ivar)
-        
+
         return ivarValue
     }
 

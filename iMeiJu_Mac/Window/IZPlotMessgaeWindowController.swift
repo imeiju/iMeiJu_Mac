@@ -10,14 +10,12 @@
 import Cocoa
 
 class IZPlotMessgaeWindowController: NSWindowController {
-
     var id: String?
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
-        let plot = IZPlotMessgaeViewController.init(nibName: "IZPlotMessgaeViewController", bundle: nil)
+        let plot = IZPlotMessgaeViewController(nibName: "IZPlotMessgaeViewController", bundle: nil)
         plot.id = id
         contentViewController = plot
     }
-    
 }

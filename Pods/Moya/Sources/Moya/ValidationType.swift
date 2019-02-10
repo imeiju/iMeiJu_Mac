@@ -2,7 +2,6 @@ import Foundation
 
 /// Represents the status codes to validate through Alamofire.
 public enum ValidationType {
-
     /// No validation.
     case none
 
@@ -19,10 +18,10 @@ public enum ValidationType {
     var statusCodes: [Int] {
         switch self {
         case .successCodes:
-            return Array(200..<300)
+            return Array(200 ..< 300)
         case .successAndRedirectCodes:
-            return Array(200..<400)
-        case .customCodes(let codes):
+            return Array(200 ..< 400)
+        case let .customCodes(codes):
             return codes
         case .none:
             return []
@@ -31,14 +30,13 @@ public enum ValidationType {
 }
 
 extension ValidationType: Equatable {
-
     public static func == (lhs: ValidationType, rhs: ValidationType) -> Bool {
         switch (lhs, rhs) {
         case (.none, .none),
              (.successCodes, .successCodes),
              (.successAndRedirectCodes, .successAndRedirectCodes):
             return true
-        case (.customCodes(let code1), .customCodes(let code2)):
+        case let (.customCodes(code1), .customCodes(code2)):
             return code1 == code2
         default:
             return false

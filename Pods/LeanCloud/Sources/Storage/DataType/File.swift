@@ -12,7 +12,6 @@ import Foundation
  LeanCloud file type.
  */
 public final class LCFile: LCObject {
-
     /// The file URL.
     @objc public dynamic var url: LCString?
 
@@ -45,10 +44,10 @@ public final class LCFile: LCObject {
      */
     public var mimeType: LCString? {
         get {
-            return self.get("mime_type") as? LCString
+            return get("mime_type") as? LCString
         }
         set {
-            try? self.set("mime_type", value: newValue)
+            try? set("mime_type", value: newValue)
         }
     }
 
@@ -74,13 +73,11 @@ public final class LCFile: LCObject {
      This type represents a resource to be uploaded.
      */
     public enum Payload {
-
         /// File content represented by data.
         case data(data: Data)
 
         /// File content represented by file URL.
         case fileURL(fileURL: URL)
-
     }
 
     /// The payload to be uploaded.
@@ -99,22 +96,24 @@ public final class LCFile: LCObject {
         return "_File"
     }
 
-    override public func save() -> LCBooleanResult {
+    public override func save() -> LCBooleanResult {
         return expect { fulfill in
             self.save(
-            progressInBackground: { _ in /* Nop */ },
-            completion: { result in
-                fulfill(result)
-            })
+                progressInBackground: { _ in /* Nop */ },
+                completion: { result in
+                    fulfill(result)
+                }
+            )
         }
     }
 
-    override public func save(
-        _ completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+    public override func save(
+        _ completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         return save(
             progress: { _ in /* Nop */ },
-            completion: completion)
+            completion: completion
+        )
     }
 
     /**
@@ -127,19 +126,20 @@ public final class LCFile: LCObject {
      */
     public func save(
         progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         return save(
-        progressInBackground: { value in
-            mainQueueAsync {
-                progress(value)
+            progressInBackground: { value in
+                mainQueueAsync {
+                    progress(value)
+                }
+            },
+            completion: { result in
+                mainQueueAsync {
+                    completion(result)
+                }
             }
-        },
-        completion: { result in
-            mainQueueAsync {
-                completion(result)
-            }
-        })
+        )
     }
 
     /**
@@ -153,12 +153,13 @@ public final class LCFile: LCObject {
     @discardableResult
     private func save(
         progressInBackground progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         if let _ = objectId {
             let error = LCError(
                 code: .inconsistency,
-                reason: "Cannot update file after it has been saved.")
+                reason: "Cannot update file after it has been saved."
+            )
 
             return httpClient.request(error: error) { result in
                 completion(result)
@@ -197,13 +198,14 @@ public final class LCFile: LCObject {
     private func upload(
         payload: Payload,
         progress: @escaping (Double) -> Void,
-        completion: @escaping (LCBooleanResult) -> Void) -> LCRequest
-    {
+        completion: @escaping (LCBooleanResult) -> Void
+    ) -> LCRequest {
         let uploader = FileUploader(file: self, payload: payload)
 
         return uploader.upload(
             progress: progress,
-            completion: completion)
+            completion: completion
+        )
     }
 
     /**
@@ -216,8 +218,8 @@ public final class LCFile: LCObject {
      */
     private func handleUploadResult(
         _ result: LCBooleanResult,
-        completion: (LCBooleanResult) -> Void)
-    {
+        completion: (LCBooleanResult) -> Void
+    ) {
         switch result {
         case .success:
             discardChanges()
@@ -237,18 +239,17 @@ public final class LCFile: LCObject {
      */
     private func handleSaveResult(
         _ result: LCValueResult<LCDictionary>,
-        completion: (LCBooleanResult) -> Void)
-    {
+        completion: (LCBooleanResult) -> Void
+    ) {
         switch result {
-        case .success(let dictionary):
-            dictionary.forEach { (key, value) in
+        case let .success(dictionary):
+            dictionary.forEach { key, value in
                 update(key, value)
             }
             discardChanges()
             completion(.success)
-        case .failure(let error):
+        case let .failure(error):
             completion(.failure(error: error))
         }
     }
-
 }

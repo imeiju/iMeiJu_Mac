@@ -32,8 +32,8 @@ extension Module {
 ///
 /// **Note:** this is currently only applicable when using SQLite.swift together with a FTS5-enabled version
 /// of SQLite.
-open class FTS5Config : FTSConfig {
-    public enum Detail : CustomStringConvertible {
+open class FTS5Config: FTSConfig {
+    public enum Detail: CustomStringConvertible {
         /// store rowid, column number, term offset
         case full
         /// store rowid, column number
@@ -54,18 +54,17 @@ open class FTS5Config : FTSConfig {
     var contentRowId: Expressible?
     var columnSize: Int?
 
-    override public init() {
-    }
+    public override init() {}
 
     /// [External Content Tables](https://www.sqlite.org/fts5.html#section_4_4_2)
     open func contentRowId(_ column: Expressible) -> Self {
-        self.contentRowId = column
+        contentRowId = column
         return self
     }
 
     /// [The Columnsize Option](https://www.sqlite.org/fts5.html#section_4_5)
     open func columnSize(_ size: Int) -> Self {
-        self.columnSize = size
+        columnSize = size
         return self
     }
 

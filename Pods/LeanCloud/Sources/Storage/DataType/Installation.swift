@@ -12,7 +12,6 @@ import Foundation
  LeanCloud installation type.
  */
 public final class LCInstallation: LCObject {
-
     /// The badge of installation.
     @objc public dynamic var badge: LCNumber?
 
@@ -58,27 +57,27 @@ public final class LCInstallation: LCObject {
         }
 
         #if os(iOS)
-        deviceType = "ios"
+            deviceType = "ios"
         #elseif os(macOS)
-        deviceType = "macos"
+            deviceType = "macos"
         #elseif os(watchOS)
-        deviceType = "watchos"
+            deviceType = "watchos"
         #elseif os(tvOS)
-        deviceType = "tvos"
+            deviceType = "tvos"
         #elseif os(Linux)
-        deviceType = "linux"
+            deviceType = "linux"
         #elseif os(FreeBSD)
-        deviceType = "freebsd"
+            deviceType = "freebsd"
         #elseif os(Android)
-        deviceType = "android"
+            deviceType = "android"
         #elseif os(PS4)
-        deviceType = "ps4"
+            deviceType = "ps4"
         #elseif os(Windows)
-        deviceType = "windows"
+            deviceType = "windows"
         #elseif os(Cygwin)
-        deviceType = "cygwin"
+            deviceType = "cygwin"
         #elseif os(Haiku)
-        deviceType = "haiku"
+            deviceType = "haiku"
         #endif
     }
 
@@ -92,8 +91,8 @@ public final class LCInstallation: LCObject {
     public func set(
         deviceToken: LCDeviceTokenConvertible,
         deviceProfile: LCStringConvertible? = nil,
-        apnsTeamId: LCStringConvertible)
-    {
+        apnsTeamId: LCStringConvertible
+    ) {
         self.deviceToken = deviceToken.lcDeviceToken
 
         if let deviceProfile = deviceProfile {
@@ -103,7 +102,7 @@ public final class LCInstallation: LCObject {
         self.apnsTeamId = apnsTeamId.lcString
     }
 
-    override func preferredBatchRequest(method: HTTPClient.Method, path: String, internalId: String) throws -> [String : Any]? {
+    override func preferredBatchRequest(method: HTTPClient.Method, path _: String, internalId: String) throws -> [String: Any]? {
         switch method {
         case .post, .put:
             var request: [String: Any] = [:]
@@ -146,56 +145,42 @@ public final class LCInstallation: LCObject {
             application.storageContextCache.installation = self
         }
     }
-
 }
 
 extension LCApplication {
-
     public var currentInstallation: LCInstallation {
         return lc_lazyload("currentInstallation", .OBJC_ASSOCIATION_RETAIN) {
             storageContextCache.installation ?? LCInstallation()
         }
     }
-
 }
 
-
 public protocol LCDeviceTokenConvertible {
-
     var lcDeviceToken: LCString { get }
-
 }
 
 extension String: LCDeviceTokenConvertible {
-
     public var lcDeviceToken: LCString {
         return lcString
     }
-
 }
 
 extension NSString: LCDeviceTokenConvertible {
-
     public var lcDeviceToken: LCString {
         return (self as String).lcDeviceToken
     }
-
 }
 
 extension Data: LCDeviceTokenConvertible {
-
     public var lcDeviceToken: LCString {
         let string = map { String(format: "%02.2hhx", $0) }.joined()
 
         return LCString(string)
     }
-
 }
 
 extension NSData: LCDeviceTokenConvertible {
-
     public var lcDeviceToken: LCString {
         return (self as Data).lcDeviceToken
     }
-
 }

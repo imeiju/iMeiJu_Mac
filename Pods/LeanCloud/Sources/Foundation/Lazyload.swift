@@ -6,11 +6,10 @@
 //  Copyright © 2018 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import _LeanCloud_Polyfill
+import Foundation
 
 extension NSObject {
-
     func lc_lazyload<T: Any>(_ key: String, _ policy: objc_AssociationPolicy, _ object: () -> T) -> T {
         return lc_lazyload(key, policy, object())
     }
@@ -30,5 +29,4 @@ extension NSObject {
             return object
         }
     }
-
 }

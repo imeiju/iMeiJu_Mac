@@ -18,18 +18,17 @@ enum MenuType: Int {
 }
 
 class IZMainViewController: NSViewController {
-    
-    @IBOutlet weak var collectionView: NSCollectionView!
-    @IBOutlet weak var vip: NSButton!
-    @IBOutlet weak var recommend: NSButton!
-    @IBOutlet weak var movie: NSButton!
-    @IBOutlet weak var usMovie: NSButton!
-    
+    @IBOutlet var collectionView: NSCollectionView!
+    @IBOutlet var vip: NSButton!
+    @IBOutlet var recommend: NSButton!
+    @IBOutlet var movie: NSButton!
+    @IBOutlet var usMovie: NSButton!
+
     var model: IZMainModel?
     var api = MoyaApi.index(vsize: "15")
     var isZtid = true
     var isMenu = MenuType.recommend
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
@@ -44,7 +43,7 @@ class IZMainViewController: NSViewController {
         collectionViewConfiguration()
         network()
     }
-    
+
     @IBAction func recommend(_ sender: NSButton) {
         vip.isHidden = true
         sender.isEnabled = false
@@ -55,7 +54,7 @@ class IZMainViewController: NSViewController {
         isMenu = .recommend
         network()
     }
-    
+
     @IBAction func movie(_ sender: NSButton) {
         vip.isHidden = false
         sender.isEnabled = false
@@ -66,7 +65,7 @@ class IZMainViewController: NSViewController {
         isMenu = .movie
         network()
     }
-    
+
     @IBAction func usMove(_ sender: NSButton) {
         vip.isHidden = true
         sender.isEnabled = false
@@ -77,22 +76,21 @@ class IZMainViewController: NSViewController {
         isMenu = .usMovie
         network()
     }
-    
+
     @IBAction func vip(_ sender: NSButton) {
         UserDefaults.standard.set(sender.state, forKey: "isVip")
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
-    
-    
+
     @objc func refresh() {
         network()
     }
-    
+
     @objc func search() {
         let search = IZSearchWindowContoller(windowNibName: "IZSearchWindowContoller")
         jumpWindow(window: search.window!, name: "搜索")
     }
-    
+
     func windowConfiguration() {
         let window = NSApplication.shared.windows.first
         var frame = window?.frame
@@ -100,33 +98,31 @@ class IZMainViewController: NSViewController {
         frame?.size.height = 600
         window?.setFrame(frame!, display: true)
     }
-    
+
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
-        provider.request(api, callbackQueue: nil, progress: nil) { (result) in
+        provider.request(api) { result in
             ProgressHUD.dismiss()
             switch result {
             case let .success(result):
                 let json = JSON(result.data)
                 self.model = IZMainModel(fromJson: json)
                 self.collectionView.reloadData()
-                //刷新完成后 回滚到顶部
+                // 刷新完成后 回滚到顶部
                 self.collectionView.scrollToItems(at: Set(arrayLiteral: IndexPath(item: 0, section: 0)), scrollPosition: .top)
-                break
-            case .failure(_): break
-                
+            case .failure: break
             }
         }
     }
-    
+
     func collectionViewConfiguration() {
         collectionView.collectionViewLayout = layout
         collectionView.isSelectable = true
         collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
-        collectionView.register(NSNib(nibNamed:"IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
+        collectionView.register(NSNib(nibNamed: "IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
-    
+
     let layout: NSCollectionViewFlowLayout = {
         let layout = NSCollectionViewFlowLayout()
         layout.itemSize = NSSize(width: 200, height: 260)
@@ -136,24 +132,23 @@ class IZMainViewController: NSViewController {
         layout.sectionHeadersPinToVisibleBounds = true
         return layout
     }()
-    
 }
 
 extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: NSCollectionView) -> Int {
-        if model?.code==0 {
-            if isMenu == MenuType.movie && !UserDefaults.standard.bool(forKey: "isVip") {
-               return (model?.data.count)!-1
+    func numberOfSections(in _: NSCollectionView) -> Int {
+        if model?.code == 0 {
+            if isMenu == MenuType.movie, !UserDefaults.standard.bool(forKey: "isVip") {
+                return (model?.data.count)! - 1
             }
             return (model?.data.count)!
         }
         return 0
     }
-    
-    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+
+    func collectionView(_: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return (model?.data?[section].vod.count)!
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZStillsViewItem
         let m = model!.data[indexPath.section].vod![indexPath.item]
@@ -161,7 +156,7 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
         item.setImageUrl(url: m.pic)
         return item
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
         let headView = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"), for: indexPath) as! IZMainSectionHeaderView
         headView.actionButton.target = self
@@ -176,7 +171,7 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
         let more = IZMoreWindowController(windowNibName: "IZMoreWindowController")
         if isZtid {
             more.ztid = m.id
-        }else {
+        } else {
             more.id = m.id
         }
         jumpWindow(window: more.window!, name: m.name)
@@ -190,9 +185,8 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
         plot.id = m.id
         jumpWindow(window: plot.window!, name: m.name)
     }
-    
-    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> NSSize {
+
+    func collectionView(_: NSCollectionView, layout _: NSCollectionViewLayout, referenceSizeForHeaderInSection _: Int) -> NSSize {
         return NSSize(width: 1002, height: 40)
     }
-    
 }

@@ -40,7 +40,7 @@ public final class LCRelation: NSObject, LCValue, LCValueExtension, Sequence {
     internal convenience init(key: String, parent: LCObject) {
         self.init()
 
-        self.key    = key
+        self.key = key
         self.parent = parent
     }
 
@@ -71,7 +71,7 @@ public final class LCRelation: NSObject, LCValue, LCValueExtension, Sequence {
         }
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return self
     }
 
@@ -93,7 +93,7 @@ public final class LCRelation: NSObject, LCValue, LCValueExtension, Sequence {
 
     private var typedJSONValue: [String: String] {
         var result = [
-            "__type": "Relation"
+            "__type": "Relation",
         ]
 
         if let className = effectiveObjectClassName {
@@ -116,7 +116,7 @@ public final class LCRelation: NSObject, LCValue, LCValueExtension, Sequence {
     }
 
     var lconValue: Any? {
-        return value.compactMap { (element) in element.lconValue }
+        return value.compactMap { element in element.lconValue }
     }
 
     static func instance() -> LCValue {
@@ -127,15 +127,15 @@ public final class LCRelation: NSObject, LCValue, LCValueExtension, Sequence {
         try value.forEach { element in try body(element) }
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 
@@ -211,13 +211,13 @@ public final class LCRelation: NSObject, LCValue, LCValueExtension, Sequence {
         let parent = self.parent!
 
         /* If class name already known, use it.
-           Otherwise, use class name redirection. */
+         Otherwise, use class name redirection. */
         if let objectClassName = objectClassName {
             query = LCQuery(className: objectClassName)
         } else {
             query = LCQuery(className: parent.actualClassName)
             query.extraParameters = [
-                "redirectClassNameForKey": key
+                "redirectClassNameForKey": key,
             ]
         }
 

@@ -6,8 +6,8 @@
 //  Copyright © 2018 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 /**
  Local storage.
@@ -15,7 +15,6 @@ import CoreData
  This type defines a local storage backed by Core Data.
  */
 class LocalStorage {
-
     /// The application of local storage.
     let application: LCApplication
 
@@ -68,7 +67,7 @@ class LocalStorage {
 
         let bundle = Bundle(for: Swift.type(of: self))
 
-        let persistentStoreType  = try synthesizePersistentStoreType()
+        let persistentStoreType = try synthesizePersistentStoreType()
         let persistentController = try PersistentController(name: name, bundle: bundle, type: persistentStoreType)
         let managedObjectContext = try persistentController.createManagedObjectContext()
 
@@ -81,7 +80,7 @@ class LocalStorage {
     private var systemCacheDirectory: URL? {
         do {
             return try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        } catch let error {
+        } catch {
             Logger.shared.error(error)
             return nil
         }
@@ -91,7 +90,7 @@ class LocalStorage {
     private var systemApplicationSupportDirectory: URL? {
         do {
             return try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        } catch let error {
+        } catch {
             Logger.shared.error(error)
             return nil
         }
@@ -122,7 +121,7 @@ class LocalStorage {
 
         do {
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
-        } catch let error {
+        } catch {
             Logger.shared.error(error)
             return nil
         }
@@ -226,7 +225,7 @@ class LocalStorage {
      Create a singleton object.
      */
     func createSingleton<T: NSManagedObject>() throws -> T {
-        return try perform { context in
+        return try perform { _ in
             if let object: T = try fetchAnyObject() {
                 return object
             }
@@ -262,7 +261,7 @@ class LocalStorage {
     /**
      Delete all objects of a given type.
      */
-    func deleteAllObjects<T: NSManagedObject>(type: T.Type) throws {
+    func deleteAllObjects<T: NSManagedObject>(type _: T.Type) throws {
         try perform { context in
             let isInMemoryStore = (context.persistentStoreCoordinator?.persistentStores.first { $0.type == NSInMemoryStoreType }) != nil
 
@@ -300,14 +299,12 @@ class LocalStorage {
             try context.save()
         }
     }
-
 }
 
 /**
  Local storage types.
  */
 enum LocalStorageType {
-
     /// This type indicates that data will be stored in memory.
     case memory
 
@@ -319,7 +316,6 @@ enum LocalStorageType {
 
     /// This type indicates that data will be stored in a file, the file will not be cleared by OS.
     case filePersistent
-
 }
 
 /**
@@ -328,11 +324,9 @@ enum LocalStorageType {
  Concrete local storage must confirm this protocol.
  */
 protocol LocalStorageProtocol {
-
     /// The name of data model.
     var name: String { get }
 
     /// Local storage type.
     var type: LocalStorageType { get }
-
 }

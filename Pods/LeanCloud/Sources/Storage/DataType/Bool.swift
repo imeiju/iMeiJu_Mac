@@ -25,7 +25,7 @@ public final class LCBool: NSObject, LCValue, LCValueExtension, ExpressibleByBoo
         self.value = value
     }
 
-    public convenience required init(booleanLiteral value: BooleanLiteralType) {
+    public required convenience init(booleanLiteral value: BooleanLiteralType) {
         self.init(value)
     }
 
@@ -37,7 +37,7 @@ public final class LCBool: NSObject, LCValue, LCValueExtension, ExpressibleByBoo
         aCoder.encode(value, forKey: "value")
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCBool(value)
     }
 
@@ -53,7 +53,7 @@ public final class LCBool: NSObject, LCValue, LCValueExtension, ExpressibleByBoo
         return value
     }
 
-    func formattedJSONString(indentLevel: Int, numberOfSpacesForOneIndentLevel: Int = 4) -> String {
+    func formattedJSONString(indentLevel _: Int, numberOfSpacesForOneIndentLevel _: Int = 4) -> String {
         return "\(value)"
     }
 
@@ -73,19 +73,19 @@ public final class LCBool: NSObject, LCValue, LCValueExtension, ExpressibleByBoo
         return LCBool()
     }
 
-    func forEachChild(_ body: (_ child: LCValue) throws -> Void) rethrows {
+    func forEachChild(_: (_ child: LCValue) throws -> Void) rethrows {
         /* Nothing to do. */
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 }

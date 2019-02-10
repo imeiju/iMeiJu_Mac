@@ -29,7 +29,7 @@ public final class LCGeoPoint: NSObject, LCValue, LCValueExtension {
 
         public init(value: Double, unit: Unit) {
             self.value = value
-            self.unit  = unit
+            self.unit = unit
         }
     }
 
@@ -60,12 +60,12 @@ public final class LCGeoPoint: NSObject, LCValue, LCValueExtension {
             return nil
         }
 
-        self.latitude  = latitude
+        self.latitude = latitude
         self.longitude = longitude
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        latitude  = aDecoder.decodeDouble(forKey: "latitude")
+        latitude = aDecoder.decodeDouble(forKey: "latitude")
         longitude = aDecoder.decodeDouble(forKey: "longitude")
     }
 
@@ -74,7 +74,7 @@ public final class LCGeoPoint: NSObject, LCValue, LCValueExtension {
         aCoder.encode(longitude, forKey: "longitude")
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCGeoPoint(latitude: latitude, longitude: longitude)
     }
 
@@ -92,9 +92,9 @@ public final class LCGeoPoint: NSObject, LCValue, LCValueExtension {
 
     private var typedJSONValue: [String: LCValueConvertible] {
         return [
-            "__type"    : "GeoPoint",
-            "latitude"  : latitude,
-            "longitude" : longitude
+            "__type": "GeoPoint",
+            "latitude": latitude,
+            "longitude": longitude,
         ]
     }
 
@@ -118,19 +118,19 @@ public final class LCGeoPoint: NSObject, LCValue, LCValueExtension {
         return self.init()
     }
 
-    func forEachChild(_ body: (_ child: LCValue) throws -> Void) rethrows {
+    func forEachChild(_: (_ child: LCValue) throws -> Void) rethrows {
         /* Nothing to do. */
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 }

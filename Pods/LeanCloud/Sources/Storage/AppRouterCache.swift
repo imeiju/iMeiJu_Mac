@@ -12,7 +12,6 @@ import Foundation
  App router cache.
  */
 final class AppRouterCache: LocalStorage, LocalStorageProtocol {
-
     let name = "AppRouterCache"
 
     var type = LocalStorageType.fileCacheOrMemory
@@ -31,7 +30,7 @@ final class AppRouterCache: LocalStorage, LocalStorageProtocol {
 
             appRouterTable.expirationDate = expirationDate
 
-            hostTable.forEach { (module, host) in
+            hostTable.forEach { module, host in
                 let appRouterRecord = AppRouterRecord(context: context)
 
                 appRouterRecord.key = module.key
@@ -52,7 +51,7 @@ final class AppRouterCache: LocalStorage, LocalStorageProtocol {
      - returns: The host for given API module, or nil if expired.
      */
     func fetchHost(module: HTTPRouter.Module) throws -> String? {
-        return try perform { context in
+        return try perform { _ in
             guard let appRouterTable: AppRouterTable = try fetchAnyObject() else {
                 return nil
             }
@@ -75,5 +74,4 @@ final class AppRouterCache: LocalStorage, LocalStorageProtocol {
             return host
         }
     }
-
 }

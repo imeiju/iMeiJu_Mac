@@ -10,11 +10,9 @@
 import Cocoa
 
 class IZSearchWindowContoller: NSWindowController {
-
     override func windowDidLoad() {
         super.windowDidLoad()
-        let search = IZSearchViewController.init(nibName: "IZSearchViewController", bundle: nil)
+        let search = IZSearchViewController(nibName: "IZSearchViewController", bundle: nil)
         contentViewController = search
     }
-    
 }

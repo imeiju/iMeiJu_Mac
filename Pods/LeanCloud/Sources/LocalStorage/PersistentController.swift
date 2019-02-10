@@ -6,19 +6,16 @@
 //  Copyright © 2018 LeanCloud. All rights reserved.
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 enum PersistentStoreType {
-
     case memory
 
     case file(url: URL)
-
 }
 
 class PersistentController {
-
     let name: String
 
     let bundle: Bundle
@@ -53,7 +50,7 @@ class PersistentController {
     func createManagedObjectContext() throws -> NSManagedObjectContext {
         let options = [
             NSInferMappingModelAutomaticallyOption: true,
-            NSMigratePersistentStoresAutomaticallyOption: true
+            NSMigratePersistentStoresAutomaticallyOption: true,
         ]
 
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
@@ -61,7 +58,7 @@ class PersistentController {
         switch type {
         case .memory:
             try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: options)
-        case .file(let url):
+        case let .file(url):
             try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         }
 
@@ -73,5 +70,4 @@ class PersistentController {
 
         return managedObjectContext
     }
-
 }

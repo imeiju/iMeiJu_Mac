@@ -2,7 +2,6 @@ import Foundation
 
 /// A type representing possible errors Moya can throw.
 public enum MoyaError: Swift.Error {
-
     /// Indicates a response failed to map to an image.
     case imageMapping(Response)
 
@@ -35,12 +34,12 @@ public extension MoyaError {
     /// Depending on error type, returns a `Response` object.
     var response: Moya.Response? {
         switch self {
-        case .imageMapping(let response): return response
-        case .jsonMapping(let response): return response
-        case .stringMapping(let response): return response
-        case .objectMapping(_, let response): return response
-        case .statusCode(let response): return response
-        case .underlying(_, let response): return response
+        case let .imageMapping(response): return response
+        case let .jsonMapping(response): return response
+        case let .stringMapping(response): return response
+        case let .objectMapping(_, response): return response
+        case let .statusCode(response): return response
+        case let .underlying(_, response): return response
         case .encodableMapping: return nil
         case .requestMapping: return nil
         case .parameterEncoding: return nil
@@ -67,7 +66,7 @@ extension MoyaError: LocalizedError {
             return "Status code didn't fall within the given range."
         case .requestMapping:
             return "Failed to map Endpoint to a URLRequest."
-        case .parameterEncoding(let error):
+        case let .parameterEncoding(error):
             return "Failed to encode parameters for URLRequest. \(error.localizedDescription)"
         case .underlying(let error, _):
             return error.localizedDescription

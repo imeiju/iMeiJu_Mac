@@ -7,18 +7,17 @@
 //  Copyright © 2019 iizvv. All rights reserved.
 //
 
-import Cocoa
 import AVKit
+import Cocoa
 import Moya
-import SwiftyJSON
 import SQLite
+import SwiftyJSON
 
 class IZPlotMessgaeViewController: NSViewController {
-    
-    @IBOutlet weak var playerView: AVPlayerView!
-    @IBOutlet weak var episodeView: NSScrollView!
-    @IBOutlet weak var collectionView: NSCollectionView!
-    
+    @IBOutlet var playerView: AVPlayerView!
+    @IBOutlet var episodeView: NSScrollView!
+    @IBOutlet var collectionView: NSCollectionView!
+
     var id: String!
     var model: IZPlotMessageModel?
     var player: AVPlayer?
@@ -31,17 +30,17 @@ class IZPlotMessgaeViewController: NSViewController {
     let level = Expression<Int>("level") // 第几集
     let prate = Expression<Int64>("prate") // 视频进度
     var playing = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        playerView.showsFullScreenToggleButton = true
+//        playerView.showsFullScreenToggleButton = true
         episodeView.backgroundColor = .clear
         episodeView.isHidden = true
-        collectionView.backgroundColors = [NSColor(calibratedWhite: 0.8 , alpha: 0.8)]
+        collectionView.backgroundColors = [NSColor(calibratedWhite: 0.8, alpha: 0.8)]
         collectionViewConfiguration()
         // 监听播放完成通知,进行连播任务
         NotificationCenter.default.addObserver(self, selector: #selector(playToEndTime), name: .AVPlayerItemDidPlayToEndTime, object: nil)
-        
+
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         do {
             db = try Connection("\(path)/iMeiJu.sqlite3")
@@ -53,90 +52,82 @@ class IZPlotMessgaeViewController: NSViewController {
                 t.column(level)
                 t.column(prate, defaultValue: 0)
             })
-        }catch {
-            
-        }
-        
+        } catch {}
+
         network()
     }
-    
-    override func mouseDown(with event: NSEvent) {
+
+    override func mouseDown(with _: NSEvent) {
         if episodeView == nil {
             return
         }
         showEpisodeView()
     }
-    
+
     func showEpisodeView() {
         episodeView.isHidden = !episodeView.isHidden
     }
-    
+
     @objc func playToEndTime() {
-        if episodeView != nil &&
-            (model?.data.zu.first?.ji.count)! > 1 &&
-            idx < (model?.data.zu.first?.ji.count)!-1 {
-            idx+=1
-            self.collectionView.deselectAll(nil)
-            self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: idx, section: 0)), scrollPosition: .top)
+        if episodeView != nil,
+            (model?.data.zu.first?.ji.count)! > 1,
+            idx < (model?.data.zu.first?.ji.count)! - 1 {
+            idx += 1
+            collectionView.deselectAll(nil)
+            collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: idx, section: 0)), scrollPosition: .top)
             let m = model!.data.zu.first?.ji[idx]
             playVideo(url: m!.purl, levelName: m!.name, update: true)
         }
     }
-    
+
     func playVideo(url: String, levelName: String, update: Bool?) {
         let item = AVPlayerItem(url: URL(string: url)!)
-        self.player = AVPlayer(playerItem: item)
-        self.playerView.player = self.player
-        self.player?.play()
+        player = AVPlayer(playerItem: item)
+        playerView.player = player
+        player?.play()
         let window = NSApplication.shared.windows.last!
-        window.title =  (model?.data.name)! + " " + levelName
+        window.title = (model?.data.name)! + " " + levelName
         item.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         if update == true {
             do {
-                let query = self.plot.filter(self.vid == self.id)
-                try db.run(query.update(self.level <- idx))
-            }catch {
-                
-            }
+                let query = plot.filter(vid == id)
+                try db.run(query.update(level <- idx))
+            } catch {}
         }
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    override func observeValue(forKeyPath keyPath: String?, of _: Any?, change _: [NSKeyValueChangeKey: Any]?, context _: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
-            switch self.player?.currentItem!.status {
+            switch player?.currentItem!.status {
             case .readyToPlay?:
                 do {
                     if playing == false {
-                        let query = self.plot.filter(self.vid == self.id)
-                        let p = try self.db.pluck(query)
+                        let query = plot.filter(vid == id)
+                        let p = try db.pluck(query)
                         player?.seek(to: CMTime(value: p![prate], timescale: 1))
 //                        player?.play()
                         playing = true
                     }
-                }catch {
-                    
-                }
-               
+                } catch {}
+
             case .failed?:
-                //播放失败
+                // 播放失败
                 print("failed")
-            case.unknown?:
-                //未知情况
+            case .unknown?:
+                // 未知情况
                 print("unkonwn")
             case .none:
                 print("none")
-                break
-            case .some(_):
+            case .some:
                 print("some")
-                break
             }
         }
     }
-    
+
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
-        provider.request(.show(id: id!), callbackQueue: nil, progress: nil) { result in
+        provider.request(.show(id: id!)) { result in
             ProgressHUD.dismiss()
             switch result {
             case let .success(result):
@@ -148,7 +139,7 @@ class IZPlotMessgaeViewController: NSViewController {
                     if ji.count == 1 {
                         self.episodeView.removeFromSuperview()
                         self.episodeView = nil
-                    }else {
+                    } else {
                         self.episodeView.isHidden = false
                     }
                     do {
@@ -157,26 +148,23 @@ class IZPlotMessgaeViewController: NSViewController {
                         if p == nil {
                             let insert = self.plot.insert(self.vid <- self.id, self.name <- v.name, self.level <- self.idx, self.prate <- 0)
                             try self.db.run(insert)
-                        }else {
+                        } else {
                             self.idx = p![self.level]
                             v = ji[self.idx]
 //                            let seekTime = CMTime(value: p![self.prate], timescale: 1)
 //                            self.player?.seek(to: seekTime)
                         }
-                    }catch {
-                        
-                    }
+                    } catch {}
                     self.playVideo(url: v.purl, levelName: v.name, update: false)
                     self.collectionView.reloadData()
                     self.collectionView.selectItems(at: Set(arrayLiteral: IndexPath(item: self.idx, section: 0)), scrollPosition: .top)
                 }
-                break
-            case .failure(_):
+            case .failure:
                 break
             }
         }
     }
-    
+
     func collectionViewConfiguration() {
         collectionView.collectionViewLayout = layout
         collectionView.isSelectable = true
@@ -184,7 +172,7 @@ class IZPlotMessgaeViewController: NSViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-    
+
     var layout: NSCollectionViewFlowLayout {
         let layout = NSCollectionViewFlowLayout()
         layout.itemSize = NSSize(width: 60, height: 60)
@@ -194,44 +182,39 @@ class IZPlotMessgaeViewController: NSViewController {
         layout.sectionHeadersPinToVisibleBounds = true
         return layout
     }
-    
 }
 
 extension IZPlotMessgaeViewController: NSCollectionViewDelegate, NSCollectionViewDataSource {
-    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: NSCollectionView, numberOfItemsInSection _: Int) -> Int {
         if model?.code == 0 {
             return (model!.data.zu.first?.ji.count)!
-        }else {
+        } else {
             return 0
         }
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZEpisodeItem
         let m = model!.data.zu.first?.ji[indexPath.item]
         item.setLevel(level: (m?.name)!)
         return item
     }
-    
-    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+
+    func collectionView(_: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         idx = indexPaths.first!.item
         let m = model!.data.zu.first?.ji[idx]
         playVideo(url: m!.purl, levelName: m!.name, update: true)
     }
-    
+
     override func viewDidDisappear() {
         super.viewDidDisappear()
         let currentTime = player!.currentTime()
         let currentTimeNum = currentTime.value / Int64(currentTime.timescale)
         do {
-            let query = self.plot.filter(self.vid == self.id)
-            try db.run(query.update(self.prate <- currentTimeNum))
-        }catch {
-            
-        }
+            let query = plot.filter(vid == id)
+            try db.run(query.update(prate <- currentTimeNum))
+        } catch {}
         player?.currentItem!.removeObserver(self, forKeyPath: "status", context: nil)
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
-    
 }
-

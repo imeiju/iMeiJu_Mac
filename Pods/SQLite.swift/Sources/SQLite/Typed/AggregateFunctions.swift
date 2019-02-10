@@ -22,8 +22,7 @@
 // THE SOFTWARE.
 //
 
-extension ExpressionType where UnderlyingType : Value {
-
+extension ExpressionType where UnderlyingType: Value {
     /// Builds a copy of the expression prefixed with the `DISTINCT` keyword.
     ///
     ///     let name = Expression<String>("name")
@@ -50,11 +49,9 @@ extension ExpressionType where UnderlyingType : Value {
     public var count: Expression<Int> {
         return wrap(self)
     }
-
 }
 
-extension ExpressionType where UnderlyingType : _OptionalType, UnderlyingType.WrappedType : Value {
-
+extension ExpressionType where UnderlyingType: _OptionalType, UnderlyingType.WrappedType: Value {
     /// Builds a copy of the expression prefixed with the `DISTINCT` keyword.
     ///
     ///     let name = Expression<String?>("name")
@@ -81,11 +78,9 @@ extension ExpressionType where UnderlyingType : _OptionalType, UnderlyingType.Wr
     public var count: Expression<Int> {
         return wrap(self)
     }
-
 }
 
-extension ExpressionType where UnderlyingType : Value, UnderlyingType.Datatype : Comparable {
-
+extension ExpressionType where UnderlyingType: Value, UnderlyingType.Datatype: Comparable {
     /// Builds a copy of the expression wrapped with the `max` aggregate
     /// function.
     ///
@@ -111,11 +106,9 @@ extension ExpressionType where UnderlyingType : Value, UnderlyingType.Datatype :
     public var min: Expression<UnderlyingType?> {
         return wrap(self)
     }
-
 }
 
-extension ExpressionType where UnderlyingType : _OptionalType, UnderlyingType.WrappedType : Value, UnderlyingType.WrappedType.Datatype : Comparable {
-
+extension ExpressionType where UnderlyingType: _OptionalType, UnderlyingType.WrappedType: Value, UnderlyingType.WrappedType.Datatype: Comparable {
     /// Builds a copy of the expression wrapped with the `max` aggregate
     /// function.
     ///
@@ -141,11 +134,9 @@ extension ExpressionType where UnderlyingType : _OptionalType, UnderlyingType.Wr
     public var min: Expression<UnderlyingType> {
         return wrap(self)
     }
-
 }
 
-extension ExpressionType where UnderlyingType : Value, UnderlyingType.Datatype : Number {
-
+extension ExpressionType where UnderlyingType: Value, UnderlyingType.Datatype: Number {
     /// Builds a copy of the expression wrapped with the `avg` aggregate
     /// function.
     ///
@@ -184,11 +175,9 @@ extension ExpressionType where UnderlyingType : Value, UnderlyingType.Datatype :
     public var total: Expression<Double> {
         return wrap(self)
     }
-
 }
 
-extension ExpressionType where UnderlyingType : _OptionalType, UnderlyingType.WrappedType : Value, UnderlyingType.WrappedType.Datatype : Number {
-
+extension ExpressionType where UnderlyingType: _OptionalType, UnderlyingType.WrappedType: Value, UnderlyingType.WrappedType.Datatype: Number {
     /// Builds a copy of the expression wrapped with the `avg` aggregate
     /// function.
     ///
@@ -227,15 +216,12 @@ extension ExpressionType where UnderlyingType : _OptionalType, UnderlyingType.Wr
     public var total: Expression<Double> {
         return wrap(self)
     }
-
 }
 
 extension ExpressionType where UnderlyingType == Int {
-
     static func count(_ star: Star) -> Expression<UnderlyingType> {
         return wrap(star(nil, nil))
     }
-
 }
 
 /// Builds an expression representing `count(*)` (when called with the `*`

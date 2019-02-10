@@ -10,104 +10,94 @@
 import Foundation
 import SwiftyJSON
 
-class IZPlotMessageModel : NSObject, NSCoding{
-    
-    var code : Int!
-    var data : IZPlotMessageData!
-    
-    
+class IZPlotMessageModel: NSObject, NSCoding {
+    var code: Int!
+    var data: IZPlotMessageData!
+
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
-    init(fromJson json: JSON!){
-        if json.isEmpty{
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
             return
         }
         code = json["code"].intValue
         let dataJson = json["data"]
-        if !dataJson.isEmpty{
+        if !dataJson.isEmpty {
             data = IZPlotMessageData(fromJson: dataJson)
         }
     }
-    
+
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> [String:Any]
-    {
-        var dictionary = [String:Any]()
-        if code != nil{
+    func toDictionary() -> [String: Any] {
+        var dictionary = [String: Any]()
+        if code != nil {
             dictionary["code"] = code
         }
-        if data != nil{
+        if data != nil {
             dictionary["data"] = data.toDictionary()
         }
         return dictionary
     }
-    
+
     /**
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    @objc required init(coder aDecoder: NSCoder)
-    {
+    @objc required init(coder aDecoder: NSCoder) {
         code = aDecoder.decodeObject(forKey: "code") as? Int
         data = aDecoder.decodeObject(forKey: "data") as? IZPlotMessageData
-        
     }
-    
+
     /**
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encode(with aCoder: NSCoder)
-    {
-        if code != nil{
+    func encode(with aCoder: NSCoder) {
+        if code != nil {
             aCoder.encode(code, forKey: "code")
         }
-        if data != nil{
+        if data != nil {
             aCoder.encode(data, forKey: "data")
         }
-        
     }
-    
 }
 
-class IZPlotMessageData : NSObject, NSCoding{
-    
-    var addtime : String!
-    var cid : String!
-    var cion : String!
-    var cname : String!
-    var commentCount : Int!
-    var daoyan : String!
-    var dhits : Int!
-    var diqu : String!
-    var fid : String!
-    var hits : String!
-    var id : String!
-    var info : String!
-    var look : Int!
-    var looktime : Int!
-    var name : String!
-    var pf : String!
-    var pic : String!
-    var shareurl : String!
-    var state : String!
-    var text : String!
-    var type : String!
-    var vip : String!
-    var year : String!
-    var yuyan : String!
-    var zhuyan : String!
-    var zu : [Zu]!
-    
-    
+class IZPlotMessageData: NSObject, NSCoding {
+    var addtime: String!
+    var cid: String!
+    var cion: String!
+    var cname: String!
+    var commentCount: Int!
+    var daoyan: String!
+    var dhits: Int!
+    var diqu: String!
+    var fid: String!
+    var hits: String!
+    var id: String!
+    var info: String!
+    var look: Int!
+    var looktime: Int!
+    var name: String!
+    var pf: String!
+    var pic: String!
+    var shareurl: String!
+    var state: String!
+    var text: String!
+    var type: String!
+    var vip: String!
+    var year: String!
+    var yuyan: String!
+    var zhuyan: String!
+    var zu: [Zu]!
+
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
-    init(fromJson json: JSON!){
-        if json.isEmpty{
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
             return
         }
         addtime = json["addtime"].stringValue
@@ -137,95 +127,94 @@ class IZPlotMessageData : NSObject, NSCoding{
         zhuyan = json["zhuyan"].stringValue
         zu = [Zu]()
         let zuArray = json["zu"].arrayValue
-        for zuJson in zuArray{
+        for zuJson in zuArray {
             let value = Zu(fromJson: zuJson)
             zu.append(value)
         }
     }
-    
+
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> [String:Any]
-    {
-        var dictionary = [String:Any]()
-        if addtime != nil{
+    func toDictionary() -> [String: Any] {
+        var dictionary = [String: Any]()
+        if addtime != nil {
             dictionary["addtime"] = addtime
         }
-        if cid != nil{
+        if cid != nil {
             dictionary["cid"] = cid
         }
-        if cion != nil{
+        if cion != nil {
             dictionary["cion"] = cion
         }
-        if cname != nil{
+        if cname != nil {
             dictionary["cname"] = cname
         }
-        if commentCount != nil{
+        if commentCount != nil {
             dictionary["comment_count"] = commentCount
         }
-        if daoyan != nil{
+        if daoyan != nil {
             dictionary["daoyan"] = daoyan
         }
-        if dhits != nil{
+        if dhits != nil {
             dictionary["dhits"] = dhits
         }
-        if diqu != nil{
+        if diqu != nil {
             dictionary["diqu"] = diqu
         }
-        if fid != nil{
+        if fid != nil {
             dictionary["fid"] = fid
         }
-        if hits != nil{
+        if hits != nil {
             dictionary["hits"] = hits
         }
-        if id != nil{
+        if id != nil {
             dictionary["id"] = id
         }
-        if info != nil{
+        if info != nil {
             dictionary["info"] = info
         }
-        if look != nil{
+        if look != nil {
             dictionary["look"] = look
         }
-        if looktime != nil{
+        if looktime != nil {
             dictionary["looktime"] = looktime
         }
-        if name != nil{
+        if name != nil {
             dictionary["name"] = name
         }
-        if pf != nil{
+        if pf != nil {
             dictionary["pf"] = pf
         }
-        if pic != nil{
+        if pic != nil {
             dictionary["pic"] = pic
         }
-        if shareurl != nil{
+        if shareurl != nil {
             dictionary["shareurl"] = shareurl
         }
-        if state != nil{
+        if state != nil {
             dictionary["state"] = state
         }
-        if text != nil{
+        if text != nil {
             dictionary["text"] = text
         }
-        if type != nil{
+        if type != nil {
             dictionary["type"] = type
         }
-        if vip != nil{
+        if vip != nil {
             dictionary["vip"] = vip
         }
-        if year != nil{
+        if year != nil {
             dictionary["year"] = year
         }
-        if yuyan != nil{
+        if yuyan != nil {
             dictionary["yuyan"] = yuyan
         }
-        if zhuyan != nil{
+        if zhuyan != nil {
             dictionary["zhuyan"] = zhuyan
         }
-        if zu != nil{
-            var dictionaryElements = [[String:Any]]()
+        if zu != nil {
+            var dictionaryElements = [[String: Any]]()
             for zuElement in zu {
                 dictionaryElements.append(zuElement.toDictionary())
             }
@@ -233,13 +222,12 @@ class IZPlotMessageData : NSObject, NSCoding{
         }
         return dictionary
     }
-    
+
     /**
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    @objc required init(coder aDecoder: NSCoder)
-    {
+    @objc required init(coder aDecoder: NSCoder) {
         addtime = aDecoder.decodeObject(forKey: "addtime") as? String
         cid = aDecoder.decodeObject(forKey: "cid") as? String
         cion = aDecoder.decodeObject(forKey: "cion") as? String
@@ -266,207 +254,193 @@ class IZPlotMessageData : NSObject, NSCoding{
         yuyan = aDecoder.decodeObject(forKey: "yuyan") as? String
         zhuyan = aDecoder.decodeObject(forKey: "zhuyan") as? String
         zu = aDecoder.decodeObject(forKey: "zu") as? [Zu]
-        
     }
-    
+
     /**
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encode(with aCoder: NSCoder)
-    {
-        if addtime != nil{
+    func encode(with aCoder: NSCoder) {
+        if addtime != nil {
             aCoder.encode(addtime, forKey: "addtime")
         }
-        if cid != nil{
+        if cid != nil {
             aCoder.encode(cid, forKey: "cid")
         }
-        if cion != nil{
+        if cion != nil {
             aCoder.encode(cion, forKey: "cion")
         }
-        if cname != nil{
+        if cname != nil {
             aCoder.encode(cname, forKey: "cname")
         }
-        if commentCount != nil{
+        if commentCount != nil {
             aCoder.encode(commentCount, forKey: "comment_count")
         }
-        if daoyan != nil{
+        if daoyan != nil {
             aCoder.encode(daoyan, forKey: "daoyan")
         }
-        if dhits != nil{
+        if dhits != nil {
             aCoder.encode(dhits, forKey: "dhits")
         }
-        if diqu != nil{
+        if diqu != nil {
             aCoder.encode(diqu, forKey: "diqu")
         }
-        if fid != nil{
+        if fid != nil {
             aCoder.encode(fid, forKey: "fid")
         }
-        if hits != nil{
+        if hits != nil {
             aCoder.encode(hits, forKey: "hits")
         }
-        if id != nil{
+        if id != nil {
             aCoder.encode(id, forKey: "id")
         }
-        if info != nil{
+        if info != nil {
             aCoder.encode(info, forKey: "info")
         }
-        if look != nil{
+        if look != nil {
             aCoder.encode(look, forKey: "look")
         }
-        if looktime != nil{
+        if looktime != nil {
             aCoder.encode(looktime, forKey: "looktime")
         }
-        if name != nil{
+        if name != nil {
             aCoder.encode(name, forKey: "name")
         }
-        if pf != nil{
+        if pf != nil {
             aCoder.encode(pf, forKey: "pf")
         }
-        if pic != nil{
+        if pic != nil {
             aCoder.encode(pic, forKey: "pic")
         }
-        if shareurl != nil{
+        if shareurl != nil {
             aCoder.encode(shareurl, forKey: "shareurl")
         }
-        if state != nil{
+        if state != nil {
             aCoder.encode(state, forKey: "state")
         }
-        if text != nil{
+        if text != nil {
             aCoder.encode(text, forKey: "text")
         }
-        if type != nil{
+        if type != nil {
             aCoder.encode(type, forKey: "type")
         }
-        if vip != nil{
+        if vip != nil {
             aCoder.encode(vip, forKey: "vip")
         }
-        if year != nil{
+        if year != nil {
             aCoder.encode(year, forKey: "year")
         }
-        if yuyan != nil{
+        if yuyan != nil {
             aCoder.encode(yuyan, forKey: "yuyan")
         }
-        if zhuyan != nil{
+        if zhuyan != nil {
             aCoder.encode(zhuyan, forKey: "zhuyan")
         }
-        if zu != nil{
+        if zu != nil {
             aCoder.encode(zu, forKey: "zu")
         }
-        
     }
-    
 }
 
-class Zu : NSObject, NSCoding{
-    
-    var count : Int!
-    var id : Int!
-    var ji : [Ji]!
-    var ly : String!
-    var name : String!
-    
-    
+class Zu: NSObject, NSCoding {
+    var count: Int!
+    var id: Int!
+    var ji: [Ji]!
+    var ly: String!
+    var name: String!
+
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
-    init(fromJson json: JSON!){
-        if json.isEmpty{
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
             return
         }
         count = json["count"].intValue
         id = json["id"].intValue
         ji = [Ji]()
         let jiArray = json["ji"].arrayValue
-        for jiJson in jiArray{
+        for jiJson in jiArray {
             let value = Ji(fromJson: jiJson)
             ji.append(value)
         }
         ly = json["ly"].stringValue
         name = json["name"].stringValue
     }
-    
+
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> [String:Any]
-    {
-        var dictionary = [String:Any]()
-        if count != nil{
+    func toDictionary() -> [String: Any] {
+        var dictionary = [String: Any]()
+        if count != nil {
             dictionary["count"] = count
         }
-        if id != nil{
+        if id != nil {
             dictionary["id"] = id
         }
-        if ji != nil{
-            var dictionaryElements = [[String:Any]]()
+        if ji != nil {
+            var dictionaryElements = [[String: Any]]()
             for jiElement in ji {
                 dictionaryElements.append(jiElement.toDictionary())
             }
             dictionary["ji"] = dictionaryElements
         }
-        if ly != nil{
+        if ly != nil {
             dictionary["ly"] = ly
         }
-        if name != nil{
+        if name != nil {
             dictionary["name"] = name
         }
         return dictionary
     }
-    
+
     /**
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    @objc required init(coder aDecoder: NSCoder)
-    {
+    @objc required init(coder aDecoder: NSCoder) {
         count = aDecoder.decodeObject(forKey: "count") as? Int
         id = aDecoder.decodeObject(forKey: "id") as? Int
         ji = aDecoder.decodeObject(forKey: "ji") as? [Ji]
         ly = aDecoder.decodeObject(forKey: "ly") as? String
         name = aDecoder.decodeObject(forKey: "name") as? String
-        
     }
-    
+
     /**
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encode(with aCoder: NSCoder)
-    {
-        if count != nil{
+    func encode(with aCoder: NSCoder) {
+        if count != nil {
             aCoder.encode(count, forKey: "count")
         }
-        if id != nil{
+        if id != nil {
             aCoder.encode(id, forKey: "id")
         }
-        if ji != nil{
+        if ji != nil {
             aCoder.encode(ji, forKey: "ji")
         }
-        if ly != nil{
+        if ly != nil {
             aCoder.encode(ly, forKey: "ly")
         }
-        if name != nil{
+        if name != nil {
             aCoder.encode(name, forKey: "name")
         }
-        
     }
-    
 }
 
-class Ji : NSObject, NSCoding{
-    
-    var ext : String!
-    var id : Int!
-    var name : String!
-    var purl : String!
-    
-    
+class Ji: NSObject, NSCoding {
+    var ext: String!
+    var id: Int!
+    var name: String!
+    var purl: String!
+
     /**
      * Instantiate the instance using the passed json values to set the properties values
      */
-    init(fromJson json: JSON!){
-        if json.isEmpty{
+    init(fromJson json: JSON!) {
+        if json.isEmpty {
             return
         }
         ext = json["ext"].stringValue
@@ -474,60 +448,54 @@ class Ji : NSObject, NSCoding{
         name = json["name"].stringValue
         purl = json["purl"].stringValue
     }
-    
+
     /**
      * Returns all the available property values in the form of [String:Any] object where the key is the approperiate json key and the value is the value of the corresponding property
      */
-    func toDictionary() -> [String:Any]
-    {
-        var dictionary = [String:Any]()
-        if ext != nil{
+    func toDictionary() -> [String: Any] {
+        var dictionary = [String: Any]()
+        if ext != nil {
             dictionary["ext"] = ext
         }
-        if id != nil{
+        if id != nil {
             dictionary["id"] = id
         }
-        if name != nil{
+        if name != nil {
             dictionary["name"] = name
         }
-        if purl != nil{
+        if purl != nil {
             dictionary["purl"] = purl
         }
         return dictionary
     }
-    
+
     /**
      * NSCoding required initializer.
      * Fills the data from the passed decoder
      */
-    @objc required init(coder aDecoder: NSCoder)
-    {
+    @objc required init(coder aDecoder: NSCoder) {
         ext = aDecoder.decodeObject(forKey: "ext") as? String
         id = aDecoder.decodeObject(forKey: "id") as? Int
         name = aDecoder.decodeObject(forKey: "name") as? String
         purl = aDecoder.decodeObject(forKey: "purl") as? String
-        
     }
-    
+
     /**
      * NSCoding required method.
      * Encodes mode properties into the decoder
      */
-    func encode(with aCoder: NSCoder)
-    {
-        if ext != nil{
+    func encode(with aCoder: NSCoder) {
+        if ext != nil {
             aCoder.encode(ext, forKey: "ext")
         }
-        if id != nil{
+        if id != nil {
             aCoder.encode(id, forKey: "id")
         }
-        if name != nil{
+        if name != nil {
             aCoder.encode(name, forKey: "name")
         }
-        if purl != nil{
+        if purl != nil {
             aCoder.encode(purl, forKey: "purl")
         }
-        
     }
-    
 }

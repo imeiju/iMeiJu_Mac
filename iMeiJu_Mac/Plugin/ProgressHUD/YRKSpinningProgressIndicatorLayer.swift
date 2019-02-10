@@ -16,7 +16,7 @@ class SpinningProgressIndicatorLayer: CALayer {
             setNeedsDisplay()
         }
     }
-    
+
     var maxValue: Double = 0.0
     private var _doubleValue: Double = 0.0
     var doubleValue: Double {
@@ -28,7 +28,7 @@ class SpinningProgressIndicatorLayer: CALayer {
             setNeedsDisplay()
         }
     }
-    
+
     var color: NSColor? {
         get {
             // Need to convert from CGColor to NSColor
@@ -40,7 +40,7 @@ class SpinningProgressIndicatorLayer: CALayer {
         set(newColor) {
             // Need to convert from NSColor to CGColor
             foreColor = newColor?.cgColor
-            
+
             // Update do all of the fins to this new color, at once, immediately
             CATransaction.begin()
             CATransaction.setValue(true, forKey: kCATransactionDisableActions)
@@ -48,11 +48,11 @@ class SpinningProgressIndicatorLayer: CALayer {
                 fin.backgroundColor = newColor?.cgColor
             }
             CATransaction.commit()
-            
+
             setNeedsDisplay()
         }
     }
-    
+
     // "copy" because we don't retain it -- we create a CGColor from it
     private var finBoundsForCurrentBounds: CGRect {
         let size: CGSize = bounds.size
@@ -61,14 +61,14 @@ class SpinningProgressIndicatorLayer: CALayer {
         let height: CGFloat = minSide * 0.30
         return CGRect(x: 0, y: 0, width: width, height: height)
     }
-    
+
     private var finAnchorPointForCurrentBounds: CGPoint {
         let size: CGSize = bounds.size
         let minSide: CGFloat = size.width > size.height ? size.height : size.width
         let height: CGFloat = minSide * 0.30
         return CGPoint(x: 0.5, y: -0.9 * (minSide - height) / minSide)
     }
-    
+
     var animationTimer: Timer?
     var fposition: Int = 0
     var foreColor: CGColor?
@@ -78,7 +78,7 @@ class SpinningProgressIndicatorLayer: CALayer {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     func toggleProgressAnimation() {
         if isRunning {
             stopProgressAnimation()
@@ -86,7 +86,7 @@ class SpinningProgressIndicatorLayer: CALayer {
             startProgressAnimation()
         }
     }
-    
+
     func startProgressAnimation() {
         isHidden = false
         isRunning = true
@@ -94,13 +94,13 @@ class SpinningProgressIndicatorLayer: CALayer {
         setNeedsDisplay()
         setupAnimTimer()
     }
-    
+
     func stopProgressAnimation() {
         isRunning = false
         disposeAnimTimer()
         setNeedsDisplay()
     }
-    
+
     // Animation
     @objc private func advancePosition() {
         fposition += 1
@@ -117,7 +117,7 @@ class SpinningProgressIndicatorLayer: CALayer {
         fin.opacity = Float(fadeDownOpacity)
         setNeedsDisplay()
     }
-    
+
     // Helper Methods
     private func setupType() {
         if isDeterminate {
@@ -126,14 +126,14 @@ class SpinningProgressIndicatorLayer: CALayer {
             setupIndeterminate()
         }
     }
-    
+
     private func setupIndeterminate() {
         createFinLayers()
         if isRunning {
             setupAnimTimer()
         }
     }
-    
+
     private func setupDeterminate() {
         if isRunning {
             disposeAnimTimer()
@@ -141,13 +141,13 @@ class SpinningProgressIndicatorLayer: CALayer {
         removeFinLayers()
         isHidden = false
     }
-    
+
     private func removeFinLayers() {
         for finLayer in finLayers {
             finLayer.removeFromSuperlayer()
         }
     }
-    
+
     private func createFinLayers() {
         removeFinLayers()
         // Create new fin layers
@@ -155,7 +155,7 @@ class SpinningProgressIndicatorLayer: CALayer {
         let finAnchorPoint: CGPoint = finAnchorPointForCurrentBounds
         let finPosition = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
         let finCornerRadius: CGFloat = finBounds.size.width / 2
-        for i in 0..<numFins {
+        for i in 0 ..< numFins {
             let newFin = CALayer()
             newFin.bounds = finBounds
             newFin.anchorPoint = finAnchorPoint
@@ -177,7 +177,7 @@ class SpinningProgressIndicatorLayer: CALayer {
             finLayers.append(newFin)
         }
     }
-    
+
     private func setupAnimTimer() {
         // Just to be safe kill any existing timer.
         disposeAnimTimer()
@@ -194,15 +194,15 @@ class SpinningProgressIndicatorLayer: CALayer {
             RunLoop.current.add(aTimer, forMode: .eventTracking)
         }
     }
-    
+
     private func disposeAnimTimer() {
         animationTimer?.invalidate()
         animationTimer = nil
     }
-    
+
     init(size: CGFloat) {
         super.init()
-        
+
         fposition = 0
         numFins = 12
         fadeDownOpacity = 0.0
@@ -212,28 +212,27 @@ class SpinningProgressIndicatorLayer: CALayer {
         isDeterminate = false
         doubleValue = 0
         maxValue = 100
-        
     }
-    
+
     deinit {
         color = nil
         stopProgressAnimation()
         removeFinLayers()
     }
-    
+
     override var bounds: CGRect {
         get {
             return super.bounds
         }
         set(newBounds) {
             super.bounds = newBounds
-            
+
             // Resize the fins
             let finBounds: CGRect = finBoundsForCurrentBounds
             let finAnchorPoint: CGPoint = finAnchorPointForCurrentBounds
             let finPosition = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
             let finCornerRadius: CGFloat = finBounds.size.width / 2
-            
+
             // do the resizing all at once, immediately
             CATransaction.begin()
             CATransaction.setValue(true, forKey: kCATransactionDisableActions)
@@ -246,9 +245,9 @@ class SpinningProgressIndicatorLayer: CALayer {
             CATransaction.commit()
         }
     }
-    
+
     // MARK: - Determinate indicator drawing
-    
+
     override func draw(in ctx: CGContext) {
         ctx.clear(bounds)
         if !isDeterminate {
@@ -279,5 +278,4 @@ class SpinningProgressIndicatorLayer: CALayer {
             ctx.fillPath()
         }
     }
-    
 }

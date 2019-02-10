@@ -16,22 +16,18 @@ import Foundation
  It is a context of application-specific settings and objects.
  */
 public final class LCApplication: NSObject {
-
     /**
      Application region.
      */
     enum Region {
-
         case cn
         case ce
         case us
 
         private enum Suffix: String {
-
             case cn = "-gzGzoHsz"
             case ce = "-9Nh9j0Va"
             case us = "-MdYXbMMI"
-
         }
 
         init(id: String) {
@@ -56,7 +52,6 @@ public final class LCApplication: NSObject {
                 return "lncldglobal.com"
             }
         }
-
     }
 
     /**
@@ -65,7 +60,6 @@ public final class LCApplication: NSObject {
      We assume that log levels are ordered.
      */
     public enum LogLevel: Int, Comparable {
-
         case off
         case error
         case debug
@@ -74,7 +68,7 @@ public final class LCApplication: NSObject {
         public static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
             return lhs.rawValue < rhs.rawValue
         }
-        
+
         var description: String {
             switch self {
             case .error:
@@ -85,7 +79,6 @@ public final class LCApplication: NSObject {
                 return ""
             }
         }
-
     }
 
     /// Application ID.
@@ -141,5 +134,4 @@ public final class LCApplication: NSObject {
         self.id = id
         self.key = key
     }
-
 }

@@ -69,7 +69,7 @@ public final class LCData: NSObject, LCValue, LCValueExtension {
         aCoder.encode(value, forKey: "value")
     }
 
-    public func copy(with zone: NSZone?) -> Any {
+    public func copy(with _: NSZone?) -> Any {
         return LCData((value as NSData).copy() as! Data)
     }
 
@@ -88,7 +88,7 @@ public final class LCData: NSObject, LCValue, LCValueExtension {
     private var typedJSONValue: [String: String] {
         return [
             "__type": "Bytes",
-            "base64": base64EncodedString
+            "base64": base64EncodedString,
         ]
     }
 
@@ -112,19 +112,19 @@ public final class LCData: NSObject, LCValue, LCValueExtension {
         return self.init()
     }
 
-    func forEachChild(_ body: (_ child: LCValue) throws -> Void) rethrows {
+    func forEachChild(_: (_ child: LCValue) throws -> Void) rethrows {
         /* Nothing to do. */
     }
 
-    func add(_ other: LCValue) throws -> LCValue {
+    func add(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be added.")
     }
 
-    func concatenate(_ other: LCValue, unique: Bool) throws -> LCValue {
+    func concatenate(_: LCValue, unique _: Bool) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be concatenated.")
     }
 
-    func differ(_ other: LCValue) throws -> LCValue {
+    func differ(_: LCValue) throws -> LCValue {
         throw LCError(code: .invalidType, reason: "Object cannot be differed.")
     }
 }

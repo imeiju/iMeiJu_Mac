@@ -7,5 +7,6 @@ target 'iMeiJu_Mac' do
     pod 'SQLite.swift', '~> 0.11.5' # sql数据库
     pod 'SwiftHEXColors', '~> 1.2.0' # Color扩展
     pod 'LeanCloud', '~> 15.0.0' # 检查新版本时使用
+#    pod 'Sparkle'
 
 end

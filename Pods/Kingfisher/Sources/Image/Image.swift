@@ -24,19 +24,18 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-
 #if os(macOS)
-import AppKit
-private var imagesKey: Void?
-private var durationKey: Void?
+    import AppKit
+    private var imagesKey: Void?
+    private var durationKey: Void?
 #else
-import UIKit
-import MobileCoreServices
-private var imageSourceKey: Void?
+    import MobileCoreServices
+    import UIKit
+    private var imageSourceKey: Void?
 #endif
 
 #if !os(watchOS)
-import CoreImage
+    import CoreImage
 #endif
 
 import CoreGraphics
@@ -45,49 +44,51 @@ import ImageIO
 private var animatedImageDataKey: Void?
 
 // MARK: - Image Properties
+
 extension KingfisherWrapper where Base: Image {
     private(set) var animatedImageData: Data? {
         get { return getAssociatedObject(base, &animatedImageDataKey) }
         set { setRetainedAssociatedObject(base, &animatedImageDataKey, newValue) }
     }
-    
+
     #if os(macOS)
-    var cgImage: CGImage? {
-        return base.cgImage(forProposedRect: nil, context: nil, hints: nil)
-    }
-    
-    var scale: CGFloat {
-        return 1.0
-    }
-    
-    private(set) var images: [Image]? {
-        get { return getAssociatedObject(base, &imagesKey) }
-        set { setRetainedAssociatedObject(base, &imagesKey, newValue) }
-    }
-    
-    private(set) var duration: TimeInterval {
-        get { return getAssociatedObject(base, &durationKey) ?? 0.0 }
-        set { setRetainedAssociatedObject(base, &durationKey, newValue) }
-    }
-    
-    var size: CGSize {
-        return base.representations.reduce(.zero) { size, rep in
-            let width = max(size.width, CGFloat(rep.pixelsWide))
-            let height = max(size.height, CGFloat(rep.pixelsHigh))
-            return CGSize(width: width, height: height)
+        var cgImage: CGImage? {
+            return base.cgImage(forProposedRect: nil, context: nil, hints: nil)
         }
-    }
+
+        var scale: CGFloat {
+            return 1.0
+        }
+
+        private(set) var images: [Image]? {
+            get { return getAssociatedObject(base, &imagesKey) }
+            set { setRetainedAssociatedObject(base, &imagesKey, newValue) }
+        }
+
+        private(set) var duration: TimeInterval {
+            get { return getAssociatedObject(base, &durationKey) ?? 0.0 }
+            set { setRetainedAssociatedObject(base, &durationKey, newValue) }
+        }
+
+        var size: CGSize {
+            return base.representations.reduce(.zero) { size, rep in
+                let width = max(size.width, CGFloat(rep.pixelsWide))
+                let height = max(size.height, CGFloat(rep.pixelsHigh))
+                return CGSize(width: width, height: height)
+            }
+        }
+
     #else
-    var cgImage: CGImage? { return base.cgImage }
-    var scale: CGFloat { return base.scale }
-    var images: [Image]? { return base.images }
-    var duration: TimeInterval { return base.duration }
-    var size: CGSize { return base.size }
-    
-    private(set) var imageSource: CGImageSource? {
-        get { return getAssociatedObject(base, &imageSourceKey) }
-        set { setRetainedAssociatedObject(base, &imageSourceKey, newValue) }
-    }
+        var cgImage: CGImage? { return base.cgImage }
+        var scale: CGFloat { return base.scale }
+        var images: [Image]? { return base.images }
+        var duration: TimeInterval { return base.duration }
+        var size: CGSize { return base.size }
+
+        private(set) var imageSource: CGImageSource? {
+            get { return getAssociatedObject(base, &imageSourceKey) }
+            set { setRetainedAssociatedObject(base, &imageSourceKey, newValue) }
+        }
     #endif
 
     // Bitmap memory cost with bytes.
@@ -101,38 +102,40 @@ extension KingfisherWrapper where Base: Image {
 }
 
 // MARK: - Image Conversion
+
 extension KingfisherWrapper where Base: Image {
     #if os(macOS)
-    static func image(cgImage: CGImage, scale: CGFloat, refImage: Image?) -> Image {
-        return Image(cgImage: cgImage, size: .zero)
-    }
-    
-    /// Normalize the image. This getter does nothing on macOS but return the image itself.
-    public var normalized: Image { return base }
+        static func image(cgImage: CGImage, scale _: CGFloat, refImage _: Image?) -> Image {
+            return Image(cgImage: cgImage, size: .zero)
+        }
+
+        /// Normalize the image. This getter does nothing on macOS but return the image itself.
+        public var normalized: Image { return base }
 
     #else
-    /// Creating an image from a give `CGImage` at scale and orientation for refImage. The method signature is for
-    /// compatibility of macOS version.
-    static func image(cgImage: CGImage, scale: CGFloat, refImage: Image?) -> Image {
-        return Image(cgImage: cgImage, scale: scale, orientation: refImage?.imageOrientation ?? .up)
-    }
-    
-    /// Returns normalized image for current `base` image.
-    /// This method will try to redraw an image with orientation and scale considered.
-    public var normalized: Image {
-        // prevent animated image (GIF) lose it's images
-        guard images == nil else { return base }
-        // No need to do anything if already up
-        guard base.imageOrientation != .up else { return base }
-    
-        return draw(to: size) { _ in
-            base.draw(in: CGRect(origin: .zero, size: size))
+        /// Creating an image from a give `CGImage` at scale and orientation for refImage. The method signature is for
+        /// compatibility of macOS version.
+        static func image(cgImage: CGImage, scale: CGFloat, refImage: Image?) -> Image {
+            return Image(cgImage: cgImage, scale: scale, orientation: refImage?.imageOrientation ?? .up)
         }
-    }
+
+        /// Returns normalized image for current `base` image.
+        /// This method will try to redraw an image with orientation and scale considered.
+        public var normalized: Image {
+            // prevent animated image (GIF) lose it's images
+            guard images == nil else { return base }
+            // No need to do anything if already up
+            guard base.imageOrientation != .up else { return base }
+
+            return draw(to: size) { _ in
+                base.draw(in: CGRect(origin: .zero, size: size))
+            }
+        }
     #endif
 }
 
 // MARK: - Image Representation
+
 extension KingfisherWrapper where Base: Image {
     /// Returns PNG representation of `base` image.
     ///
@@ -146,9 +149,9 @@ extension KingfisherWrapper where Base: Image {
             return rep.representation(using: .png, properties: [:])
         #else
             #if swift(>=4.2)
-            return base.pngData()
+                return base.pngData()
             #else
-            return UIImagePNGRepresentation(base)
+                return UIImagePNGRepresentation(base)
             #endif
         #endif
     }
@@ -163,12 +166,12 @@ extension KingfisherWrapper where Base: Image {
                 return nil
             }
             let rep = NSBitmapImageRep(cgImage: cgImage)
-            return rep.representation(using:.jpeg, properties: [.compressionFactor: compressionQuality])
+            return rep.representation(using: .jpeg, properties: [.compressionFactor: compressionQuality])
         #else
             #if swift(>=4.2)
-            return base.jpegData(compressionQuality: compressionQuality)
+                return base.jpegData(compressionQuality: compressionQuality)
             #else
-            return UIImageJPEGRepresentation(base, compressionQuality)
+                return UIImageJPEGRepresentation(base, compressionQuality)
             #endif
         #endif
     }
@@ -182,8 +185,8 @@ extension KingfisherWrapper where Base: Image {
 }
 
 // MARK: - Creating Images
-extension KingfisherWrapper where Base: Image {
 
+extension KingfisherWrapper where Base: Image {
     /// Creates an animated image from a given data and options. Currently only GIF data is supported.
     ///
     /// - Parameters:
@@ -194,51 +197,51 @@ extension KingfisherWrapper where Base: Image {
     public static func animatedImage(data: Data, options: ImageCreatingOptions) -> Image? {
         let info: [String: Any] = [
             kCGImageSourceShouldCache as String: true,
-            kCGImageSourceTypeIdentifierHint as String: kUTTypeGIF
+            kCGImageSourceTypeIdentifierHint as String: kUTTypeGIF,
         ]
-        
+
         guard let imageSource = CGImageSourceCreateWithData(data as CFData, info as CFDictionary) else {
             return nil
         }
-        
+
         #if os(macOS)
-        guard let animatedImage = GIFAnimatedImage(from: imageSource, for: info, options: options) else {
-            return nil
-        }
-        let image: Image?
-        if options.onlyFirstFrame {
-            image = animatedImage.images.first
-        } else {
-            image = Image(data: data)
-            var kf = image?.kf
-            kf?.images = animatedImage.images
-            kf?.duration = animatedImage.duration
-        }
-        image?.kf.animatedImageData = data
-        return image
-        #else
-        
-        let image: Image?
-        if options.preloadAll || options.onlyFirstFrame {
-            // Use `images` image if you want to preload all animated data
             guard let animatedImage = GIFAnimatedImage(from: imageSource, for: info, options: options) else {
                 return nil
             }
+            let image: Image?
             if options.onlyFirstFrame {
                 image = animatedImage.images.first
             } else {
-                let duration = options.duration <= 0.0 ? animatedImage.duration : options.duration
-                image = .animatedImage(with: animatedImage.images, duration: duration)
+                image = Image(data: data)
+                var kf = image?.kf
+                kf?.images = animatedImage.images
+                kf?.duration = animatedImage.duration
             }
             image?.kf.animatedImageData = data
-        } else {
-            image = Image(data: data, scale: options.scale)
-            var kf = image?.kf
-            kf?.imageSource = imageSource
-            kf?.animatedImageData = data
-        }
-        
-        return image
+            return image
+        #else
+
+            let image: Image?
+            if options.preloadAll || options.onlyFirstFrame {
+                // Use `images` image if you want to preload all animated data
+                guard let animatedImage = GIFAnimatedImage(from: imageSource, for: info, options: options) else {
+                    return nil
+                }
+                if options.onlyFirstFrame {
+                    image = animatedImage.images.first
+                } else {
+                    let duration = options.duration <= 0.0 ? animatedImage.duration : options.duration
+                    image = .animatedImage(with: animatedImage.images, duration: duration)
+                }
+                image?.kf.animatedImageData = data
+            } else {
+                image = Image(data: data, scale: options.scale)
+                var kf = image?.kf
+                kf?.imageSource = imageSource
+                kf?.animatedImageData = data
+            }
+
+            return image
         #endif
     }
 
@@ -265,7 +268,7 @@ extension KingfisherWrapper where Base: Image {
         }
         return image
     }
-    
+
     /// Creates a downsampled image from given data to a certain size and scale.
     ///
     /// - Parameters:
@@ -286,13 +289,14 @@ extension KingfisherWrapper where Base: Image {
         guard let imageSource = CGImageSourceCreateWithData(data as CFData, imageSourceOptions) else {
             return nil
         }
-        
+
         let maxDimensionInPixels = max(pointSize.width, pointSize.height) * scale
         let downsampleOptions = [
             kCGImageSourceCreateThumbnailFromImageAlways: true,
             kCGImageSourceShouldCacheImmediately: true,
             kCGImageSourceCreateThumbnailWithTransform: true,
-            kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels] as CFDictionary
+            kCGImageSourceThumbnailMaxPixelSize: maxDimensionInPixels,
+        ] as CFDictionary
         guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, downsampleOptions) else {
             return nil
         }

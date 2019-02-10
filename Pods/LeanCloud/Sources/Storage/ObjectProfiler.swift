@@ -9,11 +9,10 @@
 import Foundation
 
 extension LCError {
-
     static let circularReference = LCError(
         code: .inconsistency,
-        reason: "Circular reference.")
-
+        reason: "Circular reference."
+    )
 }
 
 class ObjectProfiler {
@@ -79,7 +78,7 @@ class ObjectProfiler {
      This method will scan the loaded classes list at runtime to find out object classes.
 
      - note: When subclass and superclass have the same class name,
-             subclass will be registered for the class name.
+     subclass will be registered for the class name.
      */
     func registerClasses() {
         /* Only register builtin classes. */
@@ -127,18 +126,17 @@ class ObjectProfiler {
      - returns: Concrete LCValue subclass, or nil if property type is not LCValue.
      */
     func getLCValue(_ property: objc_property_t) -> LCValue.Type? {
-
         guard let typeEncoding: String = Runtime.typeEncoding(property) else {
             return nil
         }
-        
+
         guard typeEncoding.hasPrefix("@\"") else {
             return nil
         }
 
         let startIndex: String.Index = typeEncoding.index(typeEncoding.startIndex, offsetBy: 2)
         let endIndex: String.Index = typeEncoding.index(typeEncoding.endIndex, offsetBy: -1)
-        let name: Substring = typeEncoding[startIndex..<endIndex]
+        let name: Substring = typeEncoding[startIndex ..< endIndex]
 
         if let subclass = objc_getClass(String(name)) as? AnyClass {
             if let type = subclass as? LCValue.Type {
@@ -189,8 +187,8 @@ class ObjectProfiler {
         let getterName = Runtime.propertyName(property)
         let setterName = "set\(getterName.firstUppercaseString):"
 
-        class_replaceMethod(aClass, Selector(getterName), unsafeBitCast(self.propertyGetter, to: IMP.self), "@@:")
-        class_replaceMethod(aClass, Selector(setterName), unsafeBitCast(self.propertySetter, to: IMP.self), "v@:@")
+        class_replaceMethod(aClass, Selector(getterName), unsafeBitCast(propertyGetter, to: IMP.self), "@@:")
+        class_replaceMethod(aClass, Selector(setterName), unsafeBitCast(propertySetter, to: IMP.self), "v@:@")
     }
 
     /**
@@ -244,8 +242,8 @@ class ObjectProfiler {
             }
 
             /* Check if object is a newborn orphan.
-               If parent is not an LCObject, we think that it is an orphan. */
-            if !object.hasObjectId && !(parent is LCObject) {
+             If parent is not an LCObject, we think that it is an orphan. */
+            if !object.hasObjectId, !(parent is LCObject) {
                 if !hasNewbornOrphan {
                     output.insert(object)
                 }
@@ -286,11 +284,9 @@ class ObjectProfiler {
     }
 
     private enum VisitState: Int {
-
         case unvisited
         case visiting
         case visited
-
     }
 
     /**
@@ -500,7 +496,7 @@ class ObjectProfiler {
         let result = object(className: className)
         let keyValues = try dictionary.compactMapValue { try object(jsonValue: $0) }
 
-        keyValues.forEach { (key, value) in
+        keyValues.forEach { key, value in
             result.update(key, value)
         }
 
@@ -621,7 +617,7 @@ class ObjectProfiler {
      - parameter dictionary: A dictionary of key-value pairs.
      */
     func updateObject(_ object: LCObject, _ dictionary: [String: Any]) {
-        dictionary.forEach { (key, value) in
+        dictionary.forEach { key, value in
             object.update(key, try! self.object(jsonValue: value))
         }
     }
@@ -635,10 +631,10 @@ class ObjectProfiler {
      */
     func propertyName(_ setter: Selector) -> String {
         var propertyName = NSStringFromSelector(setter)
-        
+
         let startIndex: String.Index = propertyName.index(propertyName.startIndex, offsetBy: 3)
         let endIndex: String.Index = propertyName.index(propertyName.endIndex, offsetBy: -1)
-        propertyName = String(propertyName[startIndex..<endIndex])
+        propertyName = String(propertyName[startIndex ..< endIndex])
 
         return propertyName
     }
