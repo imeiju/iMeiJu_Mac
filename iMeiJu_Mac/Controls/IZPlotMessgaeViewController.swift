@@ -33,10 +33,9 @@ class IZPlotMessgaeViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        playerView.showsFullScreenToggleButton = true
         episodeView.backgroundColor = .clear
         episodeView.isHidden = true
-        collectionView.backgroundColors = [NSColor(calibratedWhite: 0.8, alpha: 0.8)]
+        collectionView.backgroundColors = ([NSColor(hexString: "0C172D", alpha: 0.6)] as! [NSColor])
         collectionViewConfiguration()
         // 监听播放完成通知,进行连播任务
         NotificationCenter.default.addObserver(self, selector: #selector(playToEndTime), name: .AVPlayerItemDidPlayToEndTime, object: nil)
@@ -151,8 +150,6 @@ class IZPlotMessgaeViewController: NSViewController {
                         } else {
                             self.idx = p![self.level]
                             v = ji[self.idx]
-//                            let seekTime = CMTime(value: p![self.prate], timescale: 1)
-//                            self.player?.seek(to: seekTime)
                         }
                     } catch {}
                     self.playVideo(url: v.purl, levelName: v.name, update: false)
@@ -175,13 +172,29 @@ class IZPlotMessgaeViewController: NSViewController {
 
     var layout: NSCollectionViewFlowLayout {
         let layout = NSCollectionViewFlowLayout()
-        layout.itemSize = NSSize(width: 60, height: 60)
-        layout.sectionInset = NSEdgeInsetsZero
-        layout.minimumLineSpacing = CGFloat.leastNormalMagnitude
-        layout.minimumInteritemSpacing = CGFloat.leastNormalMagnitude
+        layout.itemSize = NSSize(width: 60, height: 30)
+        layout.sectionInset = NSEdgeInsetsMake(20, 20, 10, 20)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
         layout.sectionHeadersPinToVisibleBounds = true
         return layout
     }
+    
+    override func viewDidDisappear() {
+        super.viewDidDisappear()
+        ProgressHUD.dismiss()
+        let currentTime = player?.currentTime()
+        if currentTime != nil {
+            let currentTimeNum = currentTime!.value / Int64(currentTime!.timescale)
+            do {
+                let query = plot.filter(vid == id)
+                try db.run(query.update(prate <- currentTimeNum))
+            } catch {}
+            player?.currentItem!.removeObserver(self, forKeyPath: "status", context: nil)
+        }
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
+    }
+    
 }
 
 extension IZPlotMessgaeViewController: NSCollectionViewDelegate, NSCollectionViewDataSource {
@@ -205,16 +218,5 @@ extension IZPlotMessgaeViewController: NSCollectionViewDelegate, NSCollectionVie
         let m = model!.data.zu.first?.ji[idx]
         playVideo(url: m!.purl, levelName: m!.name, update: true)
     }
-
-    override func viewDidDisappear() {
-        super.viewDidDisappear()
-        let currentTime = player!.currentTime()
-        let currentTimeNum = currentTime.value / Int64(currentTime.timescale)
-        do {
-            let query = plot.filter(vid == id)
-            try db.run(query.update(prate <- currentTimeNum))
-        } catch {}
-        player?.currentItem!.removeObserver(self, forKeyPath: "status", context: nil)
-        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
-    }
+    
 }

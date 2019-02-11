@@ -29,6 +29,7 @@ import Foundation
 /// Represents a session data task in `ImageDownloader`. It consists of an underlying `URLSessionDataTask` and
 /// an array of `TaskCallback`. Multiple `TaskCallback`s could be added for a single downloading data task.
 public class SessionDataTask {
+
     /// Represents the type of token which used for cancelling a task.
     public typealias CancelToken = Int
 
@@ -46,7 +47,7 @@ public class SessionDataTask {
     public let task: URLSessionDataTask
     private var callbacksStore = [CancelToken: TaskCallback]()
 
-    var callbacks: [SessionDataTask.CancelToken: SessionDataTask.TaskCallback].Values {
+    var callbacks: Dictionary<SessionDataTask.CancelToken, SessionDataTask.TaskCallback>.Values {
         return callbacksStore.values
     }
 
@@ -99,7 +100,7 @@ public class SessionDataTask {
         guard let callback = removeCallback(token) else {
             return
         }
-        if callbacksStore.isEmpty {
+        if callbacksStore.count == 0 {
             task.cancel()
         }
         onCallbackCancelled.call((token, callback))

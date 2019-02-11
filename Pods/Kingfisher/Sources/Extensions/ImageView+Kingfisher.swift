@@ -24,13 +24,15 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+
 #if os(macOS)
-    import AppKit
+import AppKit
 #else
-    import UIKit
+import UIKit
 #endif
 
 extension KingfisherWrapper where Base: ImageView {
+
     // MARK: Setting Image
 
     /// Sets an image to the image view with a `Source`.
@@ -76,8 +78,8 @@ extension KingfisherWrapper where Base: ImageView {
         placeholder: Placeholder? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         var mutatingSelf = self
         guard let source = source else {
             mutatingSelf.placeholder = placeholder
@@ -117,8 +119,7 @@ extension KingfisherWrapper where Base: ImageView {
                     maybeIndicator?.stopAnimatingView()
                     guard issuedIdentifier == self.taskIdentifier else {
                         let error = KingfisherError.imageSettingError(
-                            reason: .notCurrentSourceTask(result: result.value, error: result.error, source: source)
-                        )
+                            reason: .notCurrentSourceTask(result: result.value, error: result.error, source: source))
                         completionHandler?(.failure(error))
                         return
                     }
@@ -126,7 +127,7 @@ extension KingfisherWrapper where Base: ImageView {
                     mutatingSelf.imageTask = nil
 
                     switch result {
-                    case let .success(value):
+                    case .success(let value):
                         guard self.needsTransition(options: options, cacheType: value.cacheType) else {
                             mutatingSelf.placeholder = nil
                             self.base.image = value.image
@@ -144,8 +145,7 @@ extension KingfisherWrapper where Base: ImageView {
                         completionHandler?(result)
                     }
                 }
-            }
-        )
+        })
 
         mutatingSelf.imageTask = task
         return task
@@ -181,15 +181,14 @@ extension KingfisherWrapper where Base: ImageView {
         placeholder: Placeholder? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         return setImage(
             with: resource.map { .network($0) },
             placeholder: placeholder,
             options: options,
             progressBlock: progressBlock,
-            completionHandler: completionHandler
-        )
+            completionHandler: completionHandler)
     }
 
     /// Sets an image to the image view with a data provider.
@@ -213,15 +212,14 @@ extension KingfisherWrapper where Base: ImageView {
         placeholder: Placeholder? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         return setImage(
             with: provider.map { .provider($0) },
             placeholder: placeholder,
             options: options,
             progressBlock: progressBlock,
-            completionHandler: completionHandler
-        )
+            completionHandler: completionHandler)
     }
 
     // MARK: Cancelling Downloading Task
@@ -237,45 +235,44 @@ extension KingfisherWrapper where Base: ImageView {
         case .none:
             return false
         #if !os(macOS)
-            default:
-                if options.forceTransition { return true }
-                if cacheType == .none { return true }
-                return false
+        default:
+            if options.forceTransition { return true }
+            if cacheType == .none { return true }
+            return false
         #endif
         }
     }
 
     private func makeTransition(image: Image, transition: ImageTransition, done: @escaping () -> Void) {
         #if !os(macOS)
-            // Force hiding the indicator without transition first.
-            UIView.transition(
-                with: base,
-                duration: 0.0,
-                options: [],
-                animations: { self.indicator?.stopAnimatingView() },
-                completion: { _ in
-                    var mutatingSelf = self
-                    mutatingSelf.placeholder = nil
-                    UIView.transition(
-                        with: self.base,
-                        duration: transition.duration,
-                        options: [transition.animationOptions, .allowUserInteraction],
-                        animations: { transition.animations?(self.base, image) },
-                        completion: { finished in
-                            transition.completion?(finished)
-                            done()
-                        }
-                    )
-                }
-            )
+        // Force hiding the indicator without transition first.
+        UIView.transition(
+            with: self.base,
+            duration: 0.0,
+            options: [],
+            animations: { self.indicator?.stopAnimatingView() },
+            completion: { _ in
+                var mutatingSelf = self
+                mutatingSelf.placeholder = nil
+                UIView.transition(
+                    with: self.base,
+                    duration: transition.duration,
+                    options: [transition.animationOptions, .allowUserInteraction],
+                    animations: { transition.animations?(self.base, image) },
+                    completion: { finished in
+                        transition.completion?(finished)
+                        done()
+                    }
+                )
+            }
+        )
         #else
-            done()
+        done()
         #endif
     }
 }
 
 // MARK: - Associated Object
-
 private var taskIdentifierKey: Void?
 private var indicatorKey: Void?
 private var indicatorTypeKey: Void?
@@ -283,8 +280,8 @@ private var placeholderKey: Void?
 private var imageTaskKey: Void?
 
 extension KingfisherWrapper where Base: ImageView {
-    // MARK: Properties
 
+    // MARK: Properties
     public private(set) var taskIdentifier: Source.Identifier.Value? {
         get {
             let box: Box<Source.Identifier.Value>? = getAssociatedObject(base, &taskIdentifierKey)
@@ -302,19 +299,19 @@ extension KingfisherWrapper where Base: ImageView {
         get {
             return getAssociatedObject(base, &indicatorTypeKey) ?? .none
         }
-
+        
         set {
             switch newValue {
             case .none: indicator = nil
             case .activity: indicator = ActivityIndicator()
-            case let .image(data): indicator = ImageIndicator(imageData: data)
-            case let .custom(anIndicator): indicator = anIndicator
+            case .image(let data): indicator = ImageIndicator(imageData: data)
+            case .custom(let anIndicator): indicator = anIndicator
             }
 
             setRetainedAssociatedObject(base, &indicatorTypeKey, newValue)
         }
     }
-
+    
     /// Holds any type that conforms to the protocol `Indicator`.
     /// The protocol `Indicator` has a `view` property that will be shown when loading an image.
     /// It will be `nil` if `indicatorType` is `.none`.
@@ -323,27 +320,25 @@ extension KingfisherWrapper where Base: ImageView {
             let box: Box<Indicator>? = getAssociatedObject(base, &indicatorKey)
             return box?.value
         }
-
+        
         set {
             // Remove previous
             if let previousIndicator = indicator {
                 previousIndicator.view.removeFromSuperview()
             }
-
+            
             // Add new
             if let newIndicator = newValue {
                 // Set default indicator layout
                 let view = newIndicator.view
-
+                
                 base.addSubview(view)
                 view.translatesAutoresizingMaskIntoConstraints = false
                 view.centerXAnchor.constraint(
-                    equalTo: base.centerXAnchor, constant: newIndicator.centerOffset.x
-                ).isActive = true
+                    equalTo: base.centerXAnchor, constant: newIndicator.centerOffset.x).isActive = true
                 view.centerYAnchor.constraint(
-                    equalTo: base.centerYAnchor, constant: newIndicator.centerOffset.y
-                ).isActive = true
-
+                    equalTo: base.centerYAnchor, constant: newIndicator.centerOffset.y).isActive = true
+                
                 newIndicator.view.isHidden = true
             }
 
@@ -353,10 +348,10 @@ extension KingfisherWrapper where Base: ImageView {
             setRetainedAssociatedObject(base, &indicatorKey, newValue.map(Box.init))
         }
     }
-
+    
     private var imageTask: DownloadTask? {
         get { return getAssociatedObject(base, &imageTaskKey) }
-        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue) }
+        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue)}
     }
 
     /// Represents the `Placeholder` used for this image view. A `Placeholder` will be shown in the view while
@@ -367,7 +362,7 @@ extension KingfisherWrapper where Base: ImageView {
             if let previousPlaceholder = placeholder {
                 previousPlaceholder.remove(from: base)
             }
-
+            
             if let newPlaceholder = newValue {
                 newPlaceholder.add(to: base)
             } else {
@@ -378,6 +373,7 @@ extension KingfisherWrapper where Base: ImageView {
     }
 }
 
+
 @objc extension ImageView {
     func shouldPreloadAllAnimation() -> Bool { return true }
 }
@@ -387,6 +383,6 @@ extension KingfisherWrapper where Base: ImageView {
     @available(*, obsoleted: 5.0, message: "Use `taskIdentifier` instead to identify a setting task.")
     public private(set) var webURL: URL? {
         get { return nil }
-        set {}
+        set { }
     }
 }

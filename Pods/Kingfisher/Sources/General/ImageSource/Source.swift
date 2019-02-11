@@ -35,8 +35,10 @@ import Foundation
 /// - provider: The target image should be provided in a data format. Normally, it can be an image
 ///             from local storage or in any other encoding format (like Base64).
 public enum Source {
+
     /// Represents the source task identifier when setting an image to a view with extension methods.
     public enum Identifier {
+
         /// The underlying value type of source identifier.
         public typealias Value = UInt
         static var current: Value = 0
@@ -51,7 +53,7 @@ public enum Source {
     /// The target image should be got from network remotely. The associated `Resource`
     /// value defines detail information like image URL and cache key.
     case network(Resource)
-
+    
     /// The target image should be provided in a data format. Normally, it can be an image
     /// from local storage or in any other encoding format (like Base64).
     case provider(ImageDataProvider)
@@ -61,8 +63,8 @@ public enum Source {
     /// The cache key defined for this source value.
     public var cacheKey: String {
         switch self {
-        case let .network(resource): return resource.cacheKey
-        case let .provider(provider): return provider.cacheKey
+        case .network(let resource): return resource.cacheKey
+        case .provider(let provider): return provider.cacheKey
         }
     }
 
@@ -72,9 +74,9 @@ public enum Source {
     /// For a `.provider` value, it is always `nil`.
     public var url: URL? {
         switch self {
-        case let .network(resource): return resource.downloadURL
+        case .network(let resource): return resource.downloadURL
         // `ImageDataProvider` does not provide a URL. All it cares is how to get the data back.
-        case .provider: return nil
+        case .provider(_): return nil
         }
     }
 }

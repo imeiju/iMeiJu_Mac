@@ -45,20 +45,15 @@ class IZSearchViewController: NSViewController {
     func collectionViewConfiguration() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.collectionViewLayout = layout
+        collectionView.collectionViewLayout = IZLayout.layout(40, minimumLineSpacing: 40)
         collectionView.isSelectable = true
         collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
     }
-
-    var layout: NSCollectionViewFlowLayout {
-        let layout = NSCollectionViewFlowLayout()
-        layout.itemSize = NSSize(width: 200, height: 260)
-        layout.sectionInset = NSEdgeInsetsZero
-        layout.minimumLineSpacing = CGFloat.leastNormalMagnitude
-        layout.minimumInteritemSpacing = CGFloat.leastNormalMagnitude
-        layout.sectionHeadersPinToVisibleBounds = true
-        return layout
+    
+    override func viewDidDisappear() {
+        ProgressHUD.dismiss()
     }
+    
 }
 
 extension IZSearchViewController: NSCollectionViewDelegate, NSCollectionViewDataSource, NSSearchFieldDelegate {
@@ -80,8 +75,8 @@ extension IZSearchViewController: NSCollectionViewDelegate, NSCollectionViewData
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZStillsViewItem
         let m = model!.data[indexPath.item]
-        item.setName(name: m.name)
-        item.setImageUrl(url: m.pic)
+        item.setName(m.name)
+        item.setImageUrl(m.pic)
         return item
     }
 

@@ -9,15 +9,14 @@
 
 import Cocoa
 
-class IZMainSectionHeaderView: NSView {
+class IZMainSectionHeaderView: IZView {
+    
     @IBOutlet var sectionTitle: NSTextField!
 
     @IBOutlet var actionButton: NSButton!
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        NSColor(calibratedWhite: 0.8, alpha: 0.8).set()
-        __NSRectFillUsingOperation(dirtyRect, NSCompositingOperation.sourceOver)
     }
 
     func setSectionHeader(title: String) {

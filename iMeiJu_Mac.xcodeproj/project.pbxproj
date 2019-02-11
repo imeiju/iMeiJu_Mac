@@ -13,7 +13,7 @@
 		2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F12E2205C3ED005A0BB1 /* IZExtension.swift */; };
 		2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */; };
 		2711C7352206CAE4003A28DB /* IZWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7342206CAE4003A28DB /* IZWindow.swift */; };
-		2711C7392206D63C003A28DB /* IZUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7382206D63C003A28DB /* IZUtils.swift */; };
+		2711C7392206D63C003A28DB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7382206D63C003A28DB /* Network.swift */; };
 		2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7402206F13B003A28DB /* IZMainModel.swift */; };
 		2711C74822071E88003A28DB /* IZMainSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */; };
 		2711C74A22071F4E003A28DB /* IZMainSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */; };
@@ -40,6 +40,14 @@
 		278604B62209A2660097192A /* IZSearchWindowContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604B42209A2660097192A /* IZSearchWindowContoller.xib */; };
 		278604B92209A27B0097192A /* IZSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B72209A27B0097192A /* IZSearchViewController.swift */; };
 		278604BA2209A27B0097192A /* IZSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604B82209A27B0097192A /* IZSearchViewController.xib */; };
+		279403CB22114F8800970316 /* IZMenusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403CA22114F8800970316 /* IZMenusView.swift */; };
+		279403CD2211510400970316 /* IZCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403CC2211510400970316 /* IZCollectionView.swift */; };
+		279403D02211518B00970316 /* IZScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403CF2211518B00970316 /* IZScrollerView.swift */; };
+		279403D22211527A00970316 /* IZClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403D12211527A00970316 /* IZClipView.swift */; };
+		279403D622116D9100970316 /* IZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403D522116D9100970316 /* IZView.swift */; };
+		279403D8221173E000970316 /* IZImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403D7221173E000970316 /* IZImageView.swift */; };
+		279403DB22119D4E00970316 /* IZLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403DA22119D4E00970316 /* IZLayout.swift */; };
+		27978E7822114E5300C1EB6B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27978E7722114E5200C1EB6B /* CFNetwork.framework */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +62,7 @@
 		2705F12E2205C3ED005A0BB1 /* IZExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZExtension.swift; sourceTree = "<group>"; };
 		2705F1382205C4AC005A0BB1 /* IZMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainViewController.swift; sourceTree = "<group>"; };
 		2711C7342206CAE4003A28DB /* IZWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZWindow.swift; sourceTree = "<group>"; };
-		2711C7382206D63C003A28DB /* IZUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZUtils.swift; sourceTree = "<group>"; };
+		2711C7382206D63C003A28DB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2711C7402206F13B003A28DB /* IZMainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMainModel.swift; sourceTree = "<group>"; };
 		2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMainSectionHeaderView.xib; sourceTree = "<group>"; };
 		2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainSectionHeaderView.swift; sourceTree = "<group>"; };
@@ -81,6 +89,14 @@
 		278604B42209A2660097192A /* IZSearchWindowContoller.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZSearchWindowContoller.xib; sourceTree = "<group>"; };
 		278604B72209A27B0097192A /* IZSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZSearchViewController.swift; sourceTree = "<group>"; };
 		278604B82209A27B0097192A /* IZSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZSearchViewController.xib; sourceTree = "<group>"; };
+		279403CA22114F8800970316 /* IZMenusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMenusView.swift; sourceTree = "<group>"; };
+		279403CC2211510400970316 /* IZCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZCollectionView.swift; sourceTree = "<group>"; };
+		279403CF2211518B00970316 /* IZScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZScrollerView.swift; sourceTree = "<group>"; };
+		279403D12211527A00970316 /* IZClipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZClipView.swift; sourceTree = "<group>"; };
+		279403D522116D9100970316 /* IZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZView.swift; sourceTree = "<group>"; };
+		279403D7221173E000970316 /* IZImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZImageView.swift; sourceTree = "<group>"; };
+		279403DA22119D4E00970316 /* IZLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZLayout.swift; sourceTree = "<group>"; };
+		27978E7722114E5200C1EB6B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27978E7822114E5300C1EB6B /* CFNetwork.framework in Frameworks */,
 				2723E37D2208241C00EB9CE1 /* AVFoundation.framework in Frameworks */,
 				2723E37B2208241700EB9CE1 /* AVKit.framework in Frameworks */,
 				DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */,
@@ -102,6 +119,7 @@
 		09E6A8D1D83132E30760A7FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27978E7722114E5200C1EB6B /* CFNetwork.framework */,
 				2723E37C2208241C00EB9CE1 /* AVFoundation.framework */,
 				2723E37A2208241700EB9CE1 /* AVKit.framework */,
 				24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */,
@@ -130,9 +148,11 @@
 		2705F0E32205BFB4005A0BB1 /* iMeiJu_Mac */ = {
 			isa = PBXGroup;
 			children = (
+				279403D922119D3C00970316 /* Layout */,
+				279403CE2211516C00970316 /* Base */,
 				2711C751220740D6003A28DB /* Plugin */,
 				2711C73D2206F12B003A28DB /* Model */,
-				2711C7372206D624003A28DB /* Utils */,
+				2711C7372206D624003A28DB /* Network */,
 				2711C7362206CAE7003A28DB /* Window */,
 				2711C72F2206B9D6003A28DB /* Views */,
 				2705F1302205C427005A0BB1 /* Controls */,
@@ -204,12 +224,12 @@
 			path = Window;
 			sourceTree = "<group>";
 		};
-		2711C7372206D624003A28DB /* Utils */ = {
+		2711C7372206D624003A28DB /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				2711C7382206D63C003A28DB /* IZUtils.swift */,
+				2711C7382206D63C003A28DB /* Network.swift */,
 			);
-			path = Utils;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		2711C73D2206F12B003A28DB /* Model */ = {
@@ -262,6 +282,27 @@
 				278604B1220955530097192A /* IZMoreModel.swift */,
 			);
 			path = More;
+			sourceTree = "<group>";
+		};
+		279403CE2211516C00970316 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				279403CA22114F8800970316 /* IZMenusView.swift */,
+				279403CF2211518B00970316 /* IZScrollerView.swift */,
+				279403CC2211510400970316 /* IZCollectionView.swift */,
+				279403D12211527A00970316 /* IZClipView.swift */,
+				279403D522116D9100970316 /* IZView.swift */,
+				279403D7221173E000970316 /* IZImageView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		279403D922119D3C00970316 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				279403DA22119D4E00970316 /* IZLayout.swift */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 		6C6722660887476393F165E6 /* Pods */ = {
@@ -423,26 +464,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2711C7392206D63C003A28DB /* IZUtils.swift in Sources */,
+				2711C7392206D63C003A28DB /* Network.swift in Sources */,
 				2711C74A22071F4E003A28DB /* IZMainSectionHeaderView.swift in Sources */,
 				2723E37322081FF800EB9CE1 /* IZPlotMessgaeWindowView.swift in Sources */,
+				279403CD2211510400970316 /* IZCollectionView.swift in Sources */,
 				2711C75B2207419D003A28DB /* ProgressHUD.swift in Sources */,
 				2723E378220821E900EB9CE1 /* IZPlotMessgaeViewController.swift in Sources */,
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
 				2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */,
 				278604B92209A27B0097192A /* IZSearchViewController.swift in Sources */,
+				279403D22211527A00970316 /* IZClipView.swift in Sources */,
 				278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */,
+				279403CB22114F8800970316 /* IZMenusView.swift in Sources */,
 				2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */,
 				2723E38922092E2E00EB9CE1 /* IZMoreWindowController.swift in Sources */,
 				278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */,
+				279403D622116D9100970316 /* IZView.swift in Sources */,
 				2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */,
 				278604B52209A2660097192A /* IZSearchWindowContoller.swift in Sources */,
 				2711C75C2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift in Sources */,
+				279403DB22119D4E00970316 /* IZLayout.swift in Sources */,
+				279403D8221173E000970316 /* IZImageView.swift in Sources */,
 				278604B2220955530097192A /* IZMoreModel.swift in Sources */,
 				2723E37022081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift in Sources */,
 				2723E380220829D100EB9CE1 /* IZPlotMessageModel.swift in Sources */,
 				2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */,
 				2711C7352206CAE4003A28DB /* IZWindow.swift in Sources */,
+				279403D02211518B00970316 /* IZScrollerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

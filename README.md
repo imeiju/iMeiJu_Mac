@@ -30,3 +30,7 @@
 <p align="center">
   <img src="Resource/imgs/preview.gif" width="500" />
 </p>
+
+### 新版本预览
+
+<img src="Resource/imgs/首页.png" width="300" />

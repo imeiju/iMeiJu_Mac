@@ -33,6 +33,7 @@ extension Never: Error {}
 /// as its error type. To handle errors from Kingfisher, you switch over the error to get a reason catalog,
 /// then switch over the reason to know error detail.
 public enum KingfisherError: Error {
+
     // MARK: Error Reason Types
 
     /// Represents the error reason during networking request phase.
@@ -41,19 +42,20 @@ public enum KingfisherError: Error {
     /// - invalidURL: The URL of request is invalid. Code 1002.
     /// - taskCancelled: The downloading task is cancelled by user. Code 1003.
     public enum RequestErrorReason {
+        
         /// The request is empty. Code 1001.
         case emptyRequest
-
+        
         /// The URL of request is invalid. Code 1002.
         /// - request: The request is tend to be sent but its URL is invalid.
         case invalidURL(request: URLRequest)
-
+        
         /// The downloading task is cancelled by user. Code 1003.
         /// - task: The session data task which is cancelled.
         /// - token: The cancel token which is used for cancelling the task.
         case taskCancelled(task: SessionDataTask, token: SessionDataTask.CancelToken)
     }
-
+    
     /// Represents the error reason during networking response phase.
     ///
     /// - invalidURLResponse: The response is not a valid URL response. Code 2001.
@@ -62,31 +64,32 @@ public enum KingfisherError: Error {
     /// - dataModifyingFailed: Data modifying fails on returning a valid data. Code 2004.
     /// - noURLResponse: The task is done but no URL response found. Code 2005.
     public enum ResponseErrorReason {
+        
         /// The response is not a valid URL response. Code 2001.
         /// - response: The received invalid URL response.
         ///             The response is expected to be an HTTP response, but it is not.
         case invalidURLResponse(response: URLResponse)
-
+        
         /// The response contains an invalid HTTP status code. Code 2002.
         /// - Note:
         ///   By default, status code 200..<400 is recognized as valid. You can override
         ///   this behavior by conforming to the `ImageDownloaderDelegate`.
         /// - response: The received response.
         case invalidHTTPStatusCode(response: HTTPURLResponse)
-
+        
         /// An error happens in the system URL session. Code 2003.
         /// - error: The underlying URLSession error object.
         case URLSessionError(error: Error)
-
+        
         /// Data modifying fails on returning a valid data. Code 2004.
         /// - task: The failed task.
         case dataModifyingFailed(task: SessionDataTask)
-
+        
         /// The task is done but no URL response found. Code 2005.
         /// - task: The failed task.
         case noURLResponse(task: SessionDataTask)
     }
-
+    
     /// Represents the error reason during Kingfisher caching system.
     ///
     /// - fileEnumeratorCreationFailed: Cannot create a file enumerator for a certain disk URL. Code 3001.
@@ -98,45 +101,47 @@ public enum KingfisherError: Error {
     /// - cannotConvertToData: Cannot convert an object to data for storing. Code 3007.
     /// - cannotSerializeImage: Cannot serialize an image to data for storing. Code 3008.
     public enum CacheErrorReason {
+        
         /// Cannot create a file enumerator for a certain disk URL. Code 3001.
         /// - url: The target disk URL from which the file enumerator should be created.
         case fileEnumeratorCreationFailed(url: URL)
-
+        
         /// Cannot get correct file contents from a file enumerator. Code 3002.
         /// - url: The target disk URL from which the content of a file enumerator should be got.
         case invalidFileEnumeratorContent(url: URL)
-
+        
         /// The file at target URL exists, but its URL resource is unavailable. Code 3003.
         /// - error: The underlying error thrown by file manager.
         /// - key: The key used to getting the resource from cache.
         /// - url: The disk URL where the target cached file exists.
         case invalidURLResource(error: Error, key: String, url: URL)
-
+        
         /// The file at target URL exists, but the data cannot be loaded from it. Code 3004.
         /// - url: The disk URL where the target cached file exists.
         /// - error: The underlying error which describes why this error happens.
         case cannotLoadDataFromDisk(url: URL, error: Error)
-
+        
         /// Cannot create a folder at a given path. Code 3005.
         /// - path: The disk path where the directory creating operation fails.
         /// - error: The underlying error which describes why this error happens.
         case cannotCreateDirectory(path: String, error: Error)
-
+        
         /// The requested image does not exist in cache. Code 3006.
         /// - key: Key of the requested image in cache.
         case imageNotExisting(key: String)
-
+        
         /// Cannot convert an object to data for storing. Code 3007.
         /// - object: The object which needs be convert to data.
         case cannotConvertToData(object: Any, error: Error)
-
+        
         /// Cannot serialize an image to data for storing. Code 3008.
         /// - image: The input image needs to be serialized to cache.
         /// - original: The original image data, if exists.
         /// - serializer: The `CacheSerializer` used for the image serializing.
         case cannotSerializeImage(image: Image?, original: Data?, serializer: CacheSerializer)
     }
-
+    
+    
     /// Represents the error reason during image processing phase.
     ///
     /// - processingFailed: Image processing fails. There is no valid output image from the processor. Code 4001.
@@ -153,9 +158,10 @@ public enum KingfisherError: Error {
     /// - notCurrentSourceTask: The source task is finished, but it is not the one expected now. Code 5002.
     /// - dataProviderError: An error happens during getting data from an `ImageDataProvider`. Code 5003.
     public enum ImageSettingErrorReason {
+        
         /// The input resource is empty or `nil`. Code 5001.
         case emptySource
-
+        
         /// The resource task is finished, but it is not the one expected now. This usually happens when you set another
         /// resource on the view without cancelling the current on-going one. The previous setting task will fail with
         /// this `.notCurrentSourceTask` error when a result got, regardless of it being successful or not for that task.
@@ -173,7 +179,7 @@ public enum KingfisherError: Error {
     }
 
     // MARK: Member Cases
-
+    
     /// Represents the error reason during networking request phase.
     case requestError(reason: RequestErrorReason)
     /// Represents the error reason during networking response phase.
@@ -202,7 +208,7 @@ public enum KingfisherError: Error {
     /// - Returns: If `self` is a `ResponseErrorReason.invalidHTTPStatusCode` error
     ///            and its status code equals to `code`, `true` is returned. Otherwise, `false`.
     public func isInvalidResponseStatusCode(_ code: Int) -> Bool {
-        if case let .responseError(reason: .invalidHTTPStatusCode(response)) = self {
+        if case .responseError(reason: .invalidHTTPStatusCode(let response)) = self {
             return response.statusCode == code
         }
         return false
@@ -228,34 +234,35 @@ public enum KingfisherError: Error {
 }
 
 // MARK: - LocalizedError Conforming
-
 extension KingfisherError: LocalizedError {
+    
     /// A localized message describing what error occurred.
     public var errorDescription: String? {
         switch self {
-        case let .requestError(reason): return reason.errorDescription
-        case let .responseError(reason): return reason.errorDescription
-        case let .cacheError(reason): return reason.errorDescription
-        case let .processorError(reason): return reason.errorDescription
-        case let .imageSettingError(reason): return reason.errorDescription
+        case .requestError(let reason): return reason.errorDescription
+        case .responseError(let reason): return reason.errorDescription
+        case .cacheError(let reason): return reason.errorDescription
+        case .processorError(let reason): return reason.errorDescription
+        case .imageSettingError(let reason): return reason.errorDescription
         }
     }
 }
 
-// MARK: - CustomNSError Conforming
 
+// MARK: - CustomNSError Conforming
 extension KingfisherError: CustomNSError {
+
     /// The error domain of `KingfisherError`. All errors from Kingfisher is under this domain.
     public static let domain = "com.onevcat.Kingfisher.Error"
 
     /// The error code within the given domain.
     public var errorCode: Int {
         switch self {
-        case let .requestError(reason): return reason.errorCode
-        case let .responseError(reason): return reason.errorCode
-        case let .cacheError(reason): return reason.errorCode
-        case let .processorError(reason): return reason.errorCode
-        case let .imageSettingError(reason): return reason.errorCode
+        case .requestError(let reason): return reason.errorCode
+        case .responseError(let reason): return reason.errorCode
+        case .cacheError(let reason): return reason.errorCode
+        case .processorError(let reason): return reason.errorCode
+        case .imageSettingError(let reason): return reason.errorCode
         }
     }
 }
@@ -265,13 +272,13 @@ extension KingfisherError.RequestErrorReason {
         switch self {
         case .emptyRequest:
             return "The request is empty or `nil`."
-        case let .invalidURL(request):
+        case .invalidURL(let request):
             return "The request contains an invalid or empty URL. Request: \(request)."
-        case let .taskCancelled(task, token):
+        case .taskCancelled(let task, let token):
             return "The session task was cancelled. Task: \(task), cancel token: \(token)."
         }
     }
-
+    
     var errorCode: Int {
         switch self {
         case .emptyRequest: return 1001
@@ -284,19 +291,19 @@ extension KingfisherError.RequestErrorReason {
 extension KingfisherError.ResponseErrorReason {
     var errorDescription: String? {
         switch self {
-        case let .invalidURLResponse(response):
+        case .invalidURLResponse(let response):
             return "The URL response is invalid: \(response)"
-        case let .invalidHTTPStatusCode(response):
+        case .invalidHTTPStatusCode(let response):
             return "The HTTP status code in response is invalid. Code: \(response.statusCode), response: \(response)."
-        case let .URLSessionError(error):
+        case .URLSessionError(let error):
             return "A URL session error happened. The underlying error: \(error)"
-        case let .dataModifyingFailed(task):
+        case .dataModifyingFailed(let task):
             return "The data modifying delegate returned `nil` for the downloaded data. Task: \(task)."
-        case let .noURLResponse(task):
+        case .noURLResponse(let task):
             return "No URL response received. Task: \(task),"
         }
     }
-
+    
     var errorCode: Int {
         switch self {
         case .invalidURLResponse: return 2001
@@ -311,29 +318,29 @@ extension KingfisherError.ResponseErrorReason {
 extension KingfisherError.CacheErrorReason {
     var errorDescription: String? {
         switch self {
-        case let .fileEnumeratorCreationFailed(url):
+        case .fileEnumeratorCreationFailed(let url):
             return "Cannot create file enumerator for URL: \(url)."
-        case let .invalidFileEnumeratorContent(url):
+        case .invalidFileEnumeratorContent(let url):
             return "Cannot get contents from the file enumerator at URL: \(url)."
-        case let .invalidURLResource(error, key, url):
+        case .invalidURLResource(let error, let key, let url):
             return "Cannot get URL resource values or data for the given URL: \(url). " +
-                "Cache key: \(key). Underlying error: \(error)"
-        case let .cannotLoadDataFromDisk(url, error):
+                   "Cache key: \(key). Underlying error: \(error)"
+        case .cannotLoadDataFromDisk(let url, let error):
             return "Cannot load data from disk at URL: \(url). Underlying error: \(error)"
-        case let .cannotCreateDirectory(path, error):
+        case .cannotCreateDirectory(let path, let error):
             return "Cannot create directory at given path: Path: \(path). Underlying error: \(error)"
-        case let .imageNotExisting(key):
+        case .imageNotExisting(let key):
             return "The image is not in cache, but you requires it should only be " +
-                "from cache by enabling the `.onlyFromCache` option. Key: \(key)."
-        case let .cannotConvertToData(object, error):
+                   "from cache by enabling the `.onlyFromCache` option. Key: \(key)."
+        case .cannotConvertToData(let object, let error):
             return "Cannot convert the input object to a `Data` object when storing it to disk cache. " +
-                "Object: \(object). Underlying error: \(error)"
-        case let .cannotSerializeImage(image, originalData, serializer):
+                   "Object: \(object). Underlying error: \(error)"
+        case .cannotSerializeImage(let image, let originalData, let serializer):
             return "Cannot serialize an image due to the cache serializer returning `nil`. " +
-                "Image: \(String(describing: image)), original data: \(String(describing: originalData)), serializer: \(serializer)."
+                   "Image: \(String(describing:image)), original data: \(String(describing: originalData)), serializer: \(serializer)."
         }
     }
-
+    
     var errorCode: Int {
         switch self {
         case .fileEnumeratorCreationFailed: return 3001
@@ -351,11 +358,11 @@ extension KingfisherError.CacheErrorReason {
 extension KingfisherError.ProcessorErrorReason {
     var errorDescription: String? {
         switch self {
-        case let .processingFailed(processor, item):
+        case .processingFailed(let processor, let item):
             return "Processing image failed. Processor: \(processor). Processing item: \(item)."
         }
     }
-
+    
     var errorCode: Int {
         switch self {
         case .processingFailed: return 4001
@@ -368,21 +375,21 @@ extension KingfisherError.ImageSettingErrorReason {
         switch self {
         case .emptySource:
             return "The input resource is empty."
-        case let .notCurrentSourceTask(result, error, resource):
+        case .notCurrentSourceTask(let result, let error, let resource):
             if let result = result {
                 return "Retrieving resource succeeded, but this source is " +
-                    "not the one currently expected. Result: \(result). Resource: \(resource)."
+                       "not the one currently expected. Result: \(result). Resource: \(resource)."
             } else if let error = error {
                 return "Retrieving resource failed, and this resource is " +
-                    "not the one currently expected. Error: \(error). Resource: \(resource)."
+                       "not the one currently expected. Error: \(error). Resource: \(resource)."
             } else {
                 return nil
             }
-        case let .dataProviderError(provider, error):
+        case .dataProviderError(let provider, let error):
             return "Image data provider fails to provide data. Provider: \(provider), error: \(error)"
         }
     }
-
+    
     var errorCode: Int {
         switch self {
         case .emptySource: return 5001

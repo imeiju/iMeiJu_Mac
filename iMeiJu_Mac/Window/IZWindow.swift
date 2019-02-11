@@ -15,6 +15,10 @@ class IZWindow: NSWindow {
                    styleMask: style,
                    backing: backingStoreType,
                    defer: flag)
+//        let resize = standardWindowButton(NSWindow.ButtonType.zoomButton)
+//        resize?.isHidden = true
+//        titleVisibility = .hidden
+//        titlebarAppearsTransparent = true
         backingType = .buffered
     }
 }

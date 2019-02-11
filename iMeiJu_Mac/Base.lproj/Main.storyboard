@@ -142,8 +142,8 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="iMeiJu for Mac" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA" customClass="IZWindow" customModule="iMeiJu_Mac" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                    <window key="window" title="iMeiJu for Mac" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="IZWindow" customModule="iMeiJu_Mac" customModuleProvider="target">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1002" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
@@ -162,18 +162,18 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="IZMainViewController" customModule="iMeiJu_Mac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1002" height="600"/>
+                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" customClass="IZView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="1002" height="682"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a75-Vu-acx">
-                                <rect key="frame" x="70" y="0.0" width="932" height="600"/>
-                                <clipView key="contentView" id="FRX-yC-SZG">
-                                    <rect key="frame" x="1" y="1" width="930" height="598"/>
+                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a75-Vu-acx" customClass="IZScrollerView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                                <rect key="frame" x="88" y="0.0" width="914" height="682"/>
+                                <clipView key="contentView" id="FRX-yC-SZG" customClass="IZClipView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                                    <rect key="frame" x="1" y="1" width="912" height="680"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <collectionView id="CuU-Zl-x9L">
-                                            <rect key="frame" x="0.0" y="0.0" width="930" height="598"/>
+                                        <collectionView id="CuU-Zl-x9L" customClass="IZCollectionView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="912" height="680"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="MZX-EU-kH7">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -195,17 +195,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="9uF-Ob-rWU">
-                                <rect key="frame" x="0.0" y="0.0" width="70" height="600"/>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="9uF-Ob-rWU" customClass="IZMenusView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="88" height="682"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-nE-wT6">
-                                        <rect key="frame" x="15" y="280" width="40" height="40"/>
+                                        <rect key="frame" x="27" y="341" width="34" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="4We-aW-UG2"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="DMs-nC-0cA"/>
-                                            <constraint firstAttribute="width" constant="40" id="haD-hB-dkN"/>
+                                            <constraint firstAttribute="height" constant="60" id="9pf-8f-4F3"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="dianying" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="rVm-T3-bKw">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="movie" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="rVm-T3-bKw">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -213,12 +211,45 @@
                                             <action selector="movie:" target="XfG-lQ-9wD" id="x0D-2o-cpR"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-xC-U6K">
-                                        <rect key="frame" x="15" y="420" width="40" height="40"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bDb-Bn-rlQ">
+                                        <rect key="frame" x="27" y="241" width="34" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="GPJ-f6-DWP"/>
+                                            <constraint firstAttribute="height" constant="60" id="eo7-NI-ZfL"/>
                                         </constraints>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="tuijian" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="MF7-4O-7JH">
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="television" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="UPT-Wy-iEn">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="television:" target="XfG-lQ-9wD" id="c7L-4n-wS6"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p3t-zW-4uC">
+                                        <rect key="frame" x="26" y="141" width="36" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="0Vy-Ml-m4g"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="search" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="RPJ-Pj-AYP">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="search:" target="XfG-lQ-9wD" id="FBk-z1-JSc"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="21e-4a-OuC">
+                                        <rect key="frame" x="29" y="20" width="31" height="21"/>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="setting" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vP7-xZ-NAY">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-xC-U6K">
+                                        <rect key="frame" x="23" y="441" width="42" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="zGy-Fg-D4E"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="recommend" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="MF7-4O-7JH">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -226,44 +257,19 @@
                                             <action selector="recommend:" target="XfG-lQ-9wD" id="1fA-xK-kW5"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bDb-Bn-rlQ">
-                                        <rect key="frame" x="15" y="140" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="sV7-gT-ybr"/>
-                                        </constraints>
-                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="meiju" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="UPT-Wy-iEn">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="usMove:" target="XfG-lQ-9wD" id="Ms2-bE-q5Q"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kfI-jc-McM">
-                                        <rect key="frame" x="14" y="8" width="43" height="18"/>
-                                        <buttonCell key="cell" type="check" title="VIP" bezelStyle="regularSquare" imagePosition="left" inset="2" id="2ZL-ys-bJZ">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="vip:" target="XfG-lQ-9wD" id="1oT-a2-5Qn"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="leading" secondItem="zg3-nE-wT6" secondAttribute="leading" id="1T2-if-tbe"/>
-                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="Bmf-Al-a1o"/>
-                                    <constraint firstItem="kfI-jc-McM" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="Bzp-u6-Zf5"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="leading" secondItem="Pwv-xC-U6K" secondAttribute="leading" id="Cdf-R8-ex7"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="FFL-fl-XX3"/>
-                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="top" secondItem="zg3-nE-wT6" secondAttribute="bottom" constant="100" id="IFJ-m7-GrM"/>
-                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="trailing" secondItem="zg3-nE-wT6" secondAttribute="trailing" id="NQl-ol-80I"/>
-                                    <constraint firstAttribute="width" constant="70" id="O0I-iY-JIb"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="centerY" secondItem="9uF-Ob-rWU" secondAttribute="centerY" id="XOt-ZH-2XA"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="trailing" secondItem="Pwv-xC-U6K" secondAttribute="trailing" id="cW0-9z-aYU"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="top" secondItem="Pwv-xC-U6K" secondAttribute="bottom" constant="100" id="jQa-qh-7Wh"/>
-                                    <constraint firstAttribute="bottom" secondItem="kfI-jc-McM" secondAttribute="bottom" constant="10" id="mUl-W8-kPa"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="top" secondItem="Pwv-xC-U6K" secondAttribute="bottom" constant="100" id="tJ1-AG-Hk8"/>
+                                    <constraint firstItem="21e-4a-OuC" firstAttribute="top" secondItem="p3t-zW-4uC" secondAttribute="bottom" constant="100" id="42J-Dp-Yxc"/>
+                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="top" secondItem="zg3-nE-wT6" secondAttribute="bottom" constant="40" id="Alt-AF-JTA"/>
+                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="top" secondItem="Pwv-xC-U6K" secondAttribute="bottom" constant="40" id="NnT-9L-qNx"/>
+                                    <constraint firstAttribute="width" constant="88" id="O0I-iY-JIb"/>
+                                    <constraint firstAttribute="bottom" secondItem="21e-4a-OuC" secondAttribute="bottom" constant="20" id="QnK-QP-EGs"/>
+                                    <constraint firstItem="p3t-zW-4uC" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="SfV-WJ-U8O"/>
+                                    <constraint firstItem="Pwv-xC-U6K" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="X9B-l7-gmr"/>
+                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="a03-Ub-ONJ"/>
+                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="jXj-Kf-pCI"/>
+                                    <constraint firstItem="p3t-zW-4uC" firstAttribute="top" secondItem="bDb-Bn-rlQ" secondAttribute="bottom" constant="40" id="kzR-a5-wSs"/>
+                                    <constraint firstItem="21e-4a-OuC" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="wq4-WT-ZIj"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -279,20 +285,24 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="CuU-Zl-x9L" id="Jvk-1y-ZhM"/>
+                        <outlet property="menusView" destination="9uF-Ob-rWU" id="nFo-Jg-jno"/>
                         <outlet property="movie" destination="zg3-nE-wT6" id="BGc-LC-dzA"/>
                         <outlet property="recommend" destination="Pwv-xC-U6K" id="g5D-CD-mLd"/>
-                        <outlet property="usMovie" destination="bDb-Bn-rlQ" id="7OK-a5-x1B"/>
-                        <outlet property="vip" destination="kfI-jc-McM" id="tWL-9j-IZb"/>
+                        <outlet property="search" destination="p3t-zW-4uC" id="ywS-3o-zYz"/>
+                        <outlet property="setting" destination="21e-4a-OuC" id="5wt-3c-vKx"/>
+                        <outlet property="television" destination="bDb-Bn-rlQ" id="Jm4-K8-NjS"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="50" y="1376"/>
+            <point key="canvasLocation" x="50" y="1335"/>
         </scene>
     </scenes>
     <resources>
-        <image name="dianying" width="64" height="64"/>
-        <image name="meiju" width="64" height="64"/>
-        <image name="tuijian" width="64" height="64"/>
+        <image name="movie" width="34" height="67"/>
+        <image name="recommend" width="42" height="68"/>
+        <image name="search" width="36" height="61"/>
+        <image name="setting" width="31" height="21"/>
+        <image name="television" width="34" height="63"/>
     </resources>
 </document>

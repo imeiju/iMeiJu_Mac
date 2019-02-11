@@ -14,16 +14,21 @@ import SwiftyJSON
 enum MenuType: Int {
     case recommend = 0
     case movie = 1
-    case usMovie = 2
+    case television = 2
+    case search = 3
 }
 
 class IZMainViewController: NSViewController {
+    
+    @IBOutlet weak var menusView: IZMenusView!
+    
     @IBOutlet var collectionView: NSCollectionView!
-    @IBOutlet var vip: NSButton!
     @IBOutlet var recommend: NSButton!
     @IBOutlet var movie: NSButton!
-    @IBOutlet var usMovie: NSButton!
-
+    @IBOutlet var television: NSButton!
+    @IBOutlet weak var search: NSButton!
+    @IBOutlet weak var setting: NSButton!
+    
     var model: IZMainModel?
     var api = MoyaApi.index(vsize: "15")
     var isZtid = true
@@ -31,24 +36,32 @@ class IZMainViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recommend.setAttributedString("推荐", color: .white)
+        movie.setAttributedString("电影", color: .white)
+        television.setAttributedString("美剧", color : .white)
+        search.setAttributedString("搜索", color: .white)
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(search), name: NSNotification.Name(rawValue: "search"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(search(_:)), name: NSNotification.Name(rawValue: "search"), object: nil)
         view.wantsLayer = true
         if UserDefaults.standard.bool(forKey: "isVip") {
-            vip.state = NSControl.StateValue.on
+//            vip.state = NSControl.StateValue.on
         }
-        vip.isHidden = true
-        recommend.isEnabled = false
         windowConfiguration()
         collectionViewConfiguration()
-        network()
+        
+        // 默认选择推荐
+        recommend(recommend)
+        
     }
 
     @IBAction func recommend(_ sender: NSButton) {
-        vip.isHidden = true
-        sender.isEnabled = false
-        movie.isEnabled = true
-        usMovie.isEnabled = true
+        sender.image = NSImage(named: "recommend_select")
+        movie.image = NSImage(named: "movie")
+        television.image = NSImage(named: "television")
+        search.image = NSImage(named: "search")
         api = .index(vsize: "15")
         isZtid = true
         isMenu = .recommend
@@ -56,27 +69,37 @@ class IZMainViewController: NSViewController {
     }
 
     @IBAction func movie(_ sender: NSButton) {
-        vip.isHidden = false
-        sender.isEnabled = false
-        recommend.isEnabled = true
-        usMovie.isEnabled = true
+        sender.image = NSImage(named: "movie_select")
+        recommend.image = NSImage(named: "recommend")
+        television.image = NSImage(named: "television")
+        search.image = NSImage(named: "search")
         api = .movie(id: "1", vsize: "15")
         isZtid = false
         isMenu = .movie
         network()
     }
 
-    @IBAction func usMove(_ sender: NSButton) {
-        vip.isHidden = true
-        sender.isEnabled = false
-        movie.isEnabled = true
-        recommend.isEnabled = true
+    @IBAction func television(_ sender: NSButton) {
+        sender.image = NSImage(named: "television_select")
+        recommend.image = NSImage(named: "recommend")
+        movie.image = NSImage(named: "movie")
+        search.image = NSImage(named: "search")
         api = .movie(id: "2", vsize: "15")
         isZtid = false
-        isMenu = .usMovie
+        isMenu = .television
         network()
     }
 
+    @IBAction func search(_ sender: NSButton) {
+        sender.image = NSImage(named: "search_select")
+        recommend.image = NSImage(named: "recommend")
+        movie.image = NSImage(named: "movie")
+        television.image = NSImage(named: "television")
+        let search = IZSearchWindowContoller(windowNibName: "IZSearchWindowContoller")
+        jumpWindow(window: search.window!, name: "搜索")
+    }
+    
+    
     @IBAction func vip(_ sender: NSButton) {
         UserDefaults.standard.set(sender.state, forKey: "isVip")
         collectionView.reloadData()
@@ -86,17 +109,13 @@ class IZMainViewController: NSViewController {
         network()
     }
 
-    @objc func search() {
-        let search = IZSearchWindowContoller(windowNibName: "IZSearchWindowContoller")
-        jumpWindow(window: search.window!, name: "搜索")
-    }
-
     func windowConfiguration() {
         let window = NSApplication.shared.windows.first
         var frame = window?.frame
-        frame?.size.width = 1002
+        frame?.size.width = 800
         frame?.size.height = 600
         window?.setFrame(frame!, display: true)
+        
     }
 
     func network() {
@@ -110,28 +129,23 @@ class IZMainViewController: NSViewController {
                 self.model = IZMainModel(fromJson: json)
                 self.collectionView.reloadData()
                 // 刷新完成后 回滚到顶部
-                self.collectionView.scrollToItems(at: Set(arrayLiteral: IndexPath(item: 0, section: 0)), scrollPosition: .top)
+                self.collectionView.scroll(NSPoint(x: 0, y: 0))
             case .failure: break
             }
         }
     }
 
     func collectionViewConfiguration() {
-        collectionView.collectionViewLayout = layout
+        collectionView.collectionViewLayout = IZLayout.layout()
         collectionView.isSelectable = true
         collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
         collectionView.register(NSNib(nibNamed: "IZMainSectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
-
-    let layout: NSCollectionViewFlowLayout = {
-        let layout = NSCollectionViewFlowLayout()
-        layout.itemSize = NSSize(width: 200, height: 260)
-        layout.sectionInset = NSEdgeInsetsZero
-        layout.minimumLineSpacing = CGFloat.leastNormalMagnitude
-        layout.minimumInteritemSpacing = CGFloat.leastNormalMagnitude
-        layout.sectionHeadersPinToVisibleBounds = true
-        return layout
-    }()
+    
+    override func viewDidDisappear() {
+        ProgressHUD.dismiss()
+    }
+    
 }
 
 extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
@@ -152,8 +166,8 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZStillsViewItem
         let m = model!.data[indexPath.section].vod![indexPath.item]
-        item.setName(name: m.name)
-        item.setImageUrl(url: m.pic)
+        item.setName(m.name)
+        item.setImageUrl(m.pic)
         return item
     }
 
@@ -187,6 +201,7 @@ extension IZMainViewController: NSCollectionViewDataSource, NSCollectionViewDele
     }
 
     func collectionView(_: NSCollectionView, layout _: NSCollectionViewLayout, referenceSizeForHeaderInSection _: Int) -> NSSize {
-        return NSSize(width: 1002, height: 40)
+        return NSSize(width: view.frame.size.width, height: 44)
     }
+    
 }

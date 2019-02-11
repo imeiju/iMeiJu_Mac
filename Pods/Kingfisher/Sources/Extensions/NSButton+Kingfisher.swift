@@ -24,9 +24,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+
 import AppKit
 
 extension KingfisherWrapper where Base: NSButton {
+
     // MARK: Setting Image
 
     /// Sets an image to the button with a source.
@@ -51,8 +53,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: Image? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         var mutatingSelf = self
         guard let source = source else {
             base.image = placeholder
@@ -80,8 +82,7 @@ extension KingfisherWrapper where Base: NSButton {
                 DispatchQueue.main.safeAsync {
                     guard issuedIdentifier == self.taskIdentifier else {
                         let error = KingfisherError.imageSettingError(
-                            reason: .notCurrentSourceTask(result: result.value, error: result.error, source: source)
-                        )
+                            reason: .notCurrentSourceTask(result: result.value, error: result.error, source: source))
                         completionHandler?(.failure(error))
                         return
                     }
@@ -89,7 +90,7 @@ extension KingfisherWrapper where Base: NSButton {
                     mutatingSelf.imageTask = nil
 
                     switch result {
-                    case let .success(value):
+                    case .success(let value):
                         self.base.image = value.image
                         completionHandler?(result)
                     case .failure:
@@ -128,15 +129,14 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: Image? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         return setImage(
             with: resource.map { .network($0) },
             placeholder: placeholder,
             options: options,
             progressBlock: progressBlock,
-            completionHandler: completionHandler
-        )
+            completionHandler: completionHandler)
     }
 
     // MARK: Cancelling Downloading Task
@@ -155,8 +155,8 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: Image? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         var mutatingSelf = self
         guard let source = source else {
             base.alternateImage = placeholder
@@ -183,8 +183,7 @@ extension KingfisherWrapper where Base: NSButton {
                 CallbackQueue.mainCurrentOrAsync.execute {
                     guard issuedIdentifier == self.alternateTaskIdentifier else {
                         let error = KingfisherError.imageSettingError(
-                            reason: .notCurrentSourceTask(result: result.value, error: result.error, source: source)
-                        )
+                            reason: .notCurrentSourceTask(result: result.value, error: result.error, source: source))
                         completionHandler?(.failure(error))
                         return
                     }
@@ -192,7 +191,7 @@ extension KingfisherWrapper where Base: NSButton {
                     mutatingSelf.alternateImageTask = nil
 
                     switch result {
-                    case let .success(value):
+                    case .success(let value):
                         self.base.alternateImage = value.image
                         completionHandler?(result)
                     case .failure:
@@ -231,15 +230,14 @@ extension KingfisherWrapper where Base: NSButton {
         placeholder: Image? = nil,
         options: KingfisherOptionsInfo? = nil,
         progressBlock: DownloadProgressBlock? = nil,
-        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil
-    ) -> DownloadTask? {
+        completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) -> DownloadTask?
+    {
         return setAlternateImage(
             with: resource.map { .network($0) },
             placeholder: placeholder,
             options: options,
             progressBlock: progressBlock,
-            completionHandler: completionHandler
-        )
+            completionHandler: completionHandler)
     }
 
     // MARK: Cancelling Alternate Image Downloading Task
@@ -251,8 +249,8 @@ extension KingfisherWrapper where Base: NSButton {
     }
 }
 
-// MARK: - Associated Object
 
+// MARK: - Associated Object
 private var taskIdentifierKey: Void?
 private var imageTaskKey: Void?
 
@@ -260,8 +258,9 @@ private var alternateTaskIdentifierKey: Void?
 private var alternateImageTaskKey: Void?
 
 extension KingfisherWrapper where Base: NSButton {
-    // MARK: Properties
 
+    // MARK: Properties
+    
     public private(set) var taskIdentifier: Source.Identifier.Value? {
         get {
             let box: Box<Source.Identifier.Value>? = getAssociatedObject(base, &taskIdentifierKey)
@@ -272,10 +271,10 @@ extension KingfisherWrapper where Base: NSButton {
             setRetainedAssociatedObject(base, &taskIdentifierKey, box)
         }
     }
-
+    
     private var imageTask: DownloadTask? {
         get { return getAssociatedObject(base, &imageTaskKey) }
-        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue) }
+        set { setRetainedAssociatedObject(base, &imageTaskKey, newValue)}
     }
 
     public private(set) var alternateTaskIdentifier: Source.Identifier.Value? {
@@ -291,22 +290,24 @@ extension KingfisherWrapper where Base: NSButton {
 
     private var alternateImageTask: DownloadTask? {
         get { return getAssociatedObject(base, &alternateImageTaskKey) }
-        set { setRetainedAssociatedObject(base, &alternateImageTaskKey, newValue) }
+        set { setRetainedAssociatedObject(base, &alternateImageTaskKey, newValue)}
     }
 }
 
 extension KingfisherWrapper where Base: NSButton {
+
     /// Gets the image URL bound to this button.
     @available(*, obsoleted: 5.0, message: "Use `taskIdentifier` instead to identify a setting task.")
     public private(set) var webURL: URL? {
         get { return nil }
-        set {}
+        set { }
     }
+
 
     /// Gets the image URL bound to this button.
     @available(*, obsoleted: 5.0, message: "Use `alternateTaskIdentifier` instead to identify a setting task.")
     public private(set) var alternateWebURL: URL? {
         get { return nil }
-        set {}
+        set { }
     }
 }

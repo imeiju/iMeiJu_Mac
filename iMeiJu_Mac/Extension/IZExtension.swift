@@ -20,9 +20,17 @@ extension NSColor {
     }
 }
 
+extension NSButton {
+    
+    func setAttributedString(_ string: String, color: NSColor) {
+        attributedTitle = NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : color])
+    }
+    
+}
+
 extension NSImageView {
     func setImage(_ url: String) {
-        kf.setImage(with: URL(string: url), placeholder: NSImage(named: ""), options: nil, progressBlock: nil) { _ in
+        kf.setImage(with: URL(string: url), placeholder: NSApplication.shared.applicationIconImage, options: nil, progressBlock: nil) { _ in
         }
     }
 }
