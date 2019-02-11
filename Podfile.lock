@@ -23,6 +23,7 @@ PODS:
   - SQLite.swift/standard (0.11.5)
   - SwiftHEXColors (1.2.0)
   - SwiftyJSON (4.2.0)
+  - VersaPlayer (2.2.3)
 
 DEPENDENCIES:
   - Kingfisher (~> 5.1.0)
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - SQLite.swift (~> 0.11.5)
   - SwiftHEXColors (~> 1.2.0)
   - SwiftyJSON (~> 4.2.0)
+  - VersaPlayer (~> 2.2.3)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,6 +44,7 @@ SPEC REPOS:
     - SQLite.swift
     - SwiftHEXColors
     - SwiftyJSON
+    - VersaPlayer
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
@@ -52,7 +55,8 @@ SPEC CHECKSUMS:
   SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
   SwiftHEXColors: a4ebe93a70890a9fa124e205dd785cc7552273b4
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  VersaPlayer: 105ab14111cd48ea1705cf24c66366536da86935
 
-PODFILE CHECKSUM: 032d0c9dc87c853ea7db38fa8a1da6924f9628f8
+PODFILE CHECKSUM: 66a1633c8534bcbc58358568e08adebc59ec782b
 
 COCOAPODS: 1.5.3
