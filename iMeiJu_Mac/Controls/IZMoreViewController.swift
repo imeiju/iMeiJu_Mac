@@ -13,8 +13,13 @@ import SQLite
 import SwiftyJSON
 
 class IZMoreViewController: NSViewController {
+    
+    @IBOutlet weak var titleLabel: NSTextField!
+    
     @IBOutlet var collectionView: NSCollectionView!
 
+    var name: String!
+    
     var ztid: String?
     var id: String?
     var api: MoyaApi!
@@ -22,6 +27,9 @@ class IZMoreViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        titleLabel.stringValue = name
+        
         collectionViewConfiguration()
         if ztid == nil {
             api = .movieMore(page: "1", size: "10000", id: id!)
@@ -55,6 +63,7 @@ class IZMoreViewController: NSViewController {
     }
     
     override func viewDidDisappear() {
+        super.viewDidDisappear()
         ProgressHUD.dismiss()
     }
 }
@@ -81,6 +90,7 @@ extension IZMoreViewController: NSCollectionViewDelegate, NSCollectionViewDataSo
         let m = model!.data[indexPaths.first!.item]
         let plot = IZPlotMessgaeWindowController(windowNibName: "IZPlotMessgaeWindowController")
         plot.id = m.id
-        jumpWindow(window: plot.window!, name: m.name)
+        plot.name = m.name
+        jumpWindow(window: plot.window!)
     }
 }

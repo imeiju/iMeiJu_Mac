@@ -30,14 +30,12 @@ extension NSButton {
 
 extension NSImageView {
     func setImage(_ url: String) {
-        kf.setImage(with: URL(string: url), placeholder: NSApplication.shared.applicationIconImage, options: nil, progressBlock: nil) { _ in
-        }
+        kf.setImage(with: URL(string: url), placeholder: NSImage(named: "placeholder"))
     }
 }
 
 extension NSViewController {
-    func jumpWindow(window: NSWindow, name: String) {
-        window.title = name
+    func jumpWindow(window: NSWindow) {
         window.setFrame(NSApplication.shared.windows.first!.frame, display: true)
         window.orderFront(nil)
     }

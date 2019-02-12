@@ -31,6 +31,11 @@
   <img src="Resource/imgs/preview.gif" width="500" />
 </p>
 
-### 新版本预览
-
-<img src="Resource/imgs/首页.png" width="300" />
+<p align="center">
+<img src="Resource/imgs/推荐.png" width="260" />
+<img src="Resource/imgs/电影.png" width="260" />
+<img src="Resource/imgs/美剧.png" width="260" />
+<img src="Resource/imgs/搜索.png" width="260" />
+<img src="Resource/imgs/选集.png" width="260" />
+<img src="Resource/imgs/播放.png" width="260" />
+</p>

@@ -8,63 +8,74 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="IZSearchViewController" customModule="iMeiJu_Mac" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="dBq-WI-rlh" id="OCE-qU-OQ9"/>
+                <outlet property="collectionView" destination="qgh-H5-EGh" id="rbt-s7-ZVS"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
-                <outlet property="words" destination="Jpm-a7-e59" id="XZc-oO-vVU"/>
+                <outlet property="words" destination="usU-nT-bbO" id="sfl-2M-zeC"/>
+                <outlet property="wordsBackgroundView" destination="ZIU-Cn-ASm" id="zGu-il-KZM"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY" customClass="IZView" customModule="iMeiJu_Mac" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="1002" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKS-aK-mUr" customClass="IZScrollerView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="1002" height="535"/>
-                    <clipView key="contentView" id="NXQ-FP-l53" customClass="IZClipView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                        <rect key="frame" x="1" y="1" width="1000" height="533"/>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="ZIU-Cn-ASm" customClass="IZSearchView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                    <rect key="frame" x="200" y="520" width="400" height="40"/>
+                    <subviews>
+                        <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usU-nT-bbO">
+                            <rect key="frame" x="3" y="3" width="394" height="34"/>
+                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="请输入你要搜索的内容" usesSingleLineMode="YES" bezelStyle="round" id="gUA-LC-UOz">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </searchFieldCell>
+                        </searchField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="GkQ-aw-8Is"/>
+                        <constraint firstItem="usU-nT-bbO" firstAttribute="leading" secondItem="ZIU-Cn-ASm" secondAttribute="leading" constant="3" id="O64-7w-mXY"/>
+                        <constraint firstAttribute="trailing" secondItem="usU-nT-bbO" secondAttribute="trailing" constant="3" id="cDA-eO-E9z"/>
+                        <constraint firstAttribute="bottom" secondItem="usU-nT-bbO" secondAttribute="bottom" constant="3" id="cmh-Od-Td1"/>
+                        <constraint firstItem="usU-nT-bbO" firstAttribute="top" secondItem="ZIU-Cn-ASm" secondAttribute="top" constant="3" id="dWa-K3-Fsf"/>
+                    </constraints>
+                </customView>
+                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aA2-Rs-gwh" customClass="IZScrollerView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="800" height="515"/>
+                    <clipView key="contentView" id="fMS-Nq-Ciy" customClass="IZClipView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                        <rect key="frame" x="1" y="1" width="798" height="513"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView id="dBq-WI-rlh" customClass="IZCollectionView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1000" height="158"/>
+                            <collectionView id="qgh-H5-EGh" customClass="IZCollectionView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="798" height="158"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="RzK-n8-B4v">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="2p1-Fh-Ogk">
                                     <size key="itemSize" width="50" height="50"/>
                                 </collectionViewFlowLayout>
                                 <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </collectionView>
                         </subviews>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="oZE-Lu-3hm">
-                        <rect key="frame" x="1" y="143" width="248" height="16"/>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="UhR-o3-rRi">
+                        <rect key="frame" x="1" y="144" width="233" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="V2Y-et-Jot">
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="PRw-55-a5v">
                         <rect key="frame" x="234" y="1" width="15" height="143"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpm-a7-e59">
-                    <rect key="frame" x="10" y="540" width="982" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="iJZ-35-EF4"/>
-                    </constraints>
-                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="center" placeholderString="请输入所要查找的内容" usesSingleLineMode="YES" bezelStyle="round" id="SDf-3T-SlB">
-                        <font key="font" metaFont="system" size="16"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </searchFieldCell>
-                </searchField>
             </subviews>
             <constraints>
-                <constraint firstItem="HKS-aK-mUr" firstAttribute="top" secondItem="Jpm-a7-e59" secondAttribute="bottom" constant="5" id="3I0-Xh-xA5"/>
-                <constraint firstAttribute="trailing" secondItem="HKS-aK-mUr" secondAttribute="trailing" id="5vc-Ch-xOd"/>
-                <constraint firstAttribute="bottom" secondItem="HKS-aK-mUr" secondAttribute="bottom" id="EoC-EX-Ea4"/>
-                <constraint firstItem="Jpm-a7-e59" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="hN2-Xr-6G8"/>
-                <constraint firstItem="Jpm-a7-e59" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="l2X-w5-zPA"/>
-                <constraint firstAttribute="trailing" secondItem="Jpm-a7-e59" secondAttribute="trailing" constant="10" id="nIE-f8-LG8"/>
-                <constraint firstItem="HKS-aK-mUr" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="xy2-ET-aQT"/>
+                <constraint firstItem="ZIU-Cn-ASm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="200" id="K40-S9-VkV"/>
+                <constraint firstAttribute="bottom" secondItem="aA2-Rs-gwh" secondAttribute="bottom" id="QcB-PV-ZgN"/>
+                <constraint firstItem="aA2-Rs-gwh" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="S5A-Z4-9X7"/>
+                <constraint firstAttribute="trailing" secondItem="ZIU-Cn-ASm" secondAttribute="trailing" constant="200" id="XYt-82-FDV"/>
+                <constraint firstItem="aA2-Rs-gwh" firstAttribute="top" secondItem="ZIU-Cn-ASm" secondAttribute="bottom" constant="5" id="ZQs-eg-7J3"/>
+                <constraint firstItem="ZIU-Cn-ASm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="40" id="lYN-Xx-UqM"/>
+                <constraint firstAttribute="trailing" secondItem="aA2-Rs-gwh" secondAttribute="trailing" id="o3X-9S-BmM"/>
             </constraints>
+            <point key="canvasLocation" x="392.5" y="76.5"/>
         </customView>
     </objects>
 </document>

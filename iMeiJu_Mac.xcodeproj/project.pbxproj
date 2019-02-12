@@ -15,29 +15,25 @@
 		2711C7352206CAE4003A28DB /* IZWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7342206CAE4003A28DB /* IZWindow.swift */; };
 		2711C7392206D63C003A28DB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7382206D63C003A28DB /* Network.swift */; };
 		2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7402206F13B003A28DB /* IZMainModel.swift */; };
-		2711C74822071E88003A28DB /* IZMainSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */; };
-		2711C74A22071F4E003A28DB /* IZMainSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */; };
+		2711C74822071E88003A28DB /* IZCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2711C74722071E88003A28DB /* IZCollectionHeaderView.xib */; };
+		2711C74A22071F4E003A28DB /* IZCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C74922071F4E003A28DB /* IZCollectionHeaderView.swift */; };
 		2711C75B2207419D003A28DB /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7592207419D003A28DB /* ProgressHUD.swift */; };
 		2711C75C2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C75A2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift */; };
 		2723E37022081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */; };
 		2723E37122081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */; };
-		2723E37322081FF800EB9CE1 /* IZPlotMessgaeWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E37222081FF800EB9CE1 /* IZPlotMessgaeWindowView.swift */; };
-		2723E378220821E900EB9CE1 /* IZPlotMessgaeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E376220821E900EB9CE1 /* IZPlotMessgaeViewController.swift */; };
-		2723E379220821E900EB9CE1 /* IZPlotMessgaeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */; };
+		2723E378220821E900EB9CE1 /* IZPlotMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E376220821E900EB9CE1 /* IZPlotMessageViewController.swift */; };
+		2723E379220821E900EB9CE1 /* IZPlotMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E377220821E900EB9CE1 /* IZPlotMessageViewController.xib */; };
 		2723E37B2208241700EB9CE1 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2723E37A2208241700EB9CE1 /* AVKit.framework */; };
 		2723E37D2208241C00EB9CE1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2723E37C2208241C00EB9CE1 /* AVFoundation.framework */; };
 		2723E380220829D100EB9CE1 /* IZPlotMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E37F220829D100EB9CE1 /* IZPlotMessageModel.swift */; };
 		2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E38122085FBF00EB9CE1 /* IZEpisodeItem.swift */; };
 		2723E38422085FBF00EB9CE1 /* IZEpisodeItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E38222085FBF00EB9CE1 /* IZEpisodeItem.xib */; };
-		2723E38922092E2E00EB9CE1 /* IZMoreWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E38722092E2E00EB9CE1 /* IZMoreWindowController.swift */; };
-		2723E38A22092E2E00EB9CE1 /* IZMoreWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E38822092E2E00EB9CE1 /* IZMoreWindowController.xib */; };
+		277720522212EFD000BADE4D /* IZMainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277720512212EFD000BADE4D /* IZMainWindowController.swift */; };
 		278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604A8220930FF0097192A /* IZStillsViewItem.swift */; };
 		278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604A9220930FF0097192A /* IZStillsViewItem.xib */; };
 		278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604AC2209418D0097192A /* IZMoreViewController.swift */; };
 		278604AF2209418D0097192A /* IZMoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604AD2209418D0097192A /* IZMoreViewController.xib */; };
 		278604B2220955530097192A /* IZMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B1220955530097192A /* IZMoreModel.swift */; };
-		278604B52209A2660097192A /* IZSearchWindowContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B32209A2660097192A /* IZSearchWindowContoller.swift */; };
-		278604B62209A2660097192A /* IZSearchWindowContoller.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604B42209A2660097192A /* IZSearchWindowContoller.xib */; };
 		278604B92209A27B0097192A /* IZSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604B72209A27B0097192A /* IZSearchViewController.swift */; };
 		278604BA2209A27B0097192A /* IZSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604B82209A27B0097192A /* IZSearchViewController.xib */; };
 		279403CB22114F8800970316 /* IZMenusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403CA22114F8800970316 /* IZMenusView.swift */; };
@@ -47,6 +43,14 @@
 		279403D622116D9100970316 /* IZView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403D522116D9100970316 /* IZView.swift */; };
 		279403D8221173E000970316 /* IZImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403D7221173E000970316 /* IZImageView.swift */; };
 		279403DB22119D4E00970316 /* IZLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279403DA22119D4E00970316 /* IZLayout.swift */; };
+		2794041022127D6A00970316 /* IZCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794040E22127D6A00970316 /* IZCollectionViewController.swift */; };
+		2794041122127D6A00970316 /* IZCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2794040F22127D6A00970316 /* IZCollectionViewController.xib */; };
+		27940418221292D000970316 /* IZSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27940416221292D000970316 /* IZSettingViewController.swift */; };
+		27940419221292D000970316 /* IZSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27940417221292D000970316 /* IZSettingViewController.xib */; };
+		2794041B2212A18F00970316 /* IZSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794041A2212A18F00970316 /* IZSearchView.swift */; };
+		2794041E2212A86500970316 /* IZMoreWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2794041C2212A86500970316 /* IZMoreWindowController.swift */; };
+		2794041F2212A86500970316 /* IZMoreWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2794041D2212A86500970316 /* IZMoreWindowController.xib */; };
+		279404272212D35400970316 /* IZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279404262212D35400970316 /* IZButton.swift */; };
 		27978E7822114E5300C1EB6B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27978E7722114E5200C1EB6B /* CFNetwork.framework */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
@@ -64,29 +68,25 @@
 		2711C7342206CAE4003A28DB /* IZWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZWindow.swift; sourceTree = "<group>"; };
 		2711C7382206D63C003A28DB /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2711C7402206F13B003A28DB /* IZMainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMainModel.swift; sourceTree = "<group>"; };
-		2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMainSectionHeaderView.xib; sourceTree = "<group>"; };
-		2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainSectionHeaderView.swift; sourceTree = "<group>"; };
+		2711C74722071E88003A28DB /* IZCollectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZCollectionHeaderView.xib; sourceTree = "<group>"; };
+		2711C74922071F4E003A28DB /* IZCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZCollectionHeaderView.swift; sourceTree = "<group>"; };
 		2711C7592207419D003A28DB /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		2711C75A2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YRKSpinningProgressIndicatorLayer.swift; sourceTree = "<group>"; };
 		2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessgaeWindowController.swift; sourceTree = "<group>"; };
 		2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZPlotMessgaeWindowController.xib; sourceTree = "<group>"; };
-		2723E37222081FF800EB9CE1 /* IZPlotMessgaeWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessgaeWindowView.swift; sourceTree = "<group>"; };
-		2723E376220821E900EB9CE1 /* IZPlotMessgaeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessgaeViewController.swift; sourceTree = "<group>"; };
-		2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZPlotMessgaeViewController.xib; sourceTree = "<group>"; };
+		2723E376220821E900EB9CE1 /* IZPlotMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessageViewController.swift; sourceTree = "<group>"; };
+		2723E377220821E900EB9CE1 /* IZPlotMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZPlotMessageViewController.xib; sourceTree = "<group>"; };
 		2723E37A2208241700EB9CE1 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		2723E37C2208241C00EB9CE1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		2723E37F220829D100EB9CE1 /* IZPlotMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessageModel.swift; sourceTree = "<group>"; };
 		2723E38122085FBF00EB9CE1 /* IZEpisodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZEpisodeItem.swift; sourceTree = "<group>"; };
 		2723E38222085FBF00EB9CE1 /* IZEpisodeItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZEpisodeItem.xib; sourceTree = "<group>"; };
-		2723E38722092E2E00EB9CE1 /* IZMoreWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMoreWindowController.swift; sourceTree = "<group>"; };
-		2723E38822092E2E00EB9CE1 /* IZMoreWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMoreWindowController.xib; sourceTree = "<group>"; };
+		277720512212EFD000BADE4D /* IZMainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainWindowController.swift; sourceTree = "<group>"; };
 		278604A8220930FF0097192A /* IZStillsViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZStillsViewItem.swift; sourceTree = "<group>"; };
 		278604A9220930FF0097192A /* IZStillsViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZStillsViewItem.xib; sourceTree = "<group>"; };
 		278604AC2209418D0097192A /* IZMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMoreViewController.swift; sourceTree = "<group>"; };
 		278604AD2209418D0097192A /* IZMoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZMoreViewController.xib; sourceTree = "<group>"; };
 		278604B1220955530097192A /* IZMoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMoreModel.swift; sourceTree = "<group>"; };
-		278604B32209A2660097192A /* IZSearchWindowContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZSearchWindowContoller.swift; sourceTree = "<group>"; };
-		278604B42209A2660097192A /* IZSearchWindowContoller.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZSearchWindowContoller.xib; sourceTree = "<group>"; };
 		278604B72209A27B0097192A /* IZSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZSearchViewController.swift; sourceTree = "<group>"; };
 		278604B82209A27B0097192A /* IZSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZSearchViewController.xib; sourceTree = "<group>"; };
 		279403CA22114F8800970316 /* IZMenusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMenusView.swift; sourceTree = "<group>"; };
@@ -96,6 +96,14 @@
 		279403D522116D9100970316 /* IZView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZView.swift; sourceTree = "<group>"; };
 		279403D7221173E000970316 /* IZImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZImageView.swift; sourceTree = "<group>"; };
 		279403DA22119D4E00970316 /* IZLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZLayout.swift; sourceTree = "<group>"; };
+		2794040E22127D6A00970316 /* IZCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZCollectionViewController.swift; sourceTree = "<group>"; };
+		2794040F22127D6A00970316 /* IZCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZCollectionViewController.xib; sourceTree = "<group>"; };
+		27940416221292D000970316 /* IZSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZSettingViewController.swift; sourceTree = "<group>"; };
+		27940417221292D000970316 /* IZSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZSettingViewController.xib; sourceTree = "<group>"; };
+		2794041A2212A18F00970316 /* IZSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZSearchView.swift; sourceTree = "<group>"; };
+		2794041C2212A86500970316 /* IZMoreWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMoreWindowController.swift; sourceTree = "<group>"; };
+		2794041D2212A86500970316 /* IZMoreWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IZMoreWindowController.xib; sourceTree = "<group>"; };
+		279404262212D35400970316 /* IZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZButton.swift; sourceTree = "<group>"; };
 		27978E7722114E5200C1EB6B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
@@ -190,8 +198,12 @@
 				278604AD2209418D0097192A /* IZMoreViewController.xib */,
 				278604B72209A27B0097192A /* IZSearchViewController.swift */,
 				278604B82209A27B0097192A /* IZSearchViewController.xib */,
-				2723E376220821E900EB9CE1 /* IZPlotMessgaeViewController.swift */,
-				2723E377220821E900EB9CE1 /* IZPlotMessgaeViewController.xib */,
+				2723E376220821E900EB9CE1 /* IZPlotMessageViewController.swift */,
+				2723E377220821E900EB9CE1 /* IZPlotMessageViewController.xib */,
+				2794040E22127D6A00970316 /* IZCollectionViewController.swift */,
+				2794040F22127D6A00970316 /* IZCollectionViewController.xib */,
+				27940416221292D000970316 /* IZSettingViewController.swift */,
+				27940417221292D000970316 /* IZSettingViewController.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -199,9 +211,10 @@
 		2711C72F2206B9D6003A28DB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2711C74922071F4E003A28DB /* IZMainSectionHeaderView.swift */,
-				2711C74722071E88003A28DB /* IZMainSectionHeaderView.xib */,
-				2723E37222081FF800EB9CE1 /* IZPlotMessgaeWindowView.swift */,
+				279403CA22114F8800970316 /* IZMenusView.swift */,
+				2794041A2212A18F00970316 /* IZSearchView.swift */,
+				2711C74922071F4E003A28DB /* IZCollectionHeaderView.swift */,
+				2711C74722071E88003A28DB /* IZCollectionHeaderView.xib */,
 				2723E38122085FBF00EB9CE1 /* IZEpisodeItem.swift */,
 				2723E38222085FBF00EB9CE1 /* IZEpisodeItem.xib */,
 				278604A8220930FF0097192A /* IZStillsViewItem.swift */,
@@ -214,12 +227,11 @@
 			isa = PBXGroup;
 			children = (
 				2711C7342206CAE4003A28DB /* IZWindow.swift */,
+				2794041C2212A86500970316 /* IZMoreWindowController.swift */,
+				2794041D2212A86500970316 /* IZMoreWindowController.xib */,
 				2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */,
 				2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */,
-				2723E38722092E2E00EB9CE1 /* IZMoreWindowController.swift */,
-				2723E38822092E2E00EB9CE1 /* IZMoreWindowController.xib */,
-				278604B32209A2660097192A /* IZSearchWindowContoller.swift */,
-				278604B42209A2660097192A /* IZSearchWindowContoller.xib */,
+				277720512212EFD000BADE4D /* IZMainWindowController.swift */,
 			);
 			path = Window;
 			sourceTree = "<group>";
@@ -287,12 +299,12 @@
 		279403CE2211516C00970316 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				279403CA22114F8800970316 /* IZMenusView.swift */,
 				279403CF2211518B00970316 /* IZScrollerView.swift */,
 				279403CC2211510400970316 /* IZCollectionView.swift */,
 				279403D12211527A00970316 /* IZClipView.swift */,
 				279403D522116D9100970316 /* IZView.swift */,
 				279403D7221173E000970316 /* IZImageView.swift */,
+				279404262212D35400970316 /* IZButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -381,13 +393,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */,
+				2794041F2212A86500970316 /* IZMoreWindowController.xib in Resources */,
+				2794041122127D6A00970316 /* IZCollectionViewController.xib in Resources */,
 				278604AF2209418D0097192A /* IZMoreViewController.xib in Resources */,
 				2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */,
-				2723E379220821E900EB9CE1 /* IZPlotMessgaeViewController.xib in Resources */,
-				2711C74822071E88003A28DB /* IZMainSectionHeaderView.xib in Resources */,
+				27940419221292D000970316 /* IZSettingViewController.xib in Resources */,
+				2723E379220821E900EB9CE1 /* IZPlotMessageViewController.xib in Resources */,
+				2711C74822071E88003A28DB /* IZCollectionHeaderView.xib in Resources */,
 				278604BA2209A27B0097192A /* IZSearchViewController.xib in Resources */,
-				278604B62209A2660097192A /* IZSearchWindowContoller.xib in Resources */,
-				2723E38A22092E2E00EB9CE1 /* IZMoreWindowController.xib in Resources */,
 				278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */,
 				2723E38422085FBF00EB9CE1 /* IZEpisodeItem.xib in Resources */,
 				2723E37122081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib in Resources */,
@@ -465,30 +478,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				2711C7392206D63C003A28DB /* Network.swift in Sources */,
-				2711C74A22071F4E003A28DB /* IZMainSectionHeaderView.swift in Sources */,
-				2723E37322081FF800EB9CE1 /* IZPlotMessgaeWindowView.swift in Sources */,
+				2711C74A22071F4E003A28DB /* IZCollectionHeaderView.swift in Sources */,
 				279403CD2211510400970316 /* IZCollectionView.swift in Sources */,
+				277720522212EFD000BADE4D /* IZMainWindowController.swift in Sources */,
 				2711C75B2207419D003A28DB /* ProgressHUD.swift in Sources */,
-				2723E378220821E900EB9CE1 /* IZPlotMessgaeViewController.swift in Sources */,
+				2723E378220821E900EB9CE1 /* IZPlotMessageViewController.swift in Sources */,
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
 				2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */,
+				2794041B2212A18F00970316 /* IZSearchView.swift in Sources */,
 				278604B92209A27B0097192A /* IZSearchViewController.swift in Sources */,
 				279403D22211527A00970316 /* IZClipView.swift in Sources */,
 				278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */,
 				279403CB22114F8800970316 /* IZMenusView.swift in Sources */,
 				2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */,
-				2723E38922092E2E00EB9CE1 /* IZMoreWindowController.swift in Sources */,
+				2794041022127D6A00970316 /* IZCollectionViewController.swift in Sources */,
 				278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */,
 				279403D622116D9100970316 /* IZView.swift in Sources */,
 				2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */,
-				278604B52209A2660097192A /* IZSearchWindowContoller.swift in Sources */,
 				2711C75C2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift in Sources */,
 				279403DB22119D4E00970316 /* IZLayout.swift in Sources */,
+				27940418221292D000970316 /* IZSettingViewController.swift in Sources */,
 				279403D8221173E000970316 /* IZImageView.swift in Sources */,
 				278604B2220955530097192A /* IZMoreModel.swift in Sources */,
 				2723E37022081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift in Sources */,
+				2794041E2212A86500970316 /* IZMoreWindowController.swift in Sources */,
 				2723E380220829D100EB9CE1 /* IZPlotMessageModel.swift in Sources */,
 				2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */,
+				279404272212D35400970316 /* IZButton.swift in Sources */,
 				2711C7352206CAE4003A28DB /* IZWindow.swift in Sources */,
 				279403D02211518B00970316 /* IZScrollerView.swift in Sources */,
 			);

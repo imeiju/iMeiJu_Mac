@@ -12,6 +12,8 @@ import Moya
 import SwiftyJSON
 
 class IZSearchViewController: NSViewController {
+    
+    @IBOutlet weak var wordsBackgroundView: NSView!
     @IBOutlet var words: NSSearchField!
     @IBOutlet var collectionView: NSCollectionView!
 
@@ -19,11 +21,20 @@ class IZSearchViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        words.isHidden = true
+        
         words.focusRingType = .none
         words.delegate = self
-        if NSPasteboard.general.string(forType: .string) != nil {
-            words.stringValue = NSPasteboard.general.string(forType: .string)!
-        }
+        words.layer?.cornerRadius = words.bounds.size.height/2
+        words.layer?.masksToBounds = true
+        words.layer?.borderColor = NSColor.white.cgColor
+        words.layer?.borderWidth = 3
+        words.resignFirstResponder()
+        
+//        if NSPasteboard.general.string(forType: .string) != nil {
+//            words.stringValue = NSPasteboard.general.string(forType: .string)!
+//        }
+        
         collectionViewConfiguration()
     }
 
@@ -48,10 +59,6 @@ class IZSearchViewController: NSViewController {
         collectionView.collectionViewLayout = IZLayout.layout(40, minimumLineSpacing: 40)
         collectionView.isSelectable = true
         collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
-    }
-    
-    override func viewDidDisappear() {
-        ProgressHUD.dismiss()
     }
     
 }
@@ -86,6 +93,7 @@ extension IZSearchViewController: NSCollectionViewDelegate, NSCollectionViewData
         let m = model!.data[indexPaths.first!.item]
         let plot = IZPlotMessgaeWindowController(windowNibName: "IZPlotMessgaeWindowController")
         plot.id = m.id
-        jumpWindow(window: plot.window!, name: m.name)
+        plot.name = m.name
+        jumpWindow(window: plot.window!)
     }
 }

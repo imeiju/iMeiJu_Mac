@@ -60,6 +60,18 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="File" id="3gX-6q-l6y">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="File" id="fvY-9U-jhK">
+                                    <items>
+                                        <menuItem title="Close" keyEquivalent="w" id="Ra6-Dc-rkh">
+                                            <connections>
+                                                <action selector="performClose:" target="Ady-hI-5gd" id="8Th-Cr-4db"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                             <menuItem title="Edit" id="7Qf-ri-wR5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Edit" id="AZt-yk-xdp">
@@ -106,18 +118,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Options" id="IuY-A8-HGx">
                                     <items>
-                                        <menuItem title="Refresh" keyEquivalent="r" id="HnP-Ms-4Ki">
-                                            <connections>
-                                                <action selector="refresh:" target="Voe-Tx-rLC" id="grU-Wg-cm1"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VCt-Yf-6Xb"/>
-                                        <menuItem title="Search" keyEquivalent="f" id="80y-x9-L6m">
-                                            <connections>
-                                                <action selector="search:" target="Voe-Tx-rLC" id="JRl-t0-WpQ"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="3pU-Pm-1zo"/>
                                         <menuItem title="Github" keyEquivalent="g" id="LdI-yW-2es">
                                             <connections>
                                                 <action selector="github:" target="Voe-Tx-rLC" id="33g-7H-xmR"/>
@@ -141,7 +141,7 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                <windowController id="B8D-0N-5wS" customClass="IZMainWindowController" customModule="iMeiJu_Mac" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="iMeiJu for Mac" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="IZWindow" customModule="iMeiJu_Mac" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="196" y="240" width="1002" height="600"/>
@@ -166,40 +166,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="1002" height="682"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a75-Vu-acx" customClass="IZScrollerView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                                <rect key="frame" x="88" y="0.0" width="914" height="682"/>
-                                <clipView key="contentView" id="FRX-yC-SZG" customClass="IZClipView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                                    <rect key="frame" x="1" y="1" width="912" height="680"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <collectionView id="CuU-Zl-x9L" customClass="IZCollectionView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="912" height="680"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="MZX-EU-kH7">
-                                                <size key="itemSize" width="50" height="50"/>
-                                            </collectionViewFlowLayout>
-                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <outlet property="dataSource" destination="XfG-lQ-9wD" id="Zh7-qP-ffs"/>
-                                                <outlet property="delegate" destination="XfG-lQ-9wD" id="WMa-aR-2BE"/>
-                                            </connections>
-                                        </collectionView>
-                                    </subviews>
-                                </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="6Mw-os-0Q4">
-                                    <rect key="frame" x="-100" y="-100" width="1000" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="4hj-1f-9KH">
-                                    <rect key="frame" x="915" y="1" width="16" height="598"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="9uF-Ob-rWU" customClass="IZMenusView" customModule="iMeiJu_Mac" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="88" height="682"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-nE-wT6">
-                                        <rect key="frame" x="27" y="341" width="34" height="60"/>
+                                        <rect key="frame" x="27" y="380" width="34" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="9pf-8f-4F3"/>
                                         </constraints>
@@ -212,7 +183,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bDb-Bn-rlQ">
-                                        <rect key="frame" x="27" y="241" width="34" height="60"/>
+                                        <rect key="frame" x="27" y="280" width="34" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="eo7-NI-ZfL"/>
                                         </constraints>
@@ -225,7 +196,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p3t-zW-4uC">
-                                        <rect key="frame" x="26" y="141" width="36" height="60"/>
+                                        <rect key="frame" x="26" y="180" width="36" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="0Vy-Ml-m4g"/>
                                         </constraints>
@@ -238,14 +209,17 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="21e-4a-OuC">
-                                        <rect key="frame" x="29" y="20" width="31" height="21"/>
+                                        <rect key="frame" x="14" y="20" width="60" height="60"/>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="setting" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="vP7-xZ-NAY">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="setting:" target="XfG-lQ-9wD" id="o57-3r-hL1"/>
+                                        </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-xC-U6K">
-                                        <rect key="frame" x="23" y="441" width="42" height="60"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-xC-U6K" customClass="IZButton" customModule="iMeiJu_Mac" customModuleProvider="target">
+                                        <rect key="frame" x="23" y="480" width="42" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="zGy-Fg-D4E"/>
                                         </constraints>
@@ -272,19 +246,22 @@
                                     <constraint firstItem="21e-4a-OuC" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="wq4-WT-ZIj"/>
                                 </constraints>
                             </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="3dd-Oy-snq" customClass="IZView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                                <rect key="frame" x="88" y="0.0" width="914" height="682"/>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="a75-Vu-acx" secondAttribute="trailing" id="4i2-XZ-TQ6"/>
-                            <constraint firstAttribute="bottom" secondItem="a75-Vu-acx" secondAttribute="bottom" id="DWT-Bb-qnF"/>
-                            <constraint firstItem="a75-Vu-acx" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="OOu-f5-8rw"/>
+                            <constraint firstAttribute="bottom" secondItem="3dd-Oy-snq" secondAttribute="bottom" id="CcW-am-ZYa"/>
+                            <constraint firstAttribute="trailing" secondItem="3dd-Oy-snq" secondAttribute="trailing" id="NMn-rd-N5u"/>
                             <constraint firstItem="9uF-Ob-rWU" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="SIk-c6-ebP"/>
                             <constraint firstAttribute="bottom" secondItem="9uF-Ob-rWU" secondAttribute="bottom" id="VSL-Ry-X5U"/>
                             <constraint firstItem="9uF-Ob-rWU" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="czm-BN-C33"/>
-                            <constraint firstItem="a75-Vu-acx" firstAttribute="leading" secondItem="9uF-Ob-rWU" secondAttribute="trailing" id="wGx-3N-Xjg"/>
+                            <constraint firstItem="3dd-Oy-snq" firstAttribute="leading" secondItem="9uF-Ob-rWU" secondAttribute="trailing" id="kXW-3i-dzu"/>
+                            <constraint firstItem="3dd-Oy-snq" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="uLi-DJ-orN"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="CuU-Zl-x9L" id="Jvk-1y-ZhM"/>
+                        <outlet property="contentView" destination="3dd-Oy-snq" id="FuH-DD-VPB"/>
                         <outlet property="menusView" destination="9uF-Ob-rWU" id="nFo-Jg-jno"/>
                         <outlet property="movie" destination="zg3-nE-wT6" id="BGc-LC-dzA"/>
                         <outlet property="recommend" destination="Pwv-xC-U6K" id="g5D-CD-mLd"/>
@@ -302,7 +279,7 @@
         <image name="movie" width="34" height="67"/>
         <image name="recommend" width="42" height="68"/>
         <image name="search" width="36" height="61"/>
-        <image name="setting" width="31" height="21"/>
+        <image name="setting" width="60" height="60"/>
         <image name="television" width="34" height="63"/>
     </resources>
 </document>

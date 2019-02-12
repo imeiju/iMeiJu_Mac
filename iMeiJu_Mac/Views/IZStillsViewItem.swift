@@ -18,7 +18,7 @@ class IZStillsViewItem: NSCollectionViewItem {
         textField?.textColor = NSColor(hexString: "D8D8D8")
         textField?.maximumNumberOfLines = 0
         imageView?.imageAlignment = .alignCenter
-//        imageView?.imageScaling = .scaleAxesIndependently
+        imageView?.imageScaling = .scaleAxesIndependently
 //        imageView?.imageFrameStyle = NSImageView.FrameStyle.grayBezel
     }
 

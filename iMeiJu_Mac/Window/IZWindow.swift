@@ -14,11 +14,13 @@ class IZWindow: NSWindow {
         super.init(contentRect: contentRect,
                    styleMask: style,
                    backing: backingStoreType,
-                   defer: flag)
-//        let resize = standardWindowButton(NSWindow.ButtonType.zoomButton)
-//        resize?.isHidden = true
-//        titleVisibility = .hidden
-//        titlebarAppearsTransparent = true
+                   defer: flag)        
+        backgroundColor = NSColor(hexString: "0C172D")!
+        isMovableByWindowBackground = true
+        let resize = standardWindowButton(NSWindow.ButtonType.zoomButton)
+        resize?.isHidden = true
+        titleVisibility = .hidden
+        titlebarAppearsTransparent = true
         backingType = .buffered
     }
 }

@@ -24,14 +24,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
 
-    @IBAction func refresh(_: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
-    }
-
-    @IBAction func search(_: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "search"), object: nil)
-    }
-
     @IBAction func github(_: Any) {
         NSWorkspace().open(NSURL(string: "https://github.com/imeiju/iMeiJu_Mac")! as URL)
     }

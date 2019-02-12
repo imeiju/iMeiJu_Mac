@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="IZMoreViewController" customModule="iMeiJu_Mac" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="hC5-08-baE" id="4MH-n0-wGl"/>
+                <outlet property="titleLabel" destination="caI-mh-nbI" id="JJd-US-nLs"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -18,14 +19,14 @@
             <rect key="frame" x="0.0" y="0.0" width="1002" height="800"/>
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIu-0e-vFU" customClass="IZScrollerView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="1002" height="800"/>
+                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIu-0e-vFU" customClass="IZScrollerView" customModule="iMeiJu_Mac" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="1002" height="763"/>
                     <clipView key="contentView" id="DC7-GB-67X" customClass="IZClipView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                        <rect key="frame" x="1" y="1" width="1000" height="798"/>
+                        <rect key="frame" x="1" y="1" width="1000" height="761"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView id="hC5-08-baE" customClass="IZCollectionView" customModule="iMeiJu_Mac" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="1000" height="158"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1000" height="761"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="iQn-Vj-cPS">
                                     <size key="itemSize" width="50" height="50"/>
@@ -35,18 +36,32 @@
                         </subviews>
                     </clipView>
                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Kl8-24-aGp">
-                        <rect key="frame" x="1" y="144" width="233" height="15"/>
+                        <rect key="frame" x="-100" y="-100" width="233" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="FEN-bR-YRv">
-                        <rect key="frame" x="234" y="1" width="15" height="143"/>
+                        <rect key="frame" x="985" y="1" width="16" height="632"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="caI-mh-nbI">
+                    <rect key="frame" x="-2" y="768" width="1006" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="d0H-CH-dXJ"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="DIl-hN-NpH">
+                        <font key="font" metaFont="system" size="18"/>
+                        <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="EIu-0e-vFU" secondAttribute="trailing" id="KGl-Io-Mlk"/>
-                <constraint firstItem="EIu-0e-vFU" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="MLM-A6-f82"/>
+                <constraint firstItem="EIu-0e-vFU" firstAttribute="top" secondItem="caI-mh-nbI" secondAttribute="bottom" constant="5" id="efV-z6-K1M"/>
+                <constraint firstAttribute="trailing" secondItem="caI-mh-nbI" secondAttribute="trailing" id="fHO-z2-oks"/>
+                <constraint firstItem="caI-mh-nbI" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="iiC-1t-NVg"/>
+                <constraint firstItem="caI-mh-nbI" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="obB-Ec-CaS"/>
                 <constraint firstItem="EIu-0e-vFU" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="pHG-Vu-bvd"/>
                 <constraint firstAttribute="bottom" secondItem="EIu-0e-vFU" secondAttribute="bottom" id="wo2-Ge-uo8"/>
             </constraints>
