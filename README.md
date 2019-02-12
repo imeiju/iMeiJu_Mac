@@ -3,7 +3,7 @@
 </p>
 
 ![](https://img.shields.io/badge/platform-MacOS^10.13-blue.svg)
-![](https://img.shields.io/badge/verison-v1.2-green.svg)
+![](https://img.shields.io/badge/verison-v1.3-green.svg)
 ![](https://img.shields.io/github/watchers/imeiju/iMeiju_Mac.svg?style=social)
 ![](https://img.shields.io/github/stars/imeiju/iMeiJu_Mac.svg?style=social)
 ![](https://img.shields.io/github/forks/imeiju/iMeiju_Mac.svg?style=social)
