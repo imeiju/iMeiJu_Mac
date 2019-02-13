@@ -11,12 +11,7 @@
 # 爱美剧Mac客户端
 
 > 支持`MacOS 10.13及以后版本`\
-> `Resource/versions`文件中的压缩包为应用程序, 解压后直接打开使用\
-
-### 版本功能
-> 1.3
->> UI美化
-
+> `Resource/versions`文件中的压缩包为应用程序, 解压后直接打开使用
 
 <p align="center">
   <img src="Resource/imgs/preview.gif" width="500" />

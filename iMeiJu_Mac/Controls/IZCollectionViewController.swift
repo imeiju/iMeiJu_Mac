@@ -22,8 +22,17 @@ class IZCollectionViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if isMenu == .movie {
+            NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name(rawValue: "isVip"), object: nil)
+        }
+        
         collectionViewConfiguration()
-       network()
+        network()
+    }
+    
+    @objc func reloadData() {
+        self.collectionView.reloadData()
     }
     
     func collectionViewConfiguration() {
@@ -56,6 +65,9 @@ class IZCollectionViewController: NSViewController {
     override func viewDidDisappear() {
         super.viewDidDisappear()
         ProgressHUD.dismiss()
+        if isMenu == .movie {
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "isVip"), object: nil)
+        }
     }
     
 }
@@ -119,3 +131,4 @@ extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionVi
     }
     
 }
+

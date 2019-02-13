@@ -22,10 +22,9 @@
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Check Update" id="t1i-Ov-Xdx">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Check for Updates…" keyEquivalent="u" id="t1i-Ov-Xdx">
                                             <connections>
-                                                <action selector="update:" target="Voe-Tx-rLC" id="UdB-8f-r4D"/>
+                                                <action selector="checkForUpdates:" target="cgg-iE-gx2" id="JvH-k2-X9t"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -123,6 +122,14 @@
                                                 <action selector="github:" target="Voe-Tx-rLC" id="33g-7H-xmR"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="mAG-MU-Upa"/>
+                                        <menuItem title="Vip" id="1U3-s3-Jwf">
+                                            <attributedString key="attributedTitle"/>
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="vip:" target="Voe-Tx-rLC" id="8Rp-XF-R7n"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -132,8 +139,13 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="iMeiJu_Mac" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="iMeiJu_Mac" customModuleProvider="target">
+                    <connections>
+                        <outlet property="vip" destination="1U3-s3-Jwf" id="ggZ-AG-QNa"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+                <customObject id="cgg-iE-gx2" customClass="SUUpdater"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-430" y="109"/>

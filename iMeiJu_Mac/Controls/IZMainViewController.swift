@@ -38,14 +38,10 @@ class IZMainViewController: NSViewController {
         
         setting.alphaValue = 0.01
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(search(_:)), name: NSNotification.Name(rawValue: "search"), object: nil)
         view.wantsLayer = true
-        if UserDefaults.standard.bool(forKey: "isVip") {
-            //            vip.state = NSControl.StateValue.on
-        }
         windowConfiguration()
-        //         默认选择推荐
+        // 默认选择推荐
         recommend(recommend)
         
     }

@@ -29,6 +29,7 @@
 		2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E38122085FBF00EB9CE1 /* IZEpisodeItem.swift */; };
 		2723E38422085FBF00EB9CE1 /* IZEpisodeItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E38222085FBF00EB9CE1 /* IZEpisodeItem.xib */; };
 		277720522212EFD000BADE4D /* IZMainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277720512212EFD000BADE4D /* IZMainWindowController.swift */; };
+		2777205B2213D87D00BADE4D /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2777205A2213D87D00BADE4D /* dsa_pub.pem */; };
 		278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604A8220930FF0097192A /* IZStillsViewItem.swift */; };
 		278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604A9220930FF0097192A /* IZStillsViewItem.xib */; };
 		278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604AC2209418D0097192A /* IZMoreViewController.swift */; };
@@ -72,6 +73,7 @@
 		2711C74922071F4E003A28DB /* IZCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZCollectionHeaderView.swift; sourceTree = "<group>"; };
 		2711C7592207419D003A28DB /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		2711C75A2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YRKSpinningProgressIndicatorLayer.swift; sourceTree = "<group>"; };
+		272042C92213E2E500FF1A5E /* iMeiJu_Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMeiJu_Mac-Bridging-Header.h"; sourceTree = "<group>"; };
 		2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessgaeWindowController.swift; sourceTree = "<group>"; };
 		2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZPlotMessgaeWindowController.xib; sourceTree = "<group>"; };
 		2723E376220821E900EB9CE1 /* IZPlotMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessageViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		2723E38122085FBF00EB9CE1 /* IZEpisodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZEpisodeItem.swift; sourceTree = "<group>"; };
 		2723E38222085FBF00EB9CE1 /* IZEpisodeItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZEpisodeItem.xib; sourceTree = "<group>"; };
 		277720512212EFD000BADE4D /* IZMainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainWindowController.swift; sourceTree = "<group>"; };
+		2777205A2213D87D00BADE4D /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		278604A8220930FF0097192A /* IZStillsViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZStillsViewItem.swift; sourceTree = "<group>"; };
 		278604A9220930FF0097192A /* IZStillsViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZStillsViewItem.xib; sourceTree = "<group>"; };
 		278604AC2209418D0097192A /* IZMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMoreViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +159,7 @@
 		2705F0E32205BFB4005A0BB1 /* iMeiJu_Mac */ = {
 			isa = PBXGroup;
 			children = (
+				2777205A2213D87D00BADE4D /* dsa_pub.pem */,
 				279403D922119D3C00970316 /* Layout */,
 				279403CE2211516C00970316 /* Base */,
 				2711C751220740D6003A28DB /* Plugin */,
@@ -186,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				2705F12E2205C3ED005A0BB1 /* IZExtension.swift */,
+				272042C92213E2E500FF1A5E /* iMeiJu_Mac-Bridging-Header.h */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -361,9 +366,10 @@
 				TargetAttributes = {
 					2705F0E02205BFB4005A0BB1 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -400,6 +406,7 @@
 				27940419221292D000970316 /* IZSettingViewController.xib in Resources */,
 				2723E379220821E900EB9CE1 /* IZPlotMessageViewController.xib in Resources */,
 				2711C74822071E88003A28DB /* IZCollectionHeaderView.xib in Resources */,
+				2777205B2213D87D00BADE4D /* dsa_pub.pem in Resources */,
 				278604BA2209A27B0097192A /* IZSearchViewController.xib in Resources */,
 				278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */,
 				2723E38422085FBF00EB9CE1 /* IZEpisodeItem.xib in Resources */,
@@ -443,10 +450,11 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/LeanCloud/LeanCloud.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
+				"${PODS_ROOT}/Sparkle/Sparkle.framework",
+				"${PODS_ROOT}/Sparkle/Sparkle.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/SwiftHEXColors/SwiftHEXColors.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/VersaPlayer/VersaPlayer.framework",
@@ -457,10 +465,11 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LeanCloud.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Sparkle.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftHEXColors.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VersaPlayer.framework",
@@ -644,7 +653,7 @@
 			baseConfigurationReference = BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = iMeiJu_Mac/iMeiJu_Mac.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -658,6 +667,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iizvv.iMeiJu-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iMeiJu_Mac/Extension/iMeiJu_Mac-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -667,7 +678,7 @@
 			baseConfigurationReference = 3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = iMeiJu_Mac/iMeiJu_Mac.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -681,6 +692,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iizvv.iMeiJu-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "iMeiJu_Mac/Extension/iMeiJu_Mac-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;

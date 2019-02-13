@@ -8,16 +8,21 @@
 //
 
 import Cocoa
-import LeanCloud
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    
+    @IBOutlet weak var vip: NSMenuItem!
+    
     func applicationDidFinishLaunching(_: Notification) {
-        LCApplication.default.set(
-            id: "qj9kTLJ0kBsXtgO4YMHzz2Kk-gzGzoHsz",
-            key: "mHTCgzN4C68oCduACJjon4PI"
-        )
-        update(Any.self)
+        
+        if UserDefaults.standard.bool(forKey: "isVip") {
+            vip.state = .on
+        }
+        
+        // 打开时进行后台检查是否有新版本
+//        SUUpdater.shared()?.checkForUpdatesInBackground()
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_: NSApplication) -> Bool {
@@ -28,67 +33,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace().open(NSURL(string: "https://github.com/imeiju/iMeiJu_Mac")! as URL)
     }
 
-    @IBAction func update(_: Any) {
-        let query = LCQuery(className: "mac")
-        _ = query.get("5c5c39d844d90424cf9acaa9") { result in
-            switch result {
-            case let .success(object: object):
-                if (object.get("version")?.floatValue)! > Float(1.3) {
-                    if object.get("forceUpdate")!.intValue! == 1 {
-                        let alert = NSAlert()
-                        alert.messageText = object.get("title")!.stringValue!
-                        alert.informativeText = object.get("subTitle")!.stringValue!
-                        alert.addButton(withTitle: object.get("confirm")!.stringValue!)
-                        alert.alertStyle = .warning
-                        alert.beginSheetModal(for: NSApplication.shared.keyWindow!) { _ in
-                            self.github(Any.self)
-                            exit(0)
-                        }
-                        //                    alert.runModal()
-                    } else if object.get("update")!.intValue! == 1 {
-                        let alert = NSAlert()
-                        alert.messageText = object.get("title")!.stringValue!
-                        alert.informativeText = object.get("subTitle")!.stringValue!
-                        alert.addButton(withTitle: object.get("confirm")!.stringValue!)
-                        alert.addButton(withTitle: "取消")
-                        alert.alertStyle = .informational
-                        alert.beginSheetModal(for: NSApplication.shared.keyWindow!, completionHandler: { finished in
-                            switch finished.rawValue {
-                            case 1000:
-                                self.github(Any.self)
-                            default:
-                                break
-                            }
-                        })
-                    }
-                    break
-                }
-            case .failure(error: _):
-                // handle error
-                break
-            }
+    @IBAction func vip(_ sender: NSMenuItem) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "isVip"), object: nil)
+        if sender.state == .off {
+            sender.state = .on
+            UserDefaults.standard.set(true, forKey: "isVip")
+        }else {
+            sender.state = .off
+            UserDefaults.standard.set(false, forKey: "isVip")
         }
     }
+    
+    
+    
 }
-
-// switch finished {
-// case .OK:
-// break
-// case .cancel:
-// break
-//                        if (finished == NSNSApplication.ModalResponse.OK,
-//                            print("(returnCode == NSOKButton)");
-//                        }else if (returnCode == NSModalResponseCancel){
-//                            print("(returnCode == NSCancelButton)");
-//                        }else if(returnCode == NSAlertFirstButtonReturn){
-//                            print("if (returnCode == NSAlertFirstButtonReturn)");
-//                        }else if (returnCode == NSAlertSecondButtonReturn){
-//                            print("else if (returnCode == NSAlertSecondButtonReturn)");
-//                        }else if (returnCode == NSAlertThirdButtonReturn){
-//                            print("else if (returnCode == NSAlertThirdButtonReturn)");
-//                        }else{
-//                            print("All Other return code %ld",(long)returnCode);
-//                        }
-// default: break
-
-// }
