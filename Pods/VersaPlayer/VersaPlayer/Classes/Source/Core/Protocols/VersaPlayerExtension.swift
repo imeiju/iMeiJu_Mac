@@ -9,21 +9,16 @@
 import Foundation
 
 open class VersaPlayerExtension: NSObject {
-    
     /// VersaPlayer instance being used
     open var player: VersaPlayerView
-    
+
     public init(with player: VersaPlayerView) {
         self.player = player
     }
-    
+
     /// Notifies when player added the extension
-    open func didAddExtension() {
-        
-    }
-    
+    open func didAddExtension() {}
+
     /// Make preparations for the extension such as modifying the view
-    open func prepare() {
-        
-    }
+    open func prepare() {}
 }

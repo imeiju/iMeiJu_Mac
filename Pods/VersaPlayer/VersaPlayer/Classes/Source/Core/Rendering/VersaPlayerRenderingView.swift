@@ -7,24 +7,23 @@
 //
 
 #if os(macOS)
-import Cocoa
+    import Cocoa
 #else
-import UIKit
+    import UIKit
 #endif
 import AVKit
 
 open class VersaPlayerRenderingView: View {
-    
     /// VPlayerLayer instance used to render player content
     public var renderingLayer: VersaPlayerLayer!
-    
+
     /// VersaPlayer instance being rendered by renderingLayer
     public weak var player: VersaPlayerView!
 
     deinit {
-      #if DEBUG
-          print("6 \(String(describing: self))")
-      #endif
+        #if DEBUG
+            print("6 \(String(describing: self))")
+        #endif
     }
 
     /// Constructor
@@ -35,35 +34,34 @@ open class VersaPlayerRenderingView: View {
         super.init(frame: CGRect.zero)
         self.player = player
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     #if os(macOS)
-    
-    open override func layout() {
-        super.layout()
-        if renderingLayer == nil {
-            renderingLayer = VersaPlayerLayer.init(with: player)
-            layer = renderingLayer.playerLayer
+
+        open override func layout() {
+            super.layout()
+            if renderingLayer == nil {
+                renderingLayer = VersaPlayerLayer(with: player)
+                layer = renderingLayer.playerLayer
+            }
+
+            renderingLayer.playerLayer.frame = bounds
         }
-        
-        renderingLayer.playerLayer.frame = bounds
-    }
-    
+
     #else
-    
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        if renderingLayer == nil {
-            renderingLayer = VersaPlayerLayer.init(with: player)
-            layer.addSublayer(renderingLayer.playerLayer)
+
+        open override func layoutSubviews() {
+            super.layoutSubviews()
+            if renderingLayer == nil {
+                renderingLayer = VersaPlayerLayer(with: player)
+                layer.addSublayer(renderingLayer.playerLayer)
+            }
+
+            renderingLayer.playerLayer.frame = bounds
         }
-        
-        renderingLayer.playerLayer.frame = bounds
-    }
-    
+
     #endif
-    
 }

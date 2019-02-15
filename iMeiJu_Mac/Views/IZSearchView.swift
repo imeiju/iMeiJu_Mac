@@ -10,12 +10,10 @@
 import Cocoa
 
 class IZSearchView: NSView {
-
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         let gradient = NSGradient(starting: NSColor(hexString: "5CBAE8")!, ending: NSColor(hexString: "71E3DE")!)
         let path = NSBezierPath(roundedRect: dirtyRect, xRadius: 20, yRadius: 20)
         gradient?.draw(in: path, angle: 90)
     }
-    
 }

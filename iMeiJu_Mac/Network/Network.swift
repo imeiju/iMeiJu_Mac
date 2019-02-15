@@ -81,6 +81,13 @@ extension MoyaApi: TargetType {
     }
 
     var headers: [String: String]? {
-        return ["Accept": "*/*", "Accept-Encoding": "br, gzip, deflate", "Accept-Language": "en-CN;q=1, zh-Hans-CN;q=0.9", "Connection": "keep-alive", "Content-Type": "application/x-www-form-urlencoded;charset=utf8", "Host": "mjappaz.yefu365.com", "User-Agent": "XMFilmTelevision/1.4 (iPhone; iOS 12.1.3; Scale/3.00)"]
+        return [
+            "Accept": "*/*",
+            "Accept-Encoding": "br, gzip, deflate",
+            "Accept-Language": "en-CN;q=1, zh-Hans-CN;q=0.9",
+            "Connection": "keep-alive",
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf8",
+            "Host": "mjappaz.yefu365.com",
+        ]
     }
 }

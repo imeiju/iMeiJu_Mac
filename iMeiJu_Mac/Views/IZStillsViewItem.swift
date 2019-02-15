@@ -10,8 +10,6 @@
 import Cocoa
 
 class IZStillsViewItem: NSCollectionViewItem {
-        
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.wantsLayer = true
@@ -26,12 +24,12 @@ class IZStillsViewItem: NSCollectionViewItem {
         var str = name
         if name.count >= 20 {
             var prefix = name.prefix(20)
-            str = str.replacingOccurrences(of: prefix, with: prefix+"\n")
+            str = str.replacingOccurrences(of: prefix, with: prefix + "\n")
             prefix = name.prefix(10)
-            str = str.replacingOccurrences(of: prefix, with: prefix+"\n")
-        }else if name.count >= 10 {
+            str = str.replacingOccurrences(of: prefix, with: prefix + "\n")
+        } else if name.count >= 10 {
             let prefix = name.prefix(10)
-            str = str.replacingOccurrences(of: prefix, with: prefix+"\n")
+            str = str.replacingOccurrences(of: prefix, with: prefix + "\n")
         }
         textField?.stringValue = str
     }

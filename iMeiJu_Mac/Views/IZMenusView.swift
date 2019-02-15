@@ -10,11 +10,9 @@
 import Cocoa
 
 class IZMenusView: NSView {
-
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         NSColor(hexString: "172142")!.set()
         __NSRectFillUsingOperation(dirtyRect, NSCompositingOperation.sourceOver)
     }
-    
 }

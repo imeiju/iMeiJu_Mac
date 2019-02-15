@@ -12,19 +12,19 @@ import Cocoa
 import SQLite
 
 class IZPlotMessageViewController: NSViewController {
-    @IBOutlet weak var titleLabel: NSTextField!
-    @IBOutlet weak var showEpisode: NSButton!
-    @IBOutlet weak var fold: NSButton!
+    @IBOutlet var titleLabel: NSTextField!
+    @IBOutlet var showEpisode: NSButton!
+    @IBOutlet var fold: NSButton!
     @IBOutlet var playerView: AVPlayerView!
     @IBOutlet var episodeView: NSScrollView!
     @IBOutlet var collectionView: NSCollectionView!
-    @IBOutlet weak var episodeWidth: NSLayoutConstraint!
-    
+    @IBOutlet var episodeWidth: NSLayoutConstraint!
+
     // 选集菜单
     let iz_width: CGFloat = 332
-    
+
     var plotName: String!
-    
+
     var id: String!
     var model: IZPlotMessageModel?
     var player: AVPlayer?
@@ -37,22 +37,22 @@ class IZPlotMessageViewController: NSViewController {
     let level = Expression<Int>("level") // 第几集
     let prate = Expression<Int64>("prate") // 视频进度
     var playing = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         episodeView.backgroundColor = .clear
         episodeView.isHidden = true
         showEpisode.isHidden = true
         fold.isHidden = true
-        
+
         titleLabel.stringValue = plotName
         titleLabel.textColor = NSColor(hexString: "D8D8D8")
         showEpisode.setAttributedString("选集", color: NSColor(hexString: "D8D8D8")!)
-        
+
         collectionViewConfiguration()
         // 监听播放完成通知,进行连播任务
         NotificationCenter.default.addObserver(self, selector: #selector(playToEndTime), name: .AVPlayerItemDidPlayToEndTime, object: nil)
-        
+
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
         do {
             db = try Connection("\(path)/iMeiJu.sqlite3")
@@ -65,32 +65,32 @@ class IZPlotMessageViewController: NSViewController {
                 t.column(prate, defaultValue: 0)
             })
         } catch {}
-        
+
         network()
     }
-    
+
     override func mouseDown(with _: NSEvent) {
 //        showEpisodeView(NSButton())
     }
-    
-    @IBAction func fold(_ sender: Any) {
-     showEpisodeView(NSButton())
+
+    @IBAction func fold(_: Any) {
+        showEpisodeView(NSButton())
     }
-    
-    @IBAction func showEpisodeView(_ sender: NSButton) {
+
+    @IBAction func showEpisodeView(_: NSButton) {
         if episodeView == nil {
             return
         }
-        NSAnimationContext.runAnimationGroup { (context) in
+        NSAnimationContext.runAnimationGroup { context in
             context.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
             if episodeWidth.constant == 0 {
                 episodeWidth.animator().constant = iz_width
-            }else {
+            } else {
                 episodeWidth.animator().constant = 0
             }
         }
     }
-    
+
     @objc func playToEndTime() {
         if episodeView != nil,
             (model?.data.zu.first?.ji.count)! > 1,
@@ -102,7 +102,7 @@ class IZPlotMessageViewController: NSViewController {
             playVideo(url: m!.purl, levelName: m!.name, update: true)
         }
     }
-    
+
     func playVideo(url: String, levelName: String, update: Bool?) {
         let item = AVPlayerItem(url: URL(string: url)!)
         player = AVPlayer(playerItem: item)
@@ -117,7 +117,7 @@ class IZPlotMessageViewController: NSViewController {
             } catch {}
         }
     }
-    
+
     override func observeValue(forKeyPath keyPath: String?, of _: Any?, change _: [NSKeyValueChangeKey: Any]?, context _: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
             switch player?.currentItem!.status {
@@ -131,7 +131,7 @@ class IZPlotMessageViewController: NSViewController {
                         playing = true
                     }
                 } catch {}
-                
+
             case .failed?:
                 // 播放失败
                 print("failed")
@@ -145,7 +145,7 @@ class IZPlotMessageViewController: NSViewController {
             }
         }
     }
-    
+
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
@@ -190,7 +190,7 @@ class IZPlotMessageViewController: NSViewController {
             }
         }
     }
-    
+
     func collectionViewConfiguration() {
         collectionView.backgroundColors = ([NSColor(hexString: "0C172D", alpha: 0.6)] as! [NSColor])
         collectionView.collectionViewLayout = layout
@@ -199,7 +199,7 @@ class IZPlotMessageViewController: NSViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
     }
-    
+
     var layout: NSCollectionViewFlowLayout {
         let layout = NSCollectionViewFlowLayout()
         layout.itemSize = NSSize(width: 60, height: 30)
@@ -209,7 +209,7 @@ class IZPlotMessageViewController: NSViewController {
         layout.sectionHeadersPinToVisibleBounds = true
         return layout
     }
-    
+
     override func viewDidDisappear() {
         super.viewDidDisappear()
         ProgressHUD.dismiss()
@@ -224,7 +224,6 @@ class IZPlotMessageViewController: NSViewController {
         }
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
-    
 }
 
 extension IZPlotMessageViewController: NSCollectionViewDelegate, NSCollectionViewDataSource {
@@ -235,19 +234,17 @@ extension IZPlotMessageViewController: NSCollectionViewDelegate, NSCollectionVie
             return 0
         }
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZEpisodeItem
         let m = model!.data.zu.first?.ji[indexPath.item]
         item.setLevel(level: (m?.name)!)
         return item
     }
-    
+
     func collectionView(_: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         idx = indexPaths.first!.item
         let m = model!.data.zu.first?.ji[idx]
         playVideo(url: m!.purl, levelName: m!.name, update: true)
     }
-    
 }
-

@@ -28,23 +28,23 @@ import Foundation
 import ImageIO
 
 #if os(macOS)
-import AppKit
-public typealias Image = NSImage
-public typealias View = NSView
-public typealias Color = NSColor
-public typealias ImageView = NSImageView
-public typealias Button = NSButton
+    import AppKit
+    public typealias Image = NSImage
+    public typealias View = NSView
+    public typealias Color = NSColor
+    public typealias ImageView = NSImageView
+    public typealias Button = NSButton
 #else
-import UIKit
-public typealias Image = UIImage
-public typealias Color = UIColor
-#if !os(watchOS)
-public typealias ImageView = UIImageView
-public typealias View = UIView
-public typealias Button = UIButton
-#else
-import WatchKit
-#endif
+    import UIKit
+    public typealias Image = UIImage
+    public typealias Color = UIColor
+    #if !os(watchOS)
+        public typealias ImageView = UIImageView
+        public typealias View = UIView
+        public typealias Button = UIButton
+    #else
+        import WatchKit
+    #endif
 #endif
 
 /// Wrapper for Kingfisher compatible types. This type provides an extension point for
@@ -58,21 +58,20 @@ public struct KingfisherWrapper<Base> {
 
 /// Represents a type which is compatible with Kingfisher. You can use `kf` property to get a
 /// value in the namespace of Kingfisher.
-public protocol KingfisherCompatible { }
+public protocol KingfisherCompatible {}
 
 public extension KingfisherCompatible {
-    
     /// Gets a namespace holder for Kingfisher compatible types.
     public var kf: KingfisherWrapper<Self> {
         get { return KingfisherWrapper(self) }
-        set { }
+        set {}
     }
 }
 
-extension Image: KingfisherCompatible { }
+extension Image: KingfisherCompatible {}
 #if !os(watchOS)
-extension ImageView: KingfisherCompatible { }
-extension Button: KingfisherCompatible { }
+    extension ImageView: KingfisherCompatible {}
+    extension Button: KingfisherCompatible {}
 #else
-extension WKInterfaceImage: KingfisherCompatible { }
+    extension WKInterfaceImage: KingfisherCompatible {}
 #endif

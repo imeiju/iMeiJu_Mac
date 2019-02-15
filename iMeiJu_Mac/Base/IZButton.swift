@@ -10,10 +10,8 @@
 import Cocoa
 
 class IZButton: NSButton {
-
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         (cell as! NSButtonCell).highlightsBy = .contentsCellMask
     }
-    
 }

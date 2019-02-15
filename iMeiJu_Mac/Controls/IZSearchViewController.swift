@@ -10,8 +10,7 @@
 import Cocoa
 
 class IZSearchViewController: NSViewController {
-    
-    @IBOutlet weak var wordsBackgroundView: NSView!
+    @IBOutlet var wordsBackgroundView: NSView!
     @IBOutlet var words: NSSearchField!
     @IBOutlet var collectionView: NSCollectionView!
 
@@ -20,19 +19,19 @@ class IZSearchViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        words.isHidden = true
-        
+
         words.focusRingType = .none
         words.delegate = self
-        words.layer?.cornerRadius = words.bounds.size.height/2
+        words.layer?.cornerRadius = words.bounds.size.height / 2
         words.layer?.masksToBounds = true
         words.layer?.borderColor = NSColor.white.cgColor
         words.layer?.borderWidth = 3
         words.resignFirstResponder()
-        
+
 //        if NSPasteboard.general.string(forType: .string) != nil {
 //            words.stringValue = NSPasteboard.general.string(forType: .string)!
 //        }
-        
+
         collectionViewConfiguration()
     }
 
@@ -58,7 +57,6 @@ class IZSearchViewController: NSViewController {
         collectionView.isSelectable = true
         collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
     }
-    
 }
 
 extension IZSearchViewController: NSCollectionViewDelegate, NSCollectionViewDataSource, NSSearchFieldDelegate {

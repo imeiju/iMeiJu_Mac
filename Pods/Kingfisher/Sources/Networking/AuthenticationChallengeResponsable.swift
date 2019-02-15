@@ -28,7 +28,6 @@ import Foundation
 
 /// Protocol indicates that an authentication challenge could be handled.
 public protocol AuthenticationChallengeResponsable: AnyObject {
-
     /// Called when a session level authentication challenge is received.
     /// This method provide a chance to handle and response to the authentication
     /// challenge before downloading could start.
@@ -43,7 +42,8 @@ public protocol AuthenticationChallengeResponsable: AnyObject {
     func downloader(
         _ downloader: ImageDownloader,
         didReceive challenge: URLAuthenticationChallenge,
-        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    )
 
     /// Called when a task level authentication challenge is received.
     /// This method provide a chance to handle and response to the authentication
@@ -58,16 +58,16 @@ public protocol AuthenticationChallengeResponsable: AnyObject {
         _ downloader: ImageDownloader,
         task: URLSessionTask,
         didReceive challenge: URLAuthenticationChallenge,
-        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    )
 }
 
 extension AuthenticationChallengeResponsable {
-
     public func downloader(
         _ downloader: ImageDownloader,
         didReceive challenge: URLAuthenticationChallenge,
-        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
-    {
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    ) {
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
             if let trustedHosts = downloader.trustedHosts, trustedHosts.contains(challenge.protectionSpace.host) {
                 let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
@@ -80,12 +80,11 @@ extension AuthenticationChallengeResponsable {
     }
 
     public func downloader(
-        _ downloader: ImageDownloader,
-        task: URLSessionTask,
-        didReceive challenge: URLAuthenticationChallenge,
-        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
-    {
+        _: ImageDownloader,
+        task _: URLSessionTask,
+        didReceive _: URLAuthenticationChallenge,
+        completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+    ) {
         completionHandler(.performDefaultHandling, nil)
     }
-
 }

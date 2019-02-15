@@ -12,7 +12,7 @@ import Cocoa
 class IZMoreWindowController: NSWindowController {
     var ztid: String?
     var id: String?
-var name: String!
+    var name: String!
     override func windowDidLoad() {
         super.windowDidLoad()
         let more = IZMoreViewController(nibName: "IZMoreViewController", bundle: nil)

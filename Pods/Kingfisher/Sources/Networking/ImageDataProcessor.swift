@@ -42,7 +42,7 @@ class ImageDataProcessor {
     init(data: Data, callbacks: [SessionDataTask.TaskCallback], processingQueue: CallbackQueue?) {
         self.data = data
         self.callbacks = callbacks
-        self.queue = processingQueue ?? sharedProcessingQueue
+        queue = processingQueue ?? sharedProcessingQueue
     }
 
     func process() {
@@ -71,7 +71,8 @@ class ImageDataProcessor {
                 result = .success(finalImage)
             } else {
                 let error = KingfisherError.processorError(
-                    reason: .processingFailed(processor: processor, item: .data(data)))
+                    reason: .processingFailed(processor: processor, item: .data(data))
+                )
                 result = .failure(error)
             }
             onImageProcessed.call((result, callback))

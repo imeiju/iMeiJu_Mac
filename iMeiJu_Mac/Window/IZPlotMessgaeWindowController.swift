@@ -12,8 +12,7 @@ import Cocoa
 class IZPlotMessgaeWindowController: NSWindowController {
     var id: String?
     var name: String!
-    
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
         let plot = IZPlotMessageViewController(nibName: "IZPlotMessageViewController", bundle: nil)

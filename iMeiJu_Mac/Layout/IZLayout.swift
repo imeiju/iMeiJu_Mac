@@ -7,20 +7,19 @@
 //  Copyright © 2019 iizvv. All rights reserved.
 //
 
-import Foundation
 import AppKit
+import Foundation
 
 class IZLayout: NSObject {
-    
     static func layout() -> NSCollectionViewFlowLayout {
         return layout(30)
     }
-    
+
     static func layout(_ minimumLineSpacing: CGFloat) -> NSCollectionViewFlowLayout {
         return layout(50, minimumLineSpacing: minimumLineSpacing)
     }
-    
-    static func layout(_ margin: CGFloat,  minimumLineSpacing: CGFloat) -> NSCollectionViewFlowLayout {
+
+    static func layout(_ margin: CGFloat, minimumLineSpacing: CGFloat) -> NSCollectionViewFlowLayout {
         let layout = NSCollectionViewFlowLayout()
         layout.itemSize = NSSize(width: 160, height: 302)
         layout.sectionInset = NSEdgeInsetsMake(0, margin, 10, margin)
@@ -29,7 +28,4 @@ class IZLayout: NSObject {
         layout.sectionHeadersPinToVisibleBounds = true
         return layout
     }
-    
 }
-
-

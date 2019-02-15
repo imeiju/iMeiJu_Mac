@@ -7,107 +7,105 @@
 //
 
 #if os(macOS)
-import Cocoa
+    import Cocoa
 #else
-import UIKit
+    import UIKit
 #endif
-import CoreMedia
 import AVFoundation
 import AVKit
-
+import CoreMedia
 
 #if os(macOS)
-public typealias View = NSView
+    public typealias View = NSView
 #else
-public typealias View = UIView
+    public typealias View = UIView
 #endif
 
 #if os(iOS)
-public typealias PIPProtocol = AVPictureInPictureControllerDelegate
+    public typealias PIPProtocol = AVPictureInPictureControllerDelegate
 #else
-public protocol PIPProtocol {}
+    public protocol PIPProtocol {}
 #endif
 
 open class VersaPlayerView: View, PIPProtocol {
-    
     deinit {
-      player.replaceCurrentItem(with: nil)
+        player.replaceCurrentItem(with: nil)
 
-      #if DEBUG
-          print("1 \(String(describing: self))")
-      #endif
+        #if DEBUG
+            print("1 \(String(describing: self))")
+        #endif
     }
 
     /// VersaPlayer extension dictionary
     public var extensions: [String: VersaPlayerExtension] = [:]
-    
+
     /// AVPlayer used in VersaPlayer implementation
     public var player: VersaPlayer!
-    
+
     /// VersaPlayerControls instance being used to display controls
-    public var controls: VersaPlayerControls? = nil
-    
+    public var controls: VersaPlayerControls?
+
     /// VersaPlayerRenderingView instance
     public var renderingView: VersaPlayerRenderingView!
-    
+
     /// VersaPlayerPlaybackDelegate instance
-    public weak var playbackDelegate: VersaPlayerPlaybackDelegate? = nil
-    
+    public weak var playbackDelegate: VersaPlayerPlaybackDelegate?
+
     /// VersaPlayerDecryptionDelegate instance to be used only when a VPlayer item with isEncrypted = true is passed
-    public weak var decryptionDelegate: VersaPlayerDecryptionDelegate? = nil
-    
+    public weak var decryptionDelegate: VersaPlayerDecryptionDelegate?
+
     /// VersaPlayer initial container
     private var nonFullscreenContainer: View!
-    
+
     #if os(iOS)
-    /// AVPictureInPictureController instance
-    public var pipController: AVPictureInPictureController? = nil
+        /// AVPictureInPictureController instance
+        public var pipController: AVPictureInPictureController?
     #endif
 
     /// Whether player is prepared
     public var ready: Bool = false
-    
+
     /// Whether it should autoplay when adding a VPlayerItem
     public var autoplay: Bool = true
 
     /// Whether Player is currently playing
     public var isPlaying: Bool = false
-    
+
     /// Whether Player is seeking time
     public var isSeeking: Bool = false
-    
+
     /// Whether Player is presented in Fullscreen
     public var isFullscreenModeEnabled: Bool = false
-    
+
     /// Whether PIP Mode is enabled via pipController
     public var isPipModeEnabled: Bool = false
-    
+
     #if os(macOS)
-    open override var wantsLayer: Bool {
-        get { return true } set { }
-    }
+        open override var wantsLayer: Bool {
+            get { return true } set {}
+        }
     #endif
-    
+
     /// Whether Player is Fast Forwarding
     public var isForwarding: Bool {
         return player.rate > 1
     }
-    
+
     /// Whether Player is Rewinding
     public var isRewinding: Bool {
         return player.rate < 0
     }
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         prepare()
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         prepare()
     }
-    
+
     /// VersaPlayerControls instance to display controls in player, using VersaPlayerGestureRecieverView instance
     /// to handle gestures
     ///
@@ -122,13 +120,13 @@ open class VersaPlayerView: View, PIPProtocol {
         coordinator.gestureReciever = gestureReciever
         controls.controlsCoordinator = coordinator
         #if os(macOS)
-        addSubview(coordinator, positioned: NSWindow.OrderingMode.above, relativeTo: renderingView)
+            addSubview(coordinator, positioned: NSWindow.OrderingMode.above, relativeTo: renderingView)
         #else
-        addSubview(coordinator)
-        bringSubviewToFront(coordinator)
+            addSubview(coordinator)
+            bringSubviewToFront(coordinator)
         #endif
     }
-    
+
     /// Update controls to specified time
     ///
     /// - Parameters:
@@ -136,7 +134,7 @@ open class VersaPlayerView: View, PIPProtocol {
     public func updateControls(toTime time: CMTime) {
         controls?.timeDidChange(toTime: time)
     }
-    
+
     /// Add a VersaPlayerExtension instance to the current player
     ///
     /// - Parameters:
@@ -147,7 +145,7 @@ open class VersaPlayerView: View, PIPProtocol {
         ext.prepare()
         extensions[name] = ext
     }
-    
+
     /// Retrieves the instance of the VersaPlayerExtension with the name given
     ///
     /// - Parameters:
@@ -155,7 +153,7 @@ open class VersaPlayerView: View, PIPProtocol {
     open func getExtension(with name: String) -> VersaPlayerExtension? {
         return extensions[name]
     }
-    
+
     /// Prepares the player to play
     open func prepare() {
         ready = true
@@ -165,7 +163,7 @@ open class VersaPlayerView: View, PIPProtocol {
         renderingView = VersaPlayerRenderingView(with: self)
         layout(view: renderingView, into: self)
     }
-    
+
     /// Layout a view within another view stretching to edges
     ///
     /// - Parameters:
@@ -182,27 +180,27 @@ open class VersaPlayerView: View, PIPProtocol {
         view.rightAnchor.constraint(equalTo: into.rightAnchor).isActive = true
         view.bottomAnchor.constraint(equalTo: into.bottomAnchor).isActive = true
     }
-    
+
     #if os(iOS)
-    /// Enables or disables PIP when available (when device is supported)
-    ///
-    /// - Parameters:
-    ///     - enabled: Whether or not to enable
-    open func setNativePip(enabled: Bool) {
-        if pipController == nil && renderingView != nil {
-            let controller = AVPictureInPictureController(playerLayer: renderingView!.renderingLayer.playerLayer)
-            controller?.delegate = self
-            pipController = controller
+        /// Enables or disables PIP when available (when device is supported)
+        ///
+        /// - Parameters:
+        ///     - enabled: Whether or not to enable
+        open func setNativePip(enabled: Bool) {
+            if pipController == nil, renderingView != nil {
+                let controller = AVPictureInPictureController(playerLayer: renderingView!.renderingLayer.playerLayer)
+                controller?.delegate = self
+                pipController = controller
+            }
+
+            if enabled {
+                pipController?.startPictureInPicture()
+            } else {
+                pipController?.stopPictureInPicture()
+            }
         }
-        
-        if enabled {
-            pipController?.startPictureInPicture()
-        }else {
-            pipController?.stopPictureInPicture()
-        }
-    }
     #endif
-    
+
     /// Enables or disables fullscreen
     ///
     /// - Parameters:
@@ -213,26 +211,26 @@ open class VersaPlayerView: View, PIPProtocol {
         }
         if enabled {
             #if os(macOS)
-            if let window = NSApplication.shared.keyWindow {
-                nonFullscreenContainer = superview
-                removeFromSuperview()
-                layout(view: self, into: window.contentView)
-            }
+                if let window = NSApplication.shared.keyWindow {
+                    nonFullscreenContainer = superview
+                    removeFromSuperview()
+                    layout(view: self, into: window.contentView)
+                }
             #else
-            if let window = UIApplication.shared.keyWindow {
-                nonFullscreenContainer = superview
-                removeFromSuperview()
-                layout(view: self, into: window)
-            }
+                if let window = UIApplication.shared.keyWindow {
+                    nonFullscreenContainer = superview
+                    removeFromSuperview()
+                    layout(view: self, into: window)
+                }
             #endif
-        }else {
+        } else {
             removeFromSuperview()
             layout(view: self, into: nonFullscreenContainer)
         }
-        
+
         isFullscreenModeEnabled = enabled
     }
-    
+
     /// Sets the item to be played
     ///
     /// - Parameters:
@@ -241,66 +239,63 @@ open class VersaPlayerView: View, PIPProtocol {
         if !ready {
             prepare()
         }
-        
+
         player.replaceCurrentItem(with: item)
-        if autoplay && item?.error == nil {
+        if autoplay, item?.error == nil {
             play()
         }
     }
-    
+
     /// Play
-    @IBAction open func play(sender: Any? = nil) {
+    @IBAction open func play(sender _: Any? = nil) {
         if playbackDelegate?.playbackShouldBegin(player: player) ?? true {
             player.play()
             controls?.playPauseButton?.set(active: true)
             isPlaying = true
         }
     }
-    
+
     /// Pause
-    @IBAction open func pause(sender: Any? = nil) {
+    @IBAction open func pause(sender _: Any? = nil) {
         player.pause()
         controls?.playPauseButton?.set(active: false)
         isPlaying = false
     }
-    
+
     /// Toggle Playback
-    @IBAction open func togglePlayback(sender: Any? = nil) {
+    @IBAction open func togglePlayback(sender _: Any? = nil) {
         if isPlaying {
             pause()
-        }else {
+        } else {
             play()
         }
     }
-    
+
     #if os(iOS)
-    open func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        print("stopped")
-        //hide fallback
-    }
-    
-    open func pictureInPictureControllerDidStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        print("started")
-        //show fallback
-    }
-    
-    open func pictureInPictureControllerWillStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        isPipModeEnabled = false
-        controls?.controlsCoordinator.isHidden = false
-    }
-    
-    open func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-        controls?.controlsCoordinator.isHidden = true
-        isPipModeEnabled = true
-    }
-    
-    public func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: Error) {
-        print(error.localizedDescription)
-    }
-    
-    public func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        
-    }
+        open func pictureInPictureControllerDidStopPictureInPicture(_: AVPictureInPictureController) {
+            print("stopped")
+            // hide fallback
+        }
+
+        open func pictureInPictureControllerDidStartPictureInPicture(_: AVPictureInPictureController) {
+            print("started")
+            // show fallback
+        }
+
+        open func pictureInPictureControllerWillStopPictureInPicture(_: AVPictureInPictureController) {
+            isPipModeEnabled = false
+            controls?.controlsCoordinator.isHidden = false
+        }
+
+        open func pictureInPictureControllerWillStartPictureInPicture(_: AVPictureInPictureController) {
+            controls?.controlsCoordinator.isHidden = true
+            isPipModeEnabled = true
+        }
+
+        public func pictureInPictureController(_: AVPictureInPictureController, failedToStartPictureInPictureWithError error: Error) {
+            print(error.localizedDescription)
+        }
+
+        public func pictureInPictureController(_: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler _: @escaping (Bool) -> Void) {}
     #endif
-    
 }

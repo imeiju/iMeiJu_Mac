@@ -14,7 +14,7 @@ class IZWindow: NSWindow {
         super.init(contentRect: contentRect,
                    styleMask: style,
                    backing: backingStoreType,
-                   defer: flag)        
+                   defer: flag)
         backgroundColor = NSColor(hexString: "0C172D")!
         isMovableByWindowBackground = true
         let resize = standardWindowButton(NSWindow.ButtonType.zoomButton)

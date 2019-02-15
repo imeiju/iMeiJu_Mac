@@ -10,7 +10,6 @@
 import Cocoa
 
 class IZCollectionHeaderView: IZView {
-    
     @IBOutlet var sectionTitle: NSTextField!
 
     @IBOutlet var actionButton: NSButton!

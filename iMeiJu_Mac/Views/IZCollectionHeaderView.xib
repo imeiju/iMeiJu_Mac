@@ -17,6 +17,7 @@
                     <rect key="frame" x="48" y="0.0" width="50" height="24"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="justified" title="Label" id="OlB-xM-zYx">
                         <font key="font" metaFont="system" size="20"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
@@ -24,6 +25,7 @@
                     <rect key="frame" x="94" y="0.0" width="860" height="19"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="更多》" id="QfC-z3-AAP">
                         <font key="font" metaFont="system" size="16"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>

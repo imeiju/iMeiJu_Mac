@@ -10,40 +10,38 @@ import AVFoundation
 import AVKit
 
 open class VersaPlayerLayer: CALayer {
-    
     /// Player Layer to be used
     public var playerLayer: AVPlayerLayer!
-    
+
     /// VersaPlayer instance being rendered
     public weak var handler: VersaPlayerView!
 
     deinit {
-      #if DEBUG
-          print("7 \(String(describing: self))")
-      #endif
+        #if DEBUG
+            print("7 \(String(describing: self))")
+        #endif
     }
 
-    override public init(layer: Any) {
+    public override init(layer: Any) {
         super.init(layer: layer)
     }
-    
-    override public init() {
+
+    public override init() {
         super.init()
     }
-    
+
     public convenience init(with player: VersaPlayerView) {
         self.init()
-        playerLayer = AVPlayerLayer.init(player: player.player)
+        playerLayer = AVPlayerLayer(player: player.player)
         addSublayer(playerLayer)
     }
-    
-    required public init?(coder aDecoder: NSCoder) {
+
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override open func layoutSublayers() {
+
+    open override func layoutSublayers() {
         super.layoutSublayers()
         playerLayer.frame = bounds
     }
-    
 }

@@ -24,10 +24,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-import Foundation
 import CommonCrypto
+import Foundation
 
-extension String: KingfisherCompatible { }
+extension String: KingfisherCompatible {}
 extension KingfisherWrapper where Base == String {
     var md5: String {
         guard let data = base.data(using: .utf8) else {
@@ -37,7 +37,7 @@ extension KingfisherWrapper where Base == String {
         _ = data.withUnsafeBytes { bytes in
             return CC_MD5(bytes, CC_LONG(data.count), &digest)
         }
-        
+
         return digest.map { String(format: "%02x", $0) }.joined()
     }
 }

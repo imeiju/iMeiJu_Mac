@@ -9,26 +9,25 @@
 import AVFoundation
 
 open class VersaPlayerItem: AVPlayerItem {
-    
     /// whether content passed through the asset is encrypted and should be decrypted
     public var isEncrypted: Bool = false
-    
+
     public var audioTracks: [VersaPlayerMediaTrack] {
         return tracks(for: .audible)
     }
-    
+
     public var videoTracks: [VersaPlayerMediaTrack] {
         return tracks(for: .visual)
     }
-    
+
     public var captionTracks: [VersaPlayerMediaTrack] {
         return tracks(for: .legible)
     }
 
     deinit {
-      #if DEBUG
-          print("8 \(String(describing: self))")
-      #endif
+        #if DEBUG
+            print("8 \(String(describing: self))")
+        #endif
     }
 
     private func tracks(for characteristic: AVMediaCharacteristic) -> [VersaPlayerMediaTrack] {
@@ -43,5 +42,4 @@ open class VersaPlayerItem: AVPlayerItem {
         }
         return tracks
     }
-    
 }

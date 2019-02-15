@@ -30,10 +30,9 @@ import Foundation
 /// Kingfisher will use a `Resource` to download a resource from network and cache it with the cache key when
 /// using `Source.network` as its image setting source.
 public protocol Resource {
-    
     /// The key used in cache.
     var cacheKey: String { get }
-    
+
     /// The target image URL.
     var downloadURL: URL { get }
 }
@@ -42,7 +41,6 @@ public protocol Resource {
 /// When passed to image view set methods, Kingfisher will try to download the target
 /// image from the `downloadURL`, and then store it with the `cacheKey` as the key in cache.
 public struct ImageResource: Resource {
-
     // MARK: - Initializers
 
     /// Creates an image resource.
@@ -57,7 +55,7 @@ public struct ImageResource: Resource {
     }
 
     // MARK: Protocol Conforming
-    
+
     /// The key used in cache.
     public let cacheKey: String
 

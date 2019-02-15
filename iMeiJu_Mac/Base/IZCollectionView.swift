@@ -10,11 +10,9 @@
 import Cocoa
 
 class IZCollectionView: NSCollectionView {
-
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         NSColor(hexString: "0C172D")!.set()
         __NSRectFillUsingOperation(dirtyRect, NSCompositingOperation.sourceOver)
     }
-    
 }

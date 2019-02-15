@@ -7,32 +7,30 @@
 //
 
 #if os(macOS)
-import Cocoa
+    import Cocoa
 #else
-import UIKit
+    import UIKit
 #endif
 
 #if os(macOS)
-public typealias TextField = NSTextField
+    public typealias TextField = NSTextField
 #else
-public typealias TextField = UITextField
+    public typealias TextField = UITextField
 #endif
 
 open class VersaTimeLabel: TextField {
-    
     public var timeFormat: String = "HH:mm:ss"
 
     open func update(toTime: TimeInterval) {
         let date = Date(timeIntervalSince1970: toTime)
         let formatter = DateFormatter()
-        formatter.timeZone = TimeZone.init(secondsFromGMT: 0)
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         formatter.dateFormat = timeFormat
-        
+
         #if os(macOS)
-        stringValue = formatter.string(from: date)
+            stringValue = formatter.string(from: date)
         #else
-        text = formatter.string(from: date)
+            text = formatter.string(from: date)
         #endif
     }
-
 }

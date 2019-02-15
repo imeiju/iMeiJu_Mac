@@ -7,16 +7,14 @@
 //
 
 #if os(macOS)
-import Cocoa
-public typealias Slider = NSSlider
+    import Cocoa
+    public typealias Slider = NSSlider
 #elseif os(iOS)
-import UIKit
-public typealias Slider = UISlider
+    import UIKit
+    public typealias Slider = UISlider
 #else
-import UIKit
-public typealias Slider = UIProgressView
+    import UIKit
+    public typealias Slider = UIProgressView
 #endif
 
-open class VersaSeekbarSlider: Slider {
-
-}
+open class VersaSeekbarSlider: Slider {}

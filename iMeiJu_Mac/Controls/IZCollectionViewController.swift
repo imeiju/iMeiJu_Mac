@@ -9,32 +9,29 @@
 
 import Cocoa
 
-
 class IZCollectionViewController: NSViewController {
-    
-    
-    @IBOutlet weak var collectionView: IZCollectionView!
-    
+    @IBOutlet var collectionView: IZCollectionView!
+
     var isZtid: Bool!
     var isMenu: MenuType!
     var api: MoyaApi!
     var model: IZMainModel?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if isMenu == .movie {
             NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name(rawValue: "isVip"), object: nil)
         }
-        
+
         collectionViewConfiguration()
         network()
     }
-    
+
     @objc func reloadData() {
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
-    
+
     func collectionViewConfiguration() {
         collectionView.collectionViewLayout = IZLayout.layout()
         collectionView.isSelectable = true
@@ -43,8 +40,7 @@ class IZCollectionViewController: NSViewController {
         collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
         collectionView.register(NSNib(nibNamed: "IZCollectionHeaderView", bundle: nil), forSupplementaryViewOfKind: NSCollectionView.elementKindSectionHeader, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"))
     }
-    
-    
+
     func network() {
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.show()
@@ -61,7 +57,7 @@ class IZCollectionViewController: NSViewController {
             }
         }
     }
-    
+
     override func viewDidDisappear() {
         super.viewDidDisappear()
         ProgressHUD.dismiss()
@@ -69,7 +65,6 @@ class IZCollectionViewController: NSViewController {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "isVip"), object: nil)
         }
     }
-    
 }
 
 extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
@@ -82,11 +77,11 @@ extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionVi
         }
         return 0
     }
-    
+
     func collectionView(_: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return (model?.data?[section].vod.count)!
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), for: indexPath) as! IZStillsViewItem
         let m = model!.data[indexPath.section].vod![indexPath.item]
@@ -94,7 +89,7 @@ extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionVi
         item.setImageUrl(m.pic)
         return item
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, viewForSupplementaryElementOfKind kind: NSCollectionView.SupplementaryElementKind, at indexPath: IndexPath) -> NSView {
         let headView = collectionView.makeSupplementaryView(ofKind: kind, withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "header"), for: indexPath) as! IZCollectionHeaderView
         headView.actionButton.target = self
@@ -103,7 +98,7 @@ extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionVi
         headView.setSectionHeader(title: (model?.data[indexPath.section].name)!)
         return headView
     }
-    
+
     @objc func headViewDidSelect(sender: NSButton) {
         let m = model!.data[sender.tag]
         let more = IZMoreWindowController(windowNibName: "IZMoreWindowController")
@@ -115,7 +110,7 @@ extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionVi
         more.name = m.name
         jumpWindow(window: more.window!)
     }
-    
+
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         // 消除选中状态,使其可以再次选择
         collectionView.deselectItems(at: indexPaths)
@@ -125,10 +120,8 @@ extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionVi
         plot.name = m.name
         jumpWindow(window: plot.window!)
     }
-    
+
     func collectionView(_: NSCollectionView, layout _: NSCollectionViewLayout, referenceSizeForHeaderInSection _: Int) -> NSSize {
         return NSSize(width: view.frame.size.width, height: 44)
     }
-    
 }
-

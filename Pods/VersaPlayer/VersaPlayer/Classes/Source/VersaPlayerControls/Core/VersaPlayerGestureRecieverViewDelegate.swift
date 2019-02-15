@@ -7,26 +7,25 @@
 //
 
 #if os(macOS)
-import Cocoa
+    import Cocoa
 #else
-import UIKit
+    import UIKit
 #endif
 import Foundation
 
 public protocol VersaPlayerGestureRecieverViewDelegate: AnyObject {
-    
     /// Pinch was recognized
     ///
     /// - Parameters:
     ///     - scale: CGFloat scale
     func didPinch(with scale: CGFloat)
-    
+
     /// Tap was recognized
     ///
     /// - Parameters:
     ///     - point: CGPoint at wich touch was recognized
     func didTap(at point: CGPoint)
-    
+
     /// Double tap was recognized
     ///
     /// - Parameters:
@@ -39,12 +38,12 @@ public protocol VersaPlayerGestureRecieverViewDelegate: AnyObject {
     ///     - translation: translation in view
     ///     - at: initial point recognized
     func didPan(with translation: CGPoint, initially at: CGPoint)
-    
+
     #if os(tvOS)
-    /// Swipe was recognized
-    ///
-    /// - Parameters:
-    ///     - direction: gestureDirection
-    func didSwipe(with direction: UISwipeGestureRecognizer.Direction)
+        /// Swipe was recognized
+        ///
+        /// - Parameters:
+        ///     - direction: gestureDirection
+        func didSwipe(with direction: UISwipeGestureRecognizer.Direction)
     #endif
 }

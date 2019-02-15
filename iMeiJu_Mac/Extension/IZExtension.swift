@@ -9,10 +9,10 @@
 
 import Cocoa
 import Foundation
-@_exported import SwiftyJSON
-@_exported import SwiftHEXColors
 @_exported import Kingfisher
 @_exported import Moya
+@_exported import SwiftHEXColors
+@_exported import SwiftyJSON
 
 extension NSColor {
     func randomColor() -> NSColor {
@@ -24,11 +24,9 @@ extension NSColor {
 }
 
 extension NSButton {
-    
     func setAttributedString(_ string: String, color: NSColor) {
-        attributedTitle = NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor : color])
+        attributedTitle = NSAttributedString(string: string, attributes: [NSAttributedString.Key.foregroundColor: color])
     }
-    
 }
 
 extension NSImageView {

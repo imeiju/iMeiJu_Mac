@@ -11,13 +11,12 @@ import Cocoa
 import SQLite
 
 class IZMoreViewController: NSViewController {
-    
-    @IBOutlet weak var titleLabel: NSTextField!
-    
+    @IBOutlet var titleLabel: NSTextField!
+
     @IBOutlet var collectionView: NSCollectionView!
 
     var name: String!
-    
+
     var ztid: String?
     var id: String?
     var api: MoyaApi!
@@ -25,9 +24,9 @@ class IZMoreViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         titleLabel.stringValue = name
-        
+
         collectionViewConfiguration()
         if ztid == nil {
             api = .movieMore(page: "1", size: "10000", id: id!)
@@ -59,7 +58,7 @@ class IZMoreViewController: NSViewController {
         collectionView.isSelectable = true
         collectionView.register(NSNib(nibNamed: "IZStillsViewItem", bundle: nil), forItemWithIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"))
     }
-    
+
     override func viewDidDisappear() {
         super.viewDidDisappear()
         ProgressHUD.dismiss()

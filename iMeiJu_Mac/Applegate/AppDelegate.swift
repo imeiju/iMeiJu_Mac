@@ -11,16 +11,13 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
-    
-    @IBOutlet weak var vip: NSMenuItem!
-    
+    @IBOutlet var vip: NSMenuItem!
+
     func applicationDidFinishLaunching(_: Notification) {
-        
         if UserDefaults.standard.bool(forKey: "isVip") {
             vip.state = .on
         }
-        
+
         // 打开时进行后台检查是否有新版本
 //        SUUpdater.shared()?.checkForUpdatesInBackground()
     }
@@ -38,12 +35,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if sender.state == .off {
             sender.state = .on
             UserDefaults.standard.set(true, forKey: "isVip")
-        }else {
+        } else {
             sender.state = .off
             UserDefaults.standard.set(false, forKey: "isVip")
         }
     }
-    
-    
-    
 }
