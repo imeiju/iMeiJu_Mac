@@ -8,8 +8,6 @@
 //
 
 import Cocoa
-import Moya
-import SwiftyJSON
 
 class IZSearchViewController: NSViewController {
     

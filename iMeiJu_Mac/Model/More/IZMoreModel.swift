@@ -3,7 +3,6 @@
 //	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import SwiftyJSON
 
 class IZMoreModel: NSObject, NSCoding {
     var code: Int!
@@ -71,7 +70,6 @@ class IZMoreModel: NSObject, NSCoding {
 //    Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 import Foundation
-import SwiftyJSON
 
 class IZMoreData: NSObject, NSCoding {
     var ad: Int!

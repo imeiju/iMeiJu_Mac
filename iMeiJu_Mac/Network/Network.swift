@@ -8,7 +8,6 @@
 //
 
 import Foundation
-import Moya
 
 let provider = MoyaProvider<MoyaApi>()
 

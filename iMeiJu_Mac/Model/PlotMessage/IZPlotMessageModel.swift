@@ -8,7 +8,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class IZPlotMessageModel: NSObject, NSCoding {
     var code: Int!

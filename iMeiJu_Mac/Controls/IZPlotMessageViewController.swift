@@ -9,9 +9,7 @@
 
 import AVKit
 import Cocoa
-import Moya
 import SQLite
-import SwiftyJSON
 
 class IZPlotMessageViewController: NSViewController {
     @IBOutlet weak var titleLabel: NSTextField!

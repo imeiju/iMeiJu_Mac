@@ -9,7 +9,10 @@
 
 import Cocoa
 import Foundation
-import Kingfisher
+@_exported import SwiftyJSON
+@_exported import SwiftHEXColors
+@_exported import Kingfisher
+@_exported import Moya
 
 extension NSColor {
     func randomColor() -> NSColor {

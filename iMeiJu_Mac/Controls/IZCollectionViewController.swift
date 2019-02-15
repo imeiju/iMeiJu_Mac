@@ -8,7 +8,7 @@
 //
 
 import Cocoa
-import SwiftyJSON
+
 
 class IZCollectionViewController: NSViewController {
     

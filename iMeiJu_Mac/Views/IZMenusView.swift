@@ -8,7 +8,6 @@
 //
 
 import Cocoa
-import SwiftHEXColors
 
 class IZMenusView: NSView {
 
