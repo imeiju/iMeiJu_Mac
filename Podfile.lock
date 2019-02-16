@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.8.1)
-  - Kingfisher (5.1.0)
+  - Kingfisher (5.1.1)
   - Moya (12.0.1):
     - Moya/Core (= 12.0.1)
   - Moya/Core (12.0.1):
@@ -38,7 +38,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
-  Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
+  Kingfisher: 2558186963e5be42d98c5b110ccb3130148b77e4
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   Sparkle: 1678d4707e7665960c7d1b43aca125e6392d11c4
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
   VersaPlayer: 105ab14111cd48ea1705cf24c66366536da86935
 
-PODFILE CHECKSUM: 34dce23663cdef5bc17a8e67cfc0c621a602ccb7
+PODFILE CHECKSUM: 03e67982a3270d8cdd2f85cba71f42fcab563065
 
 COCOAPODS: 1.5.3

@@ -31,9 +31,10 @@ import Foundation
 /// to load some image data in your own way, as long as you can provide the data
 /// representation for the image.
 public protocol ImageDataProvider {
+    
     /// The key used in cache.
     var cacheKey: String { get }
-
+    
     /// Provides the data which represents image. Kingfisher uses the data you pass in the
     /// handler to process images and caches it for later use.
     ///
@@ -54,6 +55,7 @@ public protocol ImageDataProvider {
 /// directly, you can get benefit of using Kingfisher's extension methods, as well
 /// as applying `ImageProcessor`s and storing the image to `ImageCache` of Kingfisher.
 public struct LocalFileImageDataProvider: ImageDataProvider {
+
     // MARK: Public Properties
 
     /// The file URL from which the image be loaded.
@@ -78,14 +80,14 @@ public struct LocalFileImageDataProvider: ImageDataProvider {
     public var cacheKey: String
 
     public func data(handler: (Result<Data, Error>) -> Void) {
-        handler(Result { try Data(contentsOf: fileURL) })
+        handler( Result { try Data(contentsOf: fileURL) } )
     }
 }
 
 /// Represents an image data provider for loading image from a given Base64 encoded string.
 public struct Base64ImageDataProvider: ImageDataProvider {
-    // MARK: Public Properties
 
+    // MARK: Public Properties
     /// The encoded Base64 string for the image.
     public let base64String: String
 
@@ -114,6 +116,7 @@ public struct Base64ImageDataProvider: ImageDataProvider {
 
 /// Represents an image data provider for a raw data object.
 public struct RawImageDataProvider: ImageDataProvider {
+
     // MARK: Public Properties
 
     /// The raw data object to provide to Kingfisher image loader.
@@ -132,7 +135,7 @@ public struct RawImageDataProvider: ImageDataProvider {
     }
 
     // MARK: Protocol Conforming
-
+    
     /// The key used in cache.
     public var cacheKey: String
 

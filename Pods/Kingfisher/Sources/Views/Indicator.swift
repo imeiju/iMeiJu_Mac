@@ -25,11 +25,11 @@
 //  THE SOFTWARE.
 
 #if canImport(AppKit)
-    import AppKit
-    public typealias IndicatorView = NSView
+import AppKit
+public typealias IndicatorView = NSView
 #else
-    import UIKit
-    public typealias IndicatorView = UIView
+import UIKit
+public typealias IndicatorView = UIView
 #endif
 
 /// Represents the activity indicator type which should be added to
@@ -52,21 +52,23 @@ public enum IndicatorType {
 
 /// An indicator type which can be used to show the download task is in progress.
 public protocol Indicator {
+    
     /// Called when the indicator should start animating.
     func startAnimatingView()
-
+    
     /// Called when the indicator should stop animating.
     func stopAnimatingView()
 
     /// Center offset of the indicator. Kingfisher will use this value to determine the position of
     /// indicator in the super view.
     var centerOffset: CGPoint { get }
-
+    
     /// The indicator view which would be added to the super view.
     var view: IndicatorView { get }
 }
 
 extension Indicator {
+    
     /// Default implementation of `centerOffset` of `Indicator`. The default value is `.zero`, means that there is
     /// no offset for the indicator view.
     public var centerOffset: CGPoint { return .zero }
@@ -74,10 +76,11 @@ extension Indicator {
 
 // Displays a NSProgressIndicator / UIActivityIndicatorView
 final class ActivityIndicator: Indicator {
+
     #if os(macOS)
-        private let activityIndicatorView: NSProgressIndicator
+    private let activityIndicatorView: NSProgressIndicator
     #else
-        private let activityIndicatorView: UIActivityIndicatorView
+    private let activityIndicatorView: UIActivityIndicatorView
     #endif
     private var animatingCount = 0
 
@@ -88,9 +91,9 @@ final class ActivityIndicator: Indicator {
     func startAnimatingView() {
         if animatingCount == 0 {
             #if os(macOS)
-                activityIndicatorView.startAnimation(nil)
+            activityIndicatorView.startAnimation(nil)
             #else
-                activityIndicatorView.startAnimating()
+            activityIndicatorView.startAnimating()
             #endif
             activityIndicatorView.isHidden = false
         }
@@ -121,16 +124,15 @@ final class ActivityIndicator: Indicator {
                 let indicatorStyle = UIActivityIndicatorView.Style.gray
             #endif
             #if swift(>=4.2)
-                activityIndicatorView = UIActivityIndicatorView(style: indicatorStyle)
+            activityIndicatorView = UIActivityIndicatorView(style: indicatorStyle)
             #else
-                activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: indicatorStyle)
+            activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: indicatorStyle)
             #endif
         #endif
     }
 }
 
 // MARK: - ImageIndicator
-
 // Displays an ImageView. Supports gif
 final class ImageIndicator: Indicator {
     private let animatedImageIndicatorView: ImageView
@@ -142,21 +144,21 @@ final class ImageIndicator: Indicator {
     init?(
         imageData data: Data,
         processor: ImageProcessor = DefaultImageProcessor.default,
-        options: KingfisherParsedOptionsInfo? = nil
-    ) {
+        options: KingfisherParsedOptionsInfo? = nil)
+    {
         var options = options ?? KingfisherParsedOptionsInfo(nil)
         // Use normal image view to show animations, so we need to preload all animation data.
         if !options.preloadAllAnimationData {
             options.preloadAllAnimationData = true
         }
-
+        
         guard let image = processor.process(item: .data(data), options: options) else {
             return nil
         }
 
         animatedImageIndicatorView = ImageView()
         animatedImageIndicatorView.image = image
-
+        
         #if os(macOS)
             // Need for gif to animate on macOS
             animatedImageIndicatorView.imageScaling = .scaleNone

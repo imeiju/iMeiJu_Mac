@@ -30,6 +30,7 @@ import Foundation
 /// retrieving it from disk storage, and vice versa, to convert an image to data object
 /// for storing to the disk storage.
 public protocol CacheSerializer {
+    
     /// Gets the serialized data from a provided image
     /// and optional original data for caching to disk.
     ///
@@ -50,7 +51,7 @@ public protocol CacheSerializer {
     /// - Returns: An image deserialized or `nil` when no valid image
     ///            could be deserialized.
     func image(with data: Data, options: KingfisherParsedOptionsInfo) -> Image?
-
+    
     /// Gets an image deserialized from provided data.
     ///
     /// - Parameters:
@@ -62,7 +63,7 @@ public protocol CacheSerializer {
     /// This method is deprecated. Please implement the version with
     /// `KingfisherParsedOptionsInfo` as parameter instead.
     @available(*, deprecated,
-               message: "Deprecated. Implement the method with same name but with `KingfisherParsedOptionsInfo` instead.")
+    message: "Deprecated. Implement the method with same name but with `KingfisherParsedOptionsInfo` instead.")
     func image(with data: Data, options: KingfisherOptionsInfo?) -> Image?
 }
 
@@ -76,10 +77,11 @@ extension CacheSerializer {
 /// It could serialize and deserialize images in PNG, JPEG and GIF format. For
 /// image other than these formats, a normalized `pngRepresentation` will be used.
 public struct DefaultCacheSerializer: CacheSerializer {
+    
     /// The default general cache serializer used across Kingfisher's cache.
     public static let `default` = DefaultCacheSerializer()
     private init() {}
-
+    
     /// - Parameters:
     ///   - image: The image needed to be serialized.
     ///   - original: The original data which is just downloaded.
@@ -107,7 +109,7 @@ public struct DefaultCacheSerializer: CacheSerializer {
 
         return data
     }
-
+    
     /// Gets an image deserialized from provided data.
     ///
     /// - Parameters:

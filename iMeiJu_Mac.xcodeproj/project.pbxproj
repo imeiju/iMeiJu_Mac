@@ -29,7 +29,6 @@
 		2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E38122085FBF00EB9CE1 /* IZEpisodeItem.swift */; };
 		2723E38422085FBF00EB9CE1 /* IZEpisodeItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E38222085FBF00EB9CE1 /* IZEpisodeItem.xib */; };
 		277720522212EFD000BADE4D /* IZMainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 277720512212EFD000BADE4D /* IZMainWindowController.swift */; };
-		2777205B2213D87D00BADE4D /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 2777205A2213D87D00BADE4D /* dsa_pub.pem */; };
 		278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604A8220930FF0097192A /* IZStillsViewItem.swift */; };
 		278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 278604A9220930FF0097192A /* IZStillsViewItem.xib */; };
 		278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278604AC2209418D0097192A /* IZMoreViewController.swift */; };
@@ -53,6 +52,7 @@
 		2794041F2212A86500970316 /* IZMoreWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2794041D2212A86500970316 /* IZMoreWindowController.xib */; };
 		279404272212D35400970316 /* IZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279404262212D35400970316 /* IZButton.swift */; };
 		27978E7822114E5300C1EB6B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27978E7722114E5200C1EB6B /* CFNetwork.framework */; };
+		A537C3012217D45F00DE59FC /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = A537C3002217D45F00DE59FC /* dsa_pub.pem */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,7 +84,6 @@
 		2723E38122085FBF00EB9CE1 /* IZEpisodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZEpisodeItem.swift; sourceTree = "<group>"; };
 		2723E38222085FBF00EB9CE1 /* IZEpisodeItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZEpisodeItem.xib; sourceTree = "<group>"; };
 		277720512212EFD000BADE4D /* IZMainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMainWindowController.swift; sourceTree = "<group>"; };
-		2777205A2213D87D00BADE4D /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		278604A8220930FF0097192A /* IZStillsViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZStillsViewItem.swift; sourceTree = "<group>"; };
 		278604A9220930FF0097192A /* IZStillsViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZStillsViewItem.xib; sourceTree = "<group>"; };
 		278604AC2209418D0097192A /* IZMoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZMoreViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		279404262212D35400970316 /* IZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZButton.swift; sourceTree = "<group>"; };
 		27978E7722114E5200C1EB6B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
+		A537C3002217D45F00DE59FC /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,7 +159,7 @@
 		2705F0E32205BFB4005A0BB1 /* iMeiJu_Mac */ = {
 			isa = PBXGroup;
 			children = (
-				2777205A2213D87D00BADE4D /* dsa_pub.pem */,
+				A537C3002217D45F00DE59FC /* dsa_pub.pem */,
 				279403D922119D3C00970316 /* Layout */,
 				279403CE2211516C00970316 /* Base */,
 				2711C751220740D6003A28DB /* Plugin */,
@@ -406,7 +406,7 @@
 				27940419221292D000970316 /* IZSettingViewController.xib in Resources */,
 				2723E379220821E900EB9CE1 /* IZPlotMessageViewController.xib in Resources */,
 				2711C74822071E88003A28DB /* IZCollectionHeaderView.xib in Resources */,
-				2777205B2213D87D00BADE4D /* dsa_pub.pem in Resources */,
+				A537C3012217D45F00DE59FC /* dsa_pub.pem in Resources */,
 				278604BA2209A27B0097192A /* IZSearchViewController.xib in Resources */,
 				278604AB220930FF0097192A /* IZStillsViewItem.xib in Resources */,
 				2723E38422085FBF00EB9CE1 /* IZEpisodeItem.xib in Resources */,
@@ -454,7 +454,6 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 				"${PODS_ROOT}/Sparkle/Sparkle.framework",
-				"${PODS_ROOT}/Sparkle/Sparkle.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/SwiftHEXColors/SwiftHEXColors.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/VersaPlayer/VersaPlayer.framework",
@@ -469,7 +468,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/Sparkle.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftHEXColors.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VersaPlayer.framework",

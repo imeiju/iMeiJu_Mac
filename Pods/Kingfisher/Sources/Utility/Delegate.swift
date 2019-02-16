@@ -29,9 +29,9 @@ import Foundation
 /// A delegate helper type to "shadow" weak `self`, to prevent creating an unexpected retain cycle.
 class Delegate<Input, Output> {
     init() {}
-
+    
     private var block: ((Input) -> Output?)?
-
+    
     func delegate<T: AnyObject>(on target: T, block: ((T, Input) -> Output)?) {
         // The `target` is weak inside block, so you do not need to worry about it in the caller side.
         self.block = { [weak target] input in
@@ -39,7 +39,7 @@ class Delegate<Input, Output> {
             return block?(target, input)
         }
     }
-
+    
     func call(_ input: Input) -> Output? {
         return block?(input)
     }

@@ -41,7 +41,7 @@ public enum ImageFormat {
     case JPEG
     /// GIF image format.
     case GIF
-
+    
     struct HeaderData {
         static var PNG: [UInt8] = [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
         static var JPEG_SOI: [UInt8] = [0xFF, 0xD8]
@@ -50,10 +50,10 @@ public enum ImageFormat {
     }
 }
 
+
 extension Data: KingfisherCompatible {}
 
 // MARK: - Misc Helpers
-
 extension KingfisherWrapper where Base == Data {
     /// Gets the image format corresponding to the data.
     public var imageFormat: ImageFormat {
@@ -61,16 +61,18 @@ extension KingfisherWrapper where Base == Data {
         (base as NSData).getBytes(&buffer, length: 8)
         if buffer == ImageFormat.HeaderData.PNG {
             return .PNG
-        } else if buffer[0] == ImageFormat.HeaderData.JPEG_SOI[0],
-            buffer[1] == ImageFormat.HeaderData.JPEG_SOI[1],
-            buffer[2] == ImageFormat.HeaderData.JPEG_IF[0] {
+        } else if buffer[0] == ImageFormat.HeaderData.JPEG_SOI[0] &&
+            buffer[1] == ImageFormat.HeaderData.JPEG_SOI[1] &&
+            buffer[2] == ImageFormat.HeaderData.JPEG_IF[0]
+        {
             return .JPEG
-        } else if buffer[0] == ImageFormat.HeaderData.GIF[0],
-            buffer[1] == ImageFormat.HeaderData.GIF[1],
-            buffer[2] == ImageFormat.HeaderData.GIF[2] {
+        } else if buffer[0] == ImageFormat.HeaderData.GIF[0] &&
+            buffer[1] == ImageFormat.HeaderData.GIF[1] &&
+            buffer[2] == ImageFormat.HeaderData.GIF[2]
+        {
             return .GIF
         }
-
+        
         return .unknown
     }
 }

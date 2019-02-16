@@ -13,6 +13,9 @@
 > 支持`MacOS 10.13及以后版本`\
 > `Resource/versions`文件中的压缩包为应用程序, 解压后直接打开使用
 
+> 使用
+>> cd ~/Desktop/ && git clone https://github.com/imeiju/iMeiJu_Mac.git
+
 <p align="center">
   <img src="Resource/imgs/preview.gif" width="500" />
 </p>
