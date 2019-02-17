@@ -36,10 +36,9 @@ class IZSearchViewController: NSViewController {
     }
 
     func network() {
-        ProgressHUD.setDefaultPosition(.center)
-        ProgressHUD.show()
+        
         provider.request(.search(key: words.stringValue, page: "1", size: "10000")) { result in
-            ProgressHUD.dismiss()
+            
             switch result {
             case let .success(result):
                 self.model = IZMoreModel(fromJson: JSON(result.data))

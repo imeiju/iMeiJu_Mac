@@ -147,10 +147,7 @@ class IZPlotMessageViewController: NSViewController {
     }
 
     func network() {
-        ProgressHUD.setDefaultPosition(.center)
-        ProgressHUD.show()
         provider.request(.show(id: id!)) { result in
-            ProgressHUD.dismiss()
             switch result {
             case let .success(result):
                 self.model = IZPlotMessageModel(fromJson: JSON(result.data))
@@ -212,7 +209,7 @@ class IZPlotMessageViewController: NSViewController {
 
     override func viewDidDisappear() {
         super.viewDidDisappear()
-        ProgressHUD.dismiss()
+        
         let currentTime = player?.currentTime()
         if currentTime != nil {
             let currentTimeNum = currentTime!.value / Int64(currentTime!.timescale)

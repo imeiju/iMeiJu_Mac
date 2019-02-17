@@ -42,10 +42,9 @@ class IZCollectionViewController: NSViewController {
     }
 
     func network() {
-        ProgressHUD.setDefaultPosition(.center)
-        ProgressHUD.show()
+        
         provider.request(api) { result in
-            ProgressHUD.dismiss()
+            
             switch result {
             case let .success(result):
                 let json = JSON(result.data)
@@ -60,7 +59,7 @@ class IZCollectionViewController: NSViewController {
 
     override func viewDidDisappear() {
         super.viewDidDisappear()
-        ProgressHUD.dismiss()
+        
         if isMenu == .movie {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "isVip"), object: nil)
         }

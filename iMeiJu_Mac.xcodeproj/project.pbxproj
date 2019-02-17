@@ -17,8 +17,6 @@
 		2711C7432206F13B003A28DB /* IZMainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7402206F13B003A28DB /* IZMainModel.swift */; };
 		2711C74822071E88003A28DB /* IZCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2711C74722071E88003A28DB /* IZCollectionHeaderView.xib */; };
 		2711C74A22071F4E003A28DB /* IZCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C74922071F4E003A28DB /* IZCollectionHeaderView.swift */; };
-		2711C75B2207419D003A28DB /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C7592207419D003A28DB /* ProgressHUD.swift */; };
-		2711C75C2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2711C75A2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift */; };
 		2723E37022081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */; };
 		2723E37122081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */; };
 		2723E378220821E900EB9CE1 /* IZPlotMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2723E376220821E900EB9CE1 /* IZPlotMessageViewController.swift */; };
@@ -71,8 +69,6 @@
 		2711C7402206F13B003A28DB /* IZMainModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IZMainModel.swift; sourceTree = "<group>"; };
 		2711C74722071E88003A28DB /* IZCollectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZCollectionHeaderView.xib; sourceTree = "<group>"; };
 		2711C74922071F4E003A28DB /* IZCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZCollectionHeaderView.swift; sourceTree = "<group>"; };
-		2711C7592207419D003A28DB /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
-		2711C75A2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YRKSpinningProgressIndicatorLayer.swift; sourceTree = "<group>"; };
 		272042C92213E2E500FF1A5E /* iMeiJu_Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iMeiJu_Mac-Bridging-Header.h"; sourceTree = "<group>"; };
 		2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZPlotMessgaeWindowController.swift; sourceTree = "<group>"; };
 		2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZPlotMessgaeWindowController.xib; sourceTree = "<group>"; };
@@ -270,20 +266,10 @@
 		2711C751220740D6003A28DB /* Plugin */ = {
 			isa = PBXGroup;
 			children = (
-				2711C752220740D6003A28DB /* ProgressHUD */,
 			);
 			name = Plugin;
 			path = iMeiJu_Mac/Plugin;
 			sourceTree = SOURCE_ROOT;
-		};
-		2711C752220740D6003A28DB /* ProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				2711C7592207419D003A28DB /* ProgressHUD.swift */,
-				2711C75A2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift */,
-			);
-			path = ProgressHUD;
-			sourceTree = "<group>";
 		};
 		2723E37E2208272800EB9CE1 /* PlotMessage */ = {
 			isa = PBXGroup;
@@ -488,7 +474,6 @@
 				2711C74A22071F4E003A28DB /* IZCollectionHeaderView.swift in Sources */,
 				279403CD2211510400970316 /* IZCollectionView.swift in Sources */,
 				277720522212EFD000BADE4D /* IZMainWindowController.swift in Sources */,
-				2711C75B2207419D003A28DB /* ProgressHUD.swift in Sources */,
 				2723E378220821E900EB9CE1 /* IZPlotMessageViewController.swift in Sources */,
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
 				2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */,
@@ -502,7 +487,6 @@
 				278604AA220930FF0097192A /* IZStillsViewItem.swift in Sources */,
 				279403D622116D9100970316 /* IZView.swift in Sources */,
 				2705F13A2205C4AC005A0BB1 /* IZMainViewController.swift in Sources */,
-				2711C75C2207419D003A28DB /* YRKSpinningProgressIndicatorLayer.swift in Sources */,
 				279403DB22119D4E00970316 /* IZLayout.swift in Sources */,
 				27940418221292D000970316 /* IZSettingViewController.swift in Sources */,
 				279403D8221173E000970316 /* IZImageView.swift in Sources */,

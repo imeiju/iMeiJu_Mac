@@ -37,10 +37,9 @@ class IZMoreViewController: NSViewController {
     }
 
     func network() {
-        ProgressHUD.setDefaultPosition(.center)
-        ProgressHUD.show()
+        
         provider.request(api) { result in
-            ProgressHUD.dismiss()
+            
             switch result {
             case let .success(result):
                 self.model = IZMoreModel(fromJson: JSON(result.data))
@@ -61,7 +60,7 @@ class IZMoreViewController: NSViewController {
 
     override func viewDidDisappear() {
         super.viewDidDisappear()
-        ProgressHUD.dismiss()
+        
     }
 }
 
