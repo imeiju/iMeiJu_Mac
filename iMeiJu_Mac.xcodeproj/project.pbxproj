@@ -50,6 +50,8 @@
 		2794041F2212A86500970316 /* IZMoreWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2794041D2212A86500970316 /* IZMoreWindowController.xib */; };
 		279404272212D35400970316 /* IZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279404262212D35400970316 /* IZButton.swift */; };
 		27978E7822114E5300C1EB6B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27978E7722114E5200C1EB6B /* CFNetwork.framework */; };
+		A536D60E221BCAA30035A177 /* IZDetailWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A536D60C221BCAA30035A177 /* IZDetailWindowController.swift */; };
+		A536D60F221BCAA30035A177 /* IZDetailWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A536D60D221BCAA30035A177 /* IZDetailWindowController.xib */; };
 		A537C3012217D45F00DE59FC /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = A537C3002217D45F00DE59FC /* dsa_pub.pem */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
@@ -104,6 +106,8 @@
 		279404262212D35400970316 /* IZButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZButton.swift; sourceTree = "<group>"; };
 		27978E7722114E5200C1EB6B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3906E4CD965E37021E495DC5 /* Pods-iMeiJu_Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.release.xcconfig"; sourceTree = "<group>"; };
+		A536D60C221BCAA30035A177 /* IZDetailWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZDetailWindowController.swift; sourceTree = "<group>"; };
+		A536D60D221BCAA30035A177 /* IZDetailWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZDetailWindowController.xib; sourceTree = "<group>"; };
 		A537C3002217D45F00DE59FC /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,6 +237,8 @@
 				2723E36E22081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift */,
 				2723E36F22081C5600EB9CE1 /* IZPlotMessgaeWindowController.xib */,
 				277720512212EFD000BADE4D /* IZMainWindowController.swift */,
+				A536D60C221BCAA30035A177 /* IZDetailWindowController.swift */,
+				A536D60D221BCAA30035A177 /* IZDetailWindowController.xib */,
 			);
 			path = Window;
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 				2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */,
 				2794041F2212A86500970316 /* IZMoreWindowController.xib in Resources */,
 				2794041122127D6A00970316 /* IZCollectionViewController.xib in Resources */,
+				A536D60F221BCAA30035A177 /* IZDetailWindowController.xib in Resources */,
 				278604AF2209418D0097192A /* IZMoreViewController.xib in Resources */,
 				2705F0EC2205BFB6005A0BB1 /* Main.storyboard in Resources */,
 				27940419221292D000970316 /* IZSettingViewController.xib in Resources */,
@@ -493,6 +500,7 @@
 				278604B2220955530097192A /* IZMoreModel.swift in Sources */,
 				2723E37022081C5600EB9CE1 /* IZPlotMessgaeWindowController.swift in Sources */,
 				2794041E2212A86500970316 /* IZMoreWindowController.swift in Sources */,
+				A536D60E221BCAA30035A177 /* IZDetailWindowController.swift in Sources */,
 				2723E380220829D100EB9CE1 /* IZPlotMessageModel.swift in Sources */,
 				2705F0E52205BFB4005A0BB1 /* AppDelegate.swift in Sources */,
 				279404272212D35400970316 /* IZButton.swift in Sources */,
@@ -639,7 +647,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RS65R2LL7H;
+				DEVELOPMENT_TEAM = P2GKHL4KF3;
 				INFOPLIST_FILE = iMeiJu_Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -664,7 +672,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RS65R2LL7H;
+				DEVELOPMENT_TEAM = P2GKHL4KF3;
 				INFOPLIST_FILE = iMeiJu_Mac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
