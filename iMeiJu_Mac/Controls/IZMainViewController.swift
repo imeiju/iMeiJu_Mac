@@ -14,7 +14,8 @@ enum MenuType: Int {
     case movie = 1
     case television = 2
     case search = 3
-    case setting = 4
+    case tracing = 4
+    case setting = 5
 }
 
 class IZMainViewController: NSViewController {
@@ -24,12 +25,13 @@ class IZMainViewController: NSViewController {
 
     var menusType: MenuType?
 
-    @IBOutlet var recommend: NSButton!
-    @IBOutlet var movie: NSButton!
-    @IBOutlet var television: NSButton!
-    @IBOutlet var search: NSButton!
-    @IBOutlet var setting: NSButton!
-
+    @IBOutlet weak var recommend: NSButton!
+    @IBOutlet weak var movie: NSButton!
+    @IBOutlet weak var television: NSButton!
+    @IBOutlet weak var search: NSButton!
+    @IBOutlet weak var setting: NSButton!
+    @IBOutlet weak var tracing: NSButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,16 +60,23 @@ class IZMainViewController: NSViewController {
         changeViewController(type: .search)
     }
 
+    @IBAction func tracing(_ sender: NSButton) {
+        changeViewController(type: .tracing)
+    }
+    
     @IBAction func setting(_: NSButton) {
 //        changeViewController(type: .setting)
     }
 
+   
+    
     func initImages() {
         recommend.image = NSImage(named: "recommend")
         movie.image = NSImage(named: "movie")
         television.image = NSImage(named: "television")
         search.image = NSImage(named: "search")
         setting.image = NSImage(named: "setting")
+        tracing.image = NSImage(named: "tracing");
     }
 
     func changeViewController(type: MenuType) {
@@ -78,32 +87,35 @@ class IZMainViewController: NSViewController {
         initImages()
         var vc: NSViewController!
         if type == .recommend {
-            recommend.image = NSImage(named: "recommend_select")
+            recommend.image = NSImage(named: "recommend_selected")
             let cvc = IZCollectionViewController(nibName: "IZCollectionViewController", bundle: nil)
             cvc.api = .index(vsize: "15")
             cvc.isZtid = true
             cvc.isMenu = type
             vc = cvc
         } else if type == .movie {
-            movie.image = NSImage(named: "movie_select")
+            movie.image = NSImage(named: "movie_selected")
             let cvc = IZCollectionViewController(nibName: "IZCollectionViewController", bundle: nil)
             cvc.api = .movie(id: "1", vsize: "15")
             cvc.isZtid = false
             cvc.isMenu = type
             vc = cvc
         } else if type == .television {
-            television.image = NSImage(named: "television_select")
+            television.image = NSImage(named: "television_selected")
             let cvc = IZCollectionViewController(nibName: "IZCollectionViewController", bundle: nil)
             cvc.api = .movie(id: "2", vsize: "15")
             cvc.isZtid = false
             cvc.isMenu = type
             vc = cvc
         } else if type == .search {
-            search.image = NSImage(named: "search_select")
+            search.image = NSImage(named: "search_selected")
             vc = IZSearchViewController(nibName: "IZSearchViewController", bundle: nil)
 
+        } else if type == .tracing {
+            tracing.image = NSImage(named: "tracing_selected")
+            vc = IZTracingViewController(nibName: "IZTracingViewController", bundle: nil)
         } else if type == .setting {
-            setting.image = NSImage(named: "setting_select")
+            setting.image = NSImage(named: "setting_selected")
             vc = IZSettingViewController(nibName: "IZSettingViewController", bundle: nil)
         }
         addChild(vc)

@@ -53,6 +53,8 @@
 		A536D60E221BCAA30035A177 /* IZDetailWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A536D60C221BCAA30035A177 /* IZDetailWindowController.swift */; };
 		A536D60F221BCAA30035A177 /* IZDetailWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A536D60D221BCAA30035A177 /* IZDetailWindowController.xib */; };
 		A537C3012217D45F00DE59FC /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = A537C3002217D45F00DE59FC /* dsa_pub.pem */; };
+		A53F2EAC221D186000065D72 /* IZTracingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53F2EAA221D186000065D72 /* IZTracingViewController.swift */; };
+		A53F2EAD221D186000065D72 /* IZTracingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A53F2EAB221D186000065D72 /* IZTracingViewController.xib */; };
 		DC8CB4A1F6C2CCBB5C4973B1 /* Pods_iMeiJu_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8B0BE509C7166EBA48B1E /* Pods_iMeiJu_Mac.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +111,8 @@
 		A536D60C221BCAA30035A177 /* IZDetailWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZDetailWindowController.swift; sourceTree = "<group>"; };
 		A536D60D221BCAA30035A177 /* IZDetailWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZDetailWindowController.xib; sourceTree = "<group>"; };
 		A537C3002217D45F00DE59FC /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		A53F2EAA221D186000065D72 /* IZTracingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IZTracingViewController.swift; sourceTree = "<group>"; };
+		A53F2EAB221D186000065D72 /* IZTracingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IZTracingViewController.xib; sourceTree = "<group>"; };
 		BEC8AFFE637A62C7979464AD /* Pods-iMeiJu_Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iMeiJu_Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iMeiJu_Mac/Pods-iMeiJu_Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +211,8 @@
 				2723E377220821E900EB9CE1 /* IZPlotMessageViewController.xib */,
 				2794040E22127D6A00970316 /* IZCollectionViewController.swift */,
 				2794040F22127D6A00970316 /* IZCollectionViewController.xib */,
+				A53F2EAA221D186000065D72 /* IZTracingViewController.swift */,
+				A53F2EAB221D186000065D72 /* IZTracingViewController.xib */,
 				27940416221292D000970316 /* IZSettingViewController.swift */,
 				27940417221292D000970316 /* IZSettingViewController.xib */,
 			);
@@ -392,6 +398,7 @@
 			files = (
 				2705F0E92205BFB6005A0BB1 /* Assets.xcassets in Resources */,
 				2794041F2212A86500970316 /* IZMoreWindowController.xib in Resources */,
+				A53F2EAD221D186000065D72 /* IZTracingViewController.xib in Resources */,
 				2794041122127D6A00970316 /* IZCollectionViewController.xib in Resources */,
 				A536D60F221BCAA30035A177 /* IZDetailWindowController.xib in Resources */,
 				278604AF2209418D0097192A /* IZMoreViewController.xib in Resources */,
@@ -485,6 +492,7 @@
 				2705F12F2205C3ED005A0BB1 /* IZExtension.swift in Sources */,
 				2723E38322085FBF00EB9CE1 /* IZEpisodeItem.swift in Sources */,
 				2794041B2212A18F00970316 /* IZSearchView.swift in Sources */,
+				A53F2EAC221D186000065D72 /* IZTracingViewController.swift in Sources */,
 				278604B92209A27B0097192A /* IZSearchViewController.swift in Sources */,
 				279403D22211527A00970316 /* IZClipView.swift in Sources */,
 				278604AE2209418D0097192A /* IZMoreViewController.swift in Sources */,

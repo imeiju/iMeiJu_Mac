@@ -171,9 +171,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="88" height="682"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-nE-wT6">
-                                        <rect key="frame" x="27" y="380" width="34" height="60"/>
+                                        <rect key="frame" x="14" y="472" width="60" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="9pf-8f-4F3"/>
+                                            <constraint firstAttribute="height" constant="60" id="xka-KO-1kQ"/>
                                         </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="movie" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="rVm-T3-bKw">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -184,9 +184,9 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bDb-Bn-rlQ">
-                                        <rect key="frame" x="27" y="280" width="34" height="60"/>
+                                        <rect key="frame" x="14" y="392" width="60" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="eo7-NI-ZfL"/>
+                                            <constraint firstAttribute="height" constant="60" id="yMc-38-l5f"/>
                                         </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="television" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="UPT-Wy-iEn">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -197,9 +197,9 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="p3t-zW-4uC">
-                                        <rect key="frame" x="26" y="180" width="36" height="60"/>
+                                        <rect key="frame" x="14" y="312" width="60" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="0Vy-Ml-m4g"/>
+                                            <constraint firstAttribute="height" constant="60" id="jVY-SN-6Pr"/>
                                         </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="search" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="RPJ-Pj-AYP">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -220,9 +220,9 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pwv-xC-U6K" customClass="IZButton" customModule="iMeiJu_Mac" customModuleProvider="target">
-                                        <rect key="frame" x="23" y="480" width="42" height="60"/>
+                                        <rect key="frame" x="14" y="552" width="60" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="zGy-Fg-D4E"/>
+                                            <constraint firstAttribute="height" constant="60" id="8Un-PE-UDK"/>
                                         </constraints>
                                         <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="recommend" imagePosition="above" alignment="center" imageScaling="proportionallyDown" inset="2" id="MF7-4O-7JH">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -232,19 +232,35 @@
                                             <action selector="recommend:" target="XfG-lQ-9wD" id="1fA-xK-kW5"/>
                                         </connections>
                                     </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J4D-55-xcB">
+                                        <rect key="frame" x="14" y="232" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="V37-s5-T7Q"/>
+                                            <constraint firstAttribute="height" constant="60" id="kSW-DT-XMV"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="tracing" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="rdg-jL-XtF">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="tracing:" target="XfG-lQ-9wD" id="oHq-n7-8Qn"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="21e-4a-OuC" firstAttribute="top" secondItem="p3t-zW-4uC" secondAttribute="bottom" constant="100" id="42J-Dp-Yxc"/>
-                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="top" secondItem="zg3-nE-wT6" secondAttribute="bottom" constant="40" id="Alt-AF-JTA"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="top" secondItem="Pwv-xC-U6K" secondAttribute="bottom" constant="40" id="NnT-9L-qNx"/>
+                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="top" secondItem="zg3-nE-wT6" secondAttribute="bottom" constant="20" id="17W-38-Vu5"/>
+                                    <constraint firstItem="J4D-55-xcB" firstAttribute="top" secondItem="p3t-zW-4uC" secondAttribute="bottom" constant="20" id="LAJ-dI-tch"/>
                                     <constraint firstAttribute="width" constant="88" id="O0I-iY-JIb"/>
+                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="PFb-t9-y7Q"/>
                                     <constraint firstAttribute="bottom" secondItem="21e-4a-OuC" secondAttribute="bottom" constant="20" id="QnK-QP-EGs"/>
-                                    <constraint firstItem="p3t-zW-4uC" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="SfV-WJ-U8O"/>
-                                    <constraint firstItem="Pwv-xC-U6K" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="X9B-l7-gmr"/>
-                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="a03-Ub-ONJ"/>
-                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="jXj-Kf-pCI"/>
-                                    <constraint firstItem="p3t-zW-4uC" firstAttribute="top" secondItem="bDb-Bn-rlQ" secondAttribute="bottom" constant="40" id="kzR-a5-wSs"/>
+                                    <constraint firstItem="bDb-Bn-rlQ" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="Vv8-UY-hha"/>
+                                    <constraint firstItem="p3t-zW-4uC" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="dWW-ss-aBF"/>
+                                    <constraint firstItem="Pwv-xC-U6K" firstAttribute="top" secondItem="9uF-Ob-rWU" secondAttribute="top" constant="70" id="h43-SW-WXB"/>
+                                    <constraint firstItem="zg3-nE-wT6" firstAttribute="top" secondItem="Pwv-xC-U6K" secondAttribute="bottom" constant="20" id="scL-P2-pPr"/>
+                                    <constraint firstItem="J4D-55-xcB" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="uX2-Br-nz4"/>
+                                    <constraint firstItem="21e-4a-OuC" firstAttribute="centerX" secondItem="Pwv-xC-U6K" secondAttribute="centerX" id="vxk-C2-zuz"/>
                                     <constraint firstItem="21e-4a-OuC" firstAttribute="centerX" secondItem="9uF-Ob-rWU" secondAttribute="centerX" id="wq4-WT-ZIj"/>
+                                    <constraint firstItem="p3t-zW-4uC" firstAttribute="top" secondItem="bDb-Bn-rlQ" secondAttribute="bottom" constant="20" id="y70-PY-lsv"/>
                                 </constraints>
                             </customView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="3dd-Oy-snq" customClass="IZView" customModule="iMeiJu_Mac" customModuleProvider="target">
@@ -269,6 +285,7 @@
                         <outlet property="search" destination="p3t-zW-4uC" id="ywS-3o-zYz"/>
                         <outlet property="setting" destination="21e-4a-OuC" id="5wt-3c-vKx"/>
                         <outlet property="television" destination="bDb-Bn-rlQ" id="Jm4-K8-NjS"/>
+                        <outlet property="tracing" destination="J4D-55-xcB" id="52n-Zb-Tmb"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -277,10 +294,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="movie" width="34" height="67"/>
-        <image name="recommend" width="42" height="68"/>
-        <image name="search" width="36" height="61"/>
+        <image name="movie" width="60" height="60"/>
+        <image name="recommend" width="60" height="60"/>
+        <image name="search" width="60" height="60"/>
         <image name="setting" width="60" height="60"/>
-        <image name="television" width="34" height="63"/>
+        <image name="television" width="60" height="60"/>
+        <image name="tracing" width="60" height="60"/>
     </resources>
 </document>
