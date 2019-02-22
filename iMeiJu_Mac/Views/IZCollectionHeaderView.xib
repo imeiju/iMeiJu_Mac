@@ -30,7 +30,10 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZS-FI-mlz">
-                    <rect key="frame" x="0.0" y="0.0" width="1002" height="15"/>
+                    <rect key="frame" x="902" y="0.0" width="100" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="ecn-Gs-6aB"/>
+                    </constraints>
                     <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="GCQ-wk-pgh">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="15"/>
@@ -40,19 +43,18 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="mAo-6g-1FY" secondAttribute="bottom" id="73f-cg-a9M"/>
                 <constraint firstAttribute="trailing" secondItem="qnO-dl-Y8v" secondAttribute="trailing" constant="50" id="87Q-h1-Ibj"/>
-                <constraint firstAttribute="bottom" secondItem="fZS-FI-mlz" secondAttribute="bottom" id="JcG-fG-iCD"/>
-                <constraint firstItem="fZS-FI-mlz" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="Zng-wO-2zv"/>
-                <constraint firstItem="fZS-FI-mlz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="bcv-GF-jwp"/>
+                <constraint firstAttribute="trailing" secondItem="fZS-FI-mlz" secondAttribute="trailing" id="9Yu-YB-5Xo"/>
+                <constraint firstItem="fZS-FI-mlz" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="cTY-l9-5Q9"/>
                 <constraint firstAttribute="bottom" secondItem="qnO-dl-Y8v" secondAttribute="bottom" id="f9y-tO-6ew"/>
                 <constraint firstItem="mAo-6g-1FY" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="50" id="pbA-x0-lQu"/>
                 <constraint firstItem="qnO-dl-Y8v" firstAttribute="leading" secondItem="mAo-6g-1FY" secondAttribute="trailing" id="tnB-qC-QlC"/>
-                <constraint firstAttribute="trailing" secondItem="fZS-FI-mlz" secondAttribute="trailing" id="yng-BS-Wwy"/>
+                <constraint firstAttribute="bottom" secondItem="fZS-FI-mlz" secondAttribute="bottom" id="xxa-2c-KKW"/>
             </constraints>
             <connections>
                 <outlet property="actionButton" destination="fZS-FI-mlz" id="NGV-7Y-IH7"/>
                 <outlet property="sectionTitle" destination="mAo-6g-1FY" id="YM8-km-Otv"/>
             </connections>
-            <point key="canvasLocation" x="133" y="169"/>
+            <point key="canvasLocation" x="133" y="168.5"/>
         </customView>
     </objects>
 </document>
