@@ -31,32 +31,35 @@ extension MoyaApi: TargetType {
             return "/index.php/app/ios/topic/index"
         case .movie:
             return "/index.php/app/ios/type/index"
-        case .movieMore:
-            return "/index.php/app/ios/vod/index"
-        case .more:
-            return "/index.php/app/ios/vod/index"
-        case .search:
-            return "/index.php/app/ios/vod/index"
+//        case .movieMore:
+//            return "/index.php/app/ios/vod/index"
+//        case .more:
+//            return "/index.php/app/ios/vod/index"
+//        case .search:
+//            return "/index.php/app/ios/vod/index"
         case .show:
             return "/index.php/app/ios/vod/show"
+        default :
+            return "/index.php/app/ios/vod/index"
         }
     }
 
     var method: Moya.Method {
-        switch self {
-        case .index:
-            return .get
-        case .movie:
-            return .get
-        case .more:
-            return .get
-        case .movieMore:
-            return .get
-        case .search:
-            return .get
-        case .show:
-            return .get
-        }
+        return .get
+//        switch self {
+//        case .index:
+//            return .get
+//        case .movie:
+//            return .get
+//        case .more:
+//            return .get
+//        case .movieMore:
+//            return .get
+//        case .search:
+//            return .get
+//        case .show:
+//            return .get
+//        }
     }
 
     var sampleData: Data {
