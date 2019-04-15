@@ -2,6 +2,7 @@ import Foundation
 
 /// The protocol used to define the specifications necessary for a `MoyaProvider`.
 public protocol TargetType {
+
     /// The target's base `URL`.
     var baseURL: URL { get }
 
@@ -25,18 +26,9 @@ public protocol TargetType {
 }
 
 public extension TargetType {
+
     /// The type of validation to perform on the request. Default is `.none`.
     var validationType: ValidationType {
         return .none
-    }
-}
-
-// MARK: - Deprecated
-
-extension TargetType {
-    @available(*, deprecated: 11.0, message:
-        "TargetType's validate property has been deprecated in 11.0. Please use validationType: ValidationType.")
-    var validate: Bool {
-        return false
     }
 }

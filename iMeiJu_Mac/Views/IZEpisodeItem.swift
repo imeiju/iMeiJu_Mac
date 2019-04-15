@@ -24,7 +24,6 @@ class IZEpisodeItem: NSCollectionViewItem {
     }
 
     override var isSelected: Bool {
-        willSet {}
         didSet {
             if isSelected {
                 textField?.textColor = NSColor(hexString: "71E3DE")

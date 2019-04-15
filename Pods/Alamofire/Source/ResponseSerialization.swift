@@ -88,9 +88,9 @@ public struct DownloadResponseSerializer<Value>: DownloadResponseSerializerProto
 
 extension Request {
     var timeline: Timeline {
-        let requestStartTime = startTime ?? CFAbsoluteTimeGetCurrent()
-        let requestCompletedTime = endTime ?? CFAbsoluteTimeGetCurrent()
-        let initialResponseTime = delegate.initialResponseTime ?? requestCompletedTime
+        let requestStartTime = self.startTime ?? CFAbsoluteTimeGetCurrent()
+        let requestCompletedTime = self.endTime ?? CFAbsoluteTimeGetCurrent()
+        let initialResponseTime = self.delegate.initialResponseTime ?? requestCompletedTime
 
         return Timeline(
             requestStartTime: requestStartTime,
@@ -143,9 +143,9 @@ extension DataRequest {
     public func response<T: DataResponseSerializerProtocol>(
         queue: DispatchQueue? = nil,
         responseSerializer: T,
-        completionHandler: @escaping (DataResponse<T.SerializedObject>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DataResponse<T.SerializedObject>) -> Void)
+        -> Self
+    {
         delegate.queue.addOperation {
             let result = responseSerializer.serializeResponse(
                 self.request,
@@ -181,9 +181,9 @@ extension DownloadRequest {
     @discardableResult
     public func response(
         queue: DispatchQueue? = nil,
-        completionHandler: @escaping (DefaultDownloadResponse) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DefaultDownloadResponse) -> Void)
+        -> Self
+    {
         delegate.queue.addOperation {
             (queue ?? DispatchQueue.main).async {
                 var downloadResponse = DefaultDownloadResponse(
@@ -217,9 +217,9 @@ extension DownloadRequest {
     public func response<T: DownloadResponseSerializerProtocol>(
         queue: DispatchQueue? = nil,
         responseSerializer: T,
-        completionHandler: @escaping (DownloadResponse<T.SerializedObject>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DownloadResponse<T.SerializedObject>) -> Void)
+        -> Self
+    {
         delegate.queue.addOperation {
             let result = responseSerializer.serializeResponse(
                 self.request,
@@ -276,7 +276,7 @@ extension DataRequest {
     /// - returns: A data response serializer.
     public static func dataResponseSerializer() -> DataResponseSerializer<Data> {
         return DataResponseSerializer { _, response, data, error in
-            Request.serializeResponseData(response: response, data: data, error: error)
+            return Request.serializeResponseData(response: response, data: data, error: error)
         }
     }
 
@@ -288,9 +288,9 @@ extension DataRequest {
     @discardableResult
     public func responseData(
         queue: DispatchQueue? = nil,
-        completionHandler: @escaping (DataResponse<Data>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DataResponse<Data>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DataRequest.dataResponseSerializer(),
@@ -328,9 +328,9 @@ extension DownloadRequest {
     @discardableResult
     public func responseData(
         queue: DispatchQueue? = nil,
-        completionHandler: @escaping (DownloadResponse<Data>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DownloadResponse<Data>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DownloadRequest.dataResponseSerializer(),
@@ -355,9 +355,9 @@ extension Request {
         encoding: String.Encoding?,
         response: HTTPURLResponse?,
         data: Data?,
-        error: Error?
-    )
-        -> Result<String> {
+        error: Error?)
+        -> Result<String>
+    {
         guard error == nil else { return .failure(error!) }
 
         if let response = response, emptyDataStatusCodes.contains(response.statusCode) { return .success("") }
@@ -370,8 +370,8 @@ extension Request {
 
         if let encodingName = response?.textEncodingName as CFString?, convertedEncoding == nil {
             convertedEncoding = String.Encoding(rawValue: CFStringConvertEncodingToNSStringEncoding(
-                CFStringConvertIANACharSetNameToEncoding(encodingName)
-            ))
+                CFStringConvertIANACharSetNameToEncoding(encodingName))
+            )
         }
 
         let actualEncoding = convertedEncoding ?? .isoLatin1
@@ -394,7 +394,7 @@ extension DataRequest {
     /// - returns: A string response serializer.
     public static func stringResponseSerializer(encoding: String.Encoding? = nil) -> DataResponseSerializer<String> {
         return DataResponseSerializer { _, response, data, error in
-            Request.serializeResponseString(encoding: encoding, response: response, data: data, error: error)
+            return Request.serializeResponseString(encoding: encoding, response: response, data: data, error: error)
         }
     }
 
@@ -410,9 +410,9 @@ extension DataRequest {
     public func responseString(
         queue: DispatchQueue? = nil,
         encoding: String.Encoding? = nil,
-        completionHandler: @escaping (DataResponse<String>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DataResponse<String>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DataRequest.stringResponseSerializer(encoding: encoding),
@@ -458,9 +458,9 @@ extension DownloadRequest {
     public func responseString(
         queue: DispatchQueue? = nil,
         encoding: String.Encoding? = nil,
-        completionHandler: @escaping (DownloadResponse<String>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DownloadResponse<String>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DownloadRequest.stringResponseSerializer(encoding: encoding),
@@ -485,9 +485,9 @@ extension Request {
         options: JSONSerialization.ReadingOptions,
         response: HTTPURLResponse?,
         data: Data?,
-        error: Error?
-    )
-        -> Result<Any> {
+        error: Error?)
+        -> Result<Any>
+    {
         guard error == nil else { return .failure(error!) }
 
         if let response = response, emptyDataStatusCodes.contains(response.statusCode) { return .success(NSNull()) }
@@ -513,11 +513,11 @@ extension DataRequest {
     ///
     /// - returns: A JSON object response serializer.
     public static func jsonResponseSerializer(
-        options: JSONSerialization.ReadingOptions = .allowFragments
-    )
-        -> DataResponseSerializer<Any> {
+        options: JSONSerialization.ReadingOptions = .allowFragments)
+        -> DataResponseSerializer<Any>
+    {
         return DataResponseSerializer { _, response, data, error in
-            Request.serializeResponseJSON(options: options, response: response, data: data, error: error)
+            return Request.serializeResponseJSON(options: options, response: response, data: data, error: error)
         }
     }
 
@@ -531,9 +531,9 @@ extension DataRequest {
     public func responseJSON(
         queue: DispatchQueue? = nil,
         options: JSONSerialization.ReadingOptions = .allowFragments,
-        completionHandler: @escaping (DataResponse<Any>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DataResponse<Any>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DataRequest.jsonResponseSerializer(options: options),
@@ -550,9 +550,9 @@ extension DownloadRequest {
     ///
     /// - returns: A JSON object response serializer.
     public static func jsonResponseSerializer(
-        options: JSONSerialization.ReadingOptions = .allowFragments
-    )
-        -> DownloadResponseSerializer<Any> {
+        options: JSONSerialization.ReadingOptions = .allowFragments)
+        -> DownloadResponseSerializer<Any>
+    {
         return DownloadResponseSerializer { _, response, fileURL, error in
             guard error == nil else { return .failure(error!) }
 
@@ -579,9 +579,9 @@ extension DownloadRequest {
     public func responseJSON(
         queue: DispatchQueue? = nil,
         options: JSONSerialization.ReadingOptions = .allowFragments,
-        completionHandler: @escaping (DownloadResponse<Any>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DownloadResponse<Any>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DownloadRequest.jsonResponseSerializer(options: options),
@@ -606,9 +606,9 @@ extension Request {
         options: PropertyListSerialization.ReadOptions,
         response: HTTPURLResponse?,
         data: Data?,
-        error: Error?
-    )
-        -> Result<Any> {
+        error: Error?)
+        -> Result<Any>
+    {
         guard error == nil else { return .failure(error!) }
 
         if let response = response, emptyDataStatusCodes.contains(response.statusCode) { return .success(NSNull()) }
@@ -634,11 +634,11 @@ extension DataRequest {
     ///
     /// - returns: A property list object response serializer.
     public static func propertyListResponseSerializer(
-        options: PropertyListSerialization.ReadOptions = []
-    )
-        -> DataResponseSerializer<Any> {
+        options: PropertyListSerialization.ReadOptions = [])
+        -> DataResponseSerializer<Any>
+    {
         return DataResponseSerializer { _, response, data, error in
-            Request.serializeResponsePropertyList(options: options, response: response, data: data, error: error)
+            return Request.serializeResponsePropertyList(options: options, response: response, data: data, error: error)
         }
     }
 
@@ -652,9 +652,9 @@ extension DataRequest {
     public func responsePropertyList(
         queue: DispatchQueue? = nil,
         options: PropertyListSerialization.ReadOptions = [],
-        completionHandler: @escaping (DataResponse<Any>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DataResponse<Any>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DataRequest.propertyListResponseSerializer(options: options),
@@ -671,9 +671,9 @@ extension DownloadRequest {
     ///
     /// - returns: A property list object response serializer.
     public static func propertyListResponseSerializer(
-        options: PropertyListSerialization.ReadOptions = []
-    )
-        -> DownloadResponseSerializer<Any> {
+        options: PropertyListSerialization.ReadOptions = [])
+        -> DownloadResponseSerializer<Any>
+    {
         return DownloadResponseSerializer { _, response, fileURL, error in
             guard error == nil else { return .failure(error!) }
 
@@ -700,9 +700,9 @@ extension DownloadRequest {
     public func responsePropertyList(
         queue: DispatchQueue? = nil,
         options: PropertyListSerialization.ReadOptions = [],
-        completionHandler: @escaping (DownloadResponse<Any>) -> Void
-    )
-        -> Self {
+        completionHandler: @escaping (DownloadResponse<Any>) -> Void)
+        -> Self
+    {
         return response(
             queue: queue,
             responseSerializer: DownloadRequest.propertyListResponseSerializer(options: options),

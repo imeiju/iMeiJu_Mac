@@ -20,6 +20,9 @@ class IZMainModel: NSObject, NSCoding {
         let dataArray = json["data"].arrayValue
         for dataJson in dataArray {
             let value = IZMainData(fromJson: dataJson)
+            if value.name == "会员专区" || value.id == "17" {
+                continue
+            }
             data.append(value)
         }
     }

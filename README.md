@@ -2,6 +2,7 @@
   <img src="iMeiJu_Mac/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x.png" width="220" alt="Banner" />
 </p>
 
+![](https://img.shields.io/badge/Swift-5-orange.svg?style=flat)
 ![](https://img.shields.io/badge/platform-MacOS^10.13-blue.svg)
 ![](https://img.shields.io/badge/verison-v1.3-green.svg)
 ![](https://img.shields.io/github/watchers/imeiju/iMeiju_Mac.svg?style=social)

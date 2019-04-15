@@ -2,6 +2,7 @@ import Foundation
 
 /// Used for stubbing responses.
 public enum EndpointSampleResponse {
+
     /// The network returned a response, including status code and data.
     case networkResponse(Int, Data)
 
@@ -39,6 +40,7 @@ open class Endpoint {
                 method: Moya.Method,
                 task: Task,
                 httpHeaderFields: [String: String]?) {
+
         self.url = url
         self.sampleResponseClosure = sampleResponseClosure
         self.method = method
@@ -58,10 +60,10 @@ open class Endpoint {
 
     fileprivate func add(httpHeaderFields headers: [String: String]?) -> [String: String]? {
         guard let unwrappedHeaders = headers, unwrappedHeaders.isEmpty == false else {
-            return httpHeaderFields
+            return self.httpHeaderFields
         }
 
-        var newHTTPHeaderFields = httpHeaderFields ?? [:]
+        var newHTTPHeaderFields = self.httpHeaderFields ?? [:]
         unwrappedHeaders.forEach { key, value in
             newHTTPHeaderFields[key] = value
         }
@@ -85,7 +87,7 @@ extension Endpoint {
         switch task {
         case .requestPlain, .uploadFile, .uploadMultipart, .downloadDestination:
             return request
-        case let .requestData(data):
+        case .requestData(let data):
             request.httpBody = data
             return request
         case let .requestJSONEncodable(encodable):
@@ -112,15 +114,17 @@ extension Endpoint {
             return try bodyfulRequest.encoded(parameters: urlParameters, parameterEncoding: urlEncoding)
         }
     }
-
     // swiftlint:enable cyclomatic_complexity
 }
 
 /// Required for using `Endpoint` as a key type in a `Dictionary`.
 extension Endpoint: Equatable, Hashable {
-    public var hashValue: Int {
-        let request = try? urlRequest()
-        return request?.hashValue ?? url.hashValue
+    public func hash(into hasher: inout Hasher) {
+        guard let request = try? urlRequest() else {
+            hasher.combine(url)
+            return
+        }
+        hasher.combine(request)
     }
 
     /// Note: If both Endpoints fail to produce a URLRequest the comparison will

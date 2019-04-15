@@ -69,9 +69,9 @@ class IZCollectionViewController: NSViewController {
 extension IZCollectionViewController: NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     func numberOfSections(in _: NSCollectionView) -> Int {
         if model?.code == 0 {
-            if isMenu == MenuType.movie, !UserDefaults.standard.bool(forKey: "isVip") {
-                return (model?.data.count)! - 1
-            }
+//            if isMenu == MenuType.movie, !UserDefaults.standard.bool(forKey: "isVip") {
+//                return (model?.data.count)! - 1
+//            }
             return (model?.data.count)!
         }
         return 0

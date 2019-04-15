@@ -16,9 +16,9 @@ public extension MoyaProvider {
         do {
             let urlRequest = try endpoint.urlRequest()
             closure(.success(urlRequest))
-        } catch let MoyaError.requestMapping(url) {
+        } catch MoyaError.requestMapping(let url) {
             closure(.failure(MoyaError.requestMapping(url)))
-        } catch let MoyaError.parameterEncoding(error) {
+        } catch MoyaError.parameterEncoding(let error) {
             closure(.failure(MoyaError.parameterEncoding(error)))
         } catch {
             closure(.failure(MoyaError.underlying(error, nil)))

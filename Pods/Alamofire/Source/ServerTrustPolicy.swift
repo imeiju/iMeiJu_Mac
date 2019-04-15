@@ -67,7 +67,7 @@ extension URLSession {
         get {
             return objc_getAssociatedObject(self, &AssociatedKeys.managerKey) as? ServerTrustPolicyManager
         }
-        set(manager) {
+        set (manager) {
             objc_setAssociatedObject(self, &AssociatedKeys.managerKey, manager, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
@@ -137,7 +137,8 @@ public enum ServerTrustPolicy {
         for path in paths {
             if
                 let certificateData = try? Data(contentsOf: URL(fileURLWithPath: path)) as CFData,
-                let certificate = SecCertificateCreateWithData(nil, certificateData) {
+                let certificate = SecCertificateCreateWithData(nil, certificateData)
+            {
                 certificates.append(certificate)
             }
         }
@@ -248,6 +249,7 @@ public enum ServerTrustPolicy {
             let unspecified = SecTrustResultType.unspecified
             let proceed = SecTrustResultType.proceed
 
+
             isValid = result == unspecified || result == proceed
         }
 
@@ -259,7 +261,7 @@ public enum ServerTrustPolicy {
     private func certificateData(for trust: SecTrust) -> [Data] {
         var certificates: [SecCertificate] = []
 
-        for index in 0 ..< SecTrustGetCertificateCount(trust) {
+        for index in 0..<SecTrustGetCertificateCount(trust) {
             if let certificate = SecTrustGetCertificateAtIndex(trust, index) {
                 certificates.append(certificate)
             }
@@ -277,10 +279,11 @@ public enum ServerTrustPolicy {
     private static func publicKeys(for trust: SecTrust) -> [SecKey] {
         var publicKeys: [SecKey] = []
 
-        for index in 0 ..< SecTrustGetCertificateCount(trust) {
+        for index in 0..<SecTrustGetCertificateCount(trust) {
             if
                 let certificate = SecTrustGetCertificateAtIndex(trust, index),
-                let publicKey = publicKey(for: certificate) {
+                let publicKey = publicKey(for: certificate)
+            {
                 publicKeys.append(publicKey)
             }
         }

@@ -58,8 +58,8 @@ public struct DefaultDataResponse {
         data: Data?,
         error: Error?,
         timeline: Timeline = Timeline(),
-        metrics _: AnyObject? = nil
-    ) {
+        metrics: AnyObject? = nil)
+    {
         self.request = request
         self.response = response
         self.data = data
@@ -109,8 +109,8 @@ public struct DataResponse<Value> {
         response: HTTPURLResponse?,
         data: Data?,
         result: Result<Value>,
-        timeline: Timeline = Timeline()
-    ) {
+        timeline: Timeline = Timeline())
+    {
         self.request = request
         self.response = response
         self.data = data
@@ -296,8 +296,8 @@ public struct DefaultDownloadResponse {
         resumeData: Data?,
         error: Error?,
         timeline: Timeline = Timeline(),
-        metrics _: AnyObject? = nil
-    ) {
+        metrics: AnyObject? = nil)
+    {
         self.request = request
         self.response = response
         self.temporaryURL = temporaryURL
@@ -359,8 +359,8 @@ public struct DownloadResponse<Value> {
         destinationURL: URL?,
         resumeData: Data?,
         result: Result<Value>,
-        timeline: Timeline = Timeline()
-    ) {
+        timeline: Timeline = Timeline())
+    {
         self.request = request
         self.response = response
         self.temporaryURL = temporaryURL
@@ -536,32 +536,32 @@ extension Response {
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DefaultDataResponse: Response {
-    #if !os(watchOS)
-        /// The task metrics containing the request / response statistics.
-        public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#if !os(watchOS)
+    /// The task metrics containing the request / response statistics.
+    public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
+#endif
 }
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DataResponse: Response {
-    #if !os(watchOS)
-        /// The task metrics containing the request / response statistics.
-        public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#if !os(watchOS)
+    /// The task metrics containing the request / response statistics.
+    public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
+#endif
 }
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DefaultDownloadResponse: Response {
-    #if !os(watchOS)
-        /// The task metrics containing the request / response statistics.
-        public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#if !os(watchOS)
+    /// The task metrics containing the request / response statistics.
+    public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
+#endif
 }
 
 @available(iOS 10.0, macOS 10.12, tvOS 10.0, *)
 extension DownloadResponse: Response {
-    #if !os(watchOS)
-        /// The task metrics containing the request / response statistics.
-        public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
-    #endif
+#if !os(watchOS)
+    /// The task metrics containing the request / response statistics.
+    public var metrics: URLSessionTaskMetrics? { return _metrics as? URLSessionTaskMetrics }
+#endif
 }

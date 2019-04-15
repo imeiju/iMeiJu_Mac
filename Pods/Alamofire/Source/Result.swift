@@ -53,7 +53,7 @@ public enum Result<Value> {
     /// Returns the associated value if the result is a success, `nil` otherwise.
     public var value: Value? {
         switch self {
-        case let .success(value):
+        case .success(let value):
             return value
         case .failure:
             return nil
@@ -65,7 +65,7 @@ public enum Result<Value> {
         switch self {
         case .success:
             return nil
-        case let .failure(error):
+        case .failure(let error):
             return error
         }
     }
@@ -93,9 +93,9 @@ extension Result: CustomDebugStringConvertible {
     /// success or failure in addition to the value or error.
     public var debugDescription: String {
         switch self {
-        case let .success(value):
+        case .success(let value):
             return "SUCCESS: \(value)"
-        case let .failure(error):
+        case .failure(let error):
             return "FAILURE: \(error)"
         }
     }
@@ -141,9 +141,9 @@ extension Result {
     ///     // Throws error
     public func unwrap() throws -> Value {
         switch self {
-        case let .success(value):
+        case .success(let value):
             return value
-        case let .failure(error):
+        case .failure(let error):
             throw error
         }
     }
@@ -168,9 +168,9 @@ extension Result {
     ///            same failure.
     public func map<T>(_ transform: (Value) -> T) -> Result<T> {
         switch self {
-        case let .success(value):
+        case .success(let value):
             return .success(transform(value))
-        case let .failure(error):
+        case .failure(let error):
             return .failure(error)
         }
     }
@@ -190,13 +190,13 @@ extension Result {
     ///            same failure.
     public func flatMap<T>(_ transform: (Value) throws -> T) -> Result<T> {
         switch self {
-        case let .success(value):
+        case .success(let value):
             do {
                 return try .success(transform(value))
             } catch {
                 return .failure(error)
             }
-        case let .failure(error):
+        case .failure(let error):
             return .failure(error)
         }
     }
@@ -213,7 +213,7 @@ extension Result {
     ///            the same instance.
     public func mapError<T: Error>(_ transform: (Error) -> T) -> Result {
         switch self {
-        case let .failure(error):
+        case .failure(let error):
             return .failure(transform(error))
         case .success:
             return self
@@ -235,7 +235,7 @@ extension Result {
     ///            the same instance.
     public func flatMapError<T: Error>(_ transform: (Error) throws -> T) -> Result {
         switch self {
-        case let .failure(error):
+        case .failure(let error):
             do {
                 return try .failure(transform(error))
             } catch {

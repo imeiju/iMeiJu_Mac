@@ -29,13 +29,13 @@ import Foundation
 /// See https://tools.ietf.org/html/rfc7231#section-4.3
 public enum HTTPMethod: String {
     case options = "OPTIONS"
-    case get = "GET"
-    case head = "HEAD"
-    case post = "POST"
-    case put = "PUT"
-    case patch = "PATCH"
-    case delete = "DELETE"
-    case trace = "TRACE"
+    case get     = "GET"
+    case head    = "HEAD"
+    case post    = "POST"
+    case put     = "PUT"
+    case patch   = "PATCH"
+    case delete  = "DELETE"
+    case trace   = "TRACE"
     case connect = "CONNECT"
 }
 
@@ -74,6 +74,7 @@ public protocol ParameterEncoding {
 /// `BoolEncoding` can be used to configure how boolean values are encoded. The default behavior is to encode
 /// `true` as 1 and `false` as 0.
 public struct URLEncoding: ParameterEncoding {
+
     // MARK: Helper Types
 
     /// Defines whether the url-encoded query string is applied to the existing query string or HTTP body of the
@@ -271,7 +272,7 @@ public struct URLEncoding: ParameterEncoding {
             while index != string.endIndex {
                 let startIndex = index
                 let endIndex = string.index(index, offsetBy: batchSize, limitedBy: string.endIndex) ?? string.endIndex
-                let range = startIndex ..< endIndex
+                let range = startIndex..<endIndex
 
                 let substring = string[range]
 
@@ -318,6 +319,7 @@ public struct URLEncoding: ParameterEncoding {
 /// Uses `JSONSerialization` to create a JSON representation of the parameters object, which is set as the body of the
 /// request. The `Content-Type` HTTP header field of an encoded request is set to `application/json`.
 public struct JSONEncoding: ParameterEncoding {
+
     // MARK: Properties
 
     /// Returns a `JSONEncoding` instance with default writing options.
@@ -405,6 +407,7 @@ public struct JSONEncoding: ParameterEncoding {
 /// associated format and write options values, which is set as the body of the request. The `Content-Type` HTTP header
 /// field of an encoded request is set to `application/x-plist`.
 public struct PropertyListEncoding: ParameterEncoding {
+
     // MARK: Properties
 
     /// Returns a default `PropertyListEncoding` instance.
@@ -432,8 +435,8 @@ public struct PropertyListEncoding: ParameterEncoding {
     /// - returns: The new `PropertyListEncoding` instance.
     public init(
         format: PropertyListSerialization.PropertyListFormat = .xml,
-        options: PropertyListSerialization.WriteOptions = 0
-    ) {
+        options: PropertyListSerialization.WriteOptions = 0)
+    {
         self.format = format
         self.options = options
     }

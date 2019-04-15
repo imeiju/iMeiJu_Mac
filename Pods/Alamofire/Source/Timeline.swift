@@ -64,17 +64,17 @@ public struct Timeline {
         requestStartTime: CFAbsoluteTime = 0.0,
         initialResponseTime: CFAbsoluteTime = 0.0,
         requestCompletedTime: CFAbsoluteTime = 0.0,
-        serializationCompletedTime: CFAbsoluteTime = 0.0
-    ) {
+        serializationCompletedTime: CFAbsoluteTime = 0.0)
+    {
         self.requestStartTime = requestStartTime
         self.initialResponseTime = initialResponseTime
         self.requestCompletedTime = requestCompletedTime
         self.serializationCompletedTime = serializationCompletedTime
 
-        latency = initialResponseTime - requestStartTime
-        requestDuration = requestCompletedTime - requestStartTime
-        serializationDuration = serializationCompletedTime - requestCompletedTime
-        totalDuration = serializationCompletedTime - requestStartTime
+        self.latency = initialResponseTime - requestStartTime
+        self.requestDuration = requestCompletedTime - requestStartTime
+        self.serializationDuration = serializationCompletedTime - requestCompletedTime
+        self.totalDuration = serializationCompletedTime - requestStartTime
     }
 }
 
@@ -95,7 +95,7 @@ extension Timeline: CustomStringConvertible {
             "\"Latency\": " + latency + " secs",
             "\"Request Duration\": " + requestDuration + " secs",
             "\"Serialization Duration\": " + serializationDuration + " secs",
-            "\"Total Duration\": " + totalDuration + " secs",
+            "\"Total Duration\": " + totalDuration + " secs"
         ]
 
         return "Timeline: { " + timings.joined(separator: ", ") + " }"
@@ -128,7 +128,7 @@ extension Timeline: CustomDebugStringConvertible {
             "\"Latency\": " + latency + " secs",
             "\"Request Duration\": " + requestDuration + " secs",
             "\"Serialization Duration\": " + serializationDuration + " secs",
-            "\"Total Duration\": " + totalDuration + " secs",
+            "\"Total Duration\": " + totalDuration + " secs"
         ]
 
         return "Timeline: { " + timings.joined(separator: ", ") + " }"

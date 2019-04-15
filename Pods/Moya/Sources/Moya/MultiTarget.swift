@@ -48,7 +48,7 @@ public enum MultiTarget: TargetType {
     /// The embedded `TargetType`.
     public var target: TargetType {
         switch self {
-        case let .target(target): return target
+        case .target(let target): return target
         }
     }
 }
